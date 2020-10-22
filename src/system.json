@@ -1,0 +1,28 @@
+{
+  "name": "foundryvtt-mutants-and-masterminds",
+  "title": "Mutants and Masterminds 3rd Edition",
+  "description": "A system to support the third edition of Mutants and Masterminds.",
+  "templateVersion": 2,
+  "version": "0.1.0",
+  "author": "matthewswar",
+  "scripts": [],
+  "esmodules": [
+    "foundryvtt-mutants-and-masterminds.js"
+  ],
+  "styles": [
+    "foundryvtt-mutants-and-masterminds.css"
+  ],
+  "packs": [],
+  "languages": [],
+  "gridDistance": 1,
+  "gridUnits": "",
+  "minimumCoreVersion": "0.7.5",
+  "compatibleCoreVersion": "0.7.5",
+  "url": "",
+  "manifest": "",
+  "download": "",
+  "license": "",
+  "readme": "",
+  "bugs": "",
+  "changelog": ""
+}

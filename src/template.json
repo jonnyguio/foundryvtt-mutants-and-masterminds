@@ -1,0 +1,175 @@
+{
+    "Actor": {
+        "types": ["character", "npc"],
+        "templates": {
+            "common": {
+                "abilities": {
+                    "str": {
+                        "value": 10
+                    },
+                    "sta": {
+                        "value": 10
+                    },
+                    "agl": {
+                        "value": 10
+                    },
+                    "dex": {
+                        "value": 10
+                    },
+                    "fgt": {
+                        "value": 10
+                    },
+                    "int": {
+                        "value": 10
+                    },
+                    "awe": {
+                        "value": 10
+                    },
+                    "pre": {
+                        "value": 10
+                    }
+                },
+                "defense": {
+                    "dodge": {
+                        "value": 0,
+                        "ability": "agl"
+                    },
+                    "parry": {
+                        "value": 0,
+                        "ability": "fgt"
+                    },
+                    "fortitude": {
+                        "value": 0,
+                        "ability": "sta"
+                    },
+                    "toughness": {
+                        "value": 0,
+                        "ability": "sta"
+                    },
+                    "will": {
+                        "value": 0,
+                        "ability": "awe"
+                    }
+                },
+                "attributes": {
+                    "powerLevel": {
+                        "value": 0
+                    },
+                    "initiative": {
+                        "value": 0
+                    }
+                }
+            },
+            "creature": {
+                "skills": {
+                    "acrobatics": {
+                        "value": 0,
+                        "ability": "agl",
+                        "trainedOnly": true,
+                        "actions": ["move", "free"]
+                    },
+                    "athletics": {
+                        "value": 0,
+                        "ability": "str",
+                        "trainedOnly": false,
+                        "actions": ["move"]
+                    },
+                    "closeCombat": {
+                        "value": 0,
+                        "ability": "fgt",
+                        "trainedOnly": false,
+                        "actions": ["standard"]
+                    },
+                    "deception": {
+                        "value": 0,
+                        "ability": "pre",
+                        "trainedOnly": false,
+                        "actions": ["standard"]
+                    },
+                    "expertise": {
+                        "value": 0,
+                        "ability": "int",
+                        "trainedOnly": true,
+                        "actions": []
+                    },
+                    "insight": {
+                        "value": 0,
+                        "ability": "awe",
+                        "trainedOnly": false,
+                        "actions": ["free"]
+                    },
+                    "intimidation": {
+                        "value": 0,
+                        "ability": "pre",
+                        "trainedOnly": false,
+                        "actions": ["standard"]
+                    },
+                    "investigation": {
+                        "value": 0,
+                        "ability": "int",
+                        "trainedOnly": true,
+                        "actions": []
+                    },
+                    "perception": {
+                        "value": 0,
+                        "ability": "awe",
+                        "trainedOnly": false,
+                        "actions": ["free"]
+                    },
+                    "persuasion": {
+                        "value": 0,
+                        "ability": "pre",
+                        "trainedOnly": false,
+                        "actions": []
+                    },
+                    "rangedCombat": {
+                        "value": 0,
+                        "ability": "dex",
+                        "trainedOnly": false,
+                        "actions": ["standard"]
+                    },
+                    "sleightOfHand": {
+                        "value": 0,
+                        "ability": "dex",
+                        "trainedOnly": true,
+                        "actions": ["standard"]
+                    },
+                    "stealth": {
+                        "value": 0,
+                        "ability": "agl",
+                        "trainedOnly": false,
+                        "actions": ["move"]
+                    },
+                    "technology": {
+                        "value": 0,
+                        "ability": "int",
+                        "trainedOnly": true,
+                        "actions": ["standard"]
+                    },
+                    "treatment": {
+                        "value": 0,
+                        "ability": "int",
+                        "trainedOnly": true,
+                        "actions": ["standard"]
+                    },
+                    "vehicles": {
+                        "value": 0,
+                        "ability": "dex",
+                        "trainedOnly": true,
+                        "actions": ["move"]
+                    }
+                }
+            }
+        },
+        "character": {
+            "templates": ["common", "creature"]
+        },
+        "npc": {
+            "templates": ["common", "creature"]
+        }
+    },
+    "Item": {
+        "types": [],
+        "templates": []
+    }
+}
