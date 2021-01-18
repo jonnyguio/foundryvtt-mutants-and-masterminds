@@ -1,0 +1,41 @@
+form(class="{{cssClass}} item-sheet-modifier flexcol" autocomplete="off")
+    header.sheet-header.flexrow
+        | {{> "systems/mnm3e/templates/items/parts/header-sheet.html" }}
+
+    nav.sheet-navigation.tabs(data-group="primary")
+        a.item.active(data-tab="description") {{ localize "MNM3E.Description" }}
+        a.item(data-tab="overrides") {{ localize "MNM3E.Overrides" }}
+        //- a.item(data-tab="expressions") {{ localize "MNM3E.Expressions" }}
+        //- a.item(data-tab="effects") {{ localize "MNM3E.Effects" }}
+
+    section.sheet-body
+        .tab.description.flexrow.active(data-group="primary" data-tab="description")
+            .modifier-properties.flexcol
+                | {{> "systems/mnm3e/templates/items/parts/cost-sheet.html" }}
+            //-     .cost-input.flexrow
+            //-         label.property-title {{ localize "MNM3E.Cost" }}
+            //-         input.property-value(type="number" name="data.cost" value="{{data.cost}}" data-dtype="number" placeholder="1")
+            //-     .cost-input.form-group.select
+            //-         label.property-title {{ localize "MNM3E.RankCostType" }}
+            //-         select(name="data.costType")
+            //-             | {{#select data.costType}}
+            //-             | {{#each config.rankCostTypes as |localizedName name|}}
+            //-             option(value="{{name}}") {{localizedName}}
+            //-             | {{/each}}
+            //-             | {{/select}}
+            //-     .cost-input.flexrow
+            //-         label.property-title {{ localize "MNM3E.ModifierParentEffect" }}
+            //-         input.property-value(type="text" name="data.parentEffect" value="{{data.parentEffect}}" placeholder="")
+
+            | {{editor content=data.description.value target="data.description.value" button=true owner=owner editable=editable}}
+
+        .tab.overrides.flexcol(data-group="primary" data-tab="overrides")
+            | {{> "systems/mnm3e/templates/items/parts/activations-sheet.html" }}
+
+            | {{> "systems/mnm3e/templates/items/parts/actions-sheet.html" }}
+
+        //- .tab.expressions.flexrow(data-group="primary" data-tab="expressions")
+        //-     | {{> "systems/mnm3e/templates/items/parts/expressions-sheet.html" }}
+
+        //- .tab.effects.flexrow(data-group="primary" data-tab="effects")
+        //-     | {{> "systems/mnm3e/templates/actors/parts/actor-effects.html" }}

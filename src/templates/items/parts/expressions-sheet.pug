@@ -1,0 +1,19 @@
+ol.items-list.expressions-list
+    li.items-header.flexrow
+        h3.item-name.expression-name.flexrow {{ localize 'MNM3E.ExpressionKey' }}
+        .expression-value {{ localize 'MNM3E.ExpressionValue' }}
+        .item-controls.expression-controls.flexrow
+            a.expression-control(data-action="create" title="{{ localize 'MNM3E.ExpressionCreate' }}")
+                i.fas.fa-plus
+                    | {{ localize "MNM3E.Add" }}
+        
+    ol.item-list
+        li.item.expression.flexcol
+            | {{#each data.expressions as |expression|}}
+            .item-name.expression-name.flexrow
+                input(name="data.expressions.{{@index}}.key" type="text" value="{{expression.key}}" placeholder="{{ localize 'MNM3E.ExpressionKey' }}")
+                input(name="data.expressions.{{@index}}.formula" type="text" value="{{expression.formula}}" placeholder="{{ localize 'MNM3E.ExpressionValue' }}")
+                .item-controls.expression-controls.flexrow
+                    a.expression-control(data-action="delete" data-index="{{@index}}" title="{{ localize 'MNM3E.ExpressionDelete' }}")
+                        i.fas.fa-trash
+            | {{/each}}

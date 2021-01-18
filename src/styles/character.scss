@@ -1,0 +1,71 @@
+.mnm3e.sheet.actor.character {
+    .core-container {
+        .ability-section {
+            flex: 0 0 100px;
+            margin-right: 6px;
+            margin-top: 6px;
+            border: $sectionBorder;
+            border-radius: $sectionBorderRadius;
+        }
+
+        .ability-scores {
+            list-style: none;
+            font-family: Charcoal, sans-serif;
+            text-align: center;
+            border: $borderGroove;
+            margin: 0;
+            padding-left: 2px;
+            padding-right: 2px;
+    
+            .ability {
+                height: 60px;
+                border-bottom: $borderGroove;
+                text-transform: uppercase;
+    
+                &:last-child {
+                    border-bottom: none;
+                    margin-bottom: 3px;
+                }
+    
+                span.ability-score {
+                    height: 30px;
+                    width: 36px;
+                    margin: 0 auto;
+                    font-size: 20px;
+                }
+            }
+        }
+
+        .defense-section {
+            flex: 0 0 100px;
+            border: $sectionBorder;
+            border-radius: $sectionBorderRadius;
+            font-family: Charcoal, sans-serif;
+            margin-top: 6px;
+        }
+
+        .skill-section {
+            flex: 0 0 10px;
+            margin-top: 6px;
+            border: $sectionBorder;
+            border-radius: $sectionBorderRadius;
+            font-family: Charcoal, sans-serif;
+
+        }
+    }
+}
+
+label.box-title {
+    height: 18px;
+    line-height: 16px;
+    margin: 4px 8px 2px;
+    font-size: 15px;
+    color: black;
+    border-bottom: 1px solid gray;
+    white-space: nowrap;
+}
+
+h3.section-title {
+    text-align: center;
+    margin-top: 2px;
+}

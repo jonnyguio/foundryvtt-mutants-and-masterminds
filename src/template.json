@@ -5,155 +5,150 @@
             "common": {
                 "abilities": {
                     "str": {
-                        "value": 10
+                        "rank": 0
                     },
                     "sta": {
-                        "value": 10
+                        "rank": 0
                     },
                     "agl": {
-                        "value": 10
+                        "rank": 0
                     },
                     "dex": {
-                        "value": 10
+                        "rank": 0
                     },
                     "fgt": {
-                        "value": 10
+                        "rank": 0
                     },
                     "int": {
-                        "value": 10
+                        "rank": 0
                     },
                     "awe": {
-                        "value": 10
+                        "rank": 0
                     },
                     "pre": {
-                        "value": 10
+                        "rank": 0
                     }
                 },
-                "defense": {
-                    "dodge": {
-                        "value": 0,
+                "defenses": {
+                    "dge": {
+                        "rank": 0,
                         "ability": "agl"
                     },
-                    "parry": {
-                        "value": 0,
+                    "pry": {
+                        "rank": 0,
                         "ability": "fgt"
                     },
-                    "fortitude": {
-                        "value": 0,
+                    "frt": {
+                        "rank": 0,
                         "ability": "sta"
                     },
-                    "toughness": {
-                        "value": 0,
+                    "tgh": {
+                        "rank": 0,
                         "ability": "sta"
                     },
-                    "will": {
-                        "value": 0,
+                    "wil": {
+                        "rank": 0,
                         "ability": "awe"
                     }
                 },
-                "attributes": {
-                    "powerLevel": {
-                        "value": 0
-                    },
-                    "initiative": {
-                        "value": 0
-                    }
-                }
+                "powerLevel": 0,
+                "initiative": 0,
+                "groupAffiliation": ""
             },
             "creature": {
                 "skills": {
-                    "acrobatics": {
-                        "value": 0,
+                    "acr": {
+                        "rank": 0,
                         "ability": "agl",
                         "trainedOnly": true,
                         "actions": ["move", "free"]
                     },
-                    "athletics": {
-                        "value": 0,
+                    "ath": {
+                        "rank": 0,
                         "ability": "str",
                         "trainedOnly": false,
                         "actions": ["move"]
                     },
-                    "closeCombat": {
-                        "value": 0,
+                    "cco": {
+                        "rank": 0,
                         "ability": "fgt",
                         "trainedOnly": false,
                         "actions": ["standard"]
                     },
-                    "deception": {
-                        "value": 0,
+                    "dec": {
+                        "rank": 0,
                         "ability": "pre",
                         "trainedOnly": false,
                         "actions": ["standard"]
                     },
-                    "expertise": {
-                        "value": 0,
+                    "exp": {
+                        "rank": 0,
                         "ability": "int",
                         "trainedOnly": true,
                         "actions": []
                     },
-                    "insight": {
-                        "value": 0,
+                    "ins": {
+                        "rank": 0,
                         "ability": "awe",
                         "trainedOnly": false,
                         "actions": ["free"]
                     },
-                    "intimidation": {
-                        "value": 0,
+                    "itm": {
+                        "rank": 0,
                         "ability": "pre",
                         "trainedOnly": false,
                         "actions": ["standard"]
                     },
-                    "investigation": {
-                        "value": 0,
+                    "inv": {
+                        "rank": 0,
                         "ability": "int",
                         "trainedOnly": true,
                         "actions": []
                     },
-                    "perception": {
-                        "value": 0,
+                    "prc": {
+                        "rank": 0,
                         "ability": "awe",
                         "trainedOnly": false,
                         "actions": ["free"]
                     },
-                    "persuasion": {
-                        "value": 0,
+                    "per": {
+                        "rank": 0,
                         "ability": "pre",
                         "trainedOnly": false,
                         "actions": []
                     },
-                    "rangedCombat": {
-                        "value": 0,
+                    "rco": {
+                        "rank": 0,
                         "ability": "dex",
                         "trainedOnly": false,
                         "actions": ["standard"]
                     },
-                    "sleightOfHand": {
-                        "value": 0,
+                    "slt": {
+                        "rank": 0,
                         "ability": "dex",
                         "trainedOnly": true,
                         "actions": ["standard"]
                     },
-                    "stealth": {
-                        "value": 0,
+                    "ste": {
+                        "rank": 0,
                         "ability": "agl",
                         "trainedOnly": false,
                         "actions": ["move"]
                     },
-                    "technology": {
-                        "value": 0,
+                    "tec": {
+                        "rank": 0,
                         "ability": "int",
                         "trainedOnly": true,
                         "actions": ["standard"]
                     },
-                    "treatment": {
-                        "value": 0,
+                    "tre": {
+                        "rank": 0,
                         "ability": "int",
                         "trainedOnly": true,
                         "actions": ["standard"]
                     },
-                    "vehicles": {
-                        "value": 0,
+                    "vhc": {
+                        "rank": 0,
                         "ability": "dex",
                         "trainedOnly": true,
                         "actions": ["move"]
@@ -162,14 +157,111 @@
             }
         },
         "character": {
-            "templates": ["common", "creature"]
+            "templates": ["common", "creature"],
+            "identity": "",
+            "baseOfOperations": "",
+            "heroPoints": 0
         },
         "npc": {
             "templates": ["common", "creature"]
         }
     },
     "Item": {
-        "types": [],
-        "templates": []
+        "types": ["advantage", "effect", "modifier", "power"],
+        "templates": {
+            "itemDescription": {
+                "description": {
+                    "value": "",
+                    "chat": ""
+                }
+            },
+            "activatedEffect": {
+                "activation": {
+                    "type": {
+                        "value": ""
+                    },
+                    "cost": 0,
+                    "condition": ""
+                },
+                "duration": {
+                    "type": {
+                        "value": ""
+                    }
+                },
+                "range": {
+                    "area": {
+                        "value": null
+                    },
+                    "type": {
+                        "value": ""
+                    }
+                },
+                "uses": {
+                    "value": 0,
+                    "max": 0,
+                    "per": null
+                },
+                "consume": {
+                    "type": {
+                        "value": ""
+                    },
+                    "target": {
+                        "value": null
+                    },
+                    "amount": {
+                        "value": null
+                    }
+                }
+            },
+            "action": {
+                "ability": {
+                    "value": null
+                },
+                "attack": {
+                    "bonus": {
+                        "value": 0
+                    },
+                    "defense": {
+                        "value": null
+                    }
+                },
+                "chatFlavor": "",
+                "resist": {
+                    "baseDC": {
+                        "value": null
+                    },
+                    "defense": {
+                        "value": null
+                    }
+                },
+                "type": {
+                    "value": null
+                }
+            },
+            "scalingEffect": {
+                "cost": 0,
+                "costType": ""
+            }
+        },
+        "advantage": {
+            "templates": ["itemDescription", "activatedEffect", "action", "scalingEffect"],
+            "rank": 0
+        },
+        "effect": {
+            "templates": ["itemDescription", "activatedEffect", "action", "scalingEffect"],
+            "rank": 0,
+            "modifiers": []
+        },
+        "modifier": {
+            "templates": ["itemDescription", "activatedEffect", "action", "scalingEffect"],
+            "parentEffect": "",
+            "expressions": []
+        },
+        "power": {
+            "templates": ["itemDescription"],
+            "totalCost": 0,
+            "effects": [],
+            "alternatePowerIDs": []
+        }
     }
 }

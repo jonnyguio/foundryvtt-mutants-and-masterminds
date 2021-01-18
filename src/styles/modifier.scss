@@ -1,0 +1,22 @@
+.mnm3e.sheet.item.modifier {
+    //modifier-sheet.pug for method info
+    //More info on *That*which*shall*not*be*named* : https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+    //text box info below
+
+   .modifier-properties {
+        color: black;
+        width: 5%;
+        //flex changes the box on the left of the modifier page - 33% of total page
+        flex: 0 1 30%;
+    }
+    .property-title {
+        border-radius: $sectionBorderRadius;
+   }
+
+   .editor{
+    width:70%;
+    height: 70%;
+    border-color: green;
+}
+
+}

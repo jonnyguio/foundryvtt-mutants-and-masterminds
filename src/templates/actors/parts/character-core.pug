@@ -1,0 +1,27 @@
+.core-container.flexrow
+    .ability-section.flexcol
+        h3.section-title {{ localize "MNM3E.AbilityScores" }}
+        ul.ability-scores.flexrow
+            | {{#each data.abilities as |ability key|}}
+            li.ability.flexcol
+                label.ability-name.box-title {{ability.label}}
+                //- input.ability-score(type="number" name="data.abilities.{{key}}.rank" value="{{ability.rank}}" data-dtype="number" placeholder="10")
+                span.ability-score {{ability.total}}
+            | {{/each}}
+    .attribute-section.flexcol
+        .defense-section.flexcol
+            h3.section-title {{ localize "MNM3E.Defenses" }}
+            ul.defenses-list.flexrow
+                | {{#each data.defenses as |defense key|}}
+                li.defense.flexcol(data-defense="{{key}}")
+                    label.defense-name.box-title {{defense.label}}
+                    span.defense-score {{numberFormat defense.total decimals=0 sign=true}}
+                | {{/each}}
+        .skill-section.flexcol
+            h3.section-title {{ localize "MNM3E.Skills" }}
+            ul.skills-list
+                | {{#each data.skills as |skill key|}}
+                li.skill.flexrow(data-skill="{{key}}")
+                    label.skill-name.rollable {{skill.label}}
+                    span.skill-score {{numberFormat skill.total decimals=0 sign=true}}
+                | {{/each}}

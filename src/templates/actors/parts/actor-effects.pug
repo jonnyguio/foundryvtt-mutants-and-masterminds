@@ -1,0 +1,29 @@
+ol.items-list.effects-list
+    | {{#each effects as |section sectionName|}}
+    li.items-header.flexrow(data-effect-type="{{section.type}}")
+        h3.item-name.effect-name.flexrow {{ section.label }}
+        .effect-source {{ localize "MNM3E.ActiveEffectSource" }}
+        .effect-duration {{ localize "MNM3E.ActiveEffectDuration" }}
+        .item-controls.effect-controls.flexrow
+            a.effect-control(data-action="create" title="{{localize 'MNM3E.ActiveEffectCreate'}}")
+                i.fas.fa-plus
+                | {{ localize "MNM3E.Add" }}
+        
+    ol.item-list
+        | {{#each section.effects as |effect|}}
+        li.item.effect.flexrow(data-effect-id="{{effect.id}}")
+            .item-name.effect-name.flexrow
+                img.item-image(src="{{effect.data.icon}}")
+                h4 {{ effect.data.label }}
+            .effect-source {{ effect.sourceName }}
+            .effect-duration {{ effect.duration.label }}
+            .item-controls.effect-controls.flexrow
+                a.effect-control(data-action="toggle" title="{{ localize 'MNM3E.ActiveEffectToggle' }}")
+                    i(class="fas {{#if effect.data.disabled}}fa-check{{else}}fa-times{{/if}}")
+                a.effect-control(data-action="edit" title="{{ localize 'MNM3E.ActiveEffectEdit' }}")
+                    i.fas.fa-edit
+                a.effect-control(data-action="delete" title="{{ localize 'MNM3E.ActiveEffectDelete' }}")
+                    i.fas.fa-trash
+        | {{/each}}
+    
+    | {{/each}}

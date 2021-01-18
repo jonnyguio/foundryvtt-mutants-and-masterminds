@@ -1,0 +1,7 @@
+.item-properties
+    ol.properties-list
+        | {{#each itemProperties}}
+        li {{this}}
+        | {{/each}}
+
+| {{editor content=data.description.value target="data.description.value" button=true owner=owner editable=editable}}

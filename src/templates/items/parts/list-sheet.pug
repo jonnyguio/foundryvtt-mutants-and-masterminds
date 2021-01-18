@@ -1,0 +1,16 @@
+ol(class="items-list {{ type }}-list")
+    li.items-header.flexrow
+        h3.item-name.flexrow {{ header }}
+
+    ol.item-list
+        | {{#each items as |item id|}}
+        li.item.flexrow(data-item-id="{{id}}")
+            .item-name.flexrow
+                .item-image(style="background-image: url('{{item.img}}')")
+                h4 {{ item.name }}
+            div(class="item-controls flexrow item-{{ ../type }}-controls")
+                a.item-control(title="{{ localize 'MNM3E.ItemEdit' }}" data-action="edit" data-index="{{@index}}")
+                    i.fas.fa-edit
+                a.item-control(title="{{ localize 'MNM3E.ItemDelete' }}" data-action="delete" data-index="{{@index}}")
+                    i.fas.fa-trash
+        | {{/each}}

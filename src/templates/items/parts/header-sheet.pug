@@ -1,0 +1,10 @@
+img.profile(src="{{item.img}}" title="{{item.name}}" data-edit="img")
+.header-details.flexrow
+    h1.charname
+        input(name="name" type="text" value="{{item.name}}" placeholder="{{ localize 'MNM3E.ItemName' }}")
+
+    .item-subtitle
+        h4.item-type {{itemType}}
+        | {{#if itemSubtype}}
+        span.item-subtype {{itemSubtype}}
+        | {{/if}}

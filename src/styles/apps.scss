@@ -1,0 +1,30 @@
+.mnm3e {
+    .window-content {
+        background: $sheetBackground;
+    }
+}
+
+.mnm3e.sheet {
+    input[type="text"],
+    input[type="number"] {
+        background: none;
+        border: 1px solid transparent;
+
+        &:hover,
+        &:focus {
+            border: 1px solid black;
+        }
+    }
+
+    .section-title {
+        border-radius: $sectionBorderRadius;
+    }
+
+    // .editor {
+    //   height: 100%;
+    //     .tox-toolbar-overlord,
+    //     .tox-toolbar__primary {
+    //         background: none;
+    //     }
+    // }
+}

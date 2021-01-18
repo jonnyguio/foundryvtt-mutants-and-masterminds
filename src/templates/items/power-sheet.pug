@@ -1,0 +1,26 @@
+form(class="{{cssClass}} item-sheet-power flexcol" autocomplete="off")
+    header.sheet-header.flexrow
+        | {{> "systems/mnm3e/templates/items/parts/header-sheet.html" }}
+
+    nav.sheet-navigation.tabs(data-group="primary")
+        a.item.active(data-tab="description") {{ localize "MNM3E.Description" }}
+        a.item(data-tab="details") {{ localize "MNM3E.Details" }}
+
+    section.sheet-body
+        .tab.description.flexrow.active(data-group="primary" data-tab="description")
+            | {{> "systems/mnm3e/templates/items/parts/description-sheet.html"}}
+
+        .tab.details.flexrow(data-group="primary" data-tab="details")
+            | {{>
+            |       "systems/mnm3e/templates/items/parts/list-sheet.html"
+            |       items=data.effects
+            |       header=(localize "MNM3E.Effects")
+            |       type="effect"
+            | }}
+
+            | {{>
+            |       "systems/mnm3e/templates/items/parts/list-sheet.html"
+            |       items=data.alternatePowers
+            |       header=(localize "MNM3E.Powers")
+            |       type="power"
+            | }}

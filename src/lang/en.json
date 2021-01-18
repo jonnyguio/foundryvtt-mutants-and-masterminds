@@ -1,0 +1,136 @@
+{
+    "ACTOR.TypeCharacter": "Character",
+    "ACTOR.TypeNPC": "NPC",
+
+    "ITEM.TypeAdvantage": "Advantage",
+    "ITEM.TypeEffect": "Effect",
+    "ITEM.TypeModifier": "Modifier",
+    "ITEM.TypePower": "Power",
+
+    "MNM3E.ActionStandard": "Standard Action",
+    "MNM3E.ActionMove": "Move Action",
+    "MNM3E.ActionFree": "Free Action",
+    "MNM3E.ActionReaction": "Reaction",
+
+    "MNM3E.ActiveEffectCreate": "Create",
+    "MNM3E.ActiveEffectDelete": "Delete",
+    "MNM3E.ActiveEffectDuration": "Duration",
+    "MNM3E.ActiveEffectEdit": "Edit",
+    "MNM3E.ActiveEffectInactive": "Inactive",
+    "MNM3E.ActiveEffectNew": "New Effect",
+    "MNM3E.ActiveEffectPassive": "Passive",
+    "MNM3E.ActiveEffectSource": "Source",
+    "MNM3E.ActiveEffectTemporary": "Temporary",
+    "MNM3E.ActiveEffectToggle": "Toggle",
+
+    "MNM3E.AbilityScores": "Ability Scores",
+    "MNM3E.Ability": "Ability",
+    "MNM3E.AbilityStr": "Strength",
+    "MNM3E.AbilityStrAbbrev": "str",
+    "MNM3E.AbilitySta": "Stamina",
+    "MNM3E.AbilityStaAbbrev": "sta",
+    "MNM3E.AbilityAgl": "Agility",
+    "MNM3E.AbilityAglAbbrev": "agl",
+    "MNM3E.AbilityDex": "Dexterity",
+    "MNM3E.AbilityDexAbbrev": "dex",
+    "MNM3E.AbilityFgt": "Fighting",
+    "MNM3E.AbilityFgtAbbrev": "fgt",
+    "MNM3E.AbilityInt": "Intelligence",
+    "MNM3E.AbilityIntAbbrev": "int",
+    "MNM3E.AbilityAwe": "Awareness",
+    "MNM3E.AbilityAweAbbrev": "awe",
+    "MNM3E.AbilityPre": "Presence",
+    "MNM3E.AbilityPreAbbrev": "pre",
+
+    "MNM3E.Add": "Add",
+
+    "MNM3E.BaseOfOperations": "Base of Operations",
+
+    "MNM3E.Core": "Core",
+
+    "MNM3E.Defenses": "Defenses",
+    "MNM3E.DefenseDge": "Dodge",
+    "MNM3E.DefensePry": "Parry",
+    "MNM3E.DefenseFrt": "Fortitude",
+    "MNM3E.DefenseTgh": "Toughness",
+    "MNM3E.DefenseWil": "Willpower",
+
+    "MNM3E.Description": "Description",
+    "MNM3E.Details": "Details",
+
+    "MNM3E.EffectBaseRange": "Base Range",
+    "MNM3E.Effects": "Effects",
+
+    "MNM3E.EffectType": "Effect Type",
+    "MNM3E.EffectTypeAttack": "Attack",
+    "MNM3E.EffectTypeControl": "Control",
+    "MNM3E.EffectTypeDefense": "Defense",
+    "MNM3E.EffectTypeGeneral": "General",
+    "MNM3E.EffectTypeMovement": "Movement",
+    "MNM3E.EffectTypeSensory": "Sensory",
+
+    "MNM3E.Expressions": "Expressions",
+
+    "MNM3E.GroupAffiliation": "Group Affiliation",
+
+    "MNM3E.Identity": "Identity",
+
+    "MNM3E.ItemName": "Item Name",
+
+    "MNM3E.Level": "Level",
+
+    "MNM3E.Modifiers": "Modifiers",
+    "MNM3E.ModifierExtra": "Extra",
+    "MNM3E.ModifierFlaw": "Flaw",
+    "MNM3E.ModifierParentEffect": "Parent Effect",
+
+    "MNM3E.Name": "Name",
+    "MNM3E.None": "None",
+
+    "MNM3E.Powers": "Powers",
+
+    "MNM3E.Range": "Range",
+    "MNM3E.RangeTypeClose": "Close",
+    "MNM3E.RangeTypeRanged": "Ranged",
+    "MNM3E.RangeTypePerception": "Perception",
+    "MNM3E.RangeTypePersonal": "Personal",
+
+    "MNM3E.Rank": "Rank",
+    "MNM3E.RankCostType": "Rank Cost Type",
+    "MNM3E.RankCostTypeFlat": "Flat",
+    "MNM3E.RankCostTypePerRank": "Per Rank",
+
+    "MNM3E.SheetClassCharacter": "Default 3e Character Sheet",
+    "MNM3E.SheetClassItem": "Default 3e Item Sheet",
+
+    "MNM3E.Skills": "Skills",
+    "MNM3E.SkillAcr": "Acrobatics",
+    "MNM3E.SkillAth": "Athletics",
+    "MNM3E.SkillCco": "Close Combat",
+    "MNM3E.SkillDec": "Deception",
+    "MNM3E.SkillExp": "Expertise",
+    "MNM3E.SkillIns": "Insight",
+    "MNM3E.SkillItm": "Intimidation",
+    "MNM3E.SkillInv": "Investigation",
+    "MNM3E.SkillPrc": "Perception",
+    "MNM3E.SkillPer": "Persuasion",
+    "MNM3E.SkillRco": "Ranged Combat",
+    "MNM3E.SkillSlt": "Sleight of Hand",
+    "MNM3E.SkillSte": "Stealth",
+    "MNM3E.SkillTec": "Technology",
+    "MNM3E.SkillTre": "Treatment",
+    "MNM3E.SkillVhc": "Vehicle",
+
+    "MNM3E.TargetSelf": "Self",
+    "MNM3E.TargetCharacter": "Character",
+    "MNM3E.TargetAlly": "Ally",
+    "MNM3E.TargetEnemy": "Enemy",
+    "MNM3E.TargetObject": "Object",
+    "MNM3E.TargetBurst": "Burst",
+    "MNM3E.TargetCloud": "Cloud",
+    "MNM3E.TargetCone": "Cone",
+    "MNM3E.TargetCylinder": "Cylinder",
+    "MNM3E.TargetLine": "Line",
+    "MNM3E.TargetPerception": "Perception",
+    "MNM3E.TargetShapeable": "Shapeable"
+}

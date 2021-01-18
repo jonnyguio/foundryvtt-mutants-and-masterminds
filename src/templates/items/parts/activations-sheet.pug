@@ -1,0 +1,48 @@
+doctype html
+.form-group.select
+    label {{ localize "MNM3E.ItemActivationType" }}
+    .form-fields
+        select(name="data.activation.type.value" "{{#if data.activation.type.override}}disabled{{/if}}")
+            | {{#select data.activation.type.value}}
+            option(value="")
+            | {{#each config.activationTypes as |localizedName name|}}
+            option(value="{{name}}") {{ localizedName }}
+            | {{/each}}
+            | {{/select}}
+
+| {{#if (or data.activation.type.value (eq item.type "modifier")) }}
+
+.form-group.select
+    label {{ localize "MNM3E.Range" }}
+    .form-fields
+        select(name="data.range.type.value" "{{#if data.range.type.override}}disabled{{/if}}")
+            | {{#select data.range.type.value}}
+            option(value="")
+            | {{#each config.rangeTypes as |localizedName name|}}
+            option(value="{{name}}") {{ localizedName }}
+            | {{/each}}
+            | {{/select}}
+
+.form-group.select
+    label {{ localize "MNM3E.Area" }}
+    .form-fields
+        select(name="data.range.area.value" "{{#if data.range.area.override}}disabled{{/if}}")
+            | {{#select data.range.area.value}}
+            option(value="")
+            | {{#each config.areaTypes as |localizedName name|}}
+            option(value="{{name}}") {{ localizedName }}
+            | {{/each}}
+            | {{/select}}
+
+.form-group.select
+    label {{ localize "MNM3E.Duration" }}
+    .form-fields
+        select(name="data.duration.type.value" "{{#if data.duration.type.override}}disabled{{/if}}")
+            | {{#select data.duration.type.value}}
+            option(value="")
+            | {{#each config.durationTypes as |localizedName name|}}
+            option(value="{{name}}") {{ localizedName }}
+            | {{/each}}
+            | {{/select}}
+
+| {{/if}}

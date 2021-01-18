@@ -1,0 +1,23 @@
+form(class="{{cssClass}} flexcol" autocomplete="off")
+    header.sheet-header.flexrow
+        img.profile(src="{{actor.img}}" data-edit="img" title="{{actor.name}}")
+        section.header-details.flexrow
+            h1.charname
+                input(name="name" type="text" value="{{actor.name}}" placeholder="{{ localize 'MNM3E.Name' }}")
+            aside.header-powerlevel
+                .powerlevel
+                    label| {{ localize "MNM3E.Level" }} {{data.powerLevel}}
+            ul.summary
+                | {{#each summary as |summary|}}
+                li
+                    input(type="text" name="{{ summary.name }}" value="{{ summary.value }}" placeholder="{{ localize summary.localizedKey }}")
+                | {{/each}}
+    nav.sheet-navigation.tabs(data-group="primary")
+        a.item.active(data-tab="core")| {{ localize "MNM3E.Core" }}
+        a.item(data-tab="powers")| {{ localize "MNM3E.Powers" }}
+
+    section.sheet-body
+        .tab.core.flexrow(data-group="primary" data-tab="core")
+            | {{> "systems/mnm3e/templates/actors/parts/character-core.html"}}
+        .tab.powers.flexcol(data-group="primary" data-tab="powers")
+            | {{> "systems/mnm3e/templates/actors/parts/character-powers.html"}}
