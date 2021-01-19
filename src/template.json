@@ -219,7 +219,7 @@
                 },
                 "attack": {
                     "bonus": {
-                        "value": 0
+                        "value": null
                     },
                     "defense": {
                         "value": null

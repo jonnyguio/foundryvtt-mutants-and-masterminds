@@ -1,0 +1,22 @@
+mixin select-form-fields(dataPath, configPath)
+    .form-fields
+        select(name=`${dataPath}.value`)&attributes({[`{{#if ${dataPath}.override}}disabled{{/if}}`]: ''})
+            | {{#select #{dataPath}.value}}
+            | {{#if (eq item.type "modifier")}}
+            option(value="")
+            | {{/if}}
+            | {{#each #{configPath} as |localizedName name|}}
+            option(value="{{name}}") {{ localizedName }}
+            | {{/each}}
+            | {{/select}}
+
+mixin select-value-with-override(label, dataPath, configPath)
+    .form-group.select
+        label {{ localize "#{label}" }}
+        +select-form-fields(dataPath, configPath)
+
+mixin input-select-value-with-override(label, inputDataPath, selectDataPath, configPath)
+    .form-group.input-select
+        label {{ localize "#{label}" }}
+        input(type="text" name=`${inputDataPath}.value` value=`{{${inputDataPath}.value}}` data-dtype="Number" placeholder="0")&attributes({[`{{#if ${inputDataPath}.override}}disabled{{/if}}`]: ''})
+        +select-form-fields(selectDataPath, configPath)

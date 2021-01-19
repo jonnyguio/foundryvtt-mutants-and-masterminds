@@ -1,55 +1,16 @@
 doctype html
-.form-group.select
-    label {{ localize "MNM3E.ItemActionType" }}
-    .form-fields
-        select(name="data.type.value" "{{#if data.type.override}}disabled{{/if}}")
-            | {{#select data.type.value}}
-            option(value="")
-            | {{#each config.actionTypes as |localizedName name|}}
-            option(value="{{name}}") {{ localizedName }}
-            | {{/each}}
-            | {{/select}}
+include ../../mixins.pug
++select-value-with-override("MNM3E.ItemActionType", "data.type", "config.actionTypes")
 
 | {{#if (or data.type.value (eq item.type "modifier")) }}
 
-.form-group.select
-    label {{ localize "MNM3E.AbilityModifier" }}
-    .form-fields
-        select(name="data.ability.value" "{{#if data.ability.override}}disabled{{/if}}")
-            | {{#select data.ability.value}}
-            option(value="")
-            | {{#each config.abilities as |localizedName name|}}
-            option(value="{{name}}") {{ localizedName }}
-            | {{/each}}
-            | {{/select}}
++select-value-with-override("MNM3E.AbilityModifier", "data.ability", "config.abilities")
 
 | {{#if (or (eq data.type.value "attack") (eq item.type "modifier")) }}
-.form-group.input
-    label {{ localize "MNM3E.AttackBonus" }}
-    input(type="text" name="data.attack.bonus.value" value="{{data.attack.bonus.value}}" data-dtype="Number" placeholder="0" "{{#if data.attack.bonus.override}}disabled{{/if}}")
 
-.form-group.input-select
-    label {{ localize "MNM3E.BaseDC" }}
-    input(type="text" name="data.resist.baseDC.value" value="{{data.resist.baseDC.value}}" data-dtype="Number" placeholder="0" "{{#if data.resist.baseDC.override}}disabled{{/if}}")
-    .form-fields
-        select(name="data.attack.defense.value" "{{#if data.attack.defense.override}}disabled{{/if}}")
-            | {{#select data.attack.defense.value}}
-            option(value="")
-            | {{#each config.defenses as |localizedName name|}}
-            option(value="{{name}}") {{ localizedName }}
-            | {{/each}}
-            | {{/select}}
++input-select-value-with-override("MNM3E.AttackBonus", "data.attack.bonus", "data.attack.defense", "config.defenses")
++input-select-value-with-override("MNM3E.ResistBaseDC", "data.resist.baseDC", "data.resist.defense", "config.defenses")
 
-.form-group.select
-    label {{ localize "MNM3E.CheckResistanceDefense"}}
-    .form-fields
-        select(name="data.resist.defense.value" "{{#if data.resist.defense.override}}disabled{{/if}}")
-            | {{#select data.resist.defense.value}}
-            option(value="")
-            | {{#each config.defenses as |localizedName name|}}
-            option(value="{{name}}") {{ localizedName }}
-            | {{/each}}
-            | {{/select}}
 | {{/if}}
 
 | {{#if (ne item.type "modifier")}}
