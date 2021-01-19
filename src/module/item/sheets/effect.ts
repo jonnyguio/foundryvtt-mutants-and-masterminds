@@ -57,10 +57,6 @@ export default class ItemSheet3eEffect extends ItemSheet3e<PowerEffectData, Item
         }
 
         this.item.data.data.modifiers.push(duplicate(droppedItem.data) as ItemData<ModifierData>);
-        if (this.parentData) {
-            (this.item.sheet as any)._onSubmit(event, { updateData: { data: { modifiers: this.item.data.data.modifiers } }});
-        } else {
-            this.item.update({ data: { modifiers: this.item.data.data.modifiers } }, {});
-        }
+        (this.item.sheet as any)._onSubmit(event, { updateData: { data: { modifiers: this.item.data.data.modifiers } }});
     }
 }
