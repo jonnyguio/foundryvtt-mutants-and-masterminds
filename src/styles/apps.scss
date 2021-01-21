@@ -20,6 +20,27 @@
         border-radius: $sectionBorderRadius;
     }
 
+    .tabs {
+        color: black;
+        flex: 0 1 10%;
+        align-items: center;
+        .item{
+            font-size: 100%;
+            font-family: Charcoal, sans-serif;
+            color:rgb(49, 49, 49);
+        }
+    }
+
+    .editor{
+        width:70%;
+        height: 90%;
+        border-color: green;
+     }
+
+    .sheet-header{
+        -ms-flex-item-align: start;
+    }
+
     // .editor {
     //   height: 100%;
     //     .tox-toolbar-overlord,

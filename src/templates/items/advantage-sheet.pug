@@ -1,0 +1,15 @@
+form(class="{{cssClass}} item-sheet-advantage flexcol" autocomplete="off")
+    header.sheet-header.flexrow
+        | {{> "systems/mnm3e/templates/items/parts/header-sheet.html" itemSubtype=itemSubtype }}
+
+    nav.sheet-navigation.tabs(data-group="primary")
+        a.item.active(data-tab="description") {{ localize "MNM3E.Description" }}
+        a.item(data-tab="effects") {{ localize "MNM3E.Effects" }}
+
+    section.sheet-body
+        .tab.description.flexrow.active(data-group="primary" data-tab="description")
+            | {{> "systems/mnm3e/templates/items/parts/cost-sheet.html" }}
+            | {{> "systems/mnm3e/templates/items/parts/description-sheet.html"}}
+
+        .tab.effects.flexrow(data-group="primary" data-tab="effects")
+            | {{> "systems/mnm3e/templates/actors/parts/actor-effects.html" }}

@@ -7,7 +7,14 @@ form(class="{{cssClass}} item-sheet-power flexcol" autocomplete="off")
         a.item(data-tab="details") {{ localize "MNM3E.Details" }}
 
     section.sheet-body
-        .tab.description.flexrow.active(data-group="primary" data-tab="description")
+        .tab.description.flexcol.active(data-group="primary" data-tab="description")
+            .flexrow
+                label {{ localize "MNM3E.PowerSummary" }}
+                span {{ data.summary }}
+            .flexrow
+                label {{ localize "MNM3E.PowerTotalCost" }}
+                span {{ data.totalCost }}
+
             | {{> "systems/mnm3e/templates/items/parts/description-sheet.html"}}
 
         .tab.details.flexrow(data-group="primary" data-tab="details")

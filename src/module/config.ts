@@ -112,6 +112,7 @@ export interface Config {
     rankCostTypes: {
         flat: string;
         perRank: string;
+        discount: string;
     };
 
     skills: {
@@ -132,6 +133,11 @@ export interface Config {
         tre: string;
         vhc: string;
     };
+
+    summaryPositions: {
+        before: string;
+        after: string;
+    }
 }
 
 export const MNM3E: Config = {
@@ -238,6 +244,7 @@ export const MNM3E: Config = {
     rankCostTypes: {
         flat: 'MNM3E.RankCostTypeFlat',
         perRank: 'MNM3E.RankCostTypePerRank',
+        discount: 'MNM3E.RankCostTypeDiscount',
     },
     skills: {
         acr: 'MNM3E.SkillAcr',
@@ -256,5 +263,9 @@ export const MNM3E: Config = {
         tec: 'MNM3E.SkillTec',
         tre: 'MNM3E.SkillTre',
         vhc: 'MNM3E.SkillVhc',
+    },
+    summaryPositions: {
+        before: 'MNM3E.SummaryBefore',
+        after: 'MNM3E.SummaryAfter',
     },
 }

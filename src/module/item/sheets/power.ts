@@ -1,11 +1,8 @@
 import Item3e from '../entity';
 import ItemSheet3e, { ExtendedItemSheetData } from './base';
 
-interface ExtendedPowerData extends PowerData, ItemActivatedEffect, ItemAction {
-
-}
-
-interface ExtendedPowerSheetData extends ExtendedItemSheetData<ExtendedPowerData> {
+interface ExtendedPowerSheetData extends ExtendedItemSheetData<PowerData> {
+    powerSummary: string;
     effectSummaries: {
         label: string;
         value: string | number;
@@ -29,6 +26,26 @@ export default class ItemSheet3ePower extends ItemSheet3e<PowerData, Item3e<Powe
      */
     public getData(options: DataOptions = {}): any {
         const sheetData = super.getData(options) as ExtendedPowerSheetData;
+
+        sheetData.data.summary = '';
+        sheetData.data.effects.forEach(effect => {
+            const before: string[] = [];
+            const after: string[] = [];
+            effect.data.modifiers.forEach(modifier => {
+                let format = modifier.data.summary.format;
+                let targetList = before;
+                if (modifier.data.summary.position == 'after') {
+                    targetList = after;
+                }
+
+                targetList.push(format.replace('$cost', modifier.data.cost.value.toString()));
+            });
+
+            sheetData.data.summary += effect.data.summary.format.
+                replace('$rank', effect.data.rank.toString()).
+                replace('$before', before.join(' ')).
+                replace('$after', after.join(' '));
+        });
 
         sheetData.effectSummaries = [];
         return sheetData;

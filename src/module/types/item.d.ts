@@ -1,6 +1,20 @@
+declare type SummaryPosition = 'before' | 'after';
+
+declare interface ItemSummary {
+    summary: {
+        format: string;
+        position: SummaryPosition;
+
+        // Prepared Data
+        parsed?: string;
+    };
+}
+
 declare interface ItemDescription {
-    value: string;
-    chat: string;
+    description: {
+        value: string;
+        chat: string;
+    };
 }
 
 declare interface OverrideValue<T> {
@@ -61,9 +75,16 @@ declare interface ItemAction {
     type: OverrideValue<string>;
 }
 
+declare type RankCostType = 'flat' | 'perRank' | 'discount';
+
+declare interface ItemCost {
+    value: number;
+    type: RankCostType;
+    discountPer: number;
+}
+
 declare interface ItemScalingEffect {
-    cost: number;
-    costType: string;
+    cost: ItemCost;
 }
 
 declare interface Expression {
@@ -75,29 +96,27 @@ declare interface AdvantageData extends ItemDescription, ItemActivatedEffect, It
 
 }
 
-declare interface PowerEffectData extends ItemDescription, ItemActivatedEffect, ItemAction, ItemScalingEffect {
+declare interface PowerEffectData extends ItemSummary, ItemDescription, ItemActivatedEffect, ItemAction, ItemScalingEffect {
     modifiers: ItemData<ModifierData>[];
+    rank: number;
 }
 
-declare interface ModifierData extends ItemDescription, ItemActivatedEffect, ItemAction, ItemScalingEffect {
+declare interface ModifierData extends ItemSummary, ItemDescription, ItemActivatedEffect, ItemAction, ItemScalingEffect {
     parentEffect: string;
     expressions: Expression[];
 }
 
 declare interface PowerData extends ItemDescription {
-    totalCost: number;
     effects: ItemData<PowerEffectData>[];
     alternatePowerIDs: string[];
+
+    // Prepared data
+    totalCost?: number;
+    summary?: string;
     alternatePowers?: ItemData<PowerData>[];
 }
 
 declare interface FoundryItemSheetData<T = any> extends Omit<ItemSheetData<T>, 'data'> {
     data: T;
     effects: ActiveEffectCategories;
-}
-
-declare interface ParentData {
-    key: string;
-    item: Item;
-    itemTag: string;
 }

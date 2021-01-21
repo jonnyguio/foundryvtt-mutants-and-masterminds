@@ -27,6 +27,10 @@ export default class Item3e<T = any> extends Item<T> {
         if (!Array.isArray(data.data.expressions)) {
             data.data.expressions = Object.values(data.data.expressions).map(e => e) as Expression[];
         }
+
+        if (data.data.summary.format == '') {
+            data.data.summary.format = data.name;
+        }
     }
 
     private preparePowerEffectData(data: ItemData<PowerEffectData>): void {        
@@ -66,14 +70,51 @@ export default class Item3e<T = any> extends Item<T> {
                     });
                 }
             });
-            // modifier.data.expressions.forEach(expression => {
-            //     const result = evaluateExpression(data, expression);
-            //     setProperty(data, expression.key, result);
-            // });
         });
+
+        if (data.data.summary.format == '') {
+            data.data.summary.format = `$before ${data.name} $rank $after`;
+        }
     }
 
     private preparePowerData(data: ItemData<PowerData>): void {
+        let totalPowerCost = 0;
+        const deferredCosts: { modifier: number; discountPer: number; }[] = [];
+
+        data.data.effects.forEach(effect => {
+            let perRankCost = 0;
+            let flatCost = 0;
+
+            const evaluateCostType = (costType: RankCostType, cost: number, discountPer?: number) => {
+                switch (costType) {
+                    case 'flat':
+                        flatCost += cost;
+                        break;
+                    case 'perRank':
+                        perRankCost += cost;
+                        break;
+                    case 'discount':
+                        deferredCosts.push({ modifier: cost, discountPer: !discountPer || discountPer < 1 ? 1 : discountPer });
+                        break;
+                }
+            };
+
+            evaluateCostType(effect.data.cost.type, effect.data.cost.value, effect.data.cost.discountPer);
+            effect.data.modifiers.forEach(modifier => evaluateCostType(
+                modifier.data.cost.type,
+                modifier.data.cost.value,
+                modifier.data.cost.discountPer
+            ));
+
+            totalPowerCost = totalPowerCost + (perRankCost * effect.data.rank) + flatCost;
+        });
+
+        deferredCosts.forEach(dc => {
+            const quotient = totalPowerCost / dc.discountPer;
+            totalPowerCost += quotient * dc.modifier;
+        });
+
+        data.data.totalCost = totalPowerCost;
         data.data.alternatePowers = data.data.alternatePowerIDs.map(id => game.items.get(id).data) as ItemData<PowerData>[];
     }
 }

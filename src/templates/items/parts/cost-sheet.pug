@@ -2,13 +2,22 @@
     label {{ localize "MNM3E.Rank" }}
     input(type="text" name="data.rank" value="{{data.rank}}" data-dtype="Number" placeholder="0")
 
-.form-group.input-select
-    label {{ localize "MNM3E.Cost" }}
-    input(type="text" name="data.cost" value="{{data.cost}}" data-dtype="Number" placeholder="0")
+.form-group.select
+    label {{ localize "MNM3E.CostType" }}
     .form-fields
-        select(name="data.costType")
-            | {{#select data.costType}}
+        select(name="data.cost.type")
+            | {{#select data.cost.type}}
             | {{#each config.rankCostTypes as |localizedName name|}}
             option(value="{{name}}") {{ localizedName }}
             | {{/each}}
             | {{/select}}
+
+.form-group.input
+    label {{#if (eq data.cost.type "discount")}} {{ localize "MNM3E.CostDiscount" }} {{else}} {{ localize "MNM3E.Cost" }} {{/if}}
+    input(type="text" name="data.cost.value" value="{{data.cost.value}}" data-dtype="Number" placeholder="0")
+
+| {{#if (eq data.cost.type "discount")}}
+.form-group.input
+    label {{ localize "MNM3E.CostDiscountPer" }}
+    input(type="text" name="data.cost.discountPer" value="{{data.cost.discountPer}}" data-dtype="Number" placeholder="0")
+| {{/if}}

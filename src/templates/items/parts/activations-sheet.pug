@@ -3,11 +3,11 @@ include ../../mixins.pug
 
 +select-value-with-override("MNM3E.ItemActivationType", "data.activation.type", "config.activationTypes")
 
-| {{#if (or data.activation.type.value (eq item.type "modifier")) }}
+| {{#if (or (ne data.activation.type.value "none") (eq item.type "modifier")) }}
 
 +select-value-with-override("MNM3E.Range", "data.range.type", "config.rangeTypes")
 
-+select-value-with-override("MNM3E.Area", "data.range.area", "config.areaTypes")
++select-value-with-override("MNM3E.Area", "data.range.area", "config.areaTypes", true)
 
 +select-value-with-override("MNM3E.Duration", "data.duration.type", "config.durationTypes")
 

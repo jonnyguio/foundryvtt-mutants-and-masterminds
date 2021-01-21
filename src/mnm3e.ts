@@ -16,6 +16,7 @@ import { preloadTemplates } from './module/preloadTemplates.js';
 import Actor3e from './module/actor/entity';
 import ActorSheet3eCharacter from './module/actor/sheets/character';
 import Item3e from './module/item/entity';
+import ItemSheet3eAdvantage from './module/item/sheets/advantage';
 import ItemSheet3ePower from './module/item/sheets/power';
 import ItemSheet3eEffect from './module/item/sheets/effect';
 import ItemSheet3eModifier from './module/item/sheets/modifier';
@@ -42,6 +43,11 @@ Hooks.once('init', async function() {
     });
 
     Items.unregisterSheet('core', Item3e);
+    Items.registerSheet('mnm3e', ItemSheet3eAdvantage, {
+        types: ['advantage'],
+        makeDefault: true,
+        label: 'MNM3E.SheetClassItem',
+    });
     Items.registerSheet('mnm3e', ItemSheet3ePower, {
         types: ['power'],
         makeDefault: true,

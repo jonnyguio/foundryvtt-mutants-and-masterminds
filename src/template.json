@@ -175,6 +175,12 @@
                     "chat": ""
                 }
             },
+            "itemSummary": {
+                "summary": {
+                    "format": "",
+                    "position": ""
+                }
+            },
             "activatedEffect": {
                 "activation": {
                     "type": {
@@ -239,8 +245,11 @@
                 }
             },
             "scalingEffect": {
-                "cost": 0,
-                "costType": ""
+                "cost": {
+                    "value": 0,
+                    "type": "",
+                    "discountPer": 1
+                }
             }
         },
         "advantage": {
@@ -248,18 +257,17 @@
             "rank": 0
         },
         "effect": {
-            "templates": ["itemDescription", "activatedEffect", "action", "scalingEffect"],
+            "templates": ["itemSummary", "itemDescription", "activatedEffect", "action", "scalingEffect"],
             "rank": 0,
             "modifiers": []
         },
         "modifier": {
-            "templates": ["itemDescription", "activatedEffect", "action", "scalingEffect"],
+            "templates": ["itemSummary", "itemDescription", "activatedEffect", "action", "scalingEffect"],
             "parentEffect": "",
             "expressions": []
         },
         "power": {
             "templates": ["itemDescription"],
-            "totalCost": 0,
             "effects": [],
             "alternatePowerIDs": []
         }

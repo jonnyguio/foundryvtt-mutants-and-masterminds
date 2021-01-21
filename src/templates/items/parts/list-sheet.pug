@@ -1,14 +1,16 @@
-ol(class="items-list {{ type }}-list")
+ol(class="items-list {{ type }}-list item-{{ type }}-controls")
     li.items-header.flexrow
         h3.item-name.flexrow {{ header }}
+        a.item-control(title="{{ localize 'MNM3E.ItemCreate' }}" data-action="create" data-item-type="{{ type }}")
+            i.fas.fa-plus
 
     ol.item-list
         | {{#each items as |item id|}}
         li.item.flexrow(data-item-id="{{id}}")
             .item-name.flexrow
                 .item-image(style="background-image: url('{{item.img}}')")
-                h4 {{ item.name }}
-            div(class="item-controls flexrow item-{{ ../type }}-controls")
+                h4 {{#if item.data.summary.parsed}} {{item.data.summary.parsed}} {{else}} {{item.name}} {{/if}}
+            div(class="item-controls flexrow")
                 a.item-control(title="{{ localize 'MNM3E.ItemEdit' }}" data-action="edit" data-index="{{@index}}")
                     i.fas.fa-edit
                 a.item-control(title="{{ localize 'MNM3E.ItemDelete' }}" data-action="delete" data-index="{{@index}}")

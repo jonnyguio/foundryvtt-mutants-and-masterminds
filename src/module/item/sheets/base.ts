@@ -50,9 +50,7 @@ export default class ItemSheet3e<T, I extends Item<T>> extends ItemSheet<T, I> {
         
         const originalClose = this.close.bind(this);
         this.close = async () => {
-            this._childItems.forEach(async (value) => {
-                await value.sheet.close();
-            });
+            this._childItems.forEach(async (value) => await value.sheet.close());
             await originalClose();
         }
     }
@@ -63,6 +61,14 @@ export default class ItemSheet3e<T, I extends Item<T>> extends ItemSheet<T, I> {
         const list = getProperty(this.item.data, key) as any[];
         const subItemIndex = target.dataset.index;
         switch (target.dataset.action) {
+            case 'create':
+                const newItem = await Item.create({ 
+                    name: `New ${target.dataset.itemType}`,
+                    type: target.dataset.itemType
+                }, { temporary: true });
+                list.push(newItem.data);
+                await this.updateItem(ev, key, list);
+                break;
             case 'edit':
                 await this.handleListItemEdit(ev, key, list, subItemIndex);
                 break;
@@ -91,7 +97,7 @@ export default class ItemSheet3e<T, I extends Item<T>> extends ItemSheet<T, I> {
             const rawSheet = newItem.sheet as any;
             rawSheet._parentItem = this.item;
             rawSheet._updateObject = (async (_: JQuery.Event, flattenedObject: object) => {
-                const updatedItem = list.find(data => data.tempData.tag == sourceItem.tempData.tag);
+                const updatedItem = list.find(data => data.tempData?.tag == sourceItem.tempData.tag);
                 if (!updatedItem) {
                     return;
                 }

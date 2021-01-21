@@ -18,7 +18,7 @@ export default class ItemSheet3eEffect extends ItemSheet3e<ModifierData, Item3e<
      */
     public getData(options: DataOptions = {}): any {
         const sheetData = super.getData(options) as ExtendedItemSheetData<ModifierData>;
-        sheetData.itemSubtype = game.i18n.localize(sheetData.data.cost >= 0 ? 'MNM3E.ModifierExtra' : 'MNM3E.ModifierFlaw');
+        sheetData.itemSubtype = game.i18n.localize(sheetData.data.cost.value >= 0 ? 'MNM3E.ModifierExtra' : 'MNM3E.ModifierFlaw');
         return sheetData;
     }
 

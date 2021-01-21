@@ -8,7 +8,11 @@ form(class="{{cssClass}} item-sheet-effect flexcol" autocomplete="off")
         a.item(data-tab="modifiers") {{ localize "MNM3E.Modifiers" }}
 
     section.sheet-body
-        .tab.description.flexrow.active(data-group="primary" data-tab="description")
+        .tab.description.flexcol.active(data-group="primary" data-tab="description")
+            .form-group.input
+                label {{ localize "MNM3E.SummaryFormat" }}
+                input(type="text" name="data.summary.format" value="{{data.summary.format}}" data-dtype="String" placeholder="{{item.name}} $rank")
+
             | {{> "systems/mnm3e/templates/items/parts/description-sheet.html"}}
 
         .tab.details.flexcol(data-group="primary" data-tab="details")

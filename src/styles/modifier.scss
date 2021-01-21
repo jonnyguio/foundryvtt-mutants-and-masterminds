@@ -4,7 +4,7 @@
     //text box info below
 
    .modifier-properties {
-        color: black;
+        color:rgb(49, 49, 49);
         width: 5%;
         //flex changes the box on the left of the modifier page - 33% of total page
         flex: 0 1 30%;
@@ -13,10 +13,6 @@
         border-radius: $sectionBorderRadius;
    }
 
-   .editor{
-    width:70%;
-    height: 70%;
-    border-color: green;
-}
+
 
 }

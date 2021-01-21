@@ -27,7 +27,19 @@ form(class="{{cssClass}} item-sheet-modifier flexcol" autocomplete="off")
             //-         label.property-title {{ localize "MNM3E.ModifierParentEffect" }}
             //-         input.property-value(type="text" name="data.parentEffect" value="{{data.parentEffect}}" placeholder="")
 
-            | {{editor content=data.description.value target="data.description.value" button=true owner=owner editable=editable}}
+            .flexcol
+                .form-group.select-input
+                    label {{ localize "MNM3E.SummaryFormat" }}
+                    .form-fields
+                        select(name="data.summary.position")
+                            | {{#select data.summary.position}}
+                            | {{#each config.summaryPositions as |localizedName name|}}
+                            option(value="{{name}}") {{localizedName}}
+                            | {{/each}}
+                            | {{/select}}
+                    input(type="text" name="data.summary.format" value="{{data.summary.format}}" data-dtype="String" placeholder="{{item.name}}")
+
+                | {{editor content=data.description.value target="data.description.value" button=true owner=owner editable=editable}}
 
         .tab.overrides.flexcol(data-group="primary" data-tab="overrides")
             | {{> "systems/mnm3e/templates/items/parts/activations-sheet.html" }}
