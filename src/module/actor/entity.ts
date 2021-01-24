@@ -25,7 +25,7 @@ export default class Actor3e<T extends CommonActorData> extends Actor<T> {
         this._prepareSkills(actorData);
     }
 
-    private _prepareAbilities(actorData: ActorData<T>): void {
+    private _prepareAbilities(actorData: Actor.Data<T>): void {
         const data = actorData.data;
 
         Object.values(data.abilities).forEach(ability => {
@@ -33,7 +33,7 @@ export default class Actor3e<T extends CommonActorData> extends Actor<T> {
         });
     }
 
-    private _prepareDefenses(actorData: ActorData<T>): void {
+    private _prepareDefenses(actorData: Actor.Data<T>): void {
         const data = actorData.data;
 
         Object.values(data.defenses).forEach(defense => {
@@ -41,7 +41,7 @@ export default class Actor3e<T extends CommonActorData> extends Actor<T> {
         });
     }
 
-    private _prepareSkills(actorData: ActorData<T>): void {
+    private _prepareSkills(actorData: Actor.Data<T>): void {
         const data = actorData.data;
 
         Object.values(data.skills).forEach(skill => {
@@ -54,11 +54,11 @@ export default class Actor3e<T extends CommonActorData> extends Actor<T> {
         });
     }
 
-    private _prepareCharacterData(actorData: ActorData<T>): void {
+    private _prepareCharacterData(actorData: Actor.Data<T>): void {
 
     }
 
-    private _prepareNPCData(actorData: ActorData<T>): void {
+    private _prepareNPCData(actorData: Actor.Data<T>): void {
 
     }
 }

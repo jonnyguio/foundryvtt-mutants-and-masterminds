@@ -5,7 +5,7 @@ export default class ItemSheet3eAdvantage extends ItemSheet3e<AdvantageData, Ite
     /**
      * @override
      */
-    public static get defaultOptions(): FormApplicationOptions {
+    public static get defaultOptions(): FormApplication.Options {
         const opts = super.defaultOptions;
         opts.classes?.push('advantage');
         return mergeObject(opts, {
@@ -16,7 +16,7 @@ export default class ItemSheet3eAdvantage extends ItemSheet3e<AdvantageData, Ite
     /**
      * @override
      */
-    public getData(options: DataOptions = {}): any {
+    public getData(options: DataOptions = {}): ItemSheet.Data<AdvantageData> {
         const sheetData = super.getData(options) as ExtendedItemSheetData<ModifierData>;
         return sheetData;
     }

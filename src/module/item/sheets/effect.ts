@@ -5,7 +5,7 @@ export default class ItemSheet3eEffect extends ItemSheet3e<PowerEffectData, Item
     /**
      * @override
      */
-    public static get defaultOptions(): FormApplicationOptions {
+    public static get defaultOptions(): FormApplication.Options {
         const opts = super.defaultOptions;
         opts.classes?.push('effect');
         return mergeObject(opts, {
@@ -16,7 +16,7 @@ export default class ItemSheet3eEffect extends ItemSheet3e<PowerEffectData, Item
     /**
      * @override
      */
-    public getData(options: DataOptions = {}): any {
+    public getData(options: DataOptions = {}): ItemSheet.Data<PowerEffectData> {
         const sheetData = super.getData(options) as ExtendedItemSheetData<PowerEffectData>;
         if (sheetData.data.type.value) {
             sheetData.itemSubtype = game.i18n.localize(`MNM3E.EffectType${sheetData.data.type.value.titleCase()}`);
@@ -56,7 +56,7 @@ export default class ItemSheet3eEffect extends ItemSheet3e<PowerEffectData, Item
             return;
         }
 
-        this.item.data.data.modifiers.push(duplicate(droppedItem.data) as ItemData<ModifierData>);
+        this.item.data.data.modifiers.push(duplicate(droppedItem.data) as Item.Data<ModifierData>);
         (this.item.sheet as any)._onSubmit(event, { updateData: { data: { modifiers: this.item.data.data.modifiers } }});
     }
 }

@@ -20,7 +20,7 @@ export default class ItemSheet3e<T, I extends Item<T>> extends ItemSheet<T, I> {
     /**
      * @override
      */
-    public static get defaultOptions(): FormApplicationOptions {
+    public static get defaultOptions(): FormApplication.Options {
         return mergeObject(super.defaultOptions, {
             classes: ['mnm3e', 'sheet', 'item'],
             width: 600,
@@ -32,8 +32,8 @@ export default class ItemSheet3e<T, I extends Item<T>> extends ItemSheet<T, I> {
     /**
      * @override
      */
-    public getData(options: DataOptions = {}): any {
-        const sheetData = (super.getData() as any) as ExtendedItemSheetData<T>;
+    public getData(options: DataOptions = {}): ItemSheet.Data<T> {
+        const sheetData = super.getData() as ExtendedItemSheetData<T>;
         sheetData.config = CONFIG.MNM3E;
         sheetData.itemType = game.i18n.localize(`ITEM.Type${this.item.type.titleCase()}`);
 

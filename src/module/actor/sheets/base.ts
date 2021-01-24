@@ -1,12 +1,8 @@
 export default class ActorSheet3e<T extends CommonActorData & CreatureData, A extends Actor<T>> extends ActorSheet<T, A> {
-    constructor(...args: any[]) {
-        super(...args);
-    }
-
     /**
      * @override
      */
-    public static get defaultOptions(): FormApplicationOptions {
+    public static get defaultOptions(): FormApplication.Options {
         return mergeObject(super.defaultOptions, {
             classes: ['mnm3e', 'sheet', 'actor'],
             width: 600,
@@ -18,8 +14,8 @@ export default class ActorSheet3e<T extends CommonActorData & CreatureData, A ex
     /**
      * @override
      */
-    public getData(): any {
-        const sheetData = super.getData() as any as FoundryActorSheetData<T>;
+    public getData(): ActorSheet.Data<T> {
+        const sheetData = super.getData();
 
         Object.entries(sheetData.data.abilities).forEach(([name, ability]) => {
             ability.label = CONFIG.MNM3E.abilities[name];

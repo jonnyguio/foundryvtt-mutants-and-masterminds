@@ -13,7 +13,7 @@ export default class ItemSheet3ePower extends ItemSheet3e<PowerData, Item3e<Powe
     /**
      * @override
      */
-    public static get defaultOptions(): FormApplicationOptions {
+    public static get defaultOptions(): FormApplication.Options {
         const opts = super.defaultOptions;
         opts.classes?.push('power');
         return mergeObject(opts, {
@@ -24,7 +24,7 @@ export default class ItemSheet3ePower extends ItemSheet3e<PowerData, Item3e<Powe
     /**
      * @override
      */
-    public getData(options: DataOptions = {}): any {
+    public getData(options: DataOptions = {}): ItemSheet.Data<PowerData> {
         const sheetData = super.getData(options) as ExtendedPowerSheetData;
 
         sheetData.data.summary = '';
@@ -84,7 +84,7 @@ export default class ItemSheet3ePower extends ItemSheet3e<PowerData, Item3e<Powe
             return;
         }
 
-        this.item.data.data.effects.push(droppedItem.data as ItemData<PowerEffectData>);
+        this.item.data.data.effects.push(droppedItem.data as Item.Data<PowerEffectData>);
         if (this.item._id) {
             this.item.update({ data: { effects: this.item.data.data.effects } }, {});
         }

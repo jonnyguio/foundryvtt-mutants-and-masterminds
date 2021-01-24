@@ -12,18 +12,18 @@ export default class Item3e<T = any> extends Item<T> {
     public prepareMNM3EData(): void {
         switch(this.type) {
             case 'modifier':
-                this.prepareModifierData((this.data as unknown) as ItemData<ModifierData>);
+                this.prepareModifierData((this.data as unknown) as Item.Data<ModifierData>);
                 break;
             case 'effect':
-                this.preparePowerEffectData((this.data as unknown) as ItemData<PowerEffectData>);
+                this.preparePowerEffectData((this.data as unknown) as Item.Data<PowerEffectData>);
                 break;
             case 'power':
-                this.preparePowerData((this.data as unknown) as ItemData<PowerData>);
+                this.preparePowerData((this.data as unknown) as Item.Data<PowerData>);
                 break;
         }
     }
 
-    private prepareModifierData(data: ItemData<ModifierData>): void {
+    private prepareModifierData(data: Item.Data<ModifierData>): void {
         if (!Array.isArray(data.data.expressions)) {
             data.data.expressions = Object.values(data.data.expressions).map(e => e) as Expression[];
         }
@@ -33,7 +33,7 @@ export default class Item3e<T = any> extends Item<T> {
         }
     }
 
-    private preparePowerEffectData(data: ItemData<PowerEffectData>): void {        
+    private preparePowerEffectData(data: Item.Data<PowerEffectData>): void {
         const overrideValues = [
             'data.activation.type',
             'data.duration.type',
@@ -77,7 +77,7 @@ export default class Item3e<T = any> extends Item<T> {
         }
     }
 
-    private preparePowerData(data: ItemData<PowerData>): void {
+    private preparePowerData(data: Item.Data<PowerData>): void {
         let totalPowerCost = 0;
         const deferredCosts: { modifier: number; discountPer: number; }[] = [];
 
@@ -115,6 +115,6 @@ export default class Item3e<T = any> extends Item<T> {
         });
 
         data.data.totalCost = totalPowerCost;
-        data.data.alternatePowers = data.data.alternatePowerIDs.map(id => game.items.get(id).data) as ItemData<PowerData>[];
+        data.data.alternatePowers = data.data.alternatePowerIDs.map(id => game.items.get(id).data) as Item.Data<PowerData>[];
     }
 }

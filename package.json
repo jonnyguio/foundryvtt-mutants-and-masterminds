@@ -8,14 +8,14 @@
     "build": "gulp build && gulp link",
     "build:watch": "gulp watch",
     "clean": "gulp clean && gulp link --clean",
-    "update": "npm install --save-dev ssh://git@github.com:ShoyuVanilla/foundryvtt-typescript-types.git"
+    "update": "npm install --save-dev gitlab:foundry-projects/foundry-pc/foundry-pc-types"
   },
   "author": "",
   "license": "",
   "devDependencies": {
     "archiver": "^5.0.2",
     "chalk": "^4.1.0",
-    "foundryvtt-typescript-types": "git+ssh://git@github.com/ShoyuVanilla/foundryvtt-typescript-types.git",
+    "foundry-pc-types": "gitlab:foundry-projects/foundry-pc/foundry-pc-types",
     "fs-extra": "^9.0.1",
     "gulp": "^4.0.2",
     "gulp-git": "^2.10.1",
