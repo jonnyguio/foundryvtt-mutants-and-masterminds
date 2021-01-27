@@ -37,7 +37,7 @@ export default class ItemSheet3e<T, I extends Item<T>> extends ItemSheet<T, I> {
         sheetData.config = CONFIG.MNM3E;
         sheetData.itemType = game.i18n.localize(`ITEM.Type${this.item.type.titleCase()}`);
 
-        sheetData.effects = prepareActiveEffectCategories(this.entity.effects);
+        sheetData.effects = prepareActiveEffectCategories((this.entity as any).effects);
         return sheetData;
     }
 
