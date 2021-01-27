@@ -2,6 +2,9 @@ export const preloadTemplates = async function() {
     const templatePaths: string[] = [
         // Add paths to "systems/foundryvtt-mutants-and-masterminds/templates"
 
+        // Apps
+        "system/mnm3e/templates/apps/summary-builder.html",
+
         // Actor
         "systems/mnm3e/templates/actors/parts/character-core.html",
         "systems/mnm3e/templates/actors/parts/character-powers.html",

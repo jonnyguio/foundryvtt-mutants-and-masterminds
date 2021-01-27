@@ -35,8 +35,8 @@ Hooks.once('init', async function() {
     CONFIG.Item.entityClass = Item3e as typeof Item;
 
     // Assign custom classes and constants here
-    Actors.unregisterSheet('core', ActorSheet);
-    Actors.registerSheet('mnm3e', ActorSheet3eCharacter, {
+    (Actors as any).unregisterSheet('core', ActorSheet);
+    (Actors as any).registerSheet('mnm3e', ActorSheet3eCharacter, {
         types: ['character'],
         makeDefault: true,
         label: 'MNM3E.SheetClassCharacter',

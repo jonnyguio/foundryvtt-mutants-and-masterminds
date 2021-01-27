@@ -97,7 +97,7 @@ declare interface AdvantageData extends ItemDescription, ItemActivatedEffect, It
 }
 
 declare interface PowerEffectData extends ItemSummary, ItemDescription, ItemActivatedEffect, ItemAction, ItemScalingEffect {
-    modifiers: ItemData<ModifierData>[];
+    modifiers: Item.Data<ModifierData>[];
     rank: number;
 }
 
@@ -107,16 +107,16 @@ declare interface ModifierData extends ItemSummary, ItemDescription, ItemActivat
 }
 
 declare interface PowerData extends ItemDescription {
-    effects: ItemData<PowerEffectData>[];
+    effects: Item.Data<PowerEffectData>[];
     alternatePowerIDs: string[];
 
     // Prepared data
     totalCost?: number;
     summary?: string;
-    alternatePowers?: ItemData<PowerData>[];
+    alternatePowers?: Item.Data<PowerData>[];
 }
 
-declare interface FoundryItemSheetData<T = any> extends Omit<ItemSheetData<T>, 'data'> {
+declare interface FoundryItemSheetData<T = any> extends Omit<ItemSheet.Data<T>, 'data'> {
     data: T;
     effects: ActiveEffectCategories;
 }

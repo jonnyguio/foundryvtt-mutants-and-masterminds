@@ -94,6 +94,6 @@ declare interface NPCData extends CommonActorData, CreatureData {
 
 }
 
-declare interface FoundryActorSheetData<T = any> extends Omit<ActorSheetData<T>, 'data'> {
-    data: T;
+declare interface FoundryActorSheetData<T = any> extends ActorSheet.Data<T> {
+    // Use ActiveEffects when needed
 }

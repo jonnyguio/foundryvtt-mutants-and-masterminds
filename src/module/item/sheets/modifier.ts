@@ -5,7 +5,7 @@ export default class ItemSheet3eEffect extends ItemSheet3e<ModifierData, Item3e<
     /**
      * @override
      */
-    public static get defaultOptions(): FormApplicationOptions {
+    public static get defaultOptions(): FormApplication.Options {
         const opts = super.defaultOptions;
         opts.classes?.push('modifier');
         return mergeObject(opts, {
@@ -16,7 +16,7 @@ export default class ItemSheet3eEffect extends ItemSheet3e<ModifierData, Item3e<
     /**
      * @override
      */
-    public getData(options: DataOptions = {}): any {
+    public getData(options: DataOptions = {}): ItemSheet.Data<ModifierData> {
         const sheetData = super.getData(options) as ExtendedItemSheetData<ModifierData>;
         sheetData.itemSubtype = game.i18n.localize(sheetData.data.cost.value >= 0 ? 'MNM3E.ModifierExtra' : 'MNM3E.ModifierFlaw');
         return sheetData;
