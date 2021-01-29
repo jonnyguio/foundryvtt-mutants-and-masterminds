@@ -1,6 +1,13 @@
 .core-container.flexrow
     .ability-section.flexcol
         h3.section-title {{ localize "MNM3E.AbilityScores" }}
+            a.config-button(
+                    title="{{ localize 'MNM3E.AbilityConfigure' }}"
+                    data-action="score-config"
+                    data-score-path="data.abilities"
+                    data-score-config-path="abilities"
+                )
+                i.fas.fa-cog
         ul.ability-scores.flexrow
             | {{#each data.abilities as |ability key|}}
             li.ability.flexcol

@@ -1,0 +1,15 @@
+form.score-config.stacked(autocomplete="off")
+    .flexrow
+        span {{ localize "MNM3E.ScoreName" }}
+        span {{ localize "MNM3E.ScoreBase" }}
+        span {{ localize "MNM3E.ScoreModifier" }}
+    | {{#each scores as |score name|}}
+    .form-group.input
+        label {{ score.label }}
+        input(type="text" name="{{../dataPath}}.{{name}}.rank" value="{{score.rank}}" data-dtype="Number" placeholder="0")
+        input(type="text" name="{{../dataPath}}.{{name}}.total" value="{{score.total}}" data-dtype="Number" disabled)
+    | {{/each}}
+    button(type="submit" name="submit" value="1")
+        i.fas.fa-save
+        .
+            {{ localize "Submit" }}

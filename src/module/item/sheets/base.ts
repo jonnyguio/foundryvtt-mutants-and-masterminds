@@ -1,9 +1,11 @@
 import { Config } from '../../config';
 import { onManagedActiveEffect, prepareActiveEffectCategories } from '../../active-effects';
 import Item3e from '../entity';
+import SummaryBuilder from '../../apps/summary-builder';
 
 export interface ExtendedItemSheetData<T = any> extends FoundryItemSheetData<T> {
     config: Config;
+    isOwned: boolean;
     itemType?: string;
     itemSubtype?: string;
 }
@@ -35,6 +37,7 @@ export default class ItemSheet3e<T, I extends Item<T>> extends ItemSheet<T, I> {
     public getData(options: DataOptions = {}): ItemSheet.Data<T> {
         const sheetData = super.getData() as ExtendedItemSheetData<T>;
         sheetData.config = CONFIG.MNM3E;
+        (sheetData.item as any).isOwned = this.item.isOwned;
         sheetData.itemType = game.i18n.localize(`ITEM.Type${this.item.type.titleCase()}`);
 
         sheetData.effects = prepareActiveEffectCategories((this.entity as any).effects);
@@ -45,14 +48,15 @@ export default class ItemSheet3e<T, I extends Item<T>> extends ItemSheet<T, I> {
      * @override
      */
     protected activateListeners(html: JQuery): void {
-        super.activateListeners(html);
         html.find('.effect-control').on('click', ev => onManagedActiveEffect(ev, this.item));
-        
+        html.find('.config-button').on('click', this.onConfigMenu.bind(this));
+
         const originalClose = this.close.bind(this);
         this.close = async () => {
             this._childItems.forEach(async (value) => await value.sheet.close());
             await originalClose();
         }
+        super.activateListeners(html);
     }
 
     protected async onItemListActionHandler(ev: JQuery.ClickEvent, key: string): Promise<void> {
@@ -91,8 +95,9 @@ export default class ItemSheet3e<T, I extends Item<T>> extends ItemSheet<T, I> {
         let childItem = this._childItems.get(sourceItem);
         if (!childItem) {
             sourceItem.tempData = { tag: `${Math.random().toString(36).substr(2, 9)}-temp` };
-            const newItem = await Item.create(sourceItem, { temporary: true });
-            (newItem.data as any)._id = sourceItem.tempData.tag;
+            const newItem = await Item.create(sourceItem, { temporary: true }) as Item3e;
+            (newItem.options as any).actor = this.item.actor;
+            newItem.data._id = sourceItem.tempData.tag;
 
             const rawSheet = newItem.sheet as any;
             rawSheet._parentItem = this.item;
@@ -105,8 +110,8 @@ export default class ItemSheet3e<T, I extends Item<T>> extends ItemSheet<T, I> {
                 rawSheet.item.data = mergeObject(updatedItem, flattenedObject);
                 await rawSheet.updateItem(ev, key, list);
             });
-            childItem = newItem as Item;
-            this._childItems.set(sourceItem, newItem as Item);
+            childItem = newItem;
+            this._childItems.set(sourceItem, newItem);
         }
         childItem!.render(true);
     }
@@ -119,5 +124,22 @@ export default class ItemSheet3e<T, I extends Item<T>> extends ItemSheet<T, I> {
         } else {
             this.item.update({ [key]: list }, {});
         }
+    }
+
+    private async onConfigMenu(ev: JQuery.ClickEvent): Promise<void> {
+        ev.preventDefault();
+        const button = ev.currentTarget;
+        let app: Application;
+        switch (button.dataset.action) {
+            case 'summary-builder':
+                app = new SummaryBuilder(this.object);
+                break;
+            default:
+                throw new Error(`unknown action: ${button.dataset.action}`);
+        }
+        if (this._parentItem) {
+            (app as any)._updateObject = (this.item.sheet as any)._updateObject;
+        }
+        app.render(true);
     }
 }

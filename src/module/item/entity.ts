@@ -23,6 +23,33 @@ export default class Item3e<T = any> extends Item<T> {
         }
     }
 
+    public async roll({ rollMode }: { rollMode?: string} = {}): Promise<ChatMessage | object | void> {
+        return this.displayCard({rollMode});
+    }
+
+    public async displayCard({ rollMode }: { rollMode?: string } = {}): Promise<ChatMessage | object | void> {
+        const token = this.actor?.token;
+        const templateData = {
+            actor: this.actor,
+            tokenId: token ? `${token.scene._id}.${token.id}` : null,
+            item: this.data,
+            data: this.data.data,
+        };
+
+        const html = await renderTemplate('systems/mnm3e/templates/chat/item-card.html', templateData);
+        const chatData = {
+            user: game.user._id,
+            type: CONST.CHAT_MESSAGE_TYPES.OTHER,
+            content: html,
+            flavor: (this.data.data as any).chatFlavor,
+            speaker: ChatMessage.getSpeaker({actor: this.actor!, token}),
+        };
+
+        (ChatMessage as any).applyRollMode(chatData, rollMode || game.settings.get('core', 'rollMode'));
+
+        return ChatMessage.create(chatData);
+    }
+
     private prepareModifierData(data: Item.Data<ModifierData>): void {
         if (!Array.isArray(data.data.expressions)) {
             data.data.expressions = Object.values(data.data.expressions).map(e => e) as Expression[];
@@ -31,6 +58,8 @@ export default class Item3e<T = any> extends Item<T> {
         if (data.data.summary.format == '') {
             data.data.summary.format = data.name;
         }
+
+        data.data.summary.parsed = data.data.summary.format.replace('$cost', data.data.cost.value.toString());
     }
 
     private preparePowerEffectData(data: Item.Data<PowerEffectData>): void {
@@ -73,8 +102,27 @@ export default class Item3e<T = any> extends Item<T> {
         });
 
         if (data.data.summary.format == '') {
-            data.data.summary.format = `$before ${data.name} $rank $after`;
+            data.data.summary.format = `$prefix ${data.name} $rank $postfix`;
         }
+
+        const prefix: string[] = [];
+        const postfix: string[] = [];
+        data.data.modifiers.forEach(modifier => {
+            let targetList = prefix;
+            if (modifier.data.summary.position == 'postfix') {
+                targetList = postfix;
+            }
+
+            if (modifier.data.summary.parsed) {
+                targetList.push(modifier.data.summary.parsed);
+            }
+        });
+
+        data.data.summary.parsed = data.data.summary.format.
+            replace('$rank', data.data.rank.toString()).
+            replace('$prefix', prefix.join(' ')).
+            replace('$postfix', postfix.join(' ')).
+            trim();
     }
 
     private preparePowerData(data: Item.Data<PowerData>): void {

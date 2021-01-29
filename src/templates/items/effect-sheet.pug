@@ -1,3 +1,5 @@
+include ../mixins.pug
+
 form(class="{{cssClass}} item-sheet-effect flexcol" autocomplete="off")
     header.sheet-header.flexrow
         | {{> "systems/mnm3e/templates/items/parts/header-sheet.html" itemSubtype=itemSubtype }}
@@ -8,15 +10,15 @@ form(class="{{cssClass}} item-sheet-effect flexcol" autocomplete="off")
         a.item(data-tab="modifiers") {{ localize "MNM3E.Modifiers" }}
 
     section.sheet-body
-        .tab.description.flexcol.active(data-group="primary" data-tab="description")
-            .form-group.input
-                label {{ localize "MNM3E.SummaryFormat" }}
-                input(type="text" name="data.summary.format" value="{{data.summary.format}}" data-dtype="String" placeholder="{{item.name}} $rank")
+        .tab.description.flexrow.active(data-group="primary" data-tab="description")
+            .effect-properties.flexcol
+                | {{> "systems/mnm3e/templates/items/parts/cost-sheet.html" }}
 
-            | {{> "systems/mnm3e/templates/items/parts/description-sheet.html"}}
+            .effect-editor.flexcol
+                +item-summary-controller()
+                | {{> "systems/mnm3e/templates/items/parts/description-sheet.html"}}
 
         .tab.details.flexcol(data-group="primary" data-tab="details")
-            | {{> "systems/mnm3e/templates/items/parts/cost-sheet.html" }}
 
             | {{> "systems/mnm3e/templates/items/parts/activations-sheet.html" }}
 

@@ -21,6 +21,8 @@ import ItemSheet3ePower from './module/item/sheets/power';
 import ItemSheet3eEffect from './module/item/sheets/effect';
 import ItemSheet3eModifier from './module/item/sheets/modifier';
 import { MNM3E } from './module/config';
+import SummaryBuilder from './module/apps/summary-builder';
+import ScoreConfig from './module/apps/score-config';
 
 /* ------------------------------------ */
 /* Initialize system					*/
@@ -28,7 +30,12 @@ import { MNM3E } from './module/config';
 Hooks.once('init', async function() {
     console.log('MnM3e | Initializing Mutants and Masterminds 3rd Edition Game System');
 
-    game.mnm3e = {};
+    game.mnm3e = {
+        applications: {
+            SummaryBuilder,
+            ScoreConfig,
+        },
+    };
 
     CONFIG.MNM3E = MNM3E;
     CONFIG.Actor.entityClass = Actor3e as typeof Actor;

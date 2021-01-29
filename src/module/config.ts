@@ -135,9 +135,9 @@ export interface Config {
     };
 
     summaryPositions: {
-        before: string;
-        after: string;
-    }
+        prefix: string;
+        postfix: string;
+    };
 }
 
 export const MNM3E: Config = {
@@ -265,7 +265,7 @@ export const MNM3E: Config = {
         vhc: 'MNM3E.SkillVhc',
     },
     summaryPositions: {
-        before: 'MNM3E.SummaryBefore',
-        after: 'MNM3E.SummaryAfter',
+        prefix: 'MNM3E.SummaryPrefix',
+        postfix: 'MNM3E.SummaryPostfix',
     },
 }

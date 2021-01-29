@@ -88,6 +88,9 @@ declare interface CharacterData extends CommonActorData, CreatureData {
     identity: string;
     baseOfOperations: string;
     heroPoints: number;
+
+    // Prepared Data
+    powers: Item.Data<PowerData>;
 }
 
 declare interface NPCData extends CommonActorData, CreatureData {

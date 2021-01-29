@@ -5,8 +5,8 @@ ol(class="items-list {{ type }}-list item-{{ type }}-controls")
             i.fas.fa-plus
 
     ol.item-list
-        | {{#each items as |item id|}}
-        li.item.flexrow(data-item-id="{{id}}")
+        | {{#each items as |item|}}
+        li.item.flexrow(data-item-id="{{item._id}}")
             .item-name.flexrow
                 .item-image(style="background-image: url('{{item.img}}')")
                 h4 {{#if item.data.summary.parsed}} {{item.data.summary.parsed}} {{else}} {{item.name}} {{/if}}

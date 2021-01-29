@@ -3,16 +3,34 @@
     //More info on *That*which*shall*not*be*named* : https://css-tricks.com/snippets/css/a-guide-to-flexbox/
     //text box info below
 
-   .modifier-properties {
-        color:rgb(49, 49, 49);
-        width: 5%;
-        //flex changes the box on the left of the modifier page - 33% of total page
-        flex: 0 1 30%;
-    }
     .property-title {
         border-radius: $sectionBorderRadius;
    }
 
+   .modifier-properties{
+       min-width: 10px;
+       flex: 0 1 30%;
+   }
 
+    .tab {
+        .description{
+            .modifier-editor{
+                .editor{
+                    flex-wrap: nowrap;
+                    flex: 1 0 auto;
+                    //width: auto;
+                    //height: auto;
+                }
 
+            }
+        }
+
+        .item-summary {
+            flex: 0 1 auto;
+        }
+        .summary-controls{
+            flex: 0 1 10%;
+            align-items: flex-start;
+        }
+    }
 }

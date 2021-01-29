@@ -99,6 +99,7 @@
     "MNM3E.RankCostType": "Rank Cost Type",
     "MNM3E.RankCostTypeFlat": "Flat",
     "MNM3E.RankCostTypePerRank": "Per Rank",
+    "MNM3E.RankCostTypeDiscount": "Discount",
 
     "MNM3E.SheetClassCharacter": "Default 3e Character Sheet",
     "MNM3E.SheetClassItem": "Default 3e Item Sheet",

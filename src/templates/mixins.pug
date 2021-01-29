@@ -23,3 +23,11 @@ mixin input-select-value-with-override(label, inputDataPath, selectDataPath, con
         label {{ localize "#{label}" }}
         input(type="text" name=`${inputDataPath}.value` value=`{{${inputDataPath}.value}}` data-dtype="Number" placeholder="0")&attributes({[`{{#if ${inputDataPath}.override}}disabled{{/if}}`]: ''})
         +select-form-fields(selectDataPath, configPath, allowBlank)
+
+mixin item-summary-controller()
+    .item-summary.flexrow
+        label {{ localize "MNM3E.SummaryFormat" }}
+        span {{ data.summary.parsed }}
+        .summary-controls.flexrow
+            a.config-button(title="{{ localize 'MNM3E.ItemSummaryBuilder' }}" data-action="summary-builder")
+                i.fas.fa-bars

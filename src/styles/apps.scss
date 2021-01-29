@@ -31,21 +31,17 @@
         }
     }
 
-    .editor{
-        width:70%;
-        height: 90%;
-        border-color: green;
-     }
-
-    .sheet-header{
-        -ms-flex-item-align: start;
+    .tab {
+        flex: auto;
     }
 
-    // .editor {
-    //   height: 100%;
-    //     .tox-toolbar-overlord,
-    //     .tox-toolbar__primary {
-    //         background: none;
-    //     }
-    // }
+    .sheet-header {
+        flex: 0 1 auto;
+        align-items: flex-start;
+    }
+
+    .sheet-body {
+        color:rgb(49, 49, 49);
+        display: flex;
+    }
 }

@@ -50,7 +50,22 @@ export default class ActorSheet3eCharacter extends ActorSheet3e<CharacterData, A
     /**
      * @override
      */
-    protected activateListeners(html: JQuery | HTMLElement): void {
+    protected activateListeners(html: JQuery<HTMLElement>): void {
         super.activateListeners(html);
+    }
+
+    /**
+     * @override
+     */
+    protected prepareItems(data: ActorSheet.Data<CharacterData>) {
+        const powers: Item<PowerData>[] = [];
+        data.items.reduce((arr, item) => {
+            if (item.type == 'power') {
+                arr[0].push(item as any);
+            }
+            return arr;
+        }, [powers]);
+
+        (data as any).powers = powers;
     }
 }

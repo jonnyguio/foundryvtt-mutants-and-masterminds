@@ -1,0 +1,17 @@
+form.summary-builder.stacked(autocomplete="off")
+    label {{ localize "MNM3E.SummaryFormat" }}
+    .form-group.select-input
+        | {{#if (eq type "modifier")}}
+        .form-fields
+            select(name="data.summary.position")
+                | {{#select data.summary.position}}
+                | {{#each config.summaryPositions as |localizedName name|}}
+                option(value="{{name}}") {{localizedName}}
+                | {{/each}}
+                | {{/select}}
+        | {{/if}}
+        input(type="text" name="data.summary.format" value="{{data.summary.format}}" data-dtype="String")
+    button(type="submit" name="submit" value="1")
+        i.fas.fa-save
+        .
+            {{ localize "Submit" }}
