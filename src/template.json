@@ -58,100 +58,133 @@
             "creature": {
                 "skills": {
                     "acr": {
-                        "rank": 0,
-                        "ability": "agl",
-                        "trainedOnly": true,
-                        "actions": ["move", "free"]
+                        "type": "static",
+                        "data": {
+                            "rank": 0,
+                            "ability": "agl",
+                            "trainedOnly": true,
+                            "actions": ["move", "free"]
+                        }
                     },
                     "ath": {
-                        "rank": 0,
-                        "ability": "str",
-                        "trainedOnly": false,
-                        "actions": ["move"]
+                        "type": "static",
+                        "data": {
+                            "rank": 0,
+                            "ability": "str",
+                            "trainedOnly": false,
+                            "actions": ["move"]
+                        }
                     },
                     "cco": {
-                        "rank": 0,
-                        "ability": "fgt",
-                        "trainedOnly": false,
-                        "actions": ["standard"]
+                        "type": "dynamic",
+                        "data": {}
                     },
                     "dec": {
-                        "rank": 0,
-                        "ability": "pre",
-                        "trainedOnly": false,
-                        "actions": ["standard"]
+                        "type": "static",
+                        "data": {
+                            "rank": 0,
+                            "ability": "pre",
+                            "trainedOnly": false,
+                            "actions": ["standard"]
+                        }
                     },
                     "exp": {
-                        "rank": 0,
-                        "ability": "int",
-                        "trainedOnly": true,
-                        "actions": []
+                        "type": "dynamic",
+                        "data": {}
                     },
                     "ins": {
-                        "rank": 0,
-                        "ability": "awe",
-                        "trainedOnly": false,
-                        "actions": ["free"]
+                        "type": "static",
+                        "data": {
+                            "rank": 0,
+                            "ability": "awe",
+                            "trainedOnly": false,
+                            "actions": ["free"]
+                        }
                     },
                     "itm": {
-                        "rank": 0,
-                        "ability": "pre",
-                        "trainedOnly": false,
-                        "actions": ["standard"]
+                        "type": "static",
+                        "data": {
+                            "rank": 0,
+                            "ability": "pre",
+                            "trainedOnly": false,
+                            "actions": ["standard"]
+                        }
                     },
                     "inv": {
-                        "rank": 0,
-                        "ability": "int",
-                        "trainedOnly": true,
-                        "actions": []
+                        "type": "static",
+                        "data": {
+                            "rank": 0,
+                            "ability": "int",
+                            "trainedOnly": true,
+                            "actions": []
+                        }
                     },
                     "prc": {
-                        "rank": 0,
-                        "ability": "awe",
-                        "trainedOnly": false,
-                        "actions": ["free"]
+                        "type": "static",
+                        "data": {
+                            "rank": 0,
+                            "ability": "awe",
+                            "trainedOnly": false,
+                            "actions": ["free"]
+                        }
                     },
                     "per": {
-                        "rank": 0,
-                        "ability": "pre",
-                        "trainedOnly": false,
-                        "actions": []
+                        "type": "static",
+                        "data": {
+                            "rank": 0,
+                            "ability": "pre",
+                            "trainedOnly": false,
+                            "actions": []
+                        }
                     },
                     "rco": {
-                        "rank": 0,
-                        "ability": "dex",
-                        "trainedOnly": false,
-                        "actions": ["standard"]
+                        "type": "dynamic",
+                        "data": {}
                     },
                     "slt": {
-                        "rank": 0,
-                        "ability": "dex",
-                        "trainedOnly": true,
-                        "actions": ["standard"]
+                        "type": "static",
+                        "data": {
+                            "rank": 0,
+                            "ability": "dex",
+                            "trainedOnly": true,
+                            "actions": ["standard"]
+                        }
                     },
                     "ste": {
-                        "rank": 0,
-                        "ability": "agl",
-                        "trainedOnly": false,
-                        "actions": ["move"]
+                        "type": "static",
+                        "data": {
+                            "rank": 0,
+                            "ability": "agl",
+                            "trainedOnly": false,
+                            "actions": ["move"]
+                        }
                     },
                     "tec": {
-                        "rank": 0,
-                        "ability": "int",
-                        "trainedOnly": true,
-                        "actions": ["standard"]
+                        "type": "static",
+                        "data": {
+                            "rank": 0,
+                            "ability": "int",
+                            "trainedOnly": true,
+                            "actions": ["standard"]
+                        }
                     },
                     "tre": {
-                        "rank": 0,
-                        "ability": "int",
-                        "trainedOnly": true,
-                        "actions": ["standard"]
+                        "type": "static",
+                        "data": {
+                            "rank": 0,
+                            "ability": "int",
+                            "trainedOnly": true,
+                            "actions": ["standard"]
+                        }
                     },
                     "vhc": {
-                        "rank": 0,
-                        "ability": "dex",
-                        "trainedOnly": true,
-                        "actions": ["move"]
+                        "type": "static",
+                        "data": {
+                            "rank": 0,
+                            "ability": "dex",
+                            "trainedOnly": true,
+                            "actions": ["move"]
+                        }
                     }
                 }
             }
@@ -160,7 +193,8 @@
             "templates": ["common", "creature"],
             "identity": "",
             "baseOfOperations": "",
-            "heroPoints": 0
+            "heroPoints": 0,
+            "powerPoints": 0
         },
         "npc": {
             "templates": ["common", "creature"]

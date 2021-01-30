@@ -1,15 +1,52 @@
 form.score-config.stacked(autocomplete="off")
     .flexrow
         span {{ localize "MNM3E.ScoreName" }}
-        span {{ localize "MNM3E.ScoreBase" }}
-        span {{ localize "MNM3E.ScoreModifier" }}
+        span {{ localize "MNM3E.ScoreRank" }}
+        span {{ localize "MNM3E.ScoreTotal" }}
     | {{#each scores as |score name|}}
+    | {{#if (eq score.type "dynamic")}}
+    .score-header.flexrow
+        label {{ score.label }}
+        a.score-control(title="{{ localize 'MNM3E.ScoreCreate' }}" data-action="create" data-score-type="{{name}}")
+            i.fas.fa-plus
+    ul.subscores
+        | {{#each score.data as |subscore subscoreName|}}
+        li.subscore
+            .form-group.input-input
+                span {{ subscoreName }}
+                input(
+                    type="text"
+                    name="{{../../dataPath}}.{{name}}.data.{{subscoreName}}.rank"
+                    value="{{subscore.rank}}"
+                    data-dtype="Number"
+                    placeholder="0"
+                )
+                input(
+                    type="text"
+                    name="{{../../dataPath}}.{{name}}.data.{{subscoreName}}.total"
+                    value="{{subscore.total}}"
+                    data-type="Number"
+                    disabled
+                )
+                a.score-control(title="{{ localize 'MNM3E.ScoreDelete' }}" data-action="delete" data-score-type="{{name}}" data-subscore-name="{{subscoreName}}")
+                    i.fas.fa-trash
+        | {{/each}}
+    | {{else}}
     .form-group.input
         label {{ score.label }}
-        input(type="text" name="{{../dataPath}}.{{name}}.rank" value="{{score.rank}}" data-dtype="Number" placeholder="0")
-        input(type="text" name="{{../dataPath}}.{{name}}.total" value="{{score.total}}" data-dtype="Number" disabled)
+        input(
+            type="text"
+            name="{{../dataPath}}.{{name}}.{{#if score.type}}data.{{/if}}rank"
+            value="{{#if score.type}}{{score.data.rank}}{{else}}{{score.rank}}{{/if}}"
+            data-dtype="Number"
+            placeholder="0"
+        )&attributes({[`{{#if (eq name "tgh")}}disabled{{/if}}`]: ''})
+        input(
+            type="text"
+            name="{{../dataPath}}.{{name}}.{{#if score.type}}data.{{/if}}total"
+            value="{{#if score.type}}{{score.data.total}}{{else}}{{score.total}}{{/if}}"
+            data-dtype="Number"
+            disabled
+        )
+    | {{/if}}
     | {{/each}}
-    button(type="submit" name="submit" value="1")
-        i.fas.fa-save
-        .
-            {{ localize "Submit" }}

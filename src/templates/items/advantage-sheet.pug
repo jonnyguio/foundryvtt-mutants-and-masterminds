@@ -8,8 +8,10 @@ form(class="{{cssClass}} item-sheet-advantage flexcol" autocomplete="off")
 
     section.sheet-body
         .tab.description.flexrow.active(data-group="primary" data-tab="description")
-            | {{> "systems/mnm3e/templates/items/parts/cost-sheet.html" }}
-            | {{> "systems/mnm3e/templates/items/parts/description-sheet.html"}}
+            .advantage-properties.flexcol
+                | {{> "systems/mnm3e/templates/items/parts/cost-sheet.html" }}
+            
+            | {{editor content=data.description.value target="data.description.value" button=true owner=owner editable=editable}}
 
         .tab.effects.flexrow(data-group="primary" data-tab="effects")
             | {{> "systems/mnm3e/templates/actors/parts/actor-effects.html" }}

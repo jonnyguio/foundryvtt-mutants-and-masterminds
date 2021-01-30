@@ -1,4 +1,4 @@
-| {{#if (and item.isOwned (eq item.type "effect"))}}
+| {{#if (and item.isOwned (ne item.type "modifier"))}}
 .form-group.input
     label {{ localize "MNM3E.Rank" }}
     input(type="text" name="data.rank" value="{{data.rank}}" data-dtype="Number" placeholder="0")

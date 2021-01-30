@@ -1,23 +1,35 @@
 form(class="{{cssClass}} flexcol" autocomplete="off")
     header.sheet-header.flexrow
         img.profile(src="{{actor.img}}" data-edit="img" title="{{actor.name}}")
-        section.header-details.flexrow
-            h1.charname
-                input(name="name" type="text" value="{{actor.name}}" placeholder="{{ localize 'MNM3E.Name' }}")
-            aside.header-powerlevel
-                .powerlevel
-                    label| {{ localize "MNM3E.Level" }} {{data.powerLevel}}
-            ul.summary
-                | {{#each summary as |summary|}}
-                li
-                    input(type="text" name="{{ summary.name }}" value="{{ summary.value }}" placeholder="{{ localize summary.localizedKey }}")
+        section.header-details.flexcol
+            .character-details.flexrow
+                h1.charname
+                    input(name="name" type="text" value="{{actor.name}}" placeholder="{{ localize 'MNM3E.Name' }}")
+                aside.header-powerlevel
+                    .powerlevel
+                        .form-group.input
+                            label {{ localize "MNM3E.PowerLevel" }}:
+                            input(type="text" name="data.powerLevel" value="{{data.powerLevel}}" data-dtype="Number" placeholder="1")
+                ul.summary
+                    | {{#each summary as |summary|}}
+                    li
+                        input(type="text" name="{{ summary.name }}" value="{{ summary.value }}" placeholder="{{ localize summary.localizedKey }}")
+                    | {{/each}}
+            .cost-breakdown.flexrow
+                | {{#each data.pointCosts as |cost|}}
+                label {{ cost.label }}:
+                span {{ cost.value }}
                 | {{/each}}
+
     nav.sheet-navigation.tabs(data-group="primary")
         a.item.active(data-tab="core")| {{ localize "MNM3E.Core" }}
-        a.item(data-tab="powers")| {{ localize "MNM3E.Powers" }}
+        a.item(data-tab="catalog")| {{ localize "MNM3E.Catalog" }}
+        a.item(data-tab="effects") {{ localize "MNM3E.Effects" }}
 
     section.sheet-body
         .tab.core.flexrow(data-group="primary" data-tab="core")
             | {{> "systems/mnm3e/templates/actors/parts/character-core.html"}}
-        .tab.powers.flexcol(data-group="primary" data-tab="powers")
-            | {{> "systems/mnm3e/templates/actors/parts/character-powers.html"}}
+        .tab.powers.flexcol(data-group="primary" data-tab="catalog")
+            | {{> "systems/mnm3e/templates/actors/parts/character-catalog.html"}}
+        .tab.effects.flexrow(data-group="primary" data-tab="effects")
+            | {{> "systems/mnm3e/templates/actors/parts/actor-effects.html" }}

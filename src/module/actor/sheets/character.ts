@@ -2,6 +2,8 @@ import ActorSheet3e from './base';
 import Actor3e from '../entity'
 
 interface ExtendedCharacterSheetData extends ActorSheet.Data<CharacterData> {
+    powers: Item<PowerData>[];
+    advantages: Item<AdvantageData>[];
     summary: {
         name: string;
         value: string;
@@ -28,17 +30,17 @@ export default class ActorSheet3eCharacter extends ActorSheet3e<CharacterData, A
         const sheetData = super.getData() as ExtendedCharacterSheetData;
         sheetData.summary = [
             {
-                name: 'actor.data.identity',
+                name: 'data.identity',
                 value: sheetData.data.identity,
                 localizedKey: 'MNM3E.Identity',
             },
             {
-                name: 'actor.data.groupAffiliation',
+                name: 'data.groupAffiliation',
                 value: sheetData.data.groupAffiliation,
                 localizedKey: 'MNM3E.GroupAffiliation',
             },
             {
-                name: 'actor.data.baseOfOperations',
+                name: 'data.baseOfOperations',
                 value: sheetData.data.baseOfOperations,
                 localizedKey: 'MNM3E.BaseOfOperations',
             },
@@ -57,15 +59,28 @@ export default class ActorSheet3eCharacter extends ActorSheet3e<CharacterData, A
     /**
      * @override
      */
-    protected prepareItems(data: ActorSheet.Data<CharacterData>) {
+    protected prepareItems(incomingData: ActorSheet.Data<CharacterData>) {
+        const data = incomingData as ExtendedCharacterSheetData;
         const powers: Item<PowerData>[] = [];
+        const advantages: Item<AdvantageData>[] = [];
         data.items.reduce((arr, item) => {
-            if (item.type == 'power') {
-                arr[0].push(item as any);
+            let targetArray;
+            switch (item.type) {
+                case 'power':
+                    targetArray = arr[0];
+                    break;
+                case 'advantage':
+                    targetArray = arr[1];
+                    break;
             }
+            if (!targetArray) {
+                return arr;
+            }
+            targetArray.push(item as any);
             return arr;
-        }, [powers]);
+        }, [powers, advantages]);
 
-        (data as any).powers = powers;
+        data.powers = powers;
+        data.advantages = advantages;
     }
 }

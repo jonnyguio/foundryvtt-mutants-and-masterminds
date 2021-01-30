@@ -175,7 +175,6 @@ async function copyFiles() {
         'fonts',
         'assets',
         'ui',
-        // 'templates',
         'module.json',
         'system.json',
         'template.json',

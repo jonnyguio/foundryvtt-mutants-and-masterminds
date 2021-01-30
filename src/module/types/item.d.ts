@@ -93,7 +93,7 @@ declare interface Expression {
 }
 
 declare interface AdvantageData extends ItemDescription, ItemActivatedEffect, ItemAction, ItemScalingEffect {
-
+    rank: number;
 }
 
 declare interface PowerEffectData extends ItemSummary, ItemDescription, ItemActivatedEffect, ItemAction, ItemScalingEffect {

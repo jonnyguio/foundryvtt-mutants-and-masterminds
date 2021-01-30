@@ -28,6 +28,13 @@ declare interface Skill {
     // Prepared Data
     isTrained?: boolean;
     total?: number;
+}
+
+declare type SkillType = 'static' | 'dynamic';
+
+declare interface SkillDetail {
+    type: SkillType;
+    data: Skill | {[skillName: string]: Skill};
 
     // Prepared Sheet Data
     label?: string;
@@ -53,23 +60,37 @@ declare type Defenses = {
 } & {[defenseAbbrev: string]: Defense};
 
 declare type Skills = {
-    acr: Skill;
-    ath: Skill;
-    cco: Skill;
-    dec: Skill;
-    exp: Skill; // TODO: maybe handle differently
-    ins: Skill;
-    itm: Skill;
-    inv: Skill;
-    prc: Skill;
-    per: Skill;
-    rco: Skill;
-    slt: Skill;
-    ste: Skill;
-    tec: Skill;
-    tre: Skill;
-    vhc: Skill;
-} & {[skillAbbrev: string]: Skill};
+    acr: SkillDetail;
+    ath: SkillDetail;
+    cco: SkillDetail;
+    dec: SkillDetail;
+    exp: SkillDetail;
+    ins: SkillDetail;
+    itm: SkillDetail;
+    inv: SkillDetail;
+    prc: SkillDetail;
+    per: SkillDetail;
+    rco: SkillDetail;
+    slt: SkillDetail;
+    ste: SkillDetail;
+    tec: SkillDetail;
+    tre: SkillDetail;
+    vhc: SkillDetail;
+} & {[skillAbbrev: string]: SkillDetail};
+
+declare interface LabeledNumber {
+    value: number;
+    label: string;
+}
+
+declare interface PointCosts {
+    abilities: LabeledNumber;
+    powers: LabeledNumber;
+    advantages: LabeledNumber;
+    skills: LabeledNumber;
+    defenses: LabeledNumber;
+    total: LabeledNumber;
+}
 
 declare interface CommonActorData {
     abilities: Abilities;
@@ -78,6 +99,9 @@ declare interface CommonActorData {
     powerLevel: number;
     initiative: number;
     groupAffiliation: string;
+
+    // Prepared Data
+    pointCosts: PointCosts;
 }
 
 declare interface CreatureData {
@@ -88,9 +112,11 @@ declare interface CharacterData extends CommonActorData, CreatureData {
     identity: string;
     baseOfOperations: string;
     heroPoints: number;
+    powerPoints: number;
 
     // Prepared Data
-    powers: Item.Data<PowerData>;
+    maxPowerPoints: number;
+
 }
 
 declare interface NPCData extends CommonActorData, CreatureData {
@@ -98,5 +124,5 @@ declare interface NPCData extends CommonActorData, CreatureData {
 }
 
 declare interface FoundryActorSheetData<T = any> extends ActorSheet.Data<T> {
-    // Use ActiveEffects when needed
+    effects: ActiveEffectCategories;
 }

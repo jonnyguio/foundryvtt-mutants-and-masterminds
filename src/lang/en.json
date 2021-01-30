@@ -77,8 +77,6 @@
 
     "MNM3E.ItemName": "Item Name",
 
-    "MNM3E.Level": "Level",
-
     "MNM3E.Modifiers": "Modifiers",
     "MNM3E.ModifierExtra": "Extra",
     "MNM3E.ModifierFlaw": "Flaw",
@@ -87,6 +85,7 @@
     "MNM3E.Name": "Name",
     "MNM3E.None": "None",
 
+    "MNM3E.PowerLevel": "Power Level",
     "MNM3E.Powers": "Powers",
 
     "MNM3E.Range": "Range",

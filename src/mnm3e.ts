@@ -106,7 +106,18 @@ Hooks.once('setup', function() {
             obj[e[0]] = e[1];
             return obj;
         }, {});
-    })
+    });
+
+    Handlebars.registerHelper({
+        inArr: (v1, ...vn) => vn.includes(v1),
+        inObj: (v1, ...vn) => {
+            const keys = Object.keys(v1);
+            return vn.map(s => keys.includes(s)).reduce((prev, curr) => prev && curr);
+        },
+        emptyObj: v1 => jQuery.isEmptyObject(v1),
+        not: v1 => !v1,
+        isArr: v1 => Array.isArray(v1),
+    });
 });
 
 /* ------------------------------------ */

@@ -94,7 +94,7 @@ export default class ItemSheet3e<T, I extends Item<T>> extends ItemSheet<T, I> {
 
         let childItem = this._childItems.get(sourceItem);
         if (!childItem) {
-            sourceItem.tempData = { tag: `${Math.random().toString(36).substr(2, 9)}-temp` };
+            sourceItem.tempData = { tag: `${randomID(8)}-temp` };
             const newItem = await Item.create(sourceItem, { temporary: true }) as Item3e;
             (newItem.options as any).actor = this.item.actor;
             newItem.data._id = sourceItem.tempData.tag;

@@ -1,7 +1,9 @@
 .mnm3e {
     .window-content {
         background: $sheetBackground;
+        background-size: cover;
     }
+
 }
 
 .mnm3e.sheet {
@@ -31,6 +33,10 @@
         }
     }
 
+    .tab .form-group{
+        flex: 0 0 auto;
+    }
+
     .tab {
         flex: auto;
     }
@@ -44,4 +50,13 @@
         color:rgb(49, 49, 49);
         display: flex;
     }
+
+    .item .item-name .item-image{
+        flex: 0 0 30px;
+        height: 30px;
+        background-size: 30px;
+        border: none;
+        margin-right: 5px;
+    }
+
 }

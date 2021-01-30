@@ -1,5 +1,10 @@
 import Item3e from '../../item/entity';
 import ScoreConfig from '../../apps/score-config';
+import { prepareActiveEffectCategories, onManagedActiveEffect } from '../../active-effects';
+
+export interface ExtendedActorSheetData<T extends CommonActorData & CreatureData> extends FoundryActorSheetData<T> {
+
+}
 
 export default abstract class ActorSheet3e<T extends CommonActorData & CreatureData, A extends Actor<T>> extends ActorSheet<T, A> {
     /**
@@ -18,7 +23,7 @@ export default abstract class ActorSheet3e<T extends CommonActorData & CreatureD
      * @override
      */
     public getData(): ActorSheet.Data<T> {
-        const sheetData = super.getData();
+        const sheetData = super.getData() as ExtendedActorSheetData<T>;
 
         Object.entries(sheetData.data.abilities).forEach(([name, ability]) => {
             ability.label = CONFIG.MNM3E.abilities[name];
@@ -34,6 +39,8 @@ export default abstract class ActorSheet3e<T extends CommonActorData & CreatureD
 
         this.prepareItems(sheetData);
 
+        sheetData.effects = prepareActiveEffectCategories((this.entity as any).effects);
+
         return sheetData;
     }
 
@@ -41,7 +48,9 @@ export default abstract class ActorSheet3e<T extends CommonActorData & CreatureD
      * @override
      */
     protected activateListeners(html: JQuery): void {
+        html.find('.effect-control').on('click', ev => onManagedActiveEffect(ev, this.actor));
         html.find('.item-power-controls .item-control').on('click', this.onEmbeddedItemEvent.bind(this));
+        html.find('.item-advantage-controls .item-control').on('click', this.onEmbeddedItemEvent.bind(this));
         html.find('.config-button').on('click', this.onConfigMenu.bind(this));
 
         if (this.actor.owner) {
@@ -88,7 +97,39 @@ export default abstract class ActorSheet3e<T extends CommonActorData & CreatureD
         let app: Application;
         switch (button.dataset.action) {
             case 'score-config':
-                app = new ScoreConfig(button.dataset.scorePath, button.dataset.scoreConfigPath, this.object);
+                const onCreate = (scoreType: string): object => {
+                    switch (scoreType) {
+                        case 'cco':
+                            return {
+                                rank: 0,
+                                ability: 'fgt',
+                                trainedOnly: false,
+                                actions: ['standard'],
+                            };
+                        case 'exp':
+                            return {
+                                rank: 0,
+                                ability: 'int',
+                                trainedOnly: true,
+                                actions: [],
+                            };
+                        case 'rco':
+                            return {
+                                rank: 0,
+                                ability: 'dex',
+                                trainedOnly: false,
+                                actions: ['standard'],
+                            };
+                        default:
+                            throw new Error(`Unrecognized type: ${scoreType}`)
+                    }
+                };
+                app = new ScoreConfig(
+                    button.dataset.scorePath,
+                    button.dataset.scoreConfigPath,
+                    onCreate,
+                    this.object
+                );
                 break;
             default:
                 throw new Error(`unknown action: ${button.dataset.action}`);
