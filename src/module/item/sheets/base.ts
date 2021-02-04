@@ -3,9 +3,14 @@ import { onManagedActiveEffect, prepareActiveEffectCategories } from '../../acti
 import Item3e from '../entity';
 import SummaryBuilder from '../../apps/summary-builder';
 
+interface TargetScoreOption {
+    label: string;
+    entries: object;
+}
+
 export interface ExtendedItemSheetData<T = any> extends FoundryItemSheetData<T> {
     config: Config;
-    isOwned: boolean;
+    targetScoreOptions: TargetScoreOption[];
     itemType?: string;
     itemSubtype?: string;
 }
@@ -40,6 +45,18 @@ export default class ItemSheet3e<T, I extends Item<T>> extends ItemSheet<T, I> {
         (sheetData.item as any).isOwned = this.item.isOwned;
         sheetData.itemType = game.i18n.localize(`ITEM.Type${this.item.type.titleCase()}`);
 
+        sheetData.targetScoreOptions = [
+            {label: 'MNM3E.Abilities', scores: sheetData.config.abilities},
+            {label: 'MNM3E.Defenses', scores: sheetData.config.defenses},
+            {label: 'MNM3E.Skills', scores: sheetData.config.skills},
+        ].map(opts => ({
+            label: game.i18n.localize(opts.label),
+            entries: Object.entries(opts.scores).reduce((agg: any, entry) => {
+                agg[entry[0]] = entry[1];
+                return agg;
+            }, {}),
+        }));
+
         sheetData.effects = prepareActiveEffectCategories((this.entity as any).effects);
         return sheetData;
     }
@@ -49,6 +66,7 @@ export default class ItemSheet3e<T, I extends Item<T>> extends ItemSheet<T, I> {
      */
     protected activateListeners(html: JQuery): void {
         html.find('.effect-control').on('click', ev => onManagedActiveEffect(ev, this.item));
+        html.find('.check-control').on('click', this.onCheckControl.bind(this));
         html.find('.config-button').on('click', this.onConfigMenu.bind(this));
 
         const originalClose = this.close.bind(this);
@@ -94,15 +112,14 @@ export default class ItemSheet3e<T, I extends Item<T>> extends ItemSheet<T, I> {
 
         let childItem = this._childItems.get(sourceItem);
         if (!childItem) {
-            sourceItem.tempData = { tag: `${randomID(8)}-temp` };
             const newItem = await Item.create(sourceItem, { temporary: true }) as Item3e;
             (newItem.options as any).actor = this.item.actor;
-            newItem.data._id = sourceItem.tempData.tag;
+            newItem.data._id = sourceItem._id;
 
             const rawSheet = newItem.sheet as any;
             rawSheet._parentItem = this.item;
             rawSheet._updateObject = (async (_: JQuery.Event, flattenedObject: object) => {
-                const updatedItem = list.find(data => data.tempData?.tag == sourceItem.tempData.tag);
+                const updatedItem = list.find(data => data._id == sourceItem._id);
                 if (!updatedItem) {
                     return;
                 }
@@ -141,5 +158,25 @@ export default class ItemSheet3e<T, I extends Item<T>> extends ItemSheet<T, I> {
             (app as any)._updateObject = (this.item.sheet as any)._updateObject;
         }
         app.render(true);
+    }
+
+    private async onCheckControl(ev: JQuery.ClickEvent): Promise<void> {
+        ev.preventDefault();
+        const button = ev.currentTarget;
+        const dataPath = button.dataset.dataPath as string;
+        const targetArray = getProperty(this.item.data, dataPath);
+        switch (button.dataset.action) {
+            case 'create':
+                const newFormula: Formula = { op: '', value: ''};
+                targetArray.push(newFormula);
+                break;
+            case 'delete':
+                targetArray.splice(Number(button.dataset.index), 1);
+                break;
+            default:
+                throw new Error(`unknown action: ${button.dataset.action}`);
+        }
+
+        await this._onSubmit(ev, { updateData: {[dataPath]: targetArray}});
     }
 }

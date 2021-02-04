@@ -23,6 +23,7 @@
     "MNM3E.ActiveEffectTemporary": "Temporary",
     "MNM3E.ActiveEffectToggle": "Toggle",
 
+    "MNM3E.Abilities": "Abilities",
     "MNM3E.AbilityScores": "Ability Scores",
     "MNM3E.Ability": "Ability",
     "MNM3E.AbilityStr": "Strength",
@@ -132,5 +133,8 @@
     "MNM3E.TargetCylinder": "Cylinder",
     "MNM3E.TargetLine": "Line",
     "MNM3E.TargetPerception": "Perception",
-    "MNM3E.TargetShapeable": "Shapeable"
+    "MNM3E.TargetShapeable": "Shapeable",
+
+    "MNM3E.Versus": "Versus",
+    "MNM3E.VersusAbbrev": "vs"
 }

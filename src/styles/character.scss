@@ -6,51 +6,66 @@
             margin-top: 6px;
             border: $sectionBorder;
             border-radius: $sectionBorderRadius;
+            background-color: rgba(224, 224, 224, 0.863);
+            align-self: flex-start;
+            margin-top: 6px;
         }
 
         .ability-scores {
             list-style: none;
+            align-self: flex-start;
             font-family: Charcoal, sans-serif;
             text-align: center;
-            border: $borderGroove;
+            border-top: $sectionBorder;
             margin: 0;
             padding-left: 2px;
             padding-right: 2px;
+            background-color: rgba(224, 224, 224, 0.527);
     
             .ability {
                 height: 60px;
                 border-bottom: $borderGroove;
                 text-transform: uppercase;
+                background-color: rgba(224, 224, 224, 0.527);
+            }
     
-                &:last-child {
-                    border-bottom: none;
-                    margin-bottom: 3px;
-                }
+            &:last-child {
+                border-bottom: none;
+                margin-bottom: 3px;
+                //background-color: rgba(224, 224, 224, 0.527);
+            }
     
-                span.ability-score {
-                    height: 30px;
-                    width: 36px;
-                    margin: 0 auto;
-                    font-size: 20px;
-                }
+            span.ability-score {
+                height: 30px;
+                width: 36px;
+                margin: 0 auto;
+                font-size: 20px;
+                background-color: rgba(224, 224, 224, 0.527);
             }
         }
-
+    
         .defense-section {
             flex: 0 0 100px;
             border: $sectionBorder;
             border-radius: $sectionBorderRadius;
+            background-color: rgba(224, 224, 224, 0.527);
             font-family: Charcoal, sans-serif;
             margin-top: 6px;
         }
-
+    
         .skill-section {
             flex: 0 0 10px;
             margin-top: 6px;
             border: $sectionBorder;
             border-radius: $sectionBorderRadius;
             font-family: Charcoal, sans-serif;
+            background-color: rgba(224, 224, 224, 0.527);
+    
+        }
 
+        .config-button{
+            margin-left: 6px;
+            margin-top: 4px;
         }
     }
 }
@@ -63,9 +78,11 @@ label.box-title {
     color:rgb(49, 49, 49);
     border-bottom: 1px solid gray;
     white-space: nowrap;
+    background-color: rgba(224, 224, 224, 0.527);
+
 }
 
 h3.section-title {
     text-align: center;
-    margin-top: 2px;
+    margin-top: 6px;
 }

@@ -1,6 +1,16 @@
 import { evaluateExpression } from '../expressions';
 
+interface PowerEffectCardInfo {
+    effect: Item.Data<PowerEffectData>;
+    roll?: Roll;
+}
+
 export default class Item3e<T = any> extends Item<T> {
+    public get hasAreaTarget() {
+        const data = this.data.data as any;
+        return data.activation && data.activation.type.value && data.range.area.value;
+    }
+
     /**
      * @override
      */
@@ -24,16 +34,43 @@ export default class Item3e<T = any> extends Item<T> {
     }
 
     public async roll({ rollMode }: { rollMode?: string} = {}): Promise<ChatMessage | object | void> {
-        return this.displayCard({rollMode});
+        if (this.hasAreaTarget) {
+            const powerTemplate = game.mnm3e.canvas.PowerEffectTemplate.fromItem(this);
+            powerTemplate?.drawPreview();
+        }
+
+        let rollData: any = {};
+        if (this.isOwned) {
+            rollData = this.actor?.data.data;
+        }
+        let effects: PowerEffectCardInfo[] = [];
+        if (this.data.type == 'power') {
+            const powerData = (this.data.data as unknown) as PowerData;
+            effects = powerData.effects.map(effect => {
+                this.preparePowerEffectData(effect);
+                if (effect.data.action.type.value == 'attack') {
+                    const attackFormula = effect.data.action.roll.attack.formula.value.map(pair => `${pair.op} ${pair.value}`).join(' ');
+                    const roll = new Roll(`1d20 ${attackFormula}`, {...rollData, rank: effect.data.rank});
+                    return { effect, roll } as PowerEffectCardInfo;
+                }
+
+                return undefined;
+            }).filter(d => d) as PowerEffectCardInfo[];
+        }
+
+        effects.forEach(r => r.roll?.roll());
+
+        return this.displayCard({effects, rollMode});
     }
 
-    public async displayCard({ rollMode }: { rollMode?: string } = {}): Promise<ChatMessage | object | void> {
+    public async displayCard({ effects, rollMode }: { effects?: PowerEffectCardInfo[], rollMode?: string } = {}): Promise<ChatMessage | object | void> {
         const token = this.actor?.token;
         const templateData = {
             actor: this.actor,
             tokenId: token ? `${token.scene._id}.${token.id}` : null,
             item: this.data,
             data: this.data.data,
+            effects: effects,
         };
 
         const html = await renderTemplate('systems/mnm3e/templates/chat/item-card.html', templateData);
@@ -51,10 +88,7 @@ export default class Item3e<T = any> extends Item<T> {
     }
 
     private prepareModifierData(data: Item.Data<ModifierData>): void {
-        if (!Array.isArray(data.data.expressions)) {
-            data.data.expressions = Object.values(data.data.expressions).map(e => e) as Expression[];
-        }
-
+        this.fixArrays(data);
         if (data.data.summary.format == '') {
             data.data.summary.format = data.name;
         }
@@ -63,20 +97,25 @@ export default class Item3e<T = any> extends Item<T> {
     }
 
     private preparePowerEffectData(data: Item.Data<PowerEffectData>): void {
+        this.fixArrays(data);
         const overrideValues = [
+            'data.activation.check.targetScore.type',
+            'data.activation.check.targetScore.custom',
+            'data.activation.consume.type',
+            'data.activation.consume.target',
+            'data.activation.consume.amount',
+            'data.activation.duration.type',
+            'data.activation.range.area',
+            'data.activation.range.type',
+            'data.activation.uses.amount',
+            'data.activation.uses.max',
+            'data.activation.uses.per',
             'data.activation.type',
-            'data.duration.type',
-            'data.range.type',
-            'data.range.area',
-            'data.consume.type',
-            'data.consume.target',
-            'data.consume.amount',
-            'data.ability',
-            'data.attack.bonus',
-            'data.attack.defense',
-            'data.resist.baseDC',
-            'data.resist.defense',
-            'data.type',
+            'data.action.roll.attack.targetScore.type',
+            'data.action.roll.attack.targetScore.custom',
+            'data.action.roll.resist.targetScore.type',
+            'data.action.roll.resist.targetScore.custom',
+            'data.action.type',
         ];
         overrideValues.forEach(key => {
             if (getProperty(data, `${key}.override`)) {
@@ -84,21 +123,25 @@ export default class Item3e<T = any> extends Item<T> {
                     override: false,
                     value: getProperty(data, `${key}.originalValue`),
                     originalValue: undefined,
+                    overrideRank: undefined,
                 });
             }
         });
-        
-        data.data.modifiers.forEach(modifier => {
-            overrideValues.forEach(key => {
-                const value = getProperty(modifier, `${key}.value`);
-                if (value) {
-                    setProperty(data, key, {
-                        override: true,
-                        value,
-                        originalValue: getProperty(data, `${key}.value`),
-                    });
-                }
-            });
+
+        const overrideArrayValues = [
+            'data.activation.check.formula',
+            'data.action.roll.attack.formula',
+            'data.action.roll.resist.formula',
+        ];
+        overrideArrayValues.forEach(key => {
+            if (getProperty(data, `${key}.override`)) {
+                const offset = getProperty(data, `${key}.numOverrides`) || 0;
+                setProperty(data, key, {
+                    override: false,
+                    value: getProperty(data, `${key}.value`).slice(offset),
+                    numOverrides: undefined,
+                });
+            }
         });
 
         if (data.data.summary.format == '') {
@@ -107,7 +150,33 @@ export default class Item3e<T = any> extends Item<T> {
 
         const prefix: string[] = [];
         const postfix: string[] = [];
+
         data.data.modifiers.forEach(modifier => {
+            overrideValues.forEach(key => {
+                const value = getProperty(modifier, `${key}.value`);
+                if (value) {
+                    setProperty(data, key, {
+                        override: true,
+                        value,
+                        originalValue: getProperty(data, `${key}.value`),
+                        overrideRank: modifier.data.rank,
+                    });
+                }
+            });
+
+            overrideArrayValues.forEach(key => {
+                const value = getProperty(modifier, `${key}.value`)
+                if (value && value.length > 0) {
+                    const currentValue = getProperty(data, `${key}.value`)
+                    const offset = getProperty(data, `${key}.numOverrides`) || 0;
+                    setProperty(data, key, {
+                        override: true,
+                        numOverrides: offset + 1,
+                        value: duplicate(value).concat(currentValue),
+                    });
+                }
+            });
+
             let targetList = prefix;
             if (modifier.data.summary.position == 'postfix') {
                 targetList = postfix;
@@ -164,5 +233,19 @@ export default class Item3e<T = any> extends Item<T> {
 
         data.data.totalCost = totalPowerCost;
         data.data.alternatePowers = data.data.alternatePowerIDs.map(id => game.items.get(id).data) as Item.Data<PowerData>[];
+    }
+
+    private fixArrays(data: Item.Data): void {
+        [
+            'data.expressions',
+            'data.activation.check.formula.value',
+            'data.action.roll.attack.formula.value',
+            'data.action.roll.resist.formula.value',
+        ].forEach(dataPath => {
+            const value = getProperty(data, dataPath);
+            if (value && !Array.isArray(value)) {
+                setProperty(data, dataPath, Object.values(value).map(v => v));
+            }
+        });
     }
 }

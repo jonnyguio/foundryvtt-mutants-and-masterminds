@@ -70,9 +70,9 @@ export default class ItemSheet3ePower extends ItemSheet3e<PowerData, Item3e<Powe
             return;
         }
 
-        this.item.data.data.effects.push(droppedItem.data as Item.Data<PowerEffectData>);
-        if (this.item._id) {
-            this.item.update({ data: { effects: this.item.data.data.effects } }, {});
-        }
+        const copiedItem = duplicate(droppedItem.data) as Item.Data<PowerEffectData>;
+        (copiedItem as any)._id = `${randomID(8)}-temp`;
+        this.item.data.data.effects.push(copiedItem);
+        (this.item.sheet as any)._onSubmit(event, { updateData: { data: { effects: this.item.data.data.effects }}});
     }
 }

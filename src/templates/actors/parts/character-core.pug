@@ -5,7 +5,7 @@ mixin score-config-button(scoreType, dataPath)
         data-score-path=`data.${dataPath}`
         data-score-config-path=`${dataPath}`
     )
-        i.fas.fa-cog
+        i.fab.fa-superpowers
 
 .core-container.flexrow
     .ability-section.flexcol
@@ -34,9 +34,9 @@ mixin score-config-button(scoreType, dataPath)
                 | {{#each data.skills as |skill key|}}
                 | {{#if (eq skill.type "dynamic")}}
                 | {{#if (not (emptyObj skill.data))}}
-                | {{#each skill.data as |subskill subskillName|}}
+                | {{#each skill.data as |subskill|}}
                 li.subskill.flexrow(data-skill="{{key}}")
-                    label.subskill-name.rollable {{skill.label}}: {{subskillName}}
+                    label.subskill-name.rollable {{skill.label}}: {{subskill.displayName}}
                     span.skill-score {{numberFormat subskill.total decimals=0 sign=true}}
                 | {{/each}}
                 | {{/if}}

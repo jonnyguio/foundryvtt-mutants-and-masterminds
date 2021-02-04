@@ -97,39 +97,7 @@ export default abstract class ActorSheet3e<T extends CommonActorData & CreatureD
         let app: Application;
         switch (button.dataset.action) {
             case 'score-config':
-                const onCreate = (scoreType: string): object => {
-                    switch (scoreType) {
-                        case 'cco':
-                            return {
-                                rank: 0,
-                                ability: 'fgt',
-                                trainedOnly: false,
-                                actions: ['standard'],
-                            };
-                        case 'exp':
-                            return {
-                                rank: 0,
-                                ability: 'int',
-                                trainedOnly: true,
-                                actions: [],
-                            };
-                        case 'rco':
-                            return {
-                                rank: 0,
-                                ability: 'dex',
-                                trainedOnly: false,
-                                actions: ['standard'],
-                            };
-                        default:
-                            throw new Error(`Unrecognized type: ${scoreType}`)
-                    }
-                };
-                app = new ScoreConfig(
-                    button.dataset.scorePath,
-                    button.dataset.scoreConfigPath,
-                    onCreate,
-                    this.object
-                );
+                app = new ScoreConfig(button.dataset.scorePath, button.dataset.scoreConfigPath, this.object);
                 break;
             default:
                 throw new Error(`unknown action: ${button.dataset.action}`);

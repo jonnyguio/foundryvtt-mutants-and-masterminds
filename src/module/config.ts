@@ -45,7 +45,7 @@ export interface Config {
         cylinder: string;
         line: string;
         shapeable: string;
-    };
+    } & {[type: string]: string};
 
     areaTypes: {
         burst: string;

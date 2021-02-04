@@ -1,14 +1,15 @@
 doctype html
 include ../../mixins.pug
 
-+select-value-with-override("MNM3E.ItemActivationType", "data.activation.type", "config.activationTypes")
++select-value-with-override("MNM3E.ItemActivationType", "data.activation.type", "config.activationTypes", true)
 
-| {{#if (or (ne data.activation.type.value "none") (eq item.type "modifier")) }}
+| {{#if (or data.activation.type.value (eq item.type "modifier")) }}
++expanding-roll-controller("MNM3E.ActivationCheck", "data.activation.check")
 
-+select-value-with-override("MNM3E.Range", "data.range.type", "config.rangeTypes")
++select-value-with-override("MNM3E.Range", "data.activation.range.type", "config.rangeTypes")
 
-+select-value-with-override("MNM3E.Area", "data.range.area", "config.areaTypes", true)
++select-value-with-override("MNM3E.Area", "data.activation.range.area", "config.areaTypes", true, true)
 
-+select-value-with-override("MNM3E.Duration", "data.duration.type", "config.durationTypes")
++select-value-with-override("MNM3E.Duration", "data.activation.duration.type", "config.durationTypes")
 
 | {{/if}}

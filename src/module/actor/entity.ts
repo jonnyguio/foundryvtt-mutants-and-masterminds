@@ -31,10 +31,6 @@ export default class Actor3e<T extends CommonActorData> extends Actor<T> {
             }
         };
 
-        this._prepareAbilities(actorData);
-        this._prepareDefenses(actorData);
-        this._prepareSkills(actorData);
-
         switch (actorData.type) {
             case 'character':
                 this._prepareCharacterData(actorData);
@@ -50,6 +46,10 @@ export default class Actor3e<T extends CommonActorData> extends Actor<T> {
      */
     public prepareDerivedData(): void {
         const actorData = this.data;
+
+        this._prepareAbilities(actorData);
+        this._prepareDefenses(actorData);
+        this._prepareSkills(actorData);
 
         actorData.items.forEach(item => {
             switch (item.type) {
@@ -98,19 +98,22 @@ export default class Actor3e<T extends CommonActorData> extends Actor<T> {
         const data = actorData.data;
 
         Object.values(data.skills).forEach(skill => {
-            const evaluateSkill = (s: Skill) => {
-                s.isTrained = false;
+            const evaluateSkill = (sd: SkillDetail, s: Skill) => {
+                sd.isTrained = false;
+                sd.base = data.abilities[sd.ability].rank;
                 s.total = 0;
-                if (!s.trainedOnly || (s.trainedOnly && s.rank > 0)) {
-                    s.isTrained = true;
-                    s.total = data.abilities[s.ability].rank + s.rank;
+                if (!sd.trainedOnly || (sd.trainedOnly && s.rank > 0)) {
+                    sd.isTrained = true;
+                    s.total = sd.base + s.rank;
                 }
                 data.pointCosts.skills.value += s.rank / 2;
             };
             if (skill.type == 'dynamic') {
-                Object.values(skill.data).forEach(evaluateSkill);
+                Object.values(skill.data).forEach((s: Skill) => {
+                    evaluateSkill(skill, s);
+                });
             } else {
-                evaluateSkill(skill.data as Skill);
+                evaluateSkill(skill, skill.data as Skill);
             }
         });
     }

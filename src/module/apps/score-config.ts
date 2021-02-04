@@ -1,13 +1,11 @@
 export default class ScoreConfig extends BaseEntitySheet {
     private _dataPath: string;
     private _configPath: string;
-    private _onCreateScore: (scoreType: string) => object;
 
-    constructor(dataPath: string, configPath: string, onCreateScore: (scoreType: string) => object, ...args: any[]) {
+    constructor(dataPath: string, configPath: string, ...args: any[]) {
         super(...args);
         this._dataPath = dataPath;
         this._configPath = configPath;
-        this._onCreateScore = onCreateScore;
         this.options.closeOnSubmit = false;
         this.options.submitOnChange = true;
         this.options.submitOnClose = true;
@@ -106,13 +104,18 @@ export default class ScoreConfig extends BaseEntitySheet {
                             },
                         },
                         close: () => resolve(null),
+                        default: 'ok',
                     }).render(true);
-                });
+                }) as string | null;
                 if (!scoreName) {
                     return;
                 }
-                const newScore = this._onCreateScore(scoreType);
-                targetScore.data[scoreName as string] = newScore;
+                const newScore = {
+                    rank: 0,
+                    displayName: scoreName,
+                };
+                const cleanedName = scoreName.replace(' ', '');
+                targetScore.data[cleanedName] = newScore;
                 await this.entity.update({[`${this._dataPath}.${scoreType}`]: targetScore});
                 break;
             case 'delete':

@@ -19,13 +19,36 @@ declare interface ItemDescription {
 
 declare interface OverrideValue<T> {
     value: T;
+
+    // Prepared Data
     override: boolean;
+    originalValue?: T;
+    overrideRank?: number;
 }
 
-declare interface EffectActivation {
-    type: OverrideValue<string>;
-    cost: number;
-    condition: string;
+declare interface OverrideArray<T> {
+    value: T[];
+
+    // Prepared Data
+    override: boolean;
+    numOverrides?: number;
+}
+
+declare interface TargetScore {
+    type: OverrideValue<string>
+
+    // Only valid when type is custom
+    custom: OverrideValue<string>
+}
+
+declare interface Formula {
+    op: string;
+    value: string;
+}
+
+declare interface RollDetails {
+    formula: OverrideArray<Formula>
+    targetScore: TargetScore;
 }
 
 declare interface EffectDuration {
@@ -38,9 +61,9 @@ declare interface EffectRange {
 }
 
 declare interface EffectUses {
-    value: number;
-    max: number;
-    per?: string;
+    amount: OverrideValue<number>;
+    max: OverrideValue<number>;
+    per?: OverrideValue<string>;
 }
 
 declare interface EffectConsume {
@@ -49,30 +72,31 @@ declare interface EffectConsume {
     amount: OverrideValue<number?>;
 }
 
-declare interface ItemActivatedEffect {
-    activation: EffectActivation;
+declare interface EffectActivation {
+    check: RollDetails;
+    consume: EffectConsume;
     duration: EffectDuration;
     range: EffectRange;
     uses: EffectUses;
-    consume: EffectConsume;
+    type: OverrideValue<string>;
 }
 
-declare interface ActionAttack {
-    bonus: OverrideValue<number>;
-    defense: OverrideValue<string?>
+declare interface ItemActivatedEffect {
+    activation: EffectActivation;
 }
 
-declare interface ActionResist {
-    baseDC: OverrideValue<number?>
-    defense: OverrideValue<string?>
+declare interface ActionTargetedRoll {
+    attack: RollDetails;
+    resist: RollDetails;
+}
+
+declare interface ActionData {
+    roll: ActionTargetedRoll;
+    type: OverrideValue<string>
 }
 
 declare interface ItemAction {
-    ability: OverrideValue<string?>;
-    attack: ActionAttack;
-    chatFlavor: string;
-    resist: ActionResist;
-    type: OverrideValue<string>;
+    action: ActionData;
 }
 
 declare type RankCostType = 'flat' | 'perRank' | 'discount';
@@ -84,6 +108,7 @@ declare interface ItemCost {
 }
 
 declare interface ItemScalingEffect {
+    rank: number;
     cost: ItemCost;
 }
 
@@ -93,16 +118,13 @@ declare interface Expression {
 }
 
 declare interface AdvantageData extends ItemDescription, ItemActivatedEffect, ItemAction, ItemScalingEffect {
-    rank: number;
 }
 
 declare interface PowerEffectData extends ItemSummary, ItemDescription, ItemActivatedEffect, ItemAction, ItemScalingEffect {
     modifiers: Item.Data<ModifierData>[];
-    rank: number;
 }
 
 declare interface ModifierData extends ItemSummary, ItemDescription, ItemActivatedEffect, ItemAction, ItemScalingEffect {
-    parentEffect: string;
     expressions: Expression[];
 }
 

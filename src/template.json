@@ -59,131 +59,156 @@
                 "skills": {
                     "acr": {
                         "type": "static",
+                        "ability": "agl",
+                        "trainedOnly": true,
+                        "actions": ["move", "free"],
+                        "base": 0,
                         "data": {
-                            "rank": 0,
-                            "ability": "agl",
-                            "trainedOnly": true,
-                            "actions": ["move", "free"]
+                            "rank": 0
                         }
                     },
                     "ath": {
                         "type": "static",
+                        "base": 0,
+                        "ability": "str",
+                        "trainedOnly": false,
+                        "actions": ["move"],
                         "data": {
-                            "rank": 0,
-                            "ability": "str",
-                            "trainedOnly": false,
-                            "actions": ["move"]
+                            "rank": 0
                         }
                     },
                     "cco": {
                         "type": "dynamic",
+                        "ability": "fgt",
+                        "trainedOnly": false,
+                        "actions": ["standard"],
+                        "base": 0,
                         "data": {}
                     },
                     "dec": {
                         "type": "static",
+                        "ability": "pre",
+                        "trainedOnly": false,
+                        "actions": ["standard"],
+                        "base": 0,
                         "data": {
-                            "rank": 0,
-                            "ability": "pre",
-                            "trainedOnly": false,
-                            "actions": ["standard"]
+                            "rank": 0
                         }
                     },
                     "exp": {
                         "type": "dynamic",
+                        "ability": "int",
+                        "trainedOnly": true,
+                        "actions": [],
+                        "base": 0,
                         "data": {}
                     },
                     "ins": {
                         "type": "static",
+                        "base": 0,
+                        "ability": "awe",
+                        "trainedOnly": false,
+                        "actions": ["free"],
                         "data": {
-                            "rank": 0,
-                            "ability": "awe",
-                            "trainedOnly": false,
-                            "actions": ["free"]
+                            "rank": 0
                         }
                     },
                     "itm": {
                         "type": "static",
+                        "ability": "pre",
+                        "trainedOnly": false,
+                        "actions": ["standard"],
+                        "base": 0,
                         "data": {
-                            "rank": 0,
-                            "ability": "pre",
-                            "trainedOnly": false,
-                            "actions": ["standard"]
+                            "rank": 0
                         }
                     },
                     "inv": {
                         "type": "static",
+                        "ability": "int",
+                        "trainedOnly": true,
+                        "actions": [],
+                        "base": 0,
                         "data": {
-                            "rank": 0,
-                            "ability": "int",
-                            "trainedOnly": true,
-                            "actions": []
+                            "rank": 0
                         }
                     },
                     "prc": {
                         "type": "static",
+                        "base": 0,
+                        "ability": "awe",
+                        "trainedOnly": false,
+                        "actions": ["free"],
                         "data": {
-                            "rank": 0,
-                            "ability": "awe",
-                            "trainedOnly": false,
-                            "actions": ["free"]
+                            "rank": 0
                         }
                     },
                     "per": {
                         "type": "static",
+                        "base": 0,
+                        "ability": "pre",
+                        "trainedOnly": false,
+                        "actions": [],
                         "data": {
-                            "rank": 0,
-                            "ability": "pre",
-                            "trainedOnly": false,
-                            "actions": []
+                            "rank": 0
                         }
                     },
                     "rco": {
                         "type": "dynamic",
+                        "ability": "dex",
+                        "trainedOnly": false,
+                        "actions": ["standard"],
+                        "base": 0,
                         "data": {}
                     },
                     "slt": {
                         "type": "static",
+                        "ability": "dex",
+                        "trainedOnly": true,
+                        "actions": ["standard"],
+                        "base": 0,
                         "data": {
-                            "rank": 0,
-                            "ability": "dex",
-                            "trainedOnly": true,
-                            "actions": ["standard"]
+                            "rank": 0
                         }
                     },
                     "ste": {
                         "type": "static",
+                        "ability": "agl",
+                        "trainedOnly": false,
+                        "actions": ["move"],
+                        "base": 0,
                         "data": {
-                            "rank": 0,
-                            "ability": "agl",
-                            "trainedOnly": false,
-                            "actions": ["move"]
+                            "rank": 0
                         }
                     },
                     "tec": {
                         "type": "static",
+                        "ability": "int",
+                        "trainedOnly": true,
+                        "actions": ["standard"],
+                        "base": 0,
                         "data": {
-                            "rank": 0,
-                            "ability": "int",
-                            "trainedOnly": true,
-                            "actions": ["standard"]
+                            "rank": 0
                         }
                     },
                     "tre": {
                         "type": "static",
+                        "ability": "int",
+                        "trainedOnly": true,
+                        "actions": ["standard"],
+                        "base": 0,
                         "data": {
-                            "rank": 0,
-                            "ability": "int",
-                            "trainedOnly": true,
-                            "actions": ["standard"]
+                            "rank": 0
                         }
                     },
                     "vhc": {
                         "type": "static",
+                        "ability": "dex",
+                        "trainedOnly": true,
+                        "actions": ["move"],
+                        "base": 0,
                         "data": {
-                            "rank": 0,
-                            "ability": "dex",
-                            "trainedOnly": true,
-                            "actions": ["move"]
+                            "rank": 0
                         }
                     }
                 }
@@ -217,68 +242,96 @@
             },
             "activatedEffect": {
                 "activation": {
+                    "check": {
+                        "formula": {
+                            "value": []
+                        },
+                        "targetScore": {
+                            "type": {
+                                "value": ""
+                            },
+                            "custom": {
+                                "value": ""
+                            }
+                        }
+                    },
+                    "consume": {
+                        "type": {
+                            "value": ""
+                        },
+                        "target": {
+                            "value": null
+                        },
+                        "amount": {
+                            "value": null
+                        }
+                    },
+                    "duration": {
+                        "type": {
+                            "value": ""
+                        }
+                    },
+                    "range": {
+                        "area": {
+                            "value": null
+                        },
+                        "type": {
+                            "value": ""
+                        }
+                    },
+                    "uses": {
+                        "amount": {
+                            "value": 0
+                        },
+                        "max": {
+                            "value": 0
+                        },
+                        "per": {
+                            "value": null
+                        }
+                    },
                     "type": {
                         "value": ""
-                    },
-                    "cost": 0,
-                    "condition": ""
-                },
-                "duration": {
-                    "type": {
-                        "value": ""
-                    }
-                },
-                "range": {
-                    "area": {
-                        "value": null
-                    },
-                    "type": {
-                        "value": ""
-                    }
-                },
-                "uses": {
-                    "value": 0,
-                    "max": 0,
-                    "per": null
-                },
-                "consume": {
-                    "type": {
-                        "value": ""
-                    },
-                    "target": {
-                        "value": null
-                    },
-                    "amount": {
-                        "value": null
                     }
                 }
             },
-            "action": {
-                "ability": {
-                    "value": null
-                },
-                "attack": {
-                    "bonus": {
-                        "value": null
+            "actionEffect": {
+                "action": {
+                    "roll": {
+                        "attack": {
+                            "formula": {
+                                "value": []
+                            },
+                            "targetScore": {
+                                "type": {
+                                    "value": ""
+                                },
+                                "custom": {
+                                    "value": ""
+                                }
+                            }
+                        },
+                        "resist": {
+                            "formula": {
+                                "value": []
+                            },
+                            "targetScore": {
+                                "type": {
+                                    "value": ""
+                                },
+                                "custom": {
+                                    "value": ""
+                                }
+                            }
+                        }
                     },
-                    "defense": {
-                        "value": null
+                    "type": {
+                        "value": ""
                     }
-                },
-                "chatFlavor": "",
-                "resist": {
-                    "baseDC": {
-                        "value": null
-                    },
-                    "defense": {
-                        "value": null
-                    }
-                },
-                "type": {
-                    "value": null
                 }
             },
             "scalingEffect": {
+                "rank": 1,
                 "cost": {
                     "value": 0,
                     "type": "",
@@ -287,17 +340,14 @@
             }
         },
         "advantage": {
-            "templates": ["itemDescription", "activatedEffect", "action", "scalingEffect"],
-            "rank": 0
+            "templates": ["itemSummary", "itemDescription", "activatedEffect", "actionEffect", "scalingEffect"]
         },
         "effect": {
-            "templates": ["itemSummary", "itemDescription", "activatedEffect", "action", "scalingEffect"],
-            "rank": 0,
+            "templates": ["itemSummary", "itemDescription", "activatedEffect", "actionEffect", "scalingEffect"],
             "modifiers": []
         },
         "modifier": {
-            "templates": ["itemSummary", "itemDescription", "activatedEffect", "action", "scalingEffect"],
-            "parentEffect": "",
+            "templates": ["itemSummary", "itemDescription", "activatedEffect", "actionEffect", "scalingEffect"],
             "expressions": []
         },
         "power": {

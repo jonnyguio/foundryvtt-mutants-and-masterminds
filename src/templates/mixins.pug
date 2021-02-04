@@ -1,6 +1,10 @@
-mixin select-form-fields(dataPath, configPath, allowBlank=false)
+- const getOverrideAttribute = (dataPath) => `{{#if ${dataPath}.override}}disabled{{/if}}`
+
+mixin select-form-fields(dataPath, configPath, allowBlank=false, onlyDisabled=false)
+    - let disabledAttribute = getOverrideAttribute(dataPath)
+    - if (onlyDisabled) disabledAttribute = `{{#if (ne item.type "modifier")}}disabled{{/if}}`
     .form-fields
-        select(name=`${dataPath}.value`)&attributes({[`{{#if ${dataPath}.override}}disabled{{/if}}`]: ''})
+        select(name=`${dataPath}.value`)&attributes({[disabledAttribute]: ''})
             | {{#select #{dataPath}.value}}
             if allowBlank
                 option(value="")
@@ -13,15 +17,20 @@ mixin select-form-fields(dataPath, configPath, allowBlank=false)
             | {{/each}}
             | {{/select}}
 
-mixin select-value-with-override(label, dataPath, configPath, allowBlank=false)
+mixin input-value-with-override(label, dataPath, dataDType="Number", dataPlaceholder="0")
+    .form-group.input
+        label {{ localize "#{label}" }}
+        input(type="text" name=`${dataPath}.value` value=`{{${dataPath}.value}}` data-dtype=`${dataDType}` placeholder=`${dataPlaceholder}`)&attributes({[`{{#if ${dataPath}.override}}disabled{{/if}}`]: ''})
+
+mixin select-value-with-override(label, dataPath, configPath, allowBlank=false, onlyDisabled=false)
     .form-group.select
         label {{ localize "#{label}" }}
-        +select-form-fields(dataPath, configPath, allowBlank)
+        +select-form-fields(dataPath, configPath, allowBlank, onlyDisabled)
 
-mixin input-select-value-with-override(label, inputDataPath, selectDataPath, configPath, allowBlank=false)
+mixin input-select-value-with-override(label, inputDType, inputPlaceholder, inputDataPath, selectDataPath, configPath, allowBlank=false, onlyDisabled=false)
     .form-group.input-select
         label {{ localize "#{label}" }}
-        input(type="text" name=`${inputDataPath}.value` value=`{{${inputDataPath}.value}}` data-dtype="Number" placeholder="0")&attributes({[`{{#if ${inputDataPath}.override}}disabled{{/if}}`]: ''})
+        input(type="text" name=`${inputDataPath}.value` value=`{{${inputDataPath}.value}}` data-dtype=`${inputDType}` placeholder=`${inputPlaceholder}`)&attributes({[`{{#if ${inputDataPath}.override}}disabled{{/if}}`]: ''})
         +select-form-fields(selectDataPath, configPath, allowBlank)
 
 mixin item-summary-controller()
@@ -31,3 +40,71 @@ mixin item-summary-controller()
         .summary-controls.flexrow
             a.config-button(title="{{ localize 'MNM3E.ItemSummaryBuilder' }}" data-action="summary-builder")
                 i.fas.fa-bars
+
+mixin expanding-roll-controller(headerLabel, rollDetailsPath)
+    .form-group.expanding-group
+        .flexcol
+            header.expanding-group-header.flexrow
+                label {{ localize "#{headerLabel}"}}
+                a.check-control(
+                    title="{{ localize 'MNM3E.AddFormula' }}"
+                    data-action="create"
+                    data-data-path=`${rollDetailsPath}.formula.value`
+                )
+                    i.fas.fa-plus
+            | {{#each #{rollDetailsPath}.formula.value as |formula idx|}}
+            .form-group
+                .form-fields
+                    - const disabledCondition = `(lt idx ../${rollDetailsPath}.formula.numOverrides)`
+                    | {{#if #{disabledCondition}}}
+                    span {{ lookup this "op" }}
+                    | {{else}}
+                    select(
+                        name=`${rollDetailsPath}.formula.value.{{idx}}.op`
+                    )&attributes({[disabledAttribute]: ''})
+                        | {{#select (lookup this "op") }}
+                        option(value="+") +
+                        option(value="-") -
+                        | {{/select}}
+                    | {{/if}}
+                input(
+                    type="text"
+                    name=`${rollDetailsPath}.formula.value.{{idx}}.value`
+                    value="{{formula.value}}"
+                    data-dtype="String"
+                )&attributes({[`{{#if ${disabledCondition}}}readonly{{/if}}`]: ''})
+                | {{#if (not #{disabledCondition})}}
+                a.check-control(
+                    title="{{ localize 'MNM3E.DeleteFormula' }}"
+                    data-action="delete"
+                    data-data-path=`${rollDetailsPath}.formula.value`
+                    data-index="{{idx}}"
+                )
+                    i.fas.fa-minus
+                | {{/if}}
+            | {{/each}}
+            | {{#if (or (eq item.type "modifier") (gt #{rollDetailsPath}.formula.value.length 0))}}
+            .form-group.score-choice
+                label {{ localize "MNM3E.Versus"}}
+                .form-fields
+                    select(
+                        name=`${rollDetailsPath}.targetScore.type.value`
+                    )&attributes({[getOverrideAttribute(`${rollDetailsPath}.targetScore.type`)]: ''})
+                        | {{#select #{rollDetailsPath}.targetScore.type.value}}
+                        | {{#if (eq item.type "modifier")}}
+                        option(value="")
+                        | {{/if}}
+                        | {{#each targetScoreOptions as |tso|}}
+                        optgroup(label="{{tso.label}}")
+                            | {{selectOptions tso.entries}}
+                        | {{/each}}
+                        option(value="custom") {{ localize "MNM3E.Custom" }}
+                        | {{/select}}
+                | {{#if (eq #{rollDetailsPath}.targetScore.type.value "custom")}}
+                input(
+                    type="text"
+                    name=`${rollDetailsPath}.targetScore.custom.value`
+                    value=`{{${rollDetailsPath}.targetScore.custom.value}}`
+                    data-dtype="String")&attributes({[getOverrideAttribute(`${rollDetailsPath}.targetScore.custom`)]: ''})
+                | {{/if}}
+            | {{/if}}

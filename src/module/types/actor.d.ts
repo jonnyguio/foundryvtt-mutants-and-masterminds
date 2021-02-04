@@ -21,20 +21,28 @@ declare interface Defense {
 
 declare interface Skill {
     rank: number;
-    ability: string;
-    trainedOnly: boolean;
-    actions: string[];
 
     // Prepared Data
-    isTrained?: boolean;
     total?: number;
+
+    // Only valid on dynamic types
+    displayName: string;
 }
 
 declare type SkillType = 'static' | 'dynamic';
 
 declare interface SkillDetail {
     type: SkillType;
+    ability: string;
+    trainedOnly: boolean;
+    actions: string[];
     data: Skill | {[skillName: string]: Skill};
+
+    // Prepared Data
+    isTrained?: boolean;
+
+    // Only valid on dynamic types
+    base: number;
 
     // Prepared Sheet Data
     label?: string;

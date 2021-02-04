@@ -23,6 +23,7 @@ import ItemSheet3eModifier from './module/item/sheets/modifier';
 import { MNM3E } from './module/config';
 import SummaryBuilder from './module/apps/summary-builder';
 import ScoreConfig from './module/apps/score-config';
+import PowerEffectTemplate from './module/pixi/power-effect-template';
 
 /* ------------------------------------ */
 /* Initialize system					*/
@@ -34,6 +35,9 @@ Hooks.once('init', async function() {
         applications: {
             SummaryBuilder,
             ScoreConfig,
+        },
+        canvas: {
+            PowerEffectTemplate,
         },
     };
 
@@ -90,15 +94,19 @@ Hooks.once('setup', function() {
     const toLocalize = [
         'abilities',
         'abilityAbbreviations',
-        'defenses',
         'actionTypes',
+        'defenses',
+        'measurements.mass',
+        'measurements.time',
+        'measurements.distance',
+        'measurements.volume',
         'rangeTypes',
         'rankCostTypes',
         'skills',
     ];
 
     toLocalize.forEach(o => {
-        const localized = Object.entries(CONFIG.MNM3E[o]).map(
+        const localized = Object.entries(getProperty(CONFIG.MNM3E, o)).map(
             ([name, identifier]) => [name, game.i18n.localize(identifier as string)]
         );
 

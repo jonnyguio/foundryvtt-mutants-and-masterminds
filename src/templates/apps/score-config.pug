@@ -13,7 +13,7 @@ form.score-config.stacked(autocomplete="off")
         | {{#each score.data as |subscore subscoreName|}}
         li.subscore
             .form-group.input-input
-                span {{ subscoreName }}
+                span ({{ subscoreName }}) {{ subscore.displayName }}
                 input(
                     type="text"
                     name="{{../../dataPath}}.{{name}}.data.{{subscoreName}}.rank"
