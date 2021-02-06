@@ -44,9 +44,20 @@ mixin item-summary-controller()
 mixin expanding-roll-controller(headerLabel, rollDetailsPath)
     .form-group.expanding-group
         .flexcol
-            header.expanding-group-header.flexrow
-                label {{ localize "#{headerLabel}"}}
-                a.check-control(
+            .form-group.select
+                label {{ localize "#{headerLabel}" }}
+                .form-fields
+                    select(name=`${rollDetailsPath}.rollType.value`)&attributes({[getOverrideAttribute(`${rollDetailsPath}.rollType`)]: ''})
+                        | {{#select #{rollDetailsPath}.rollType.value}}
+                        | {{#if (eq item.type "modifier")}}
+                        option(value="")
+                        | {{/if}}
+                        | {{#each config.rollTypes as |localizedName name|}}
+                        option(value="{{name}}") {{ localizedName }}
+                        | {{/each}}
+                        | {{/select}}
+            | {{#if (or (and #{rollDetailsPath}.rollType.value (ne #{rollDetailsPath}.rollType.value "none")) (eq item.type "modifier"))}}
+            a.check-control(
                     title="{{ localize 'MNM3E.AddFormula' }}"
                     data-action="create"
                     data-data-path=`${rollDetailsPath}.formula.value`
@@ -59,9 +70,7 @@ mixin expanding-roll-controller(headerLabel, rollDetailsPath)
                     | {{#if #{disabledCondition}}}
                     span {{ lookup this "op" }}
                     | {{else}}
-                    select(
-                        name=`${rollDetailsPath}.formula.value.{{idx}}.op`
-                    )&attributes({[disabledAttribute]: ''})
+                    select(name=`${rollDetailsPath}.formula.value.{{idx}}.op`)
                         | {{#select (lookup this "op") }}
                         option(value="+") +
                         option(value="-") -
@@ -107,4 +116,5 @@ mixin expanding-roll-controller(headerLabel, rollDetailsPath)
                     value=`{{${rollDetailsPath}.targetScore.custom.value}}`
                     data-dtype="String")&attributes({[getOverrideAttribute(`${rollDetailsPath}.targetScore.custom`)]: ''})
                 | {{/if}}
+            | {{/if}}
             | {{/if}}

@@ -46,9 +46,12 @@ declare interface Formula {
     value: string;
 }
 
+declare type RollType = 'none' | 'required';
+
 declare interface RollDetails {
-    formula: OverrideArray<Formula>
+    formula: OverrideArray<Formula>;
     targetScore: TargetScore;
+    rollType: RollType;
 }
 
 declare interface EffectDuration {

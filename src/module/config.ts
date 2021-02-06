@@ -115,6 +115,11 @@ export interface Config {
         discount: string;
     };
 
+    rollTypes: {
+        none: string;
+        required: string;
+    };
+
     skills: {
         acr: string;
         ath: string;
@@ -245,6 +250,10 @@ export const MNM3E: Config = {
         flat: 'MNM3E.RankCostTypeFlat',
         perRank: 'MNM3E.RankCostTypePerRank',
         discount: 'MNM3E.RankCostTypeDiscount',
+    },
+    rollTypes: {
+        none: 'MNM3E.None',
+        required: 'MNM3E.Required',
     },
     skills: {
         acr: 'MNM3E.SkillAcr',

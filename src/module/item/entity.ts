@@ -99,6 +99,7 @@ export default class Item3e<T = any> extends Item<T> {
     private preparePowerEffectData(data: Item.Data<PowerEffectData>): void {
         this.fixArrays(data);
         const overrideValues = [
+            'data.activation.check.rollType',
             'data.activation.check.targetScore.type',
             'data.activation.check.targetScore.custom',
             'data.activation.consume.type',
@@ -111,8 +112,10 @@ export default class Item3e<T = any> extends Item<T> {
             'data.activation.uses.max',
             'data.activation.uses.per',
             'data.activation.type',
+            'data.action.roll.attack.rollType',
             'data.action.roll.attack.targetScore.type',
             'data.action.roll.attack.targetScore.custom',
+            'data.action.roll.resist.rollType',
             'data.action.roll.resist.targetScore.type',
             'data.action.roll.resist.targetScore.custom',
             'data.action.type',

@@ -109,6 +109,7 @@ export default class Actor3e<T extends CommonActorData> extends Actor<T> {
                 data.pointCosts.skills.value += s.rank / 2;
             };
             if (skill.type == 'dynamic') {
+                skill.base = data.abilities[skill.ability].rank;
                 Object.values(skill.data).forEach((s: Skill) => {
                     evaluateSkill(skill, s);
                 });
