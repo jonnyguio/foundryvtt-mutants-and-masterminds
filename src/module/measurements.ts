@@ -5,7 +5,7 @@ export interface MeasurementValue {
     units: string;
 }
 
-export type MeasurementType = 'mass' | 'time' | 'distance' | 'volume';
+export type MeasurementType = 'mass' | 'time' | 'distance' | 'volume' | 'attack-distance';
 
 export const getMeasurement = (mType: MeasurementType, rank: number): MeasurementValue => {
     let targetTable: MeasurementValue[];
@@ -21,6 +21,9 @@ export const getMeasurement = (mType: MeasurementType, rank: number): Measuremen
             break;
         case 'volume':
             targetTable = volumeTable;
+            break;
+        case 'attack-distance':
+            targetTable = attackDistanceTable;
             break;
         default:
             throw new Error(`unknown measurement type ${mType}`);
@@ -48,6 +51,7 @@ let massTable: MeasurementValue[] = [];
 let timeTable: MeasurementValue[] = [];
 let distanceTable: MeasurementValue[] = [];
 let volumeTable: MeasurementValue[] = [];
+let attackDistanceTable: MeasurementValue[] = [];
 
 Hooks.once('ready', () => {
     const MNM3E: Config = CONFIG.MNM3E;
@@ -206,4 +210,16 @@ Hooks.once('ready', () => {
         { value: 500, units: MNM3E.measurements.volume.mcft },
         { value: 1, units: MNM3E.measurements.volume.bcft },
     ];
+
+    attackDistanceTable = [
+        { value: 0, units: MNM3E.measurements.distance.feet },
+        { value: 0, units: MNM3E.measurements.distance.feet },
+        { value: 2, units: MNM3E.measurements.distance.feet },
+        { value: 5, units: MNM3E.measurements.distance.feet },
+        { value: 10, units: MNM3E.measurements.distance.feet },
+        { value: 25, units: MNM3E.measurements.distance.feet },
+        { value: 50, units: MNM3E.measurements.distance.feet },
+        { value: 100, units: MNM3E.measurements.distance.feet },
+        { value: 200, units: MNM3E.measurements.distance.feet },
+    ]
 });

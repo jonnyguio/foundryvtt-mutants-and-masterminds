@@ -10,17 +10,33 @@ header.card-header.flexrow
     h3.item-name {{item.name}}
 
 .card-content.flexcol
-    | {{#each effects as |effect|}}
+    | {{#each effects }}
     h4 
-        | {{#if effect.effect.data.summary.parsed}}
-        |   {{effect.effect.data.summary.parsed}}
+        | {{#if this.effect.data.summary.parsed}}
+        |   {{this.effect.data.summary.parsed}}
         | {{else}}
-        |   {{ effect.effect.name }}
+        |   {{ this.effect.name }}
         | {{/if}}
-    | {{#if effect.roll}}
-    .roll-result
-        span {{ effect.roll.total }}
+    span {{{ this.effect.data.description.value }}}
+    | {{#if this.activationRoll}}
+    h3 {{ localize "MNM3E.Activation" }}
+    | {{{ this.activationRoll.template }}}
+    span {{ localize "MNM3E.VersusAbbrev" }} {{ this.effect.data.activation.check.targetScore.label }}
     | {{/if}}
+    | {{#if this.attackRoll}}
+    h3 {{ localize "MNM3E.Attack" }}
+    | {{{ this.attackRoll.template }}}
+    span {{ localize "MNM3E.VersusAbbrev" }} {{ this.effect.data.action.roll.attack.targetScore.label }}
+    | {{/if}}
+    | {{#if this.resistInfo}}
+    h3 {{ localize "MNM3E.ResistCheck" }}
+    button {{ localize "MNM3E.DC" }} {{ this.resistInfo.dc }} {{ this.resistInfo.versusLabel }}
+    | {{/if}}
+    // Maybe not footer?
+    footer.effect-footer
+        | {{#each this.tags}}
+        span {{ this }}
+        | {{/each}}
     | {{/each}}
 
 footer.card-footer

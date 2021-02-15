@@ -1,4 +1,8 @@
 .mnm3e.sheet.actor.character {
+    .cost-breakdown {
+        flex: 0 1 auto;
+    }
+    
     .core-container {
         .ability-section {
             flex: 0 0 100px;
@@ -54,13 +58,22 @@
         }
     
         .skill-section {
+            max-width: fit-content;
             flex: 0 0 10px;
             margin-top: 6px;
             border: $sectionBorder;
             border-radius: $sectionBorderRadius;
             font-family: Charcoal, sans-serif;
             background-color: rgba(224, 224, 224, 0.527);
-    
+            .skill-score{
+                text-align: right;
+                padding-left: 20px;
+                padding-right: 10px;
+            }
+            ul {
+                padding-left: 10px;
+                white-space: nowrap;
+            }
         }
 
         .config-button{

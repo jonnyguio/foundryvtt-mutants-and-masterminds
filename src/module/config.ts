@@ -1,4 +1,4 @@
-export interface Config {
+export type Config = {
     abilities: {
         str: string;
         sta: string;
@@ -109,6 +109,11 @@ export interface Config {
         rank: string;
     };
 
+    rangedMultiplier: {
+        positive: string;
+        negative: string;
+    }
+
     rankCostTypes: {
         flat: string;
         perRank: string;
@@ -143,7 +148,7 @@ export interface Config {
         prefix: string;
         postfix: string;
     };
-}
+} & {[key: string]: any};
 
 export const MNM3E: Config = {
     abilities: {
@@ -245,6 +250,10 @@ export const MNM3E: Config = {
         ranged: 'MNM3E.RangeTypeRanged',
         perception: 'MNM3E.RangeTypePerception',
         rank: 'MNM3E.RangeTypeRank',
+    },
+    rangedMultiplier: {
+        positive: 'MNM3E.Positive',
+        negative: 'MNM3E.Negative',
     },
     rankCostTypes: {
         flat: 'MNM3E.RankCostTypeFlat',

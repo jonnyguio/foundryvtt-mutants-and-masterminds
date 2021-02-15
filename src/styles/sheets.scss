@@ -1,0 +1,24 @@
+.mnm3e.sheet {
+
+    .description{
+        .editor{
+            flex-wrap: nowrap;
+            flex: 1 0 auto;
+            margin: 15px;
+        }
+    }
+    
+    .tabs {
+        flex: 0 1 auto;
+    }
+
+    .tab {
+        .item-summary {
+            flex: 0 1 auto;
+        }
+        .summary-controls{
+            flex: 0 1 10%;
+            align-items: flex-start;
+        }
+    }
+}

@@ -32,13 +32,17 @@ declare interface OverrideArray<T> {
     // Prepared Data
     override: boolean;
     numOverrides?: number;
+    overrideRanks?: number[];
 }
 
 declare interface TargetScore {
-    type: OverrideValue<string>
+    type: OverrideValue<string>;
 
     // Only valid when type is custom
-    custom: OverrideValue<string>
+    custom: OverrideValue<string>;
+
+    // Prepared Data
+    label: string;
 }
 
 declare interface Formula {
@@ -51,16 +55,19 @@ declare type RollType = 'none' | 'required';
 declare interface RollDetails {
     formula: OverrideArray<Formula>;
     targetScore: TargetScore;
-    rollType: RollType;
+    rollType: OverrideValue<RollType>;
 }
 
 declare interface EffectDuration {
     type: OverrideValue<string>;
 }
 
+declare type RangeMultiplier = 'positive' | 'negative';
+
 declare interface EffectRange {
     type: OverrideValue<string>;
     area: OverrideValue<string?>;
+    multiplier: OverrideValue<RangeMultiplier?>;
 }
 
 declare interface EffectUses {

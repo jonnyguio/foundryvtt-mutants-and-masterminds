@@ -1,4 +1,6 @@
 include ../../mixins.pug
+
+h3.form-header {{ localize "MNM3E.ItemActionDetails" }}
 +select-value-with-override("MNM3E.ItemActionType", "data.action.type", "config.actionTypes", true)
 
 | {{#if (or data.action.type.value (eq item.type "modifier")) }}

@@ -1,12 +1,17 @@
 doctype html
 include ../../mixins.pug
 
+h3.form-header {{ localize "MNM3E.ItemActivationDetails" }}
 +select-value-with-override("MNM3E.ItemActivationType", "data.activation.type", "config.activationTypes", true)
 
 | {{#if (or data.activation.type.value (eq item.type "modifier")) }}
 +expanding-roll-controller("MNM3E.ActivationCheck", "data.activation.check")
 
 +select-value-with-override("MNM3E.Range", "data.activation.range.type", "config.rangeTypes")
+
+| {{#if (and (eq data.activation.range.type.value "ranged") (eq item.type "modifier"))}}
++select-value-with-override("MNM3E.RankMultiplier", "data.activation.range.multiplier", "config.rangedMultiplier", true)
+| {{/if}}
 
 +select-value-with-override("MNM3E.Area", "data.activation.range.area", "config.areaTypes", true, true)
 

@@ -18,7 +18,7 @@ form(class="{{cssClass}} item-sheet-effect flexcol" autocomplete="off")
                 +item-summary-controller()
                 | {{editor content=data.description.value target="data.description.value" button=true owner=owner editable=editable}}
 
-        .tab.details.flexcol(data-group="primary" data-tab="details")
+        .tab.details(data-group="primary" data-tab="details")
 
             | {{> "systems/mnm3e/templates/items/parts/activations-sheet.html" }}
 

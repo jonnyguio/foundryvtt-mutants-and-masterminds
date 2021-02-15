@@ -11,24 +11,4 @@
        min-width: 10px;
        flex: 0 1 30%;
    }
-
-    .tab {
-        .description{
-            .modifier-editor{
-                .editor{
-                    flex-wrap: nowrap;
-                    flex: 1 0 auto;
-                }
-
-            }
-        }
-
-        .item-summary {
-            flex: 0 1 auto;
-        }
-        .summary-controls{
-            flex: 0 1 10%;
-            align-items: flex-start;
-        }
-    }
 }

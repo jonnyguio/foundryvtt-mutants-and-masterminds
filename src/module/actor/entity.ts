@@ -51,13 +51,13 @@ export default class Actor3e<T extends CommonActorData> extends Actor<T> {
         this._prepareDefenses(actorData);
         this._prepareSkills(actorData);
 
-        actorData.items.forEach(item => {
+        this.items.forEach(item => {
             switch (item.type) {
                 case 'power':
-                    actorData.data.pointCosts.powers.value += (item.data as PowerData).totalCost || 0;
+                    actorData.data.pointCosts.powers.value += (item.data.data as PowerData).totalCost || 0;
                     break;
                 case 'advantage':
-                    const advantageData = item.data as AdvantageData;
+                    const advantageData = item.data.data as AdvantageData;
                     let pointCost = advantageData.cost.value;
                     if (advantageData.cost.type == 'perRank') {
                         pointCost *= advantageData.rank;

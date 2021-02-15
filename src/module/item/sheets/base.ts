@@ -17,6 +17,7 @@ export interface ExtendedItemSheetData<T = any> extends FoundryItemSheetData<T> 
 
 export default class ItemSheet3e<T, I extends Item<T>> extends ItemSheet<T, I> {
     private _parentItem?: Item;
+    private _childDataPath?: string;
     private _childItems: Map<object, Item>;
 
     constructor(...args: any[]) {
@@ -46,13 +47,13 @@ export default class ItemSheet3e<T, I extends Item<T>> extends ItemSheet<T, I> {
         sheetData.itemType = game.i18n.localize(`ITEM.Type${this.item.type.titleCase()}`);
 
         sheetData.targetScoreOptions = [
-            {label: 'MNM3E.Abilities', scores: sheetData.config.abilities},
-            {label: 'MNM3E.Defenses', scores: sheetData.config.defenses},
-            {label: 'MNM3E.Skills', scores: sheetData.config.skills},
+            {label: 'MNM3E.Abilities', scores: 'abilities'},
+            {label: 'MNM3E.Defenses', scores: 'defenses'},
+            {label: 'MNM3E.Skills', scores: 'skills'},
         ].map(opts => ({
             label: game.i18n.localize(opts.label),
-            entries: Object.entries(opts.scores).reduce((agg: any, entry) => {
-                agg[entry[0]] = entry[1];
+            entries: Object.entries(sheetData.config[opts.scores]).reduce((agg: any, entry) => {
+                agg[`${opts.scores}.${entry[0]}`] = entry[1];
                 return agg;
             }, {}),
         }));
@@ -118,6 +119,7 @@ export default class ItemSheet3e<T, I extends Item<T>> extends ItemSheet<T, I> {
 
             const rawSheet = newItem.sheet as any;
             rawSheet._parentItem = this.item;
+            rawSheet._childDataPath = key;
             rawSheet._updateObject = (async (_: JQuery.Event, flattenedObject: object) => {
                 const updatedItem = list.find(data => data._id == sourceItem._id);
                 if (!updatedItem) {
@@ -135,9 +137,14 @@ export default class ItemSheet3e<T, I extends Item<T>> extends ItemSheet<T, I> {
 
     private async updateItem(ev: JQuery.Event, key: string, list: any[]): Promise<void> {
         if (this._parentItem) {
-            await (this._parentItem.sheet as any)._onSubmit(ev, { updateData: { [key]: list }});
+            const parentList = getProperty(this._parentItem.data, this._childDataPath!) as any[];
+            const itemToUpdateIndex = parentList.findIndex((data: any) => data._id == this.item._id);
+            if (itemToUpdateIndex >= 0) {
+                parentList[itemToUpdateIndex] = this.item.data;
+            }
             ((this.item as unknown) as Item3e).prepareMNM3EData();
             this.item.sheet.render(false);
+            await (this._parentItem.sheet as any)._onSubmit(ev, { updateData: { [this._childDataPath!]: parentList }});
         } else {
             this.item.update({ [key]: list }, {});
         }

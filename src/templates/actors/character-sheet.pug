@@ -1,5 +1,5 @@
 form(class="{{cssClass}} flexcol" autocomplete="off")
-    header.sheet-header.flexrow
+    header.sheet-header
         img.profile(src="{{actor.img}}" data-edit="img" title="{{actor.name}}")
         section.header-details.flexcol
             .character-details.flexrow
@@ -15,11 +15,12 @@ form(class="{{cssClass}} flexcol" autocomplete="off")
                     li
                         input(type="text" name="{{ summary.name }}" value="{{ summary.value }}" placeholder="{{ localize summary.localizedKey }}")
                     | {{/each}}
-            .cost-breakdown.flexrow
-                | {{#each data.pointCosts as |cost|}}
-                label {{ cost.label }}:
-                span {{ cost.value }}
-                | {{/each}}
+    section.cost-breakdown.flexrow
+        | {{#each data.pointCosts as |cost|}}
+        .point-cost
+            label {{ cost.label }}:
+            span {{ cost.value }}
+        | {{/each}}
 
     nav.sheet-navigation.tabs(data-group="primary")
         a.item.active(data-tab="core")| {{ localize "MNM3E.Core" }}
@@ -28,8 +29,8 @@ form(class="{{cssClass}} flexcol" autocomplete="off")
 
     section.sheet-body
         .tab.core.flexrow(data-group="primary" data-tab="core")
-            | {{> "systems/mnm3e/templates/actors/parts/character-core.html"}}
+            | {{> "systems/mnm3e/templates/actors/parts/character-core.html" }}
         .tab.powers.flexcol(data-group="primary" data-tab="catalog")
-            | {{> "systems/mnm3e/templates/actors/parts/character-catalog.html"}}
+            | {{> "systems/mnm3e/templates/actors/parts/character-catalog.html" }}
         .tab.effects.flexrow(data-group="primary" data-tab="effects")
             | {{> "systems/mnm3e/templates/actors/parts/actor-effects.html" }}
