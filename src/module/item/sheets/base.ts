@@ -3,14 +3,15 @@ import { onManagedActiveEffect, prepareActiveEffectCategories } from '../../acti
 import Item3e from '../entity';
 import SummaryBuilder from '../../apps/summary-builder';
 
-interface TargetScoreOption {
+interface OptionGroupInfo {
     label: string;
     entries: object;
 }
 
 export interface ExtendedItemSheetData<T = any> extends FoundryItemSheetData<T> {
     config: Config;
-    targetScoreOptions: TargetScoreOption[];
+    targetScoreOptions: OptionGroupInfo[];
+    formulaOptions: OptionGroupInfo[];
     itemType?: string;
     itemSubtype?: string;
 }
@@ -45,18 +46,54 @@ export default class ItemSheet3e<T, I extends Item<T>> extends ItemSheet<T, I> {
         sheetData.config = CONFIG.MNM3E;
         (sheetData.item as any).isOwned = this.item.isOwned;
         sheetData.itemType = game.i18n.localize(`ITEM.Type${this.item.type.titleCase()}`);
+        sheetData.targetScoreOptions = [];
+        sheetData.formulaOptions = [];
 
-        sheetData.targetScoreOptions = [
-            {label: 'MNM3E.Abilities', scores: 'abilities'},
-            {label: 'MNM3E.Defenses', scores: 'defenses'},
-            {label: 'MNM3E.Skills', scores: 'skills'},
-        ].map(opts => ({
-            label: game.i18n.localize(opts.label),
-            entries: Object.entries(sheetData.config[opts.scores]).reduce((agg: any, entry) => {
-                agg[`${opts.scores}.${entry[0]}`] = entry[1];
-                return agg;
-            }, {}),
-        }));
+        let actorData: Actor.Data<CommonActorData & CreatureData> | undefined = undefined;
+        if (this.actor) {
+            actorData = (this.actor.data as unknown) as Actor.Data<CommonActorData & CreatureData>;
+        }
+
+        [
+            {label: 'MNM3E.Abilities', score: 'abilities'},
+            {label: 'MNM3E.Defenses', score: 'defenses'},
+            {label: 'MNM3E.Skills', score: 'skills'},
+        ].forEach(opts => {
+            const scoreGroupLabel = game.i18n.localize(opts.label);
+            sheetData.targetScoreOptions.push({
+                label: scoreGroupLabel,
+                entries: Object.entries(sheetData.config[opts.score]).reduce((agg: any, entry) => {
+                    agg[`${opts.score}.${entry[0]}`] = entry[1];
+                    return agg;
+                }, {}),
+            });
+
+            sheetData.formulaOptions.push({
+                label: scoreGroupLabel,
+                entries: Object.entries(sheetData.config[opts.score]).reduce((agg: any, entry) => {
+                    const [scoreName, scoreLabel] = entry;
+                    let key = `@${opts.score}.${scoreName}`;
+                    const subCategories: {[k: string]: string} = {};
+                    if (opts.score == 'skills') {
+                        if (['cco', 'exp', 'rco'].includes(scoreName)) {
+                            key += `.base`;
+                            if (actorData) {
+                                Object.entries(actorData.data.skills[scoreName].data).forEach(customSkill => {
+                                    subCategories[`@skills.${scoreName}.data.${customSkill[0]}.total`] = `➥ ${customSkill[1].displayName}`;
+                                });
+                            }
+                        } else {
+                            key += '.data.total';
+                        }
+                    } else {
+                        key += '.total';
+                    }
+                    agg[key] = scoreLabel;
+                    Object.entries(subCategories).forEach(([dataPath, customLabel]) => agg[dataPath] = customLabel);
+                    return agg;
+                }, {}),
+            })
+        });
 
         sheetData.effects = prepareActiveEffectCategories((this.entity as any).effects);
         return sheetData;
@@ -85,10 +122,11 @@ export default class ItemSheet3e<T, I extends Item<T>> extends ItemSheet<T, I> {
         const subItemIndex = target.dataset.index;
         switch (target.dataset.action) {
             case 'create':
-                const newItem = await Item.create({ 
+                const newItem = await Item.create({
                     name: `New ${target.dataset.itemType}`,
                     type: target.dataset.itemType
                 }, { temporary: true });
+                newItem.data._id = `${randomID(8)}-temp`;
                 list.push(newItem.data);
                 await this.updateItem(ev, key, list);
                 break;
@@ -174,7 +212,7 @@ export default class ItemSheet3e<T, I extends Item<T>> extends ItemSheet<T, I> {
         const targetArray = getProperty(this.item.data, dataPath);
         switch (button.dataset.action) {
             case 'create':
-                const newFormula: Formula = { op: '', value: ''};
+                const newFormula: Formula = { op: '', value: '', dataPath: ''};
                 targetArray.push(newFormula);
                 break;
             case 'delete':

@@ -76,12 +76,27 @@ mixin expanding-roll-controller(headerLabel, rollDetailsPath)
                         option(value="-") -
                         | {{/select}}
                     | {{/if}}
+                .form-fields 
+                    | {{#if #{disabledCondition}}}
+                    span {{lookup this "dataPath"}}
+                    | {{else}}
+                    select(name=`${rollDetailsPath}.formula.value.{{idx}}.dataPath`)
+                        | {{#select (lookup this "dataPath")}}
+                        | {{#each ../formulaOptions as |fo|}}
+                        optgroup(label="{{fo.label}}")
+                            | {{selectOptions fo.entries}}
+                        | {{/each}}
+                        option(value="formula") {{ localize "MNM3E.Formula" }}
+                        | {{/select}}
+                    | {{/if}}
+                | {{#if (eq (lookup this "dataPath") "formula")}}
                 input(
                     type="text"
                     name=`${rollDetailsPath}.formula.value.{{idx}}.value`
                     value="{{formula.value}}"
                     data-dtype="String"
                 )&attributes({[`{{#if ${disabledCondition}}}readonly{{/if}}`]: ''})
+                | {{/if}}
                 | {{#if (not #{disabledCondition})}}
                 a.check-control(
                     title="{{ localize 'MNM3E.DeleteFormula' }}"

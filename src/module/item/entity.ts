@@ -1,16 +1,18 @@
 import { evaluateExpression } from '../expressions';
 import { getMeasurement } from '../measurements';
 
+interface ResistInfo {
+    dc: number;
+    versusLabel: string;
+};
+
 interface PowerEffectCardInfo {
     activationRoll?: Roll
     attackRoll?: Roll;
-    resistInfo?: {
-        dc: number;
-        versusLabel: string;
-    };
+    resistInfo?: ResistInfo;
     effect: Item.Data<PowerEffectData>;
     tags: string[];
-}
+};
 
 export default class Item3e<T = any> extends Item<T> {
     public get hasAreaTarget() {
@@ -70,10 +72,17 @@ export default class Item3e<T = any> extends Item<T> {
                 const prepareFormula = (detail: RollDetails): string => {
                     const parts = duplicate(detail.formula.value);
                     for (let i = 0; i < detail.formula.numOverrides!; i++) {
-                        parts[i].value = parts[i].value.replace('@rank', detail.formula.overrideRanks![i].toString());
+                        let dataSource = parts[i].dataPath;
+                        if (dataSource == 'formula') {
+                            dataSource = parts[i].value;
+                        }
+                        parts[i].value = (Roll as any).replaceFormulaData(dataSource, {
+                            ...rollData,
+                            rank: detail.formula.overrideRanks![i],
+                        });
                     }
 
-                    return parts.map(pair => `${pair.op} ${pair.value}`).join(' ');
+                    return parts.map(pair => `${pair.op} ${pair.value || pair.dataPath}`).join(' ');
                 };
 
                 const getRoll = async (detail: RollDetails): Promise<Roll> => {

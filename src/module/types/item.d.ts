@@ -48,6 +48,7 @@ declare interface TargetScore {
 declare interface Formula {
     op: string;
     value: string;
+    dataPath: string;
 }
 
 declare type RollType = 'none' | 'required';
