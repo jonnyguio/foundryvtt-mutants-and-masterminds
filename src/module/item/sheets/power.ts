@@ -41,14 +41,40 @@ export default class ItemSheet3ePower extends ItemSheet3e<PowerData, Item3e<Powe
      * @override
      */
     public activateListeners(html: JQuery) {
-        super.activateListeners(html);
-
-        html.find('.item-effect-controls .item-control').on('click', ev => this.onItemListActionHandler(ev, 'data.effects'));
+        const itemData = this.item.data;
+        [
+            {selector: '.item-effect-controls .item-control', dataPath: 'data.effects'},
+            {selector: '.item-power-controls .item-control', dataPath: 'data.powerArray'},
+        ].forEach(opts => html.find(opts.selector).on('click', ev => this.onItemListActionHandler(ev, opts.dataPath)));
         new DragDrop({
             dragSelector: '.item',
             dropSelector: '.items-list.effect-list',
             permissions: { dragstart: () => true, drop: () => true },
             callbacks: { drop: (ev: DragEvent) => this.handleDroppedData(ev, 'effect', 'effects') },
         }).bind($('form.editable.item-sheet-power')[0]);
+
+        new DragDrop({
+            dragSelector: '.item',
+            dropSelector: '.items-list.power-list',
+            permissions: { dragstart: () => true, drop: () => true },
+            callbacks: { drop: (ev: DragEvent) => this.handleDroppedData(ev, 'power', 'powerArray') }
+        }).bind($('form.editable.item-sheet-power')[0]);
+
+        itemData.data.powerArray.forEach((alternativePower: Item.Data<PowerData>, index: number) => {
+            if (!alternativePower.data.totalCost || !itemData.data.totalCost) {
+                return;
+            }
+            if (alternativePower.data.totalCost > itemData.data.totalCost) {
+                const listSelector = '.items-list power-list .item'
+                const listElements = html.find(listSelector);
+                if (!listElements) {
+                    throw new Error(`Couldn't find elements with selector '${listSelector}'`);
+                }
+
+                listElements[index].classList.add('invalid-power');
+            }
+        });
+
+        super.activateListeners(html);
     }
 }

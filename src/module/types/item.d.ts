@@ -141,12 +141,11 @@ declare interface ModifierData extends ItemSummary, ItemDescription, ItemActivat
 
 declare interface PowerData extends ItemDescription {
     effects: Item.Data<PowerEffectData>[];
-    alternatePowerIDs: string[];
+    powerArray: Item.Data<PowerData>[];
 
     // Prepared data
     totalCost?: number;
     summary?: string;
-    alternatePowers?: Item.Data<PowerData>[];
 }
 
 declare interface FoundryItemSheetData<T = any> extends Omit<ItemSheet.Data<T>, 'data'> {

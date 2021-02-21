@@ -87,7 +87,7 @@ export default class Item3e<T = any> extends Item<T> {
                         });
                     }
 
-                    return parts.map(pair => `${pair.op} ${pair.value || pair.dataPath}`).join(' ');
+                    return parts.map(pair => `${pair.op} ${pair.value || '@' + pair.dataPath}`).join(' ');
                 };
 
                 const getRoll = async (detail: RollDetails): Promise<Roll> => {
@@ -298,10 +298,10 @@ export default class Item3e<T = any> extends Item<T> {
             let perRankCost = 0;
             let flatCost = 0;
 
-            const evaluateCostType = (costType: RankCostType, cost: number, discountPer?: number) => {
+            const evaluateCostType = (costType: RankCostType, rank: number, cost: number, discountPer: number) => {
                 switch (costType) {
                     case 'flat':
-                        flatCost += cost;
+                        flatCost += cost * rank;
                         break;
                     case 'perRank':
                         perRankCost += cost;
@@ -312,9 +312,10 @@ export default class Item3e<T = any> extends Item<T> {
                 }
             };
 
-            evaluateCostType(effect.data.cost.type, effect.data.cost.value, effect.data.cost.discountPer);
+            evaluateCostType(effect.data.cost.type, effect.data.rank, effect.data.cost.value, effect.data.cost.discountPer);
             effect.data.modifiers.forEach(modifier => evaluateCostType(
                 modifier.data.cost.type,
+                modifier.data.rank,
                 modifier.data.cost.value,
                 modifier.data.cost.discountPer
             ));
@@ -327,8 +328,7 @@ export default class Item3e<T = any> extends Item<T> {
             totalPowerCost += quotient * dc.modifier;
         });
 
-        data.data.totalCost = totalPowerCost;
-        data.data.alternatePowers = data.data.alternatePowerIDs.map(id => game.items.get(id).data) as Item.Data<PowerData>[];
+        data.data.totalCost = totalPowerCost + data.data.powerArray.length;
     }
 
     private fixArrays(data: Item.Data): void {

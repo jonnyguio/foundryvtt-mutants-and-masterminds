@@ -128,7 +128,7 @@ export default class ItemSheet3e<T, I extends Item<T>> extends ItemSheet<T, I> {
         }
     }
 
-    protected async handleDroppedData(event: DragEvent, listedDataType: string, pluralDataType: string): Promise<void> {
+    protected async handleDroppedData(event: DragEvent, listedDataType: string, dataPath: string): Promise<void> {
         event.preventDefault();
         if (!event.dataTransfer) {
             return;
@@ -145,9 +145,9 @@ export default class ItemSheet3e<T, I extends Item<T>> extends ItemSheet<T, I> {
 
         const copiedItem = duplicate(droppedItem.data) as Item.Data;
         (copiedItem as any)._id = `${randomID(8)}-temp`;
-        const dataList = getProperty(this.item.data.data as any, pluralDataType) as any[];
+        const dataList = getProperty(this.item.data.data as any, dataPath) as any[];
         dataList.push(copiedItem);
-        (this.item.sheet as any)._onSubmit(event, { updateData: { [`data.${pluralDataType}`]: dataList }});
+        (this.item.sheet as any)._onSubmit(event, { updateData: { [`data.${dataPath}`]: dataList }});
     }
 
     private async handleListItemEdit(ev: JQuery.Event, key: string, list: any[], index: number): Promise<void> {

@@ -365,7 +365,7 @@
         "power": {
             "templates": ["itemDescription"],
             "effects": [],
-            "alternatePowerIDs": []
+            "powerArray": []
         }
     }
 }
