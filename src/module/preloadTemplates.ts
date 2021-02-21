@@ -12,7 +12,8 @@ export const preloadTemplates = async function() {
         "systems/mnm3e/templates/apps/score-config.html",
 
         // Chat
-        "systems/mnm3e/templates/chat/item-card.html",
+        "systems/mnm3e/templates/chat/effects-card.html",
+        "systems/mnm3e/templates/chat/check-card.html",
 
         // Item
         "systems/mnm3e/templates/items/parts/header-sheet.html",

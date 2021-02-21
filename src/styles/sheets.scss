@@ -1,5 +1,9 @@
-.mnm3e.sheet {
+.window-app .window-content{
+    background: $sheetBackground;
+    background-size: cover;
+}
 
+.mnm3e.sheet {
     .description{
         .editor{
             flex-wrap: nowrap;
@@ -7,9 +11,40 @@
             margin: 15px;
         }
     }
-    
+
+    .item-subtitle{
+        flex: 0 1 auto;
+        text-align: right;
+    }
+
+
+    .tox-toolbar-overlord,
+    .tox-toolbar__primary {
+      border: $sectionBorder;
+      border-radius: $sectionBorderRadius;
+      background-color: rgba(224, 224, 224, 0.527);
+    }
+    .tox-edit-area{
+        border: $sectionBorder;
+        border-radius: $sectionBorderRadius;
+        font-family: Charcoal, sans-serif;
+        background-color: rgba(224, 224, 224, 0.527);
+    }
+
     .tabs {
         flex: 0 1 auto;
+        margin: 2%;
+        align-items: center;
+        .item{
+            font-size: 100%;
+            font-family: Charcoal, sans-serif;
+            color:rgb(49, 49, 49);
+        }
+    }
+
+    .item-properties{
+        min-width: 10px;
+        flex: 0 1 30%;
     }
 
     .tab {

@@ -2,7 +2,7 @@
 |
 | class="mnm3e chat-card item-card"
 | data-actor-id="{{actor._id}}"
-| data-item-id="item._id" {{#if tokenId}}data-token-id="{{tokenId}}"{{/if}}
+| data-item-id="{{item._id}}" {{#if tokenId}}data-scene-token-id="{{sceneTokenId}}"{{/if}}
 | >
 
 header.card-header.flexrow
@@ -30,7 +30,7 @@ header.card-header.flexrow
     | {{/if}}
     | {{#if this.resistInfo}}
     h3 {{ localize "MNM3E.ResistCheck" }}
-    button {{ localize "MNM3E.DC" }} {{ this.resistInfo.dc }} {{ this.resistInfo.versusLabel }}
+    button(data-action="resist" data-effect-index="{{@index}}") {{ localize "MNM3E.DC" }} {{ this.resistInfo.dc }} {{ this.resistInfo.rollDetail.targetScore.label }}
     | {{/if}}
     // Maybe not footer?
     footer.effect-footer

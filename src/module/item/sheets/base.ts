@@ -10,7 +10,6 @@ interface OptionGroupInfo {
 
 export interface ExtendedItemSheetData<T = any> extends FoundryItemSheetData<T> {
     config: Config;
-    targetScoreOptions: OptionGroupInfo[];
     formulaOptions: OptionGroupInfo[];
     itemType?: string;
     itemSubtype?: string;
@@ -46,54 +45,40 @@ export default class ItemSheet3e<T, I extends Item<T>> extends ItemSheet<T, I> {
         sheetData.config = CONFIG.MNM3E;
         (sheetData.item as any).isOwned = this.item.isOwned;
         sheetData.itemType = game.i18n.localize(`ITEM.Type${this.item.type.titleCase()}`);
-        sheetData.targetScoreOptions = [];
-        sheetData.formulaOptions = [];
-
         let actorData: Actor.Data<CommonActorData & CreatureData> | undefined = undefined;
         if (this.actor) {
             actorData = (this.actor.data as unknown) as Actor.Data<CommonActorData & CreatureData>;
         }
 
-        [
+        sheetData.formulaOptions = [
             {label: 'MNM3E.Abilities', score: 'abilities'},
             {label: 'MNM3E.Defenses', score: 'defenses'},
             {label: 'MNM3E.Skills', score: 'skills'},
-        ].forEach(opts => {
-            const scoreGroupLabel = game.i18n.localize(opts.label);
-            sheetData.targetScoreOptions.push({
-                label: scoreGroupLabel,
-                entries: Object.entries(sheetData.config[opts.score]).reduce((agg: any, entry) => {
-                    agg[`${opts.score}.${entry[0]}`] = entry[1];
-                    return agg;
-                }, {}),
-            });
-
-            sheetData.formulaOptions.push({
-                label: scoreGroupLabel,
-                entries: Object.entries(sheetData.config[opts.score]).reduce((agg: any, entry) => {
-                    const [scoreName, scoreLabel] = entry;
-                    let key = `@${opts.score}.${scoreName}`;
-                    const subCategories: {[k: string]: string} = {};
-                    if (opts.score == 'skills') {
-                        if (['cco', 'exp', 'rco'].includes(scoreName)) {
-                            key += `.base`;
-                            if (actorData) {
-                                Object.entries(actorData.data.skills[scoreName].data).forEach(customSkill => {
-                                    subCategories[`@skills.${scoreName}.data.${customSkill[0]}.total`] = `➥ ${customSkill[1].displayName}`;
-                                });
-                            }
-                        } else {
-                            key += '.data.total';
+        ].map(opts => ({
+            label: game.i18n.localize(opts.label),
+            entries: Object.entries(sheetData.config[opts.score]).reduce((agg: any, entry) => {
+                const [scoreName, scoreLabel] = entry;
+                let key = `${opts.score}.${scoreName}`;
+                const subCategories: {[k: string]: string} = {};
+                if (opts.score == 'skills') {
+                    if (['cco', 'exp', 'rco'].includes(scoreName)) {
+                        key += `.base`;
+                        if (actorData) {
+                            Object.entries(actorData.data.skills[scoreName].data).forEach(customSkill => {
+                                subCategories[`@skills.${scoreName}.data.${customSkill[0]}.total`] = `➥ ${customSkill[1].displayName}`;
+                            });
                         }
                     } else {
-                        key += '.total';
+                        key += '.data.total';
                     }
-                    agg[key] = scoreLabel;
-                    Object.entries(subCategories).forEach(([dataPath, customLabel]) => agg[dataPath] = customLabel);
-                    return agg;
-                }, {}),
-            })
-        });
+                } else {
+                    key += '.total';
+                }
+                agg[key] = scoreLabel;
+                Object.entries(subCategories).forEach(([dataPath, customLabel]) => agg[dataPath] = customLabel);
+                return agg;
+            }, {}),
+        }));
 
         sheetData.effects = prepareActiveEffectCategories((this.entity as any).effects);
         return sheetData;

@@ -12,10 +12,10 @@ form(class="{{cssClass}} item-sheet-modifier flexcol" autocomplete="off")
 
     section.sheet-body
         .tab.description.flexrow.active(data-group="primary" data-tab="description")
-            .modifier-properties.flexcol
+            .item-properties.flexcol
                 | {{> "systems/mnm3e/templates/items/parts/cost-sheet.html" }}
 
-            .modifier-editor.flexcol
+            .item-editor.flexcol
                 +item-summary-controller()
                 | {{editor content=data.description.value target="data.description.value" button=true owner=owner editable=editable}}
 

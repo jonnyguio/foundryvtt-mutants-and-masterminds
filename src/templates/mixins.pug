@@ -107,7 +107,6 @@ mixin expanding-roll-controller(headerLabel, rollDetailsPath)
                     i.fas.fa-minus
                 | {{/if}}
             | {{/each}}
-            | {{#if (or (eq item.type "modifier") (gt #{rollDetailsPath}.formula.value.length 0))}}
             .form-group.score-choice
                 label {{ localize "MNM3E.Versus"}}
                 .form-fields
@@ -118,9 +117,9 @@ mixin expanding-roll-controller(headerLabel, rollDetailsPath)
                         | {{#if (eq item.type "modifier")}}
                         option(value="")
                         | {{/if}}
-                        | {{#each targetScoreOptions as |tso|}}
-                        optgroup(label="{{tso.label}}")
-                            | {{selectOptions tso.entries}}
+                        | {{#each formulaOptions as |fo|}}
+                        optgroup(label="{{fo.label}}")
+                            | {{selectOptions fo.entries}}
                         | {{/each}}
                         option(value="custom") {{ localize "MNM3E.Custom" }}
                         | {{/select}}
@@ -131,5 +130,4 @@ mixin expanding-roll-controller(headerLabel, rollDetailsPath)
                     value=`{{${rollDetailsPath}.targetScore.custom.value}}`
                     data-dtype="String")&attributes({[getOverrideAttribute(`${rollDetailsPath}.targetScore.custom`)]: ''})
                 | {{/if}}
-            | {{/if}}
             | {{/if}}

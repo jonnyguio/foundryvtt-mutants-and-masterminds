@@ -24,6 +24,7 @@ import { MNM3E } from './module/config';
 import SummaryBuilder from './module/apps/summary-builder';
 import ScoreConfig from './module/apps/score-config';
 import PowerEffectTemplate from './module/pixi/power-effect-template';
+import './module/hooks';
 
 /* ------------------------------------ */
 /* Initialize system					*/

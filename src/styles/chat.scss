@@ -1,0 +1,40 @@
+@use 'sass:list';
+
+.mnm3e.chat-card {
+    .card-header img {
+        flex: 0 0 36px;
+    }
+
+    $fail-degrees: '.four-fail', '.three-fail', '.two-fail', '.one-fail';
+    $success-degrees: '.one-success', '.two-success', '.three-success', '.four-success';
+
+    #{$fail-degrees}, #{$success-degrees} {
+            font-size: 20px;
+            font-weight: bold;
+            position: relative;
+            margin: 0;
+            line-height: 24px;
+            text-align: center;
+            border: 1px solid #999;
+            border-radius: 3px;
+            box-shadow: 0 0 2px #fff inset;
+            word-break: break-all;
+        }
+
+    $degree-threshold: 50;
+    $visibility: 0.8;
+
+    @for $i from 1 through list.length($fail-degrees) {
+        $threshold: $degree-threshold * $i;
+        #{list.nth($fail-degrees, $i)} {
+            background: rgba(255, $threshold, $threshold, $visibility)
+        }
+    }
+
+    @for $i from 1 through list.length($success-degrees) {
+        $threshold: 255 - $degree-threshold * $i;
+        #{list.nth($success-degrees, $i)} {
+            background: rgba($threshold, 255, $threshold, $visibility)
+        }
+    }
+}

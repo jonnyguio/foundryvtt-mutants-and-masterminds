@@ -1,9 +1,12 @@
+
+import Actor3e from '../actor/entity';
 import { evaluateExpression } from '../expressions';
 import { getMeasurement } from '../measurements';
+import { displayCard } from '../chat';
 
 interface ResistInfo {
     dc: number;
-    versusLabel: string;
+    rollDetail: RollDetails;
 };
 
 interface PowerEffectCardInfo {
@@ -75,6 +78,8 @@ export default class Item3e<T = any> extends Item<T> {
                         let dataSource = parts[i].dataPath;
                         if (dataSource == 'formula') {
                             dataSource = parts[i].value;
+                        } else {
+                            dataSource = `@${dataSource}`
                         }
                         parts[i].value = (Roll as any).replaceFormulaData(dataSource, {
                             ...rollData,
@@ -131,7 +136,7 @@ export default class Item3e<T = any> extends Item<T> {
                     formula = (Roll as any).replaceFormulaData(formula, {...rollData, rank: effect.data.rank});
                     result.resistInfo = {
                         dc: (Math as any).safeEval(formula),
-                        versusLabel: effect.data.action.roll.resist.targetScore.label,
+                        rollDetail: effect.data.action.roll.resist,
                     };
                 }
 
@@ -139,32 +144,23 @@ export default class Item3e<T = any> extends Item<T> {
             }))).filter(d => d) as PowerEffectCardInfo[];
         }
 
-        return this.displayCard({effects, rollMode});
-    }
-
-    public async displayCard({ effects, rollMode }: { effects?: PowerEffectCardInfo[], rollMode?: string } = {}): Promise<ChatMessage | object | void> {
         const token = this.actor?.token;
         const templateData = {
             actor: this.actor,
             config: CONFIG.MNM3E,
-            tokenId: token ? `${token.scene._id}.${token.id}` : null,
+            sceneTokenId: token ? `${token.scene._id}.${token.id}` : null,
             item: this.data,
             data: this.data.data,
             effects: effects,
         };
 
-        const html = await renderTemplate('systems/mnm3e/templates/chat/item-card.html', templateData);
-        const chatData = {
-            user: game.user._id,
-            type: CONST.CHAT_MESSAGE_TYPES.OTHER,
-            content: html,
-            flavor: (this.data.data as any).chatFlavor,
-            speaker: ChatMessage.getSpeaker({actor: this.actor!, token}),
-        };
-
-        (ChatMessage as any).applyRollMode(chatData, rollMode || game.settings.get('core', 'rollMode'));
-
-        return ChatMessage.create(chatData);
+        return displayCard('effects', ChatMessage.getSpeaker({
+            actor: this.actor!,
+            token,
+        }), templateData, { 
+            rollMode, 
+            flags: { 'mnm3e.effectInfo': effects },
+        });
     }
 
     private prepareModifierData(data: Item.Data<ModifierData>): void {
@@ -287,7 +283,9 @@ export default class Item3e<T = any> extends Item<T> {
             if (rollDetail.targetScore.type.value == 'custom') {
                 rollDetail.targetScore.label = rollDetail.targetScore.custom.value;
             } else {
-                rollDetail.targetScore.label = getProperty(CONFIG.MNM3E, rollDetail.targetScore.type.value);
+                const scoreParts = rollDetail.targetScore.type.value.split('.');
+                const baseScore = `${scoreParts[0]}.${scoreParts[1]}`;
+                rollDetail.targetScore.label = getProperty(CONFIG.MNM3E, baseScore);
             }
         });
     }
@@ -347,5 +345,69 @@ export default class Item3e<T = any> extends Item<T> {
                 setProperty(data, dataPath, Object.values(value).map(v => v));
             }
         });
+    }
+
+    public static activateChatListeners(html: JQuery<HTMLElement>): void {
+        html.on('click', '.card-content button', this.onChatCardAction.bind(this));
+    }
+
+    private static async onChatCardAction(ev: JQuery.ClickEvent): Promise<void> {
+        ev.preventDefault();
+        const button = ev.currentTarget;
+        button.disabled = true;
+        const card = button.closest('.chat-card');
+        const messageId = card.closest('.message').dataset.messageId;
+        const message = game.messages.get(messageId);
+        
+        const actor = this.getChatCardActor(card);
+        if (!actor) {
+            return;
+        }
+
+        const effectInfo: PowerEffectCardInfo = message.getFlag('mnm3e', 'effectInfo')[button.dataset.effectIndex];
+        switch (button.dataset.action) {
+            case 'resist':
+                if (!effectInfo.resistInfo) {
+                    return;
+                }
+                this.getCurrentTargets().forEach(t => (t.actor as Actor3e).rollResist(effectInfo.resistInfo!.dc, effectInfo.resistInfo!.rollDetail.targetScore));
+                break;
+            default:
+                throw new Error(`unknown action: ${button.dataset.action}`);
+        }
+
+        button.disabled = false;
+    }
+
+    private static getChatCardActor(card: HTMLElement): Actor3e | null {
+        const sceneTokenKey = card.dataset.sceneTokenId;
+        if (sceneTokenKey) {
+            const [sceneId, tokenId] = sceneTokenKey.split('.');
+            const scene = game.scenes.get(sceneId);
+            if (!scene) {
+                return null;
+            }
+
+            const tokenData = (scene as any).getEmbeddedEntity("Token", tokenId);
+            if (!tokenData) {
+                return null;
+            }
+
+            return new Token(tokenData).actor as Actor3e;
+        }
+
+        return game.actors.get(card.dataset.actorId!) as Actor3e || null;
+    }
+
+    private static getCurrentTargets(): Token[] {
+        let targets = canvas.tokens.controlled.filter((t: Token) => !!t.actor);
+        if (targets.length == 0 && game.user.character) {
+            targets = game.user.character.getActiveTokens();
+        }
+        if (targets.length == 0){
+            ui.notifications.warn(game.i18n.localize('MNM3E.ActionWarningNoToken'));
+        }
+
+        return targets;
     }
 }

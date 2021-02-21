@@ -1,4 +1,24 @@
-export default class Actor3e<T extends CommonActorData> extends Actor<T> {
+import { displayCard } from '../chat';
+import { calculateDegrees } from '../dice';
+
+export default class Actor3e<T extends CommonActorData = CommonActorData> extends Actor<T> {
+    /**
+     * @override
+     */
+    static async create(data: Actor.Data, options: Actor.Options): Promise<Entity> {
+        data.token = data.token || {};
+        if (data.type == 'character') {
+            mergeObject(data.token, {
+                vision: true,
+                dimSight: 30,
+                brightSight: 0,
+                actorLink: true,
+                disposition: 1,
+            }, { overwrite: false });
+        }
+        return super.create(data, options);
+    }
+    
     /**
      * @override
      */
@@ -74,6 +94,32 @@ export default class Actor3e<T extends CommonActorData> extends Actor<T> {
             const characterData = (actorData as unknown) as CharacterData;
             characterData.maxPowerPoints = 15 * characterData.powerLevel + characterData.powerPoints;
         }
+    }
+
+    public async rollResist(dc: number, targetScore: TargetScore): Promise<ChatMessage | object | void> {
+        let formula: string = '1d20';
+        if (targetScore.type.value != 'custom') {
+            formula += `+@${targetScore.type.value}`;
+        }
+
+        const roll = new Roll(formula, this.data.data).roll();
+        const degrees = calculateDegrees(dc, roll.total);
+
+        const templateData = {
+            actor: this.data,
+            config: CONFIG.MNM3E,
+            data: this.data.data,
+            dc,
+            degrees: {
+                value: Math.abs(degrees.degrees),
+                cssClass: degrees.cssClass,
+                label: game.i18n.localize(degrees.degrees >= 0 ? 'MNM3E.DegreesOfSuccess' : 'MNM3E.DegreesOfFailure'),
+            },
+            cardLabel: `${game.i18n.localize('MNM3E.DC')}${dc} ${targetScore.label} ${game.i18n.localize('MNM3E.Check')}`,
+            rollTemplate: await roll.render(),
+        };
+
+        return displayCard('check', ChatMessage.getSpeaker({ actor: this, token: this.token }), templateData);
     }
 
     private _prepareAbilities(actorData: Actor.Data<T>): void {

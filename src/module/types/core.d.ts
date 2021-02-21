@@ -70,3 +70,12 @@ declare class DragDrop {
 declare interface DataOptions {
     renderData?: any;
 }
+
+declare type CardType = 'check' | 'effects';
+
+declare interface Speaker {
+    scene?: string;
+    actor?: string;
+    token?: string;
+    alias: string;
+};
