@@ -34,30 +34,9 @@ export default class ItemSheet3eEffect extends ItemSheet3e<PowerEffectData, Item
             dragSelector: '.item',
             dropSelector: '.items-list.modifier-list',
             permissions: { dragstart: () => true, drop: () => true },
-            callbacks: { drop: this.handleDroppedModifier.bind(this) },
+            callbacks: { drop: (ev: DragEvent) => this.handleDroppedData(ev, 'modifier', 'modifiers') },
         }).bind($('form.editable.item-sheet-effect')[0]);
 
         super.activateListeners(html);
-    }
-
-    private async handleDroppedModifier(event: DragEvent): Promise<void> {
-        event.preventDefault();
-        if (!event.dataTransfer) {
-            return;
-        }
-        const dropData = JSON.parse(event.dataTransfer?.getData('text/plain'));
-        if (dropData.type != 'Item') {
-            return;
-        }
-
-        const droppedItem = game.items.get(dropData.id);
-        if (droppedItem.data.type != 'modifier') {
-            return;
-        }
-
-        const copiedItem = duplicate(droppedItem.data) as Item.Data<ModifierData>;
-        (copiedItem as any)._id = `${randomID(8)}-temp`;
-        this.item.data.data.modifiers.push(copiedItem);
-        (this.item.sheet as any)._onSubmit(event, { updateData: { data: { modifiers: this.item.data.data.modifiers } }});
     }
 }

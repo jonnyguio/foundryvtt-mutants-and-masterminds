@@ -63,12 +63,33 @@ mixin expanding-roll-controller(headerLabel, rollDetailsPath)
                     data-data-path=`${rollDetailsPath}.formula.value`
                 )
                     i.fas.fa-plus
+            .hidden-data(style="display: none;")
+                input(
+                    type="text"
+                    name=`${rollDetailsPath}.formula.override`
+                    value=`{{${rollDetailsPath}.formula.override}}`
+                    data-dtype="Boolean"
+                    readonly
+                )
+                input(
+                    type="text"
+                    name=`${rollDetailsPath}.formula.numOverrides`
+                    value=`{{${rollDetailsPath}.formula.numOverrides}}`
+                    data-dtype="Number"
+                    readonly
+                )
             | {{#each #{rollDetailsPath}.formula.value as |formula idx|}}
             .form-group
                 .form-fields
                     - const disabledCondition = `(lt idx ../${rollDetailsPath}.formula.numOverrides)`
                     | {{#if #{disabledCondition}}}
-                    span {{ lookup this "op" }}
+                    input(
+                        type="text"
+                        name=`${rollDetailsPath}.formula.value.{{idx}}.op`
+                        value="{{lookup this 'op'}}"
+                        data-dtype="String"
+                        readonly
+                    )
                     | {{else}}
                     select(name=`${rollDetailsPath}.formula.value.{{idx}}.op`)
                         | {{#select (lookup this "op") }}
@@ -78,7 +99,13 @@ mixin expanding-roll-controller(headerLabel, rollDetailsPath)
                     | {{/if}}
                 .form-fields 
                     | {{#if #{disabledCondition}}}
-                    span {{lookup this "dataPath"}}
+                    input(
+                        type="text"
+                        name=`${rollDetailsPath}.formula.value.{{idx}}.dataPath`
+                        value="{{lookup this 'dataPath'}}"
+                        data-dtype="String"
+                        readonly
+                    )
                     | {{else}}
                     select(name=`${rollDetailsPath}.formula.value.{{idx}}.dataPath`)
                         | {{#select (lookup this "dataPath")}}

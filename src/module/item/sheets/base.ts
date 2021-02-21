@@ -128,6 +128,28 @@ export default class ItemSheet3e<T, I extends Item<T>> extends ItemSheet<T, I> {
         }
     }
 
+    protected async handleDroppedData(event: DragEvent, listedDataType: string, pluralDataType: string): Promise<void> {
+        event.preventDefault();
+        if (!event.dataTransfer) {
+            return;
+        }
+        const dropData = JSON.parse(event.dataTransfer?.getData('text/plain'));
+        if (dropData.type != 'Item') {
+            return;
+        }
+
+        const droppedItem = game.items.get(dropData.id);
+        if (droppedItem.data.type != listedDataType) {
+            return;
+        }
+
+        const copiedItem = duplicate(droppedItem.data) as Item.Data;
+        (copiedItem as any)._id = `${randomID(8)}-temp`;
+        const dataList = getProperty(this.item.data.data as any, pluralDataType) as any[];
+        dataList.push(copiedItem);
+        (this.item.sheet as any)._onSubmit(event, { updateData: { [`data.${pluralDataType}`]: dataList }});
+    }
+
     private async handleListItemEdit(ev: JQuery.Event, key: string, list: any[], index: number): Promise<void> {
         const sourceItem = list[index];
         if (!sourceItem) {

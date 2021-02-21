@@ -48,31 +48,7 @@ export default class ItemSheet3ePower extends ItemSheet3e<PowerData, Item3e<Powe
             dragSelector: '.item',
             dropSelector: '.items-list.effect-list',
             permissions: { dragstart: () => true, drop: () => true },
-            callbacks: { drop: this.handleDroppedEffect.bind(this) },
+            callbacks: { drop: (ev: DragEvent) => this.handleDroppedData(ev, 'effect', 'effects') },
         }).bind($('form.editable.item-sheet-power')[0]);
-    }
-
-    /**
-     * @override
-     */
-    protected async handleDroppedEffect(event: DragEvent): Promise<void> {
-        event.preventDefault();
-        if (!event.dataTransfer) {
-            return;
-        }
-        const dropData = JSON.parse(event.dataTransfer?.getData('text/plain'));
-        if (dropData.type != 'Item') {
-            return;
-        }
-
-        const droppedItem = game.items.get(dropData.id);
-        if (droppedItem.data.type != 'effect') {
-            return;
-        }
-
-        const copiedItem = duplicate(droppedItem.data) as Item.Data<PowerEffectData>;
-        (copiedItem as any)._id = `${randomID(8)}-temp`;
-        this.item.data.data.effects.push(copiedItem);
-        (this.item.sheet as any)._onSubmit(event, { updateData: { data: { effects: this.item.data.data.effects }}});
     }
 }
