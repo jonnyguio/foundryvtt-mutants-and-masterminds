@@ -52,6 +52,7 @@ export default abstract class ActorSheet3e<T extends CommonActorData & CreatureD
         html.find('.item-power-controls .item-control').on('click', this.onEmbeddedItemEvent.bind(this));
         html.find('.item-advantage-controls .item-control').on('click', this.onEmbeddedItemEvent.bind(this));
         html.find('.config-button').on('click', this.onConfigMenu.bind(this));
+        html.find('.item .item-name h4').on('click', this.onItemSummary.bind(this));
 
         if (this.actor.owner) {
             html.find('.item .item-image').on('click', this.onItemRoll.bind(this));
@@ -103,5 +104,24 @@ export default abstract class ActorSheet3e<T extends CommonActorData & CreatureD
                 throw new Error(`unknown action: ${button.dataset.action}`);
         }
         app.render(true);
+    }
+
+    private async onItemSummary(ev: JQuery.ClickEvent): Promise<void> {
+        ev.preventDefault();
+        const li = $(ev.currentTarget).parents('.item');
+        const item = this.actor.getOwnedItem(li.data('item-id')) as Item3e;
+
+        const expandedClass = 'expanded';
+        const summaryClass = 'item-summary'
+        if (li.hasClass(expandedClass)) {
+            const summary = li.children(`.${summaryClass}`)
+            summary.slideUp(200, () => summary.remove());
+        } else {
+            const div = await item.renderListItemContents();
+            li.append(div.hide());
+            div.slideDown(200);
+        }
+
+        li.toggleClass(expandedClass);
     }
 }

@@ -22,6 +22,7 @@ export const preloadTemplates = async function() {
         "systems/mnm3e/templates/items/parts/actions-sheet.html",
         "systems/mnm3e/templates/items/parts/activations-sheet.html",
         "systems/mnm3e/templates/items/parts/list-sheet.html",
+        "systems/mnm3e/templates/items/parts/list-item-sheet.html",
         "systems/mnm3e/templates/items/parts/cost-sheet.html",
     ];
 

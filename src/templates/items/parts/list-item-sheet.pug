@@ -1,0 +1,11 @@
+.item-summary.flexcol
+    | {{{ data.description.value }}}
+    | {{#if data.powerArray}}
+    ol.item-list
+        | {{#each data.powerArray as |power|}}
+        li.item.flexrow(data-power-index="{{@index}}")
+            .item-name.flexrow
+                .item-image(style="background-image: url('{{power.img}}')")
+                h4 {{power.name}}
+        | {{/each}}
+    | {{/if}}

@@ -18,6 +18,7 @@ interface PowerEffectCardInfo {
 };
 
 export default class Item3e<T = any> extends Item<T> {
+    // TODO: Possibly remove
     public get hasAreaTarget() {
         const data = this.data.data as any;
         return data.activation && data.activation.type.value && data.range.area.value;
@@ -46,22 +47,24 @@ export default class Item3e<T = any> extends Item<T> {
         }
     }
 
-    public async roll({ rollMode }: { rollMode?: string} = {}): Promise<ChatMessage | object | void> {
-        if (this.hasAreaTarget) {
-            const powerTemplate = game.mnm3e.canvas.PowerEffectTemplate.fromItem(this);
-            powerTemplate?.drawPreview();
-        }
-
+    public async roll({ rollMode, powerArrayIndex }: { rollMode?: string, powerArrayIndex?: number} = {}): Promise<ChatMessage | object | void> {
         let rollData: any = {};
         if (this.isOwned) {
             rollData = this.actor?.data.data;
         }
 
+        let cardItem: any = this.data;
         let effects: PowerEffectCardInfo[] = [];
         if (this.data.type == 'power') {
             const config = CONFIG.MNM3E;
             const powerData = (this.data.data as unknown) as PowerData;
-            effects = (await Promise.all(powerData.effects.map(async effect => {
+
+            let targetPower = powerData;
+            if (powerArrayIndex !== undefined) {
+                cardItem = powerData.powerArray[powerArrayIndex];
+                targetPower = cardItem.data;
+            }
+            effects = (await Promise.all(targetPower.effects.map(async effect => {
                 this.preparePowerEffectData(effect);
                 const result: PowerEffectCardInfo = {
                     effect,
@@ -149,8 +152,8 @@ export default class Item3e<T = any> extends Item<T> {
             actor: this.actor,
             config: CONFIG.MNM3E,
             sceneTokenId: token ? `${token.scene._id}.${token.id}` : null,
-            item: this.data,
-            data: this.data.data,
+            item: cardItem,
+            data: cardItem.data,
             effects: effects,
         };
 
@@ -161,6 +164,19 @@ export default class Item3e<T = any> extends Item<T> {
             rollMode, 
             flags: { 'mnm3e.effectInfo': effects },
         });
+    }
+
+    public async renderListItemContents(): Promise<JQuery<HTMLElement>> {
+        const html = $(await renderTemplate('systems/mnm3e/templates/items/parts/list-item-sheet.html', this.data));
+        if (this.type == 'power') {
+            const data = (this.data as unknown) as Item.Data<PowerData>;
+            html.find('.item .item-name .item-image').on('click', ev => {
+                ev.preventDefault();
+                const powerIndex = (ev.currentTarget as any).closest('.item').dataset.powerIndex;
+                this.roll({powerArrayIndex: powerIndex});
+            });
+        }
+        return html;
     }
 
     private prepareModifierData(data: Item.Data<ModifierData>): void {
