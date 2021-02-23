@@ -33,7 +33,7 @@ export default class ItemSheet3e<T, I extends Item<T>> extends ItemSheet<T, I> {
             classes: ['mnm3e', 'sheet', 'item'],
             width: 600,
             height: 600,
-            tabs: [{ navSelector: '.sheet-navigation', contentSelector: '.sheet-body', initial: 'description' }]
+            tabs: [{ navSelector: '.sheet-navigation', contentSelector: '.sheet-body', initial: 'description' }],
         });
     }
 
