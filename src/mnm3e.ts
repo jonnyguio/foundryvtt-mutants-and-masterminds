@@ -19,6 +19,7 @@ import Item3e from './module/item/entity';
 import ItemSheet3eAdvantage from './module/item/sheets/advantage';
 import ItemSheet3ePower from './module/item/sheets/power';
 import ItemSheet3eEffect from './module/item/sheets/effect';
+import ItemSheet3eEquipment from './module/item/sheets/equipment';
 import ItemSheet3eModifier from './module/item/sheets/modifier';
 import { MNM3E } from './module/config';
 import SummaryBuilder from './module/apps/summary-builder';
@@ -62,6 +63,11 @@ Hooks.once('init', async function() {
     });
     Items.registerSheet('mnm3e', ItemSheet3ePower, {
         types: ['power'],
+        makeDefault: true,
+        label: 'MNM3E.SheetClassItem',
+    });
+    Items.registerSheet('mnm3e', ItemSheet3eEquipment, {
+        types: ['equipment'],
         makeDefault: true,
         label: 'MNM3E.SheetClassItem',
     });

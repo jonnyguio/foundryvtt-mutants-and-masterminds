@@ -226,7 +226,7 @@
         }
     },
     "Item": {
-        "types": ["advantage", "effect", "modifier", "power"],
+        "types": ["advantage", "effect", "equipment", "modifier", "power"],
         "templates": {
             "itemDescription": {
                 "description": {
@@ -366,6 +366,10 @@
             "templates": ["itemDescription"],
             "effects": [],
             "powerArray": []
+        },
+        "equipment": {
+            "templates": ["itemDescription"],
+            "effects": []
         }
     }
 }

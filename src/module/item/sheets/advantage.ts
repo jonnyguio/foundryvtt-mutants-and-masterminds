@@ -17,7 +17,7 @@ export default class ItemSheet3eAdvantage extends ItemSheet3e<AdvantageData, Ite
      * @override
      */
     public getData(options: DataOptions = {}): ItemSheet.Data<AdvantageData> {
-        const sheetData = super.getData(options) as ExtendedItemSheetData<ModifierData>;
+        const sheetData = super.getData(options) as ExtendedItemSheetData<AdvantageData>;
         return sheetData;
     }
 

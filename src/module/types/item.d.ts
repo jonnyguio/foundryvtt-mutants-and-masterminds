@@ -148,6 +148,14 @@ declare interface PowerData extends ItemDescription {
     summary?: string;
 }
 
+declare interface EquipmentData extends ItemDescription {
+    effects: Item.Data<PowerEffetData>[];
+
+    // Prepared data
+    totalCost?: number;
+    summary?: string;
+}
+
 declare interface FoundryItemSheetData<T = any> extends Omit<ItemSheet.Data<T>, 'data'> {
     data: T;
     effects: ActiveEffectCategories;

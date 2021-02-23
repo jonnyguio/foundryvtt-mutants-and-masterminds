@@ -1,9 +1,7 @@
-import ActorSheet3e from './base';
-import Actor3e from '../entity'
+import ActorSheet3e, { ExtendedActorSheetData } from './base';
+import Actor3e from '../entity';
 
-interface ExtendedCharacterSheetData extends ActorSheet.Data<CharacterData> {
-    powers: Item<PowerData>[];
-    advantages: Item<AdvantageData>[];
+interface ExtendedCharacterSheetData extends ExtendedActorSheetData<CharacterData> {
     summary: {
         name: string;
         value: string;
@@ -54,33 +52,5 @@ export default class ActorSheet3eCharacter extends ActorSheet3e<CharacterData, A
      */
     protected activateListeners(html: JQuery<HTMLElement>): void {
         super.activateListeners(html);
-    }
-
-    /**
-     * @override
-     */
-    protected prepareItems(incomingData: ActorSheet.Data<CharacterData>) {
-        const data = incomingData as ExtendedCharacterSheetData;
-        const powers: Item<PowerData>[] = [];
-        const advantages: Item<AdvantageData>[] = [];
-        data.items.reduce((arr, item) => {
-            let targetArray;
-            switch (item.type) {
-                case 'power':
-                    targetArray = arr[0];
-                    break;
-                case 'advantage':
-                    targetArray = arr[1];
-                    break;
-            }
-            if (!targetArray) {
-                return arr;
-            }
-            targetArray.push(item as any);
-            return arr;
-        }, [powers, advantages]);
-
-        data.powers = powers;
-        data.advantages = advantages;
     }
 }

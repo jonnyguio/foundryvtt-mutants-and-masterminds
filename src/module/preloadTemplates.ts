@@ -7,14 +7,6 @@ export const preloadTemplates = async function() {
         "systems/mnm3e/templates/actors/parts/character-catalog.html",
         "systems/mnm3e/templates/actors/parts/actor-effects.html",
 
-        // Apps
-        "systems/mnm3e/templates/apps/summary-builder.html",
-        "systems/mnm3e/templates/apps/score-config.html",
-
-        // Chat
-        "systems/mnm3e/templates/chat/effects-card.html",
-        "systems/mnm3e/templates/chat/check-card.html",
-
         // Item
         "systems/mnm3e/templates/items/parts/header-sheet.html",
         "systems/mnm3e/templates/items/parts/description-sheet.html",

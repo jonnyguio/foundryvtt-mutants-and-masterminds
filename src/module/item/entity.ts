@@ -41,6 +41,9 @@ export default class Item3e<T = any> extends Item<T> {
             case 'effect':
                 this.preparePowerEffectData((this.data as unknown) as Item.Data<PowerEffectData>);
                 break;
+            case 'equipment':
+                this.prepareEquipmentData((this.data as unknown) as Item.Data<EquipmentData>);
+                break;
             case 'power':
                 this.preparePowerData((this.data as unknown) as Item.Data<PowerData>);
                 break;
@@ -332,6 +335,10 @@ export default class Item3e<T = any> extends Item<T> {
         });
 
         data.data.totalCost = totalPowerCost + data.data.powerArray.length;
+    }
+
+    private prepareEquipmentData(data: Item.Data<EquipmentData>): void {
+
     }
 
     private fixArrays(data: Item.Data): void {

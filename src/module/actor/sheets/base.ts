@@ -4,7 +4,9 @@ import { prepareActiveEffectCategories, onManagedActiveEffect } from '../../acti
 import ItemSheet3e from '../../item/sheets/base';
 
 export interface ExtendedActorSheetData<T extends CommonActorData & CreatureData> extends FoundryActorSheetData<T> {
-
+    powers: Item<PowerData>[];
+    advantages: Item<AdvantageData>[];
+    equipment: Item<EquipmentData>[];
 }
 
 export default abstract class ActorSheet3e<T extends CommonActorData & CreatureData, A extends Actor<T>> extends ActorSheet<T, A> {
@@ -50,10 +52,15 @@ export default abstract class ActorSheet3e<T extends CommonActorData & CreatureD
      */
     protected activateListeners(html: JQuery): void {
         html.find('.effect-control').on('click', ev => onManagedActiveEffect(ev, this.actor));
-        html.find('.item-power-controls .item-control').on('click', this.onEmbeddedItemEvent.bind(this));
-        html.find('.item-advantage-controls .item-control').on('click', this.onEmbeddedItemEvent.bind(this));
         html.find('.config-button').on('click', this.onConfigMenu.bind(this));
         html.find('.item .item-name h4').on('click', this.onItemSummary.bind(this));
+
+        [
+            'power',
+            'advantage',
+            'equipment',
+        ].forEach(itemType =>
+            html.find(`.item-${itemType}-controls .item-control`).on('click', this.onEmbeddedItemEvent.bind(this)));
 
         if (this.actor.owner) {
             html.find('.item .item-image').on('click', this.onItemRoll.bind(this));
@@ -61,7 +68,34 @@ export default abstract class ActorSheet3e<T extends CommonActorData & CreatureD
         super.activateListeners(html);
     }
 
-    protected abstract prepareItems(data: ActorSheet.Data<T>): void;
+    protected prepareItems(incomingData: ActorSheet.Data<T>): void {
+        const data = incomingData as ExtendedActorSheetData<T>;
+        const powers: Item<PowerData>[] = [];
+        const advantages: Item<AdvantageData>[] = [];
+        const equipment: Item<EquipmentData>[] = [];
+        data.items.reduce((arr, item) => {
+            let targetArray;
+            switch (item.type) {
+                case 'power':
+                    targetArray = arr[0];
+                    break;
+                case 'advantage':
+                    targetArray = arr[1];
+                    break;
+                case 'equipment':
+                    targetArray = arr[2];
+            }
+            if (!targetArray) {
+                return arr;
+            }
+            targetArray.push(item as any);
+            return arr;
+        }, [powers, advantages, equipment]);
+
+        data.powers = powers;
+        data.advantages = advantages;
+        data.equipment = equipment;
+    }
 
     private onItemRoll(event: JQuery.ClickEvent): void {
         event.preventDefault();
