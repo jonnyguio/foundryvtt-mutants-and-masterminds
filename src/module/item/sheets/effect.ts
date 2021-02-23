@@ -28,7 +28,7 @@ export default class ItemSheet3eEffect extends ItemSheet3e<PowerEffectData, Item
     /**
      * @override
      */
-    protected activateListeners(html: JQuery) {
+    public activateListeners(html: JQuery) {
         html.find('.item-modifier-controls .item-control').on('click', ev => this.onItemListActionHandler(ev, 'data.modifiers'));
         new DragDrop({
             dragSelector: '.item',

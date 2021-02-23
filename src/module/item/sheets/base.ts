@@ -87,7 +87,7 @@ export default class ItemSheet3e<T, I extends Item<T>> extends ItemSheet<T, I> {
     /**
      * @override
      */
-    protected activateListeners(html: JQuery): void {
+    public activateListeners(html: JQuery): void {
         html.find('.effect-control').on('click', ev => onManagedActiveEffect(ev, this.item));
         html.find('.check-control').on('click', this.onCheckControl.bind(this));
         html.find('.config-button').on('click', this.onConfigMenu.bind(this));
@@ -98,6 +98,19 @@ export default class ItemSheet3e<T, I extends Item<T>> extends ItemSheet<T, I> {
             await originalClose();
         }
         super.activateListeners(html);
+    }
+
+    public async renderListItemContents(): Promise<JQuery<HTMLElement>> {
+        const html = $(await renderTemplate('systems/mnm3e/templates/items/parts/list-item-sheet.html', this.item.data));
+        if (this.item.type == 'power') {
+            const data = (this.item.data as unknown) as Item.Data<PowerData>;
+            html.find('.item .item-name .item-image').on('click', ev => {
+                ev.preventDefault();
+                const powerIndex = (ev.currentTarget as any).closest('.item').dataset.powerIndex;
+                ((this.item as unknown) as Item3e).roll({powerArrayIndex: powerIndex});
+            });
+        }
+        return html;
     }
 
     protected async onItemListActionHandler(ev: JQuery.ClickEvent, key: string): Promise<void> {

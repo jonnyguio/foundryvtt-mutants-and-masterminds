@@ -166,19 +166,6 @@ export default class Item3e<T = any> extends Item<T> {
         });
     }
 
-    public async renderListItemContents(): Promise<JQuery<HTMLElement>> {
-        const html = $(await renderTemplate('systems/mnm3e/templates/items/parts/list-item-sheet.html', this.data));
-        if (this.type == 'power') {
-            const data = (this.data as unknown) as Item.Data<PowerData>;
-            html.find('.item .item-name .item-image').on('click', ev => {
-                ev.preventDefault();
-                const powerIndex = (ev.currentTarget as any).closest('.item').dataset.powerIndex;
-                this.roll({powerArrayIndex: powerIndex});
-            });
-        }
-        return html;
-    }
-
     private prepareModifierData(data: Item.Data<ModifierData>): void {
         if (data.data.summary.format == '') {
             data.data.summary.format = data.name;

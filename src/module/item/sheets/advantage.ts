@@ -24,7 +24,7 @@ export default class ItemSheet3eAdvantage extends ItemSheet3e<AdvantageData, Ite
     /**
      * @override
      */
-    protected activateListeners(html: JQuery): void {
+    public activateListeners(html: JQuery): void {
         super.activateListeners(html);
     }
 }

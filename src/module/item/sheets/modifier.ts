@@ -25,7 +25,7 @@ export default class ItemSheet3eEffect extends ItemSheet3e<ModifierData, Item3e<
     /**
      * @override
      */
-    protected activateListeners(html: JQuery): void {
+    public activateListeners(html: JQuery): void {
         super.activateListeners(html);
         html.find('.expression-control').on('click', this.expressionControlHandler.bind(this));
     }

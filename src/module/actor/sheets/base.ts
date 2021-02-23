@@ -1,6 +1,7 @@
 import Item3e from '../../item/entity';
 import ScoreConfig from '../../apps/score-config';
 import { prepareActiveEffectCategories, onManagedActiveEffect } from '../../active-effects';
+import ItemSheet3e from '../../item/sheets/base';
 
 export interface ExtendedActorSheetData<T extends CommonActorData & CreatureData> extends FoundryActorSheetData<T> {
 
@@ -109,7 +110,6 @@ export default abstract class ActorSheet3e<T extends CommonActorData & CreatureD
     private async onItemSummary(ev: JQuery.ClickEvent): Promise<void> {
         ev.preventDefault();
         const li = $(ev.currentTarget).parents('.item');
-        const item = this.actor.getOwnedItem(li.data('item-id')) as Item3e;
 
         const expandedClass = 'expanded';
         const summaryClass = 'item-summary'
@@ -117,7 +117,8 @@ export default abstract class ActorSheet3e<T extends CommonActorData & CreatureD
             const summary = li.children(`.${summaryClass}`)
             summary.slideUp(200, () => summary.remove());
         } else {
-            const div = await item.renderListItemContents();
+            const item = this.actor.getOwnedItem(li.data('item-id')) as Item3e;
+            const div = await (item.sheet as ItemSheet3e<any, Item3e>).renderListItemContents();
             li.append(div.hide());
             div.slideDown(200);
         }
