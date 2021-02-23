@@ -77,4 +77,18 @@ export default class ItemSheet3ePower extends ItemSheet3e<PowerData, Item3e<Powe
 
         super.activateListeners(html);
     }
+
+    /**
+     * @override
+     */
+    public async renderListItemContents(): Promise<JQuery<HTMLElement>> {
+        const html = await super.renderListItemContents();
+        html.find('.item .item-name .item-image').on('click', ev => {
+            ev.preventDefault();
+            const powerIndex = (ev.currentTarget as any).closest('.item').dataset.powerIndex;
+            ((this.item as unknown) as Item3e).roll({powerArrayIndex: powerIndex});
+        });
+
+        return html;
+    }
 }

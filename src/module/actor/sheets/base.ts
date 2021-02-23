@@ -112,7 +112,7 @@ export default abstract class ActorSheet3e<T extends CommonActorData & CreatureD
         const li = $(ev.currentTarget).parents('.item');
 
         const expandedClass = 'expanded';
-        const summaryClass = 'item-summary'
+        const summaryClass = 'list-item-summary'
         if (li.hasClass(expandedClass)) {
             const summary = li.children(`.${summaryClass}`)
             summary.slideUp(200, () => summary.remove());

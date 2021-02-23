@@ -17,6 +17,10 @@
         text-align: right;
     }
 
+    .item-list .list-item-summary {
+        flex: 0 0 100%;
+    }
+
 
     .tox-toolbar-overlord,
     .tox-toolbar__primary {

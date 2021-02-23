@@ -4,9 +4,9 @@ ol(class="items-list {{ type }}-list item-{{ type }}-controls")
         a.item-control(title="{{ localize 'MNM3E.ItemCreate' }}" data-action="create" data-item-type="{{ type }}")
             i.fas.fa-plus
 
-    ol.item-list
-        | {{#each items as |item|}}
-        li.item.flexrow(data-item-id="{{item._id}}")
+    ol.item-list(data-data-path="{{dataPath}}")
+        | {{#each (getProp this dataPath) as |item|}}
+        li.item.flexrow(data-item-id="{{item._id}}" data-item-index="{{@index}}")
             .item-name.flexrow
                 .item-image(style="background-image: url('{{item.img}}')")
                 h4 {{#if item.data.summary.parsed}} {{item.data.summary.parsed}} {{else}} {{item.name}} {{/if}}

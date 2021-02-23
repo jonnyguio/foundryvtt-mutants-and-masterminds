@@ -126,6 +126,7 @@ Hooks.once('setup', function() {
         emptyObj: v1 => jQuery.isEmptyObject(v1),
         not: v1 => !v1,
         isArr: v1 => Array.isArray(v1),
+        getProp: getProperty,
     });
 });
 

@@ -91,6 +91,7 @@ export default class ItemSheet3e<T, I extends Item<T>> extends ItemSheet<T, I> {
         html.find('.effect-control').on('click', ev => onManagedActiveEffect(ev, this.item));
         html.find('.check-control').on('click', this.onCheckControl.bind(this));
         html.find('.config-button').on('click', this.onConfigMenu.bind(this));
+        html.find('.item .item-name h4').on('click', this.onItemSummary.bind(this));
 
         const originalClose = this.close.bind(this);
         this.close = async () => {
@@ -101,16 +102,7 @@ export default class ItemSheet3e<T, I extends Item<T>> extends ItemSheet<T, I> {
     }
 
     public async renderListItemContents(): Promise<JQuery<HTMLElement>> {
-        const html = $(await renderTemplate('systems/mnm3e/templates/items/parts/list-item-sheet.html', this.item.data));
-        if (this.item.type == 'power') {
-            const data = (this.item.data as unknown) as Item.Data<PowerData>;
-            html.find('.item .item-name .item-image').on('click', ev => {
-                ev.preventDefault();
-                const powerIndex = (ev.currentTarget as any).closest('.item').dataset.powerIndex;
-                ((this.item as unknown) as Item3e).roll({powerArrayIndex: powerIndex});
-            });
-        }
-        return html;
+        return $(await renderTemplate('systems/mnm3e/templates/items/parts/list-item-sheet.html', this.item.data));
     }
 
     protected async onItemListActionHandler(ev: JQuery.ClickEvent, key: string): Promise<void> {
@@ -171,9 +163,7 @@ export default class ItemSheet3e<T, I extends Item<T>> extends ItemSheet<T, I> {
 
         let childItem = this._childItems.get(sourceItem);
         if (!childItem) {
-            const newItem = await Item.create(sourceItem, { temporary: true }) as Item3e;
-            (newItem.options as any).actor = this.item.actor;
-            newItem.data._id = sourceItem._id;
+            const newItem = await this.newChildItem(sourceItem);
 
             const rawSheet = newItem.sheet as any;
             rawSheet._parentItem = this.item;
@@ -206,6 +196,14 @@ export default class ItemSheet3e<T, I extends Item<T>> extends ItemSheet<T, I> {
         } else {
             this.item.update({ [key]: list }, {});
         }
+    }
+
+    private async newChildItem(sourceItem: any): Promise<Item3e> {
+        const newItem = await Item.create(sourceItem, { temporary: true }) as Item3e;
+        (newItem.options as any).actor = this.item.actor;
+        newItem.data._id = sourceItem._id;
+
+        return newItem;
     }
 
     private async onConfigMenu(ev: JQuery.ClickEvent): Promise<void> {
@@ -243,5 +241,29 @@ export default class ItemSheet3e<T, I extends Item<T>> extends ItemSheet<T, I> {
         }
 
         await this._onSubmit(ev, { updateData: {[dataPath]: targetArray}});
+    }
+
+    private async onItemSummary(ev: JQuery.ClickEvent): Promise<void> {
+        ev.preventDefault();
+        const li = $(ev.currentTarget).closest('.item');
+
+        const expandedClass = 'expanded';
+        const summaryClass = 'list-item-summary'
+        if (li.hasClass(expandedClass)) {
+            const summary = li.children(`.${summaryClass}`)
+            summary.slideUp(200, () => summary.remove());
+        } else {
+            const dataPath = li.closest('.item-list').data('data-path');
+            const sourceItem = getProperty(this.item.data, dataPath)[li.data('item-index')];
+            let item = this._childItems.get(sourceItem);
+            if (!item) {
+                item = await this.newChildItem(sourceItem);
+            }
+            const div = await (item.sheet as ItemSheet3e<any, Item3e>).renderListItemContents();
+            li.append(div.hide());
+            div.slideDown(200);
+        }
+
+        li.toggleClass(expandedClass);
     }
 }
