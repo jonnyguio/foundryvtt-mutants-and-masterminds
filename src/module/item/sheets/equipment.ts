@@ -18,6 +18,14 @@ export default class ItemSheet3eEquipment extends ItemSheet3e<EquipmentData, Ite
      */
     public getData(options: DataOptions = {}): ItemSheet.Data<EquipmentData> {
         const sheetData = super.getData(options) as ExtendedItemSheetData<EquipmentData>;
+
+        sheetData.data.summary = '';
+        sheetData.data.effects.forEach(effect => {
+            if (effect.data.summary.parsed) {
+                sheetData.data.summary += effect.data.summary.parsed;
+            }
+        });
+
         return sheetData;
     }
 

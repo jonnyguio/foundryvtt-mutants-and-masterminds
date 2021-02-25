@@ -10,13 +10,15 @@ form(class="{{cssClass}} item-sheet-equipment flexcol" autocomplete="off")
         a.item(data-tab="effects") {{ localize "MNM3E.Effects" }}
 
     section.sheet-body
-        .tab.description.flexrow.active(data-group="primary" data-tab="description")
-            .item-properties.flexcol
-                | {{> "systems/mnm3e/templates/items/parts/cost-sheet.html" }}
-            
-            .item-editor.flexcol
-                +item-summary-controller()
-                | {{editor content=data.description.value target="data.description.value" button=true owner=owner editable=editable}}
+        .tab.description.flexcol.active(data-group="primary" data-tab="description")
+            .flexrow
+                label {{ localize "MNM3E.PowerSummary" }}
+                span {{ data.summary }}
+            .flexrow
+                label {{ localize "MNM3E.PowerTotalCost" }}
+                span {{ data.totalCost }}
+                
+            | {{editor content=data.description.value target="data.description.value" button=true owner=owner editable=editable}}
 
         .tab.details.flexcol(data-group="primary" data-tab="details")
             | {{>

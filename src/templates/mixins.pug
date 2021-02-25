@@ -17,21 +17,10 @@ mixin select-form-fields(dataPath, configPath, allowBlank=false, onlyDisabled=fa
             | {{/each}}
             | {{/select}}
 
-mixin input-value-with-override(label, dataPath, dataDType="Number", dataPlaceholder="0")
-    .form-group.input
-        label {{ localize "#{label}" }}
-        input(type="text" name=`${dataPath}.value` value=`{{${dataPath}.value}}` data-dtype=`${dataDType}` placeholder=`${dataPlaceholder}`)&attributes({[`{{#if ${dataPath}.override}}disabled{{/if}}`]: ''})
-
 mixin select-value-with-override(label, dataPath, configPath, allowBlank=false, onlyDisabled=false)
     .form-group.select
         label {{ localize "#{label}" }}
         +select-form-fields(dataPath, configPath, allowBlank, onlyDisabled)
-
-mixin input-select-value-with-override(label, inputDType, inputPlaceholder, inputDataPath, selectDataPath, configPath, allowBlank=false, onlyDisabled=false)
-    .form-group.input-select
-        label {{ localize "#{label}" }}
-        input(type="text" name=`${inputDataPath}.value` value=`{{${inputDataPath}.value}}` data-dtype=`${inputDType}` placeholder=`${inputPlaceholder}`)&attributes({[`{{#if ${inputDataPath}.override}}disabled{{/if}}`]: ''})
-        +select-form-fields(selectDataPath, configPath, allowBlank)
 
 mixin item-summary-controller()
     .item-summary.flexrow

@@ -5,51 +5,11 @@ The *unofficial* system for [FoundryVTT](https://foundryvtt.com) 0.7.9. This pro
 ## Install
 Currently it is not ready for installation. Please check back later.
 
-## System and Development Discussion
+## System Goals
 ### Ease of Use
-The goal of this system is to make it easy to build powers and effects via dragging and dropping.
-Each effect defines set of parameters that determines if a roll is needed, what to do in an attack,
-and the total DC of the resistance check if necessary. Modifiers can be dragged and dropped onto
-effects to override these parameters and the effect itself can be dropped into a power.
-
-### Why TypeScript?
-I've found TypeScript easier to use than raw JavaScript.
-[foundry-pc-types](https://gitlab.com/foundry-projects/foundry-pc/foundry-pc-types) has been
-very valuable in the interface and class definitions it provides. However, there have been a few
-interfaces and classes that I've had to override with my own definitions due to them being incomplete
-or out of date in certain areas. Currently there are places in the code where I cast to `any` to
-bypass these issues.
-
-### Why [pugjs](https://pugjs.org)?
-I find indentation scoped syntax is easier to work with and pugjs allows for a preprocessing layer.
-I plan on using most of the toolkit pugjs offers at a later point. One of the main downsides to using
-pugjs is that every line beginning with a handlebarjs expression needs to have a pipe in front of it.
-
-```pug
-//- bad
-.container
-    {{#if data.property}}
-    span {{data.property}}
-    {{/if}}
-
-//- good
-.container
-    | {{#if data.property}}
-    span {{data.property}}
-    | {{/if}}
-```
-
-Additionally, attribute names with handlebarjs directives are not easily supported in pugjs:
-
-```pug
-//- bad
-.container
-    input({{#if data.disabled}}disabled{{/if}})
-
-//- works, but not ideal
-.container
-    input()&attributes({[`{{#if data.disabled}}disabled{{/if}}`]: ''})
-```
+The main goal of this system is to make it easy to build powers and effects via dragging and dropping. Each effect defines set of parameters that determines if a roll is needed, what to do in
+an attack, and the total DC of the resistance check if necessary. Modifiers can be dragged and 
+onto effects to override these parameters and the effect itself can be dropped into a power.
 
 ## Roadmap
 - [ ] Character
@@ -78,6 +38,20 @@ Additionally, attribute names with handlebarjs directives are not easily support
     - [ ] Gadgets
 - [ ] Tools
     - [ ] Measurement calculator
+
+## Development Notes
+
+### Why TypeScript?
+I've found TypeScript easier to use than raw JavaScript.
+[foundry-pc-types](https://gitlab.com/foundry-projects/foundry-pc/foundry-pc-types) has been
+very valuable in the interface and class definitions it provides. However, there have been a few
+interfaces and classes that I've had to override with my own definitions due to them being incomplete
+or out of date in certain areas. Currently there are places in the code where I cast to `any` to
+bypass these issues.
+
+### Why [pugjs](https://pugjs.org)?
+I find indentation scoped syntax is easier to work with and pugjs allows for a preprocessing layer.
+I plan on using most of the toolkit pugjs offers at a later point.
 
 ## Related Websites
 - https://foundryvtt.com

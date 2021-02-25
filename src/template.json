@@ -290,7 +290,7 @@
                             "value": 0
                         },
                         "max": {
-                            "value": 0
+                            "value": null
                         },
                         "per": {
                             "value": null
@@ -365,11 +365,13 @@
         "power": {
             "templates": ["itemDescription"],
             "effects": [],
-            "powerArray": []
+            "powerArray": [],
+            "descriptor": ""
         },
         "equipment": {
             "templates": ["itemDescription"],
-            "effects": []
+            "effects": [],
+            "descriptor": ""
         }
     }
 }

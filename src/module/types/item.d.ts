@@ -72,20 +72,14 @@ declare interface EffectRange {
 }
 
 declare interface EffectUses {
-    amount: OverrideValue<number>;
     max: OverrideValue<number>;
-    per?: OverrideValue<string>;
-}
-
-declare interface EffectConsume {
-    type: OverrideValue<string>;
-    target: OverrideValue<string?>;
-    amount: OverrideValue<number?>;
+    
+    // Prepared data
+    remaining?: number
 }
 
 declare interface EffectActivation {
     check: RollDetails;
-    consume: EffectConsume;
     duration: EffectDuration;
     range: EffectRange;
     uses: EffectUses;

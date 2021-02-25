@@ -14,6 +14,7 @@ interface PowerEffectCardInfo {
     attackRoll?: Roll;
     resistInfo?: ResistInfo;
     effect: Item.Data<PowerEffectData>;
+    canRoll: boolean;
     tags: string[];
 };
 
@@ -58,10 +59,11 @@ export default class Item3e<T = any> extends Item<T> {
 
         let cardItem: any = this.data;
         let effects: PowerEffectCardInfo[] = [];
-        if (this.data.type == 'power') {
+        if (['power', 'equipment'].includes(this.data.type)) {
             const config = CONFIG.MNM3E;
             const powerData = (this.data.data as unknown) as PowerData;
 
+            let needsUpdate = false;
             let targetPower = powerData;
             if (powerArrayIndex !== undefined) {
                 cardItem = powerData.powerArray[powerArrayIndex];
@@ -70,6 +72,7 @@ export default class Item3e<T = any> extends Item<T> {
             effects = (await Promise.all(targetPower.effects.map(async effect => {
                 this.preparePowerEffectData(effect);
                 const result: PowerEffectCardInfo = {
+                    canRoll: true,
                     effect,
                     tags: [
                         config.activationTypes[effect.data.activation.type.value],
@@ -77,6 +80,21 @@ export default class Item3e<T = any> extends Item<T> {
                         config.durationTypes[effect.data.activation.duration.type.value],
                     ],
                 };
+
+                if (effect.data.activation.uses.max.value > 0) {
+                    if (typeof effect.data.activation.uses.remaining !== 'number') {
+                        effect.data.activation.uses.remaining = effect.data.activation.uses.max.value;
+                    }
+
+                    needsUpdate = true;
+                    const remaining = Math.max(--effect.data.activation.uses.remaining, 0);
+                    result.tags.push(game.i18n.format('MNM3E.UsesRemainingFormat', { remaining }));
+                    if (remaining <= 0) {
+                        effect.data.activation.uses.remaining = remaining;
+                        result.canRoll = false;
+                        return result;
+                    }
+                }
 
                 const prepareFormula = (detail: RollDetails): string => {
                     const parts = duplicate(detail.formula.value);
@@ -148,6 +166,10 @@ export default class Item3e<T = any> extends Item<T> {
 
                 return result;
             }))).filter(d => d) as PowerEffectCardInfo[];
+
+            if (needsUpdate) {
+                this.update({ data: {powerArray: powerData.powerArray, effects: powerData.effects}});
+            }
         }
 
         const token = this.actor?.token;
@@ -274,6 +296,10 @@ export default class Item3e<T = any> extends Item<T> {
                 targetList.push(modifier.data.summary.parsed);
             }
         });
+
+        if (data.data.activation.uses.max.value > 0 && typeof data.data.activation.uses.remaining !== 'number') {
+            data.data.activation.uses.remaining = data.data.activation.uses.max.value;
+        }
 
         data.data.summary.parsed = data.data.summary.format.
             replace('$rank', data.data.rank.toString()).
