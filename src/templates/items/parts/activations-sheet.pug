@@ -20,9 +20,9 @@ h3.form-header {{ localize "MNM3E.ItemActivationDetails" }}
 .form-group.input
         label {{ localize "MNM3E.Uses" }}
         | {{#if item.isOwned}}
-        input(type="text" name="data.activation.uses.remaining" value="{{data.activation.uses.remaining}}" data-dtype="Number")
+        input(type="number" name="data.activation.uses.remaining" value="{{data.activation.uses.remaining}}" data-dtype="Number")
         span {{ localize "MNM3E.UsesOf" }}
         | {{/if}}
-        input(type="text" name="data.activation.uses.max.value" value="{{data.activation.uses.max.value}}" data-dtype="Number")&attributes({[getOverrideAttribute(dataPath)]: ''})
+        input(type="number" name="data.activation.uses.max.value" value="{{data.activation.uses.max.value}}" data-dtype="Number")&attributes({[getOverrideAttribute(dataPath)]: ''})
 
 | {{/if}}

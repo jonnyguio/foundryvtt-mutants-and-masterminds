@@ -16,8 +16,8 @@ export default abstract class ActorSheet3e<T extends CommonActorData & CreatureD
     public static get defaultOptions(): FormApplication.Options {
         return mergeObject(super.defaultOptions, {
             classes: ['mnm3e', 'sheet', 'actor'],
-            width: 600,
-            height: 600,
+            width: 740,
+            height: 730,
             tabs: [{ navSelector: '.sheet-navigation', contentSelector: '.sheet-body', initial: 'core' }]
         });
     }

@@ -29,17 +29,17 @@ export default class ActorSheet3eCharacter extends ActorSheet3e<CharacterData, A
         sheetData.summary = [
             {
                 name: 'data.identity',
-                value: sheetData.data.identity,
+                value: sheetData.data.info.identity,
                 localizedKey: 'MNM3E.Identity',
             },
             {
                 name: 'data.groupAffiliation',
-                value: sheetData.data.groupAffiliation,
+                value: sheetData.data.info.groupAffiliation,
                 localizedKey: 'MNM3E.GroupAffiliation',
             },
             {
                 name: 'data.baseOfOperations',
-                value: sheetData.data.baseOfOperations,
+                value: sheetData.data.info.baseOfOperations,
                 localizedKey: 'MNM3E.BaseOfOperations',
             },
         ];

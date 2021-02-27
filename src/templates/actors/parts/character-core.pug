@@ -33,10 +33,13 @@ mixin score-config-button(scoreType, dataPath)
             ul.skills-list
                 | {{#each data.skills as |skill key|}}
                 | {{#if (eq skill.type "dynamic")}}
+                li.skill.flexrow(data-skill="{{key}}")
+                    label.skill-name.rollable {{skill.label}}
+                    span.skill-score {{numberFormat skill.base decimals=0 sign=true}}
                 | {{#if (not (emptyObj skill.data))}}
                 | {{#each skill.data as |subskill|}}
                 li.subskill.flexrow(data-skill="{{key}}")
-                    label.subskill-name.rollable {{skill.label}}: {{subskill.displayName}}
+                    label.subskill-name.rollable - {{subskill.displayName}}
                     span.skill-score {{numberFormat subskill.total decimals=0 sign=true}}
                 | {{/each}}
                 | {{/if}}

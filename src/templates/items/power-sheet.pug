@@ -2,6 +2,10 @@ form(class="{{cssClass}} item-sheet-power flexcol" autocomplete="off")
     header.sheet-header.flexrow
         | {{> "systems/mnm3e/templates/items/parts/header-sheet.html" }}
 
+        ul.header-summary
+            li: input(type="text" name="data.descriptor" value="{{data.descriptor}}" placeholder="{{ localize 'MNM3E.Descriptor' }}")
+            
+
     nav.sheet-navigation.tabs(data-group="primary")
         a.item.active(data-tab="description") {{ localize "MNM3E.Description" }}
         a.item(data-tab="details") {{ localize "MNM3E.Details" }}

@@ -89,10 +89,11 @@ export default class Actor3e<T extends CommonActorData = CommonActorData> extend
         let pointTotal = 0;
         Object.values(actorData.data.pointCosts).forEach((c: LabeledNumber) => pointTotal += c.value);
         actorData.data.pointCosts.total.value = pointTotal;
+        actorData.data.attributes.penaltyPoints = -Math.abs(actorData.data.attributes.penaltyPoints)
 
         if (actorData.type == 'character') {
-            const characterData = (actorData as unknown) as CharacterData;
-            characterData.maxPowerPoints = 15 * characterData.powerLevel + characterData.powerPoints;
+            const characterData = (actorData.data as unknown) as CharacterData;
+            characterData.maxPowerPoints = 15 * characterData.attributes.powerLevel + characterData.powerPoints;
         }
     }
 
@@ -101,6 +102,7 @@ export default class Actor3e<T extends CommonActorData = CommonActorData> extend
         if (targetScore.type.value != 'custom') {
             formula += `+@${targetScore.type.value}`;
         }
+        formula += ` - ${Math.abs(this.data.data.attributes.penaltyPoints)}`;
 
         const roll = new Roll(formula, this.data.data).roll();
         const degrees = calculateDegrees(dc, roll.total);

@@ -51,9 +51,16 @@
                         "ability": "awe"
                     }
                 },
-                "powerLevel": 0,
-                "initiative": 0,
-                "groupAffiliation": ""
+                "attributes": {
+                    "powerLevel": 0,
+                    "initiative": 0,
+                    "penaltyPoints": 0
+                },
+                "info": {
+                    "groupAffiliation": "",
+                    "identity": "",
+                    "baseOfOperations": ""
+                }
             },
             "creature": {
                 "skills": {
@@ -216,10 +223,8 @@
         },
         "character": {
             "templates": ["common", "creature"],
-            "identity": "",
-            "baseOfOperations": "",
             "heroPoints": 0,
-            "powerPoints": 0
+            "earnedPowerPoints": 0
         },
         "npc": {
             "templates": ["common", "creature"]

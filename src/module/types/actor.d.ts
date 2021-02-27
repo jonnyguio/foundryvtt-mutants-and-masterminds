@@ -86,6 +86,18 @@ declare type Skills = {
     vhc: SkillDetail;
 } & {[skillAbbrev: string]: SkillDetail};
 
+declare interface Attributes {
+    initiative: number;
+    powerLevel: number;
+    penaltyPoints: number;
+}
+
+declare interface ActorInfo {
+    groupAffiliation: string;
+    identity: string;
+    baseOfOperations: string;
+}
+
 declare interface LabeledNumber {
     value: number;
     label: string;
@@ -104,9 +116,8 @@ declare interface CommonActorData {
     abilities: Abilities;
     defenses: Defenses;
     skills: Skills;
-    powerLevel: number;
-    initiative: number;
-    groupAffiliation: string;
+    attributes: Attributes;
+    info: ActorInfo;
 
     // Prepared Data
     pointCosts: PointCosts;
@@ -117,8 +128,6 @@ declare interface CreatureData {
 }
 
 declare interface CharacterData extends CommonActorData, CreatureData {
-    identity: string;
-    baseOfOperations: string;
     heroPoints: number;
     powerPoints: number;
 

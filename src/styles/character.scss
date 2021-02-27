@@ -3,14 +3,82 @@
         flex: 0 1 auto;
     }
 
+    h4.box-title {
+        height: 18px;
+        line-height: 16px;
+        margin: 4px 8px 2px;
+        font-size: 18px;
+        white-space: nowrap;
+        border-bottom: 1px solid #c9c7b8
+    }
+
+    .sheet-header {
+        img.profile {
+            flex: 0 0 160px;
+            max-width: 160px;
+            height: 160px;
+        }
+
+        .header-details {
+            h1.charname {
+                flex: 1;
+                height: 60px;
+                padding: 0;
+            }
+    
+            .header-powerlevel {
+                flex: 0 0 150px;
+                height: 60px;
+                justify-content: flex-end;
+                text-align: right;
+            }
+    
+            .summary {
+                height: 30px;
+                font-size: 18px;
+            }
+        }
+    
+        ul.attributes {
+            list-style: none;
+            padding: 0;
+
+            li.attribute {
+                text-align: center;
+            }
+        }
+
+        .attributes {
+            flex: 0 0 100%;
+            margin: 0;
+
+            .attribute {
+                height: 70px;
+                margin: 0;
+            }
+        }
+    }
+
     .core-container {
+        label.box-title {
+            height: 18px;
+            line-height: 16px;
+            margin: 4px 8px 2px;
+            font-size: 15px;
+            color:rgb(49, 49, 49);
+            border-bottom: 1px solid gray;
+            white-space: nowrap;
+            background-color: $tabFillerBackground;
+        
+        }
+
         .ability-section {
             flex: 0 0 100px;
             margin-right: 6px;
             margin-top: 6px;
             border: $sectionBorder;
             border-radius: $sectionBorderRadius;
-            background-color: rgba(224, 224, 224, 0.863);
+            background-color: $tabFillerBackground;
             align-self: flex-start;
             margin-top: 6px;
         }
@@ -24,13 +92,13 @@
             margin: 0;
             padding-left: 2px;
             padding-right: 2px;
-            background-color: rgba(224, 224, 224, 0.527);
+            background-color: $tabFillerBackground;
     
             .ability {
                 height: 60px;
                 border-bottom: $borderGroove;
                 text-transform: uppercase;
-                background-color: rgba(224, 224, 224, 0.527);
+                background-color: $tabFillerBackground;
             }
     
             &:last-child {
@@ -44,7 +112,7 @@
                 width: 36px;
                 margin: 0 auto;
                 font-size: 20px;
-                background-color: rgba(224, 224, 224, 0.527);
+                background-color: $tabFillerBackground;
             }
         }
     
@@ -52,7 +120,7 @@
             flex: 0 0 100px;
             border: $sectionBorder;
             border-radius: $sectionBorderRadius;
-            background-color: rgba(224, 224, 224, 0.527);
+            background-color: $tabFillerBackground;
             font-family: Charcoal, sans-serif;
             margin-top: 6px;
         }
@@ -64,8 +132,11 @@
             border: $sectionBorder;
             border-radius: $sectionBorderRadius;
             font-family: Charcoal, sans-serif;
-            background-color: rgba(224, 224, 224, 0.527);
-            .skill-score{
+            background-color: $tabFillerBackground;
+            .subskill-name {
+                margin-left: 10px;
+            }
+            .skill-score {
                 text-align: right;
                 padding-left: 20px;
                 padding-right: 10px;
@@ -83,19 +154,9 @@
     }
 }
 
-label.box-title {
-    height: 18px;
-    line-height: 16px;
-    margin: 4px 8px 2px;
-    font-size: 15px;
-    color:rgb(49, 49, 49);
-    border-bottom: 1px solid gray;
-    white-space: nowrap;
-    background-color: rgba(224, 224, 224, 0.527);
-
-}
-
 h3.section-title {
     text-align: center;
     margin-top: 6px;
+    color: $tabFillerBackground;
+    background: $editableBackground;
 }

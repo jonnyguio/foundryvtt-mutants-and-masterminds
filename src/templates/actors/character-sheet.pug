@@ -1,20 +1,29 @@
 form(class="{{cssClass}} flexcol" autocomplete="off")
     header.sheet-header
         img.profile(src="{{actor.img}}" data-edit="img" title="{{actor.name}}")
-        section.header-details.flexcol
-            .character-details.flexrow
-                h1.charname
-                    input(name="name" type="text" value="{{actor.name}}" placeholder="{{ localize 'MNM3E.Name' }}")
-                aside.header-powerlevel
-                    .powerlevel
-                        .form-group.input
-                            label {{ localize "MNM3E.PowerLevel" }}:
-                            input(type="text" name="data.powerLevel" value="{{data.powerLevel}}" data-dtype="Number" placeholder="1")
-                ul.summary
-                    | {{#each summary as |summary|}}
-                    li
-                        input(type="text" name="{{ summary.name }}" value="{{ summary.value }}" placeholder="{{ localize summary.localizedKey }}")
-                    | {{/each}}
+        section.header-details.flexrow
+            h1.charname
+                input(name="name" type="text" value="{{actor.name}}" placeholder="{{ localize 'MNM3E.Name' }}")
+            aside.header-powerlevel
+                .powerlevel
+                    .form-group.input
+                        label {{ localize "MNM3E.PowerLevel" }}:
+                        input(type="text" name="data.attributes.powerLevel" value="{{data.attributes.powerLevel}}" data-dtype="Number" placeholder="1")
+            ul.summary.flexrow
+                | {{#each summary as |summary|}}
+                li
+                    input(type="text" name="{{ summary.name }}" value="{{ summary.value }}" placeholder="{{ localize summary.localizedKey }}")
+                | {{/each}}
+            ul.attributes.flexrow
+                li.attribute.penalty-points
+                    h4.attribute-name.box-title {{ localize "MNM3E.PenaltyPoints" }}
+                    .attribute-value
+                        input(type="number" name="data.attributes.penaltyPoints" value="{{data.attributes.penaltyPoints}}" placeholder="0")
+                li.attribute.initiative 
+                    h4.attribute-name.box-title {{ localize "MNM3E.Initiative" }}
+                    .attribute-value
+                        span {{numberFormat data.attributes.initiative decimals=0 sign=true}}
+
     section.cost-breakdown.flexrow
         | {{#each data.pointCosts as |cost|}}
         .point-cost

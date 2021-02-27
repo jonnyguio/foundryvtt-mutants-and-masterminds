@@ -5,6 +5,6 @@ h3.form-header {{ localize "MNM3E.ItemActionDetails" }}
 
 | {{#if (or data.action.type.value (eq item.type "modifier")) }}
 +expanding-roll-controller("MNM3E.AttackCheck", "data.action.roll.attack")
-+expanding-roll-controller("MNM3E.ResistCheck", "data.action.roll.resist")
++expanding-roll-controller("MNM3E.ResistDC", "data.action.roll.resist")
 
 | {{/if}}

@@ -10,6 +10,7 @@ header.card-header.flexrow
     h3.item-name {{item.name}}
 
 .card-content.flexcol
+    h4 {{ item.data.descriptor }}
     | {{{ item.data.description.value }}}
     | {{#each effects }}
     h4 

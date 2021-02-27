@@ -136,6 +136,7 @@ declare interface ModifierData extends ItemSummary, ItemDescription, ItemActivat
 declare interface PowerData extends ItemDescription {
     effects: Item.Data<PowerEffectData>[];
     powerArray: Item.Data<PowerData>[];
+    descriptor: string;
 
     // Prepared data
     totalCost?: number;
@@ -144,6 +145,7 @@ declare interface PowerData extends ItemDescription {
 
 declare interface EquipmentData extends ItemDescription {
     effects: Item.Data<PowerEffetData>[];
+    descriptor: string;
 
     // Prepared data
     totalCost?: number;
