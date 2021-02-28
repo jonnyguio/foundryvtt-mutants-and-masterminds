@@ -127,12 +127,18 @@
     
         .skill-section {
             max-width: fit-content;
-            flex: 0 0 10px;
+            max-height: fit-content;
+            flex: 0 0 175px;
             margin-top: 6px;
             border: $sectionBorder;
             border-radius: $sectionBorderRadius;
             font-family: Charcoal, sans-serif;
             background-color: $tabFillerBackground;
+
+            .untrained {
+                font-style: italic;
+            }
+
             .subskill-name {
                 margin-left: 10px;
             }
@@ -159,4 +165,5 @@ h3.section-title {
     margin-top: 6px;
     color: $tabFillerBackground;
     background: $editableBackground;
+    flex: 0 1 auto;
 }

@@ -1,8 +1,10 @@
 ol(class="items-list {{ type }}-list item-{{ type }}-controls")
     li.items-header.flexrow
         h3.item-name.flexrow {{ header }}
+        | {{#if (not hideControls)}}
         a.item-control(title="{{ localize 'MNM3E.ItemCreate' }}" data-action="create" data-item-type="{{ type }}")
             i.fas.fa-plus
+        | {{/if}}
 
     ol.item-list(data-data-path="{{dataPath}}")
         | {{#each (getProp this dataPath) as |item|}}
@@ -10,9 +12,15 @@ ol(class="items-list {{ type }}-list item-{{ type }}-controls")
             .item-name.flexrow
                 .item-image(style="background-image: url('{{item.img}}')")
                 h4 {{#if item.data.summary.parsed}} {{item.data.summary.parsed}} {{else}} {{item.name}} {{/if}}
+            | {{#if (not ../hideControls)}}
             div(class="item-controls flexrow")
+                | {{#if ../canFavorite}}
+                a.item-control(title="{{ localize 'MNM3E.ItemFavorite' }}" data-action="favorite" data-index="{{@index}}")
+                    i.fa-star(class="{{#if item.flags.mnm3e.isFavorite}}fas{{else}}far{{/if}}")
+                | {{/if}}
                 a.item-control(title="{{ localize 'MNM3E.ItemEdit' }}" data-action="edit" data-index="{{@index}}")
                     i.fas.fa-edit
                 a.item-control(title="{{ localize 'MNM3E.ItemDelete' }}" data-action="delete" data-index="{{@index}}")
                     i.fas.fa-trash
+            | {{/if}}
         | {{/each}}

@@ -5,7 +5,7 @@ mixin score-config-button(scoreType, dataPath)
         data-score-path=`data.${dataPath}`
         data-score-config-path=`${dataPath}`
     )
-        i.fab.fa-superpowers
+        i.fas.fa-cog
 
 .core-container.flexrow
     .ability-section.flexcol
@@ -13,39 +13,54 @@ mixin score-config-button(scoreType, dataPath)
             +score-config-button("Ability", "abilities")
         ul.ability-scores.flexrow
             | {{#each data.abilities as |ability key|}}
-            li.ability.flexcol
-                label.ability-name.box-title {{ability.label}}
+            li.ability.flexcol(data-ability="{{key}}")
+                label.ability-name.box-title.rollable {{ability.label}}
                 span.ability-score {{ability.total}}
             | {{/each}}
-    .attribute-section.flexcol
+    .flexcol
         .defense-section.flexcol
             h3.section-title {{ localize "MNM3E.Defenses" }}
                 +score-config-button("Defense", "defenses")
             ul.defenses-list.flexrow
                 | {{#each data.defenses as |defense key|}}
                 li.defense.flexcol(data-defense="{{key}}")
-                    label.defense-name.box-title {{defense.label}}
+                    label.defense-name.box-title.rollable {{defense.label}}
                     span.defense-score {{numberFormat defense.total decimals=0 sign=true}}
                 | {{/each}}
-        .skill-section.flexcol
-            h3.section-title {{ localize "MNM3E.Skills" }}
-                +score-config-button("Skill", "skills")
-            ul.skills-list
-                | {{#each data.skills as |skill key|}}
-                | {{#if (eq skill.type "dynamic")}}
-                li.skill.flexrow(data-skill="{{key}}")
-                    label.skill-name.rollable {{skill.label}}
-                    span.skill-score {{numberFormat skill.base decimals=0 sign=true}}
-                | {{#if (not (emptyObj skill.data))}}
-                | {{#each skill.data as |subskill|}}
-                li.subskill.flexrow(data-skill="{{key}}")
-                    label.subskill-name.rollable - {{subskill.displayName}}
-                    span.skill-score {{numberFormat subskill.total decimals=0 sign=true}}
-                | {{/each}}
-                | {{/if}}
-                | {{else}}
-                li.skill.flexrow(data-skill="{{key}}")
-                    label.skill-name.rollable {{skill.label}}
-                    span.skill-score {{numberFormat skill.data.total decimals=0 sign=true}}
+        .body-section.flexrow
+            .skill-section.flexcol
+                - const untrainedStatement = "{{#if (and skill.trainedOnly (not skill.isTrained))}}untrained{{/if}}"
+                h3.section-title {{ localize "MNM3E.Skills" }}
+                    +score-config-button("Skill", "skills")
+                ul.skills-list
+                    | {{#each data.skills as |skill key|}}
+                    | {{#if (eq skill.type "dynamic")}}
+                    li.skill.flexrow(class=untrainedStatement data-skill="{{key}}")
+                        label.skill-name.rollable {{skill.label}}
+                        span.skill-score {{numberFormat skill.base decimals=0 sign=true}}
+                    | {{#if (not (emptyObj skill.data))}}
+                    | {{#each skill.data as |subskill subKey|}}
+                    li.subskill.flexrow(data-skill="{{key}}" data-subskill="{{subKey}}")
+                        label.subskill-name.rollable - {{subskill.displayName}}
+                        span.skill-score {{numberFormat subskill.total decimals=0 sign=true}}
+                    | {{/each}}
+                    | {{/if}}
+                    | {{else}}
+                    li.skill.flexrow(class=untrainedStatement data-skill="{{key}}")
+                        label.skill-name.rollable {{skill.label}}
+                        span.skill-score {{numberFormat skill.data.total decimals=0 sign=true}}
+                    | {{/if}}
+                    | {{/each}}
+            .favorites-section.flexcol
+                | {{#each favorites}}
+                | {{#if (lookup .. this.dataPath)}}
+                | {{>
+                |       "systems/mnm3e/templates/items/parts/list-sheet.html"
+                |       ..
+                |       dataPath=this.dataPath
+                |       header=(localize this.label)
+                |       type=this.type
+                |       hideControls=true
+                | }}
                 | {{/if}}
                 | {{/each}}

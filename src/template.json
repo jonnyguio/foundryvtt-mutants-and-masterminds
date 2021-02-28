@@ -223,7 +223,7 @@
         },
         "character": {
             "templates": ["common", "creature"],
-            "heroPoints": 0,
+            "heroPoints": 1,
             "earnedPowerPoints": 0
         },
         "npc": {

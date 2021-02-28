@@ -15,14 +15,22 @@ form(class="{{cssClass}} flexcol" autocomplete="off")
                     input(type="text" name="{{ summary.name }}" value="{{ summary.value }}" placeholder="{{ localize summary.localizedKey }}")
                 | {{/each}}
             ul.attributes.flexrow
-                li.attribute.penalty-points
-                    h4.attribute-name.box-title {{ localize "MNM3E.PenaltyPoints" }}
-                    .attribute-value
-                        input(type="number" name="data.attributes.penaltyPoints" value="{{data.attributes.penaltyPoints}}" placeholder="0")
                 li.attribute.initiative 
                     h4.attribute-name.box-title {{ localize "MNM3E.Initiative" }}
                     .attribute-value
                         span {{numberFormat data.attributes.initiative decimals=0 sign=true}}
+                li.attribute.earned-power-points
+                    h4.attribute-name.box-title {{ localize "MNM3E.EarnedPowerPoints" }}
+                    .attribute-value
+                        input(type="number" name="data.earnedPowerPoints" value="{{data.earnedPowerPoints}}")
+                li.attribute.hero-points 
+                    h4.attribute-name.box-title {{ localize "MNM3E.HeroPoints" }}
+                    .attribute-value
+                        input(type="number" name="data.heroPoints" value="{{data.heroPoints}}")
+                li.attribute.penalty-points
+                    h4.attribute-name.box-title {{ localize "MNM3E.PenaltyPoints" }}
+                    .attribute-value
+                        input(type="number" name="data.attributes.penaltyPoints" value="{{data.attributes.penaltyPoints}}" placeholder="0")
 
     section.cost-breakdown.flexrow
         | {{#each data.pointCosts as |cost|}}

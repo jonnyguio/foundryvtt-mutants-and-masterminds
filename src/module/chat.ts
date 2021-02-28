@@ -6,9 +6,10 @@ export const displayCard = async (cardType: CardType, speaker: Speaker, template
     };
     const chatData = {
         user: game.user._id,
-        type: CONST.CHAT_MESSAGE_TYPES.OTHER,
+        type: CONST.CHAT_MESSAGE_TYPES.ROLL,
         content: html,
         speaker,
+        sound: CONFIG.sounds.dice,
         flags: chatFlags,
     };
 

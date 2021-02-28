@@ -1,0 +1,10 @@
+.mnm3e.chat-card.basic-roll-card(data-actor-id="{{actor._id}}")
+    header.card-header.flexrow
+        img(src="{{actor.img}}" title="{{actor.name}}" width="36" height="36")
+        h3.check-type {{ cardLabel }}
+
+    .card-content.flexcol
+        | {{#if content }}
+        p {{ content }}
+        | {{/if}}
+        | {{{ rollTemplate }}}

@@ -47,7 +47,7 @@ export default class Actor3e<T extends CommonActorData = CommonActorData> extend
             },
             total: {
                 value: 0,
-                label: game.i18n.localize('MNM3E.PointTotal'),
+                label: game.i18n.localize('MNM3E.PowerPointTotal'),
             }
         };
 
@@ -122,6 +122,54 @@ export default class Actor3e<T extends CommonActorData = CommonActorData> extend
         };
 
         return displayCard('check', ChatMessage.getSpeaker({ actor: this, token: this.token }), templateData);
+    }
+
+    public async rollAbility(abilityId: string): Promise<ChatMessage | object | void> {
+        return this.rollScore(CONFIG.MNM3E.abilities[abilityId], this.data.data.abilities[abilityId].total!);
+    }
+
+    public async rollDefense(defenseId: string): Promise<ChatMessage | object | void> {
+        return this.rollScore(CONFIG.MNM3E.defenses[defenseId], this.data.data.defenses[defenseId].total!);
+    }
+
+    public async rollSkill(skillId: string, subskillId: string): Promise<ChatMessage | object | void> {
+        const skill = this.data.data.skills[skillId];
+        let total = 0;
+        let label = '';
+        if (skill.type == 'static') {
+            total = skill.data.total as number;
+            label = CONFIG.MNM3E.skills[skillId];
+        } else if (subskillId) {
+            total = skill.data[subskillId].total as number;
+            label = skill.data[subskillId].displayName;
+        } else {
+            total = skill.base;
+            label = CONFIG.MNM3E.skills[skillId];
+        }
+
+        if (skill.trainedOnly && !skill.isTrained) {
+            return displayCard('basic-roll', ChatMessage.getSpeaker({ actor: this, token: this.token }), {
+                actor: this.data,
+                config: CONFIG.MNM3E,
+                data: this.data.data,
+                cardLabel: label,
+                content: game.i18n.localize('MNM3E.CannotRollUntrainedSkill'),
+            });
+        }
+
+        return this.rollScore(label, total);
+    }
+
+    private async rollScore(scoreLabel: string, scoreTotal: number): Promise<ChatMessage | object | void> {
+        const templateData = {
+            actor: this.data,
+            config: CONFIG.MNM3E,
+            data: this.data.data,
+            cardLabel: scoreLabel,
+            rollTemplate: await new Roll(`1d20 + ${scoreTotal}`).render(),
+        };
+
+        return displayCard('basic-roll', ChatMessage.getSpeaker({ actor: this, token: this.token}), templateData);
     }
 
     private _prepareAbilities(actorData: Actor.Data<T>): void {

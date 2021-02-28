@@ -12,6 +12,7 @@ header.card-header.flexrow
 .card-content.flexcol
     h4 {{ item.data.descriptor }}
     | {{{ item.data.description.value }}}
+
     | {{#each effects }}
     h4 
         | {{#if this.effect.data.summary.parsed}}
@@ -20,23 +21,30 @@ header.card-header.flexrow
         |   {{ this.effect.name }}
         | {{/if}}
     | {{{ this.effect.data.description.value }}}
+
     | {{#if this.canRoll}}
+
     | {{#if this.activationRoll}}
     h3 {{ localize "MNM3E.Activation" }}
     | {{{ this.activationRoll.template }}}
     span {{ localize "MNM3E.VersusAbbrev" }} {{ this.effect.data.activation.check.targetScore.label }}
     | {{/if}}
+
     | {{#if this.attackRoll}}
     h3 {{ localize "MNM3E.Attack" }}
     | {{{ this.attackRoll.template }}}
+
     span {{ localize "MNM3E.VersusAbbrev" }} {{ this.effect.data.action.roll.attack.targetScore.label }}
     | {{/if}}
+
     | {{#if this.resistInfo}}
     h3 {{ localize "MNM3E.ResistCheck" }}
     button(data-action="resist" data-effect-index="{{@index}}") {{ localize "MNM3E.DC" }} {{ this.resistInfo.dc }} {{ this.resistInfo.rollDetail.targetScore.label }}
     | {{/if}}
+    
     | {{else}}
     span {{ localize "MNM3E.NoUsesRemaining" }}
+
     | {{/if}}
     // Maybe not footer?
     footer.effect-footer

@@ -36,7 +36,7 @@ declare interface SkillDetail {
     ability: string;
     trainedOnly: boolean;
     actions: string[];
-    data: Skill | {[skillName: string]: Skill};
+    data: Skill & {[skillName: string]: Skill};
 
     // Prepared Data
     isTrained?: boolean;

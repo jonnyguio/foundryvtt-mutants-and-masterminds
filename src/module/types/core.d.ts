@@ -71,7 +71,7 @@ declare interface DataOptions {
     renderData?: any;
 }
 
-declare type CardType = 'check' | 'effects';
+declare type CardType = 'check' | 'effects' | 'basic-roll';
 
 declare interface Speaker {
     scene?: string;

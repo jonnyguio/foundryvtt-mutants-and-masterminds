@@ -2,14 +2,26 @@ import Item3e from '../../item/entity';
 import ScoreConfig from '../../apps/score-config';
 import { prepareActiveEffectCategories, onManagedActiveEffect } from '../../active-effects';
 import ItemSheet3e from '../../item/sheets/base';
+import Actor3e from '../entity';
+
+interface FavoriteItem {
+    label: string;
+    dataPath: string;
+    type: string;
+}
 
 export interface ExtendedActorSheetData<T extends CommonActorData & CreatureData> extends FoundryActorSheetData<T> {
     powers: Item<PowerData>[];
+    favoritePowers: Item<PowerData>[];
     advantages: Item<AdvantageData>[];
+    favoriteAdvantages: Item<AdvantageData>[];
     equipment: Item<EquipmentData>[];
+    favoriteEquipment: Item<EquipmentData>[];
+
+    favorites: FavoriteItem[];
 }
 
-export default abstract class ActorSheet3e<T extends CommonActorData & CreatureData, A extends Actor<T>> extends ActorSheet<T, A> {
+export default abstract class ActorSheet3e<T extends CommonActorData & CreatureData, A extends Actor3e<T>> extends ActorSheet<T, A> {
     /**
      * @override
      */
@@ -54,6 +66,9 @@ export default abstract class ActorSheet3e<T extends CommonActorData & CreatureD
         html.find('.effect-control').on('click', ev => onManagedActiveEffect(ev, this.actor));
         html.find('.config-button').on('click', this.onConfigMenu.bind(this));
         html.find('.item .item-name h4').on('click', this.onItemSummary.bind(this));
+        html.find('.ability-name').on('click', this.onRollAbilityCheck.bind(this));
+        html.find('.defense-name').on('click', this.onRollDefenseCheck.bind(this));
+        html.find('.skill-name, .subskill-name').on('click', this.onRollSkillCheck.bind(this));
 
         [
             'power',
@@ -73,6 +88,7 @@ export default abstract class ActorSheet3e<T extends CommonActorData & CreatureD
         const powers: Item<PowerData>[] = [];
         const advantages: Item<AdvantageData>[] = [];
         const equipment: Item<EquipmentData>[] = [];
+        const isFavorite = (item: any) => item.flags.mnm3e?.isFavorite;
         data.items.reduce((arr, item) => {
             let targetArray;
             switch (item.type) {
@@ -95,6 +111,16 @@ export default abstract class ActorSheet3e<T extends CommonActorData & CreatureD
         data.powers = powers;
         data.advantages = advantages;
         data.equipment = equipment;
+
+        data.favoritePowers = powers.filter(isFavorite);
+        data.favoriteAdvantages = advantages.filter(isFavorite);
+        data.favoriteEquipment = equipment.filter(isFavorite);
+
+        data.favorites = [
+            {label: 'MNM3E.FavoritePowers', dataPath: 'favoritePowers', type: 'power'},
+            {label: 'MNM3E.FavoriteAdvantages', dataPath: 'favoriteAdvantages', type: 'advantage'},
+            {label: 'MNM3E.FavoriteEquipment', dataPath: 'favoriteEquipment', type: 'equipment'},
+        ]
     }
 
     private onItemRoll(event: JQuery.ClickEvent): void {
@@ -108,6 +134,7 @@ export default abstract class ActorSheet3e<T extends CommonActorData & CreatureD
         event.preventDefault();
         const button = event.currentTarget;
         const closestItem = button.closest('li.item');
+        let item;
         switch (button.dataset.action) {
             case 'create':
                 const itemType = button.dataset.itemType;
@@ -118,11 +145,16 @@ export default abstract class ActorSheet3e<T extends CommonActorData & CreatureD
                 this.actor.createOwnedItem(itemData);
                 break;
             case 'edit':
-                const item = this.actor.getOwnedItem(closestItem?.dataset.itemId);
+                item = this.actor.getOwnedItem(closestItem?.dataset.itemId);
                 item?.sheet.render(true);
                 break;
             case 'delete':
                 this.actor.deleteOwnedItem(closestItem?.dataset.itemId);
+                break;
+            case 'favorite':
+                const favoriteKey = 'isFavorite'
+                item = this.actor.getOwnedItem(closestItem?.dataset.itemId);
+                item?.setFlag('mnm3e', favoriteKey, !(item.getFlag('mnm3e', favoriteKey) ?? false));
                 break;
         }
     }
@@ -158,5 +190,24 @@ export default abstract class ActorSheet3e<T extends CommonActorData & CreatureD
         }
 
         li.toggleClass(expandedClass);
+    }
+
+    private async onRollAbilityCheck(ev: JQuery.ClickEvent): Promise<void> {
+        ev.preventDefault();
+        await this.actor.rollAbility(ev.currentTarget.parentElement.dataset.ability);
+    }
+
+    private async onRollDefenseCheck(ev: JQuery.ClickEvent): Promise<void> {
+        ev.preventDefault();
+        await this.actor.rollDefense(ev.currentTarget.parentElement.dataset.defense);
+    }
+
+    private async onRollSkillCheck(ev: JQuery.ClickEvent): Promise<void> {
+        ev.preventDefault();
+        const container = ev.currentTarget.parentElement;
+        const skill = container.dataset.skill;
+        const subskill = container.dataset.subskill;
+
+        await this.actor.rollSkill(skill, subskill);
     }
 }

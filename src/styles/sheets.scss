@@ -4,6 +4,10 @@
 }
 
 .mnm3e.sheet {
+    .rollable:hover {
+        text-shadow: 0 0 8px red;
+    }
+
     .sheet-header {
         .summary {
             flex: 0 0 100%;

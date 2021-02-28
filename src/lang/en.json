@@ -8,22 +8,6 @@
     "ITEM.TypeModifier": "Modifier",
     "ITEM.TypePower": "Power",
 
-    "MNM3E.ActionStandard": "Standard Action",
-    "MNM3E.ActionMove": "Move Action",
-    "MNM3E.ActionFree": "Free Action",
-    "MNM3E.ActionReaction": "Reaction",
-
-    "MNM3E.ActiveEffectCreate": "Create",
-    "MNM3E.ActiveEffectDelete": "Delete",
-    "MNM3E.ActiveEffectDuration": "Duration",
-    "MNM3E.ActiveEffectEdit": "Edit",
-    "MNM3E.ActiveEffectInactive": "Inactive",
-    "MNM3E.ActiveEffectNew": "New Effect",
-    "MNM3E.ActiveEffectPassive": "Passive",
-    "MNM3E.ActiveEffectSource": "Source",
-    "MNM3E.ActiveEffectTemporary": "Temporary",
-    "MNM3E.ActiveEffectToggle": "Toggle",
-
     "MNM3E.Abilities": "Abilities",
     "MNM3E.AbilityScores": "Ability Scores",
     "MNM3E.Ability": "Ability",
@@ -44,7 +28,25 @@
     "MNM3E.AbilityPre": "Presence",
     "MNM3E.AbilityPreAbbrev": "pre",
 
+    "MNM3E.ActionStandard": "Standard Action",
+    "MNM3E.ActionMove": "Move Action",
+    "MNM3E.ActionFree": "Free Action",
+    "MNM3E.ActionReaction": "Reaction",
+
+    "MNM3E.ActiveEffectCreate": "Create",
+    "MNM3E.ActiveEffectDelete": "Delete",
+    "MNM3E.ActiveEffectDuration": "Duration",
+    "MNM3E.ActiveEffectEdit": "Edit",
+    "MNM3E.ActiveEffectInactive": "Inactive",
+    "MNM3E.ActiveEffectNew": "New Effect",
+    "MNM3E.ActiveEffectPassive": "Passive",
+    "MNM3E.ActiveEffectSource": "Source",
+    "MNM3E.ActiveEffectTemporary": "Temporary",
+    "MNM3E.ActiveEffectToggle": "Toggle",
+
     "MNM3E.Add": "Add",
+
+    "MNM3E.Advantages": "Advantages",
 
     "MNM3E.BaseOfOperations": "Base of Operations",
 
@@ -88,6 +90,7 @@
     "MNM3E.None": "None",
 
     "MNM3E.PowerLevel": "Power Level",
+    "MNM3E.PowerPointTotal": "Power Point Total",
     "MNM3E.Powers": "Powers",
 
     "MNM3E.Range": "Range",
