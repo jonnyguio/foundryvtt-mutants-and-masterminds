@@ -9,7 +9,7 @@ mixin score-config-button(scoreType, dataPath)
 
 .core-container.flexrow
     .ability-section.flexcol
-        h3.section-title {{ localize "MNM3E.AbilityScores" }}
+        h3.section-title {{ localize "MNM3E.Abilities" }}
             +score-config-button("Ability", "abilities")
         ul.ability-scores.flexrow
             | {{#each data.abilities as |ability key|}}

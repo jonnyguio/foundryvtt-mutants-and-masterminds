@@ -53,12 +53,24 @@ export default class Actor3e<T extends CommonActorData = CommonActorData> extend
 
         switch (actorData.type) {
             case 'character':
-                this._prepareCharacterData(actorData);
+                this.prepareCharacterData(actorData);
                 break;
             case 'npc':
-                this._prepareNPCData(actorData);
+                this.prepareNPCData(actorData);
                 break;
         }
+    }
+
+    /**
+     * @override
+     */
+    public prepareEmbeddedEntities(): void {
+        super.prepareEmbeddedEntities();
+        this.items.filter(item => ['power', 'equipment'].includes(item.type)).forEach(item => {
+            (item as any).effects.forEach((ae: ActiveEffect<any>) => {
+                this.effects.set(ae.id, ae);
+            });
+        })
     }
 
     /**
@@ -67,9 +79,9 @@ export default class Actor3e<T extends CommonActorData = CommonActorData> extend
     public prepareDerivedData(): void {
         const actorData = this.data;
 
-        this._prepareAbilities(actorData);
-        this._prepareDefenses(actorData);
-        this._prepareSkills(actorData);
+        this.prepareAbilities(actorData);
+        this.prepareDefenses(actorData);
+        this.prepareSkills(actorData);
 
         this.items.forEach(item => {
             switch (item.type) {
@@ -129,7 +141,8 @@ export default class Actor3e<T extends CommonActorData = CommonActorData> extend
     }
 
     public async rollDefense(defenseId: string): Promise<ChatMessage | object | void> {
-        return this.rollScore(CONFIG.MNM3E.defenses[defenseId], this.data.data.defenses[defenseId].total!);
+        const formula = `${this.data.data.defenses[defenseId].total} - ${Math.abs(this.data.data.attributes.penaltyPoints)}`;
+        return this.rollScore(CONFIG.MNM3E.defenses[defenseId], formula);
     }
 
     public async rollSkill(skillId: string, subskillId: string): Promise<ChatMessage | object | void> {
@@ -160,19 +173,19 @@ export default class Actor3e<T extends CommonActorData = CommonActorData> extend
         return this.rollScore(label, total);
     }
 
-    private async rollScore(scoreLabel: string, scoreTotal: number): Promise<ChatMessage | object | void> {
+    private async rollScore(scoreLabel: string, scoreFormula: string | number): Promise<ChatMessage | object | void> {
         const templateData = {
             actor: this.data,
             config: CONFIG.MNM3E,
             data: this.data.data,
             cardLabel: scoreLabel,
-            rollTemplate: await new Roll(`1d20 + ${scoreTotal}`).render(),
+            rollTemplate: await new Roll(`1d20 + ${scoreFormula}`).render(),
         };
 
         return displayCard('basic-roll', ChatMessage.getSpeaker({ actor: this, token: this.token}), templateData);
     }
 
-    private _prepareAbilities(actorData: Actor.Data<T>): void {
+    private prepareAbilities(actorData: Actor.Data<T>): void {
         const data = actorData.data;
 
         Object.values(data.abilities).forEach(ability => {
@@ -181,7 +194,7 @@ export default class Actor3e<T extends CommonActorData = CommonActorData> extend
         });
     }
 
-    private _prepareDefenses(actorData: Actor.Data<T>): void {
+    private prepareDefenses(actorData: Actor.Data<T>): void {
         const data = actorData.data;
 
         Object.values(data.defenses).forEach(defense => {
@@ -190,13 +203,13 @@ export default class Actor3e<T extends CommonActorData = CommonActorData> extend
         });
     }
 
-    private _prepareSkills(actorData: Actor.Data<T>): void {
+    private prepareSkills(actorData: Actor.Data<T>): void {
         const data = actorData.data;
 
         Object.values(data.skills).forEach(skill => {
             const evaluateSkill = (sd: SkillDetail, s: Skill) => {
                 sd.isTrained = false;
-                sd.base = data.abilities[sd.ability].rank;
+                sd.base += data.abilities[sd.ability].total!;
                 s.total = 0;
                 if (!sd.trainedOnly || (sd.trainedOnly && s.rank > 0)) {
                     sd.isTrained = true;
@@ -205,7 +218,9 @@ export default class Actor3e<T extends CommonActorData = CommonActorData> extend
                 data.pointCosts.skills.value += s.rank / 2;
             };
             if (skill.type == 'dynamic') {
-                skill.base = data.abilities[skill.ability].rank;
+                if (isObjectEmpty(skill.data)) {
+                    skill.base += data.abilities[skill.ability].total!;
+                }
                 Object.values(skill.data).forEach((s: Skill) => {
                     evaluateSkill(skill, s);
                 });
@@ -215,11 +230,11 @@ export default class Actor3e<T extends CommonActorData = CommonActorData> extend
         });
     }
 
-    private _prepareCharacterData(actorData: Actor.Data<T>): void {
+    private prepareCharacterData(actorData: Actor.Data<T>): void {
 
     }
 
-    private _prepareNPCData(actorData: Actor.Data<T>): void {
+    private prepareNPCData(actorData: Actor.Data<T>): void {
 
     }
 }

@@ -59,7 +59,9 @@
                 "info": {
                     "groupAffiliation": "",
                     "identity": "",
-                    "baseOfOperations": ""
+                    "baseOfOperations": "",
+                    "background": "",
+                    "notes": ""
                 }
             },
             "creature": {

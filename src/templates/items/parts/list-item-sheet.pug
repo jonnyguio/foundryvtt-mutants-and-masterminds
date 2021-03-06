@@ -1,7 +1,7 @@
 .list-item-summary.flexcol
     | {{{ data.description.value }}}
     | {{#if data.powerArray}}
-    ol.item-list
+    ol.item-list.subitem-list
         | {{#each data.powerArray as |power|}}
         li.item.flexrow(data-power-index="{{@index}}")
             .item-name.flexrow

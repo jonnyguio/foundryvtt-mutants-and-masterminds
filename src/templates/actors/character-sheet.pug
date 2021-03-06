@@ -40,8 +40,9 @@ form(class="{{cssClass}} flexcol" autocomplete="off")
         | {{/each}}
 
     nav.sheet-navigation.tabs(data-group="primary")
-        a.item.active(data-tab="core")| {{ localize "MNM3E.Core" }}
-        a.item(data-tab="catalog")| {{ localize "MNM3E.Catalog" }}
+        a.item.active(data-tab="core") {{ localize "MNM3E.Core" }}
+        a.item(data-tab="catalog") {{ localize "MNM3E.Catalog" }}
+        a.item(data-tab="notes") {{ localize "MNM3E.Notes" }}
         a.item(data-tab="effects") {{ localize "MNM3E.Effects" }}
 
     section.sheet-body
@@ -49,5 +50,7 @@ form(class="{{cssClass}} flexcol" autocomplete="off")
             | {{> "systems/mnm3e/templates/actors/parts/character-core.html" }}
         .tab.powers.flexcol(data-group="primary" data-tab="catalog")
             | {{> "systems/mnm3e/templates/actors/parts/character-catalog.html" }}
+        .tab.notes.flexrow(data-group="primary" data-tab="notes")
+            | {{> "systems/mnm3e/templates/actors/parts/actor-notes.html" }}
         .tab.effects.flexrow(data-group="primary" data-tab="effects")
             | {{> "systems/mnm3e/templates/actors/parts/actor-effects.html" }}

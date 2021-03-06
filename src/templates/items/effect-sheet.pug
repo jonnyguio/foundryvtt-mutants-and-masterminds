@@ -8,6 +8,7 @@ form(class="{{cssClass}} item-sheet-effect flexcol" autocomplete="off")
         a.item.active(data-tab="description") {{ localize "MNM3E.Description" }}
         a.item(data-tab="details") {{ localize "MNM3E.Details" }}
         a.item(data-tab="modifiers") {{ localize "MNM3E.Modifiers" }}
+        a.item(data-tab="effects") {{ localize "MNM3E.Effects" }}
 
     section.sheet-body
         .tab.description.flexrow.active(data-group="primary" data-tab="description")
@@ -32,5 +33,5 @@ form(class="{{cssClass}} item-sheet-effect flexcol" autocomplete="off")
             |       type="modifier"
             | }}
 
-        //- .tab.effects.flexrow(data-group="primary" data-tab="effects")
-        //-     | {{> "systems/mnm3e/templates/actors/parts/actor-effects.html" }}
+        .tab.effects.flexrow(data-group="primary" data-tab="effects")
+            | {{> "systems/mnm3e/templates/actors/parts/actor-effects.html" }}

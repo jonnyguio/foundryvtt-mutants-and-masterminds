@@ -15,6 +15,7 @@ import { registerSettings } from './module/settings.js';
 import { preloadTemplates } from './module/preloadTemplates.js';
 import Actor3e from './module/actor/entity';
 import ActorSheet3eCharacter from './module/actor/sheets/character';
+import ActorSheet3eNPC from './module/actor/sheets/npc';
 import Item3e from './module/item/entity';
 import ItemSheet3eAdvantage from './module/item/sheets/advantage';
 import ItemSheet3ePower from './module/item/sheets/power';
@@ -22,6 +23,7 @@ import ItemSheet3eEffect from './module/item/sheets/effect';
 import ItemSheet3eEquipment from './module/item/sheets/equipment';
 import ItemSheet3eModifier from './module/item/sheets/modifier';
 import { MNM3E } from './module/config';
+import { NamespacedActiveEffect } from './module/active-effects';
 import SummaryBuilder from './module/apps/summary-builder';
 import ScoreConfig from './module/apps/score-config';
 import PowerEffectTemplate from './module/pixi/power-effect-template';
@@ -44,15 +46,21 @@ Hooks.once('init', async function() {
     };
 
     CONFIG.MNM3E = MNM3E;
+    CONFIG.ActiveEffect.sheetClass = NamespacedActiveEffect;
     CONFIG.Actor.entityClass = Actor3e as typeof Actor;
     CONFIG.Item.entityClass = Item3e as typeof Item;
 
     // Assign custom classes and constants here
-    (Actors as any).unregisterSheet('core', ActorSheet);
-    (Actors as any).registerSheet('mnm3e', ActorSheet3eCharacter, {
+    Actors.unregisterSheet('core', ActorSheet);
+    Actors.registerSheet('mnm3e', ActorSheet3eCharacter, {
         types: ['character'],
         makeDefault: true,
         label: 'MNM3E.SheetClassCharacter',
+    });
+    Actors.registerSheet('mnm3e', ActorSheet3eNPC, {
+        types: ['npc'],
+        makeDefault: true,
+        label: 'MNM3E.SheetClassNPC',
     });
 
     Items.unregisterSheet('core', Item3e);
@@ -103,6 +111,7 @@ Hooks.once('setup', function() {
         'abilityAbbreviations',
         'actionTypes',
         'defenses',
+        'defenseAbbreviations',
         'measurements.mass',
         'measurements.time',
         'measurements.distance',
@@ -133,6 +142,7 @@ Hooks.once('setup', function() {
         not: v1 => !v1,
         isArr: v1 => Array.isArray(v1),
         getProp: getProperty,
+        titleCase: v1 => v1.titleCase(),
     });
 });
 

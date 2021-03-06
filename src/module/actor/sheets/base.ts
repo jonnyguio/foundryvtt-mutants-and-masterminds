@@ -3,22 +3,20 @@ import ScoreConfig from '../../apps/score-config';
 import { prepareActiveEffectCategories, onManagedActiveEffect } from '../../active-effects';
 import ItemSheet3e from '../../item/sheets/base';
 import Actor3e from '../entity';
-
-interface FavoriteItem {
-    label: string;
-    dataPath: string;
-    type: string;
-}
+import { Config } from '../../config';
 
 export interface ExtendedActorSheetData<T extends CommonActorData & CreatureData> extends FoundryActorSheetData<T> {
+    config: Config;
+    
     powers: Item<PowerData>[];
-    favoritePowers: Item<PowerData>[];
     advantages: Item<AdvantageData>[];
-    favoriteAdvantages: Item<AdvantageData>[];
     equipment: Item<EquipmentData>[];
-    favoriteEquipment: Item<EquipmentData>[];
 
-    favorites: FavoriteItem[];
+    summary: {
+        name: string;
+        value: string;
+        localizedKey: string;
+    }[];
 }
 
 export default abstract class ActorSheet3e<T extends CommonActorData & CreatureData, A extends Actor3e<T>> extends ActorSheet<T, A> {
@@ -39,6 +37,7 @@ export default abstract class ActorSheet3e<T extends CommonActorData & CreatureD
      */
     public getData(): ActorSheet.Data<T> {
         const sheetData = super.getData() as ExtendedActorSheetData<T>;
+        sheetData.config = CONFIG.MNM3E;
 
         Object.entries(sheetData.data.abilities).forEach(([name, ability]) => {
             ability.label = CONFIG.MNM3E.abilities[name];
@@ -55,6 +54,24 @@ export default abstract class ActorSheet3e<T extends CommonActorData & CreatureD
         this.prepareItems(sheetData);
 
         sheetData.effects = prepareActiveEffectCategories((this.entity as any).effects);
+
+        sheetData.summary = [
+            {
+                name: 'data.identity',
+                value: sheetData.data.info.identity,
+                localizedKey: 'MNM3E.Identity',
+            },
+            {
+                name: 'data.groupAffiliation',
+                value: sheetData.data.info.groupAffiliation,
+                localizedKey: 'MNM3E.GroupAffiliation',
+            },
+            {
+                name: 'data.baseOfOperations',
+                value: sheetData.data.info.baseOfOperations,
+                localizedKey: 'MNM3E.BaseOfOperations',
+            },
+        ];
 
         return sheetData;
     }
@@ -88,7 +105,6 @@ export default abstract class ActorSheet3e<T extends CommonActorData & CreatureD
         const powers: Item<PowerData>[] = [];
         const advantages: Item<AdvantageData>[] = [];
         const equipment: Item<EquipmentData>[] = [];
-        const isFavorite = (item: any) => item.flags.mnm3e?.isFavorite;
         data.items.reduce((arr, item) => {
             let targetArray;
             switch (item.type) {
@@ -111,16 +127,6 @@ export default abstract class ActorSheet3e<T extends CommonActorData & CreatureD
         data.powers = powers;
         data.advantages = advantages;
         data.equipment = equipment;
-
-        data.favoritePowers = powers.filter(isFavorite);
-        data.favoriteAdvantages = advantages.filter(isFavorite);
-        data.favoriteEquipment = equipment.filter(isFavorite);
-
-        data.favorites = [
-            {label: 'MNM3E.FavoritePowers', dataPath: 'favoritePowers', type: 'power'},
-            {label: 'MNM3E.FavoriteAdvantages', dataPath: 'favoriteAdvantages', type: 'advantage'},
-            {label: 'MNM3E.FavoriteEquipment', dataPath: 'favoriteEquipment', type: 'equipment'},
-        ]
     }
 
     private onItemRoll(event: JQuery.ClickEvent): void {

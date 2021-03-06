@@ -15,12 +15,12 @@ onto effects to override these parameters and the effect itself can be dropped i
 - [ ] Character
     - [x] Data model
     - [x] Sheet rendering
-    - [ ] Complete sheet layout
+    - [x] Complete sheet layout
     - [ ] Sheet CSS Styling
 - [ ] NPC
-    - [ ] Data model
-    - [ ] Sheet rendering
-    - [ ] Complete sheet layout
+    - [x] Data model
+    - [x] Sheet rendering
+    - [x] Complete sheet layout
     - [ ] Sheet CSS Styling
 - [ ] Powers and Equipment
     - [x] Data model

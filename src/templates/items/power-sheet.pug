@@ -9,6 +9,7 @@ form(class="{{cssClass}} item-sheet-power flexcol" autocomplete="off")
     nav.sheet-navigation.tabs(data-group="primary")
         a.item.active(data-tab="description") {{ localize "MNM3E.Description" }}
         a.item(data-tab="details") {{ localize "MNM3E.Details" }}
+        a.item(data-tab="effects") {{ localize "MNM3E.Effects" }}
 
     section.sheet-body
         .tab.description.flexcol.active(data-group="primary" data-tab="description")
@@ -17,7 +18,7 @@ form(class="{{cssClass}} item-sheet-power flexcol" autocomplete="off")
                 span {{ data.summary }}
             .flexrow
                 label {{ localize "MNM3E.PowerTotalCost" }}
-                span {{ data.totalCost }}
+                span {{ numberFormat data.totalCost decimals=2 sign=false }}
 
             | {{editor content=data.description.value target="data.description.value" button=true owner=owner editable=editable}}
 
@@ -35,3 +36,6 @@ form(class="{{cssClass}} item-sheet-power flexcol" autocomplete="off")
             |       header=(localize "MNM3E.PowerArray")
             |       type="power"
             | }}
+
+        .tab.effects.flexcol(data-group="primary" data-tab="effects")
+            | {{> "systems/mnm3e/templates/actors/parts/actor-effects.html" readOnly=true }}

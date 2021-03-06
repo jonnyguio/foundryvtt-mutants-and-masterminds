@@ -35,6 +35,42 @@
         flex: 0 0 100%;
     }
 
+    .item-list.subitem-list{
+        margin: 0%;
+    }
+
+    .items-header{
+        background: rgb(25,140,255);
+        border-radius: $sectionBorderRadius;
+        .item-name{
+            text-align: left ;
+            font-size: 1.125em;
+            color: white;
+            padding-left: 10px;
+            margin: 0;
+        }
+    }
+
+    .item-list:not(.subitem-list) {
+        background-color: $tabFillerBackground;
+        border: $sectionBorder;
+        border-radius: $sectionBorderRadius;
+        h4 {
+            size: 20px;
+            display: flex;
+            align-items: flex-end;
+        }
+        .item-list { 
+            border: none;
+        }
+        h4 {
+            size:15px;
+        }
+        .item {
+            background-color: rgba(0, 0, 0, 0.034);
+            margin: 2px;
+        }
+    }
 
     .tox-toolbar-overlord,
     .tox-toolbar__primary {
@@ -82,6 +118,17 @@
         .summary-controls{
             flex: 0 1 10%;
             align-items: flex-start;
+        }
+    }
+
+    .favorites-section {
+        margin-top: 4px;
+        ol {
+            padding: 0px;
+            flex: 0 1 auto;
+            margin: 4px 8px;
+            border:  $sectionBorder;
+            border-radius: $sectionBorderRadius;
         }
     }
 }

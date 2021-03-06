@@ -65,6 +65,14 @@ export type Config = {
         wil: string;
     };
 
+    defenseAbbreviations: {
+        dge: string;
+        pry: string;
+        frt: string;
+        tgh: string;
+        wil: string;
+    };
+
     durationTypes: {
         instant: string;
         concentration: string;
@@ -201,6 +209,13 @@ export const MNM3E: Config = {
         frt: 'MNM3E.DefenseFrt',
         tgh: 'MNM3E.DefenseTgh',
         wil: 'MNM3E.DefenseWil',
+    },
+    defenseAbbreviations: {
+        dge: 'MNM3E.DefenseDgeAbbrev',
+        pry: 'MNM3E.DefensePryAbbrev',
+        frt: 'MNM3E.DefenseFrtAbbrev',
+        tgh: 'MNM3E.DefenseTghAbbrev',
+        wil: 'MNM3E.DefenseWilAbbrev',
     },
     durationTypes: {
         instant: 'MNM3E.DurationInstant',

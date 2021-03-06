@@ -1,0 +1,11 @@
+.notes-entries.left-notes
+    article.background-notes
+        .section-titles {{ localize "MNM3E.Background" }}
+        | {{editor content=data.info.background target="data.info.background" button=true owner=owner editable=editable}}
+
+| {{#if (eq actor.type "character")}}
+.notes-entries.right-notes
+    article.journal-notes
+        .section-titles {{ localize "MNM3E.Notes" }}
+        | {{editor content=data.info.notes target="data.info.notes" button=true owner=owner editable=editable}}
+| {{/if}}

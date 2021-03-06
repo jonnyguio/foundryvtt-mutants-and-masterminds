@@ -1,12 +1,18 @@
 import ActorSheet3e, { ExtendedActorSheetData } from './base';
 import Actor3e from '../entity';
 
+interface FavoriteItem {
+    label: string;
+    dataPath: string;
+    type: string;
+}
+
 interface ExtendedCharacterSheetData extends ExtendedActorSheetData<CharacterData> {
-    summary: {
-        name: string;
-        value: string;
-        localizedKey: string;
-    }[];
+    favoritePowers: Item<PowerData>[];
+    favoriteAdvantages: Item<AdvantageData>[];
+
+    favoriteEquipment: Item<EquipmentData>[];
+    favorites: FavoriteItem[];
 }
 
 export default class ActorSheet3eCharacter extends ActorSheet3e<CharacterData, Actor3e<CharacterData>> {
@@ -26,23 +32,6 @@ export default class ActorSheet3eCharacter extends ActorSheet3e<CharacterData, A
      */
     public getData(): ActorSheet.Data<CharacterData> {
         const sheetData = super.getData() as ExtendedCharacterSheetData;
-        sheetData.summary = [
-            {
-                name: 'data.identity',
-                value: sheetData.data.info.identity,
-                localizedKey: 'MNM3E.Identity',
-            },
-            {
-                name: 'data.groupAffiliation',
-                value: sheetData.data.info.groupAffiliation,
-                localizedKey: 'MNM3E.GroupAffiliation',
-            },
-            {
-                name: 'data.baseOfOperations',
-                value: sheetData.data.info.baseOfOperations,
-                localizedKey: 'MNM3E.BaseOfOperations',
-            },
-        ];
 
         return sheetData;
     }
@@ -52,5 +41,24 @@ export default class ActorSheet3eCharacter extends ActorSheet3e<CharacterData, A
      */
     protected activateListeners(html: JQuery<HTMLElement>): void {
         super.activateListeners(html);
+    }
+
+    /**
+     * @override
+     */
+    protected prepareItems(incomingData: ActorSheet.Data<CharacterData>): void {
+        super.prepareItems(incomingData);
+        const data = incomingData as ExtendedCharacterSheetData;
+    
+        const isFavorite = (item: any) => item.flags.mnm3e?.isFavorite;
+        data.favoritePowers = data.powers.filter(isFavorite);
+        data.favoriteAdvantages = data.advantages.filter(isFavorite);
+        data.favoriteEquipment = data.equipment.filter(isFavorite);
+
+        data.favorites = [
+            {label: 'MNM3E.FavoritePowers', dataPath: 'favoritePowers', type: 'power'},
+            {label: 'MNM3E.FavoriteAdvantages', dataPath: 'favoriteAdvantages', type: 'advantage'},
+            {label: 'MNM3E.FavoriteEquipment', dataPath: 'favoriteEquipment', type: 'equipment'},
+        ];
     }
 }

@@ -6,6 +6,8 @@ export const preloadTemplates = async function() {
         "systems/mnm3e/templates/actors/parts/character-core.html",
         "systems/mnm3e/templates/actors/parts/character-catalog.html",
         "systems/mnm3e/templates/actors/parts/actor-effects.html",
+        "systems/mnm3e/templates/actors/parts/actor-notes.html",
+        "systems/mnm3e/templates/actors/parts/npc-core.html",
 
         // Item
         "systems/mnm3e/templates/items/parts/header-sheet.html",

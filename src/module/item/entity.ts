@@ -33,6 +33,28 @@ export default class Item3e<T = any> extends Item<T> {
         this.prepareMNM3EData();
     }
 
+    /**
+     * @override
+     */
+    public prepareEmbeddedEntities(): void {
+        if (['power', 'equipment'].includes(this.type)) {
+            const data = (this.data as unknown) as Item.Data<PowerData | EquipmentData> & { effects: ActiveEffect[]};
+            data.effects = [];
+            data.data.effects.forEach(effect => {
+                data.effects = data.effects.concat((effect as any).effects.map((ae: any) => {
+                    ae.changes.forEach((change: any) => {
+                        if (!change.originalValue) {
+                            change.originalValue = change.value;
+                        }
+                        change.value = change.originalValue.replace('@rank', effect.data.rank);
+                    })
+                    return ae;
+                }));
+            });
+        }
+        super.prepareEmbeddedEntities();
+    }
+
     public prepareMNM3EData(): void {
         this.fixArrays(this.data);
         switch(this.type) {
@@ -352,6 +374,9 @@ export default class Item3e<T = any> extends Item<T> {
                 modifier.data.cost.discountPer
             ));
 
+            if (perRankCost < 1) {
+                perRankCost = 1 / (Math.abs(perRankCost) + 2);
+            }
             totalPowerCost = totalPowerCost + (perRankCost * effect.data.rank) + flatCost;
         });
 

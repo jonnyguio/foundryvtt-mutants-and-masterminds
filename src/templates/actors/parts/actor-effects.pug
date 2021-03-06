@@ -4,10 +4,12 @@ ol.items-list.effects-list
         h3.item-name.effect-name.flexrow {{ section.label }}
         .effect-source {{ localize "MNM3E.ActiveEffectSource" }}
         .effect-duration {{ localize "MNM3E.ActiveEffectDuration" }}
+        | {{#if (not ../readOnly)}}
         .item-controls.effect-controls.flexrow
             a.effect-control(data-action="create" title="{{localize 'MNM3E.ActiveEffectCreate'}}")
                 i.fas.fa-plus
                 | {{ localize "MNM3E.Add" }}
+        | {{/if}}
         
     ol.item-list
         | {{#each section.effects as |effect|}}
@@ -17,6 +19,7 @@ ol.items-list.effects-list
                 h4 {{ effect.data.label }}
             .effect-source {{ effect.sourceName }}
             .effect-duration {{ effect.duration.label }}
+            | {{#if (not ../../readOnly)}}
             .item-controls.effect-controls.flexrow
                 a.effect-control(data-action="toggle" title="{{ localize 'MNM3E.ActiveEffectToggle' }}")
                     i(class="fas {{#if effect.data.disabled}}fa-check{{else}}fa-times{{/if}}")
@@ -24,6 +27,7 @@ ol.items-list.effects-list
                     i.fas.fa-edit
                 a.effect-control(data-action="delete" title="{{ localize 'MNM3E.ActiveEffectDelete' }}")
                     i.fas.fa-trash
+            | {{/if}}
         | {{/each}}
     
     | {{/each}}

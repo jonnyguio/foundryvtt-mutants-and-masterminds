@@ -81,6 +81,9 @@
             background-color: $tabFillerBackground;
             align-self: flex-start;
             margin-top: 6px;
+            .section-title{
+                margin-bottom: 0;
+            }
         }
 
         .ability-scores {
@@ -88,7 +91,7 @@
             align-self: flex-start;
             font-family: Charcoal, sans-serif;
             text-align: center;
-            border-top: $sectionBorder;
+            //border-top: $sectionBorder;
             margin: 0;
             padding-left: 2px;
             padding-right: 2px;
@@ -100,13 +103,11 @@
                 text-transform: uppercase;
                 background-color: $tabFillerBackground;
             }
-    
-            &:last-child {
+
+            :last-child {
                 border-bottom: none;
-                margin-bottom: 3px;
-                //background-color: rgba(224, 224, 224, 0.527);
             }
-    
+            
             span.ability-score {
                 height: 30px;
                 width: 36px;
@@ -123,17 +124,25 @@
             background-color: $tabFillerBackground;
             font-family: Charcoal, sans-serif;
             margin-top: 6px;
+            .section-title{
+                padding: 1px;
+            }
         }
     
+        .body-section {
+            flex: 0 1 auto;
+        }
+        
         .skill-section {
             max-width: fit-content;
-            max-height: fit-content;
-            flex: 0 0 175px;
             margin-top: 6px;
             border: $sectionBorder;
             border-radius: $sectionBorderRadius;
             font-family: Charcoal, sans-serif;
             background-color: $tabFillerBackground;
+            .section-title{
+                margin-bottom: 0;
+            }
 
             .untrained {
                 font-style: italic;
@@ -162,8 +171,8 @@
 
 h3.section-title {
     text-align: center;
-    margin-top: 6px;
     color: $tabFillerBackground;
     background: $editableBackground;
+    border-radius: 0 6px 0 6px;
     flex: 0 1 auto;
 }

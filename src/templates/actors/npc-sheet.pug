@@ -1,0 +1,28 @@
+form(class="{{cssClass}} flexcol" autocomplete="off")
+    header.sheet-header
+        img.profile(src="{{actor.img}}" data-edit="img" title="{{actor.name}}")
+        section.header-details.flexrow
+            h1.charname
+                input(name="name" type="text" value="{{actor.name}}" placeholder="{{ localize 'MNM3E.Name'}}")
+            aside.header-powerlevel
+                .powerlevel
+                    .form-group.input
+                        label {{ localize "MNM3E.PowerLevel" }}:
+                        input(type="text" name="data.attributes.powerLevel" value="{{data.attributes.powerLevel}}" data-dtype="Number" placeholder="1")
+            ul.summary.flexrow
+                | {{#each summary as |summary|}}
+                li
+                    input(type="text" name="{{ summary.name }}" value="{{ summary.value }}" placeholder="{{ localize summary.localizedKey }}")
+                | {{/each}}
+
+        nav.sheet-navigation.tabs(data-group="primary")
+            a.item.active(data-tab="core") {{ localize 'MNM3E.Core' }}
+            a.item(data-tab="notes") {{ localize 'MNM3E.Notes' }}
+
+
+    section.sheet-body 
+        .tab.core.flexrow(data-group="primary" data-tab="core")
+            | {{> "systems/mnm3e/templates/actors/parts/npc-core.html" }}
+
+        .tab.notes.flexrow(data-group="primary" data-tab="notes")
+            | {{> "systems/mnm3e/templates/actors/parts/actor-notes.html" }}

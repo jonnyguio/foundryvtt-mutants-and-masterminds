@@ -1,6 +1,6 @@
 {
     "ACTOR.TypeCharacter": "Character",
-    "ACTOR.TypeNPC": "NPC",
+    "ACTOR.TypeNpc": "NPC",
 
     "ITEM.TypeAdvantage": "Advantage",
     "ITEM.TypeEffect": "Effect",
@@ -50,14 +50,21 @@
 
     "MNM3E.BaseOfOperations": "Base of Operations",
 
+    "MNM3E.Biography": "Biography",
+
     "MNM3E.Core": "Core",
 
     "MNM3E.Defenses": "Defenses",
     "MNM3E.DefenseDge": "Dodge",
+    "MNM3E.DefenseDgeAbbrev": "dge",
     "MNM3E.DefensePry": "Parry",
+    "MNM3E.DefensePryAbbrev": "pry",
     "MNM3E.DefenseFrt": "Fortitude",
+    "MNM3E.DefenseFrtAbbrev": "frt",
     "MNM3E.DefenseTgh": "Toughness",
+    "MNM3E.DefenseTghAbbrev": "tgh",
     "MNM3E.DefenseWil": "Willpower",
+    "MNM3E.DefenseWilAbbrev": "wil",
 
     "MNM3E.Description": "Description",
     "MNM3E.Details": "Details",

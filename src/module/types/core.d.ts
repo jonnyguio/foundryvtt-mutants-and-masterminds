@@ -20,6 +20,13 @@ declare interface ActiveEffectChange {
     value: any;
     mode: number;
     priority: number;
+
+    // Custom to mnm3e
+    flags: {
+        mnm3e: {
+            namespace: string;
+        };
+    } & {[k: string]: any};
 }
 
 declare class ActiveEffectConfig extends FormApplication {
