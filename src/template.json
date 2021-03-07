@@ -54,7 +54,15 @@
                 "attributes": {
                     "powerLevel": 0,
                     "initiative": 0,
-                    "penaltyPoints": 0
+                    "penaltyPoints": 0,
+                    "movement": {
+                        "burrowing": 0,
+                        "flight": 0,
+                        "leaping": 0,
+                        "speed": 0,
+                        "swim": 0,
+                        "teleport": 0
+                    }
                 },
                 "info": {
                     "groupAffiliation": "",

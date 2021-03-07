@@ -109,6 +109,15 @@ export type Config = {
         };
     };
 
+    movement: {
+        burrowing: string;
+        flight: string;
+        leaping: string;
+        speed: string;
+        swim: string;
+        teleport: string;
+    };
+
     rangeTypes: {
         personal: string;
         close: string;
@@ -154,7 +163,7 @@ export type Config = {
 
     summaryPositions: {
         prefix: string;
-        postfix: string;
+        suffix: string;
     };
 } & {[key: string]: any};
 
@@ -178,6 +187,14 @@ export const MNM3E: Config = {
         int: 'MNM3E.AbilityIntAbbrev',
         awe: 'MNM3E.AbilityAweAbbrev',
         pre: 'MNM3E.AbilityPreAbbrev',
+    },
+    actionTypes: {
+        attack: 'MNM3E.EffectTypeAttack',
+        control: 'MNM3E.EffectTypeControl',
+        defense: 'MNM3E.EffectTypeDefense',
+        general: 'MNM3E.EffectTypeGeneral',
+        movement: 'MNM3E.EffectTypeMovement',
+        sensory: 'MNM3E.EffectTypeSensory',
     },
     activationTypes: {
         none: 'MNM3E.None',
@@ -224,14 +241,6 @@ export const MNM3E: Config = {
         continuous: 'MNM3E.DurationContinuous',
         permanent: 'MNM3E.DurationPermanent',
     },
-    actionTypes: {
-        attack: 'MNM3E.EffectTypeAttack',
-        control: 'MNM3E.EffectTypeControl',
-        defense: 'MNM3E.EffectTypeDefense',
-        general: 'MNM3E.EffectTypeGeneral',
-        movement: 'MNM3E.EffectTypeMovement',
-        sensory: 'MNM3E.EffectTypeSensory',
-    },
     measurements: {
         mass: {
             lbs: 'MNM3E.MassPoundsAbbrev',
@@ -239,25 +248,33 @@ export const MNM3E: Config = {
             ktons: 'MNM3E.MassKiloTonsAbbrev',
         },
         time: {
-            seconds: 'MNM3E.TimeSeconds',
-            minutes: 'MNM3E.TimeMinutes',
-            hours: 'MNM3E.TimeHours',
+            seconds: 'MNM3E.TimeSecondsAbbrev',
+            minutes: 'MNM3E.TimeMinutesAbbrev',
+            hours: 'MNM3E.TimeHoursAbbrev',
             days: 'MNM3E.TimeDays',
             weeks: 'MNM3E.TimeWeeks',
             months: 'MNM3E.TimeMonths',
             years: 'MNM3E.TimeYears',
         },
         distance: {
-            inches: 'MNM3E.DistanceInches',
-            feet: 'MNM3E.DistanceFeet',
-            miles: 'MNM3E.DistanceMiles',
-            mmiles: 'MNM3E.DistanceMillionMiles',
+            inches: 'MNM3E.DistanceInchesAbbrev',
+            feet: 'MNM3E.DistanceFeetAbbrev',
+            miles: 'MNM3E.DistanceMilesAbbrev',
+            mmiles: 'MNM3E.DistanceMillionMilesAbbrev',
         },
         volume: {
             cft: 'MNM3E.VolumeCubicFeetAbbrev',
             mcft: 'MNM3E.VolumeMillionCubicFeetAbbrev',
             bcft: 'MNM3E.VolumeBillionCubicFeetAbbrev',
         },
+    },
+    movement: {
+        burrowing: 'MNM3E.MovementBurrowing',
+        flight: 'MNM3E.MovementFlight',
+        leaping: 'MNM3E.MovementLeaping',
+        speed: 'MNM3E.MovementSpeed',
+        swim: 'MNM3E.MovementSwim',
+        teleport: 'MNM3E.MovementTeleport',
     },
     rangeTypes: {
         personal: 'MNM3E.RangeTypePersonal',
@@ -299,6 +316,6 @@ export const MNM3E: Config = {
     },
     summaryPositions: {
         prefix: 'MNM3E.SummaryPrefix',
-        postfix: 'MNM3E.SummaryPostfix',
+        suffix: 'MNM3E.SummarySuffix',
     },
 }

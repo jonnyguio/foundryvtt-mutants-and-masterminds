@@ -86,10 +86,20 @@ declare type Skills = {
     vhc: SkillDetail;
 } & {[skillAbbrev: string]: SkillDetail};
 
+declare interface Movement {
+    burrowing: number;
+    flight: number;
+    leaping: number;
+    speed: number;
+    swim: number;
+    teleport: number;
+}
+
 declare interface Attributes {
     initiative: number;
     powerLevel: number;
     penaltyPoints: number;
+    movement: Movement;
 }
 
 declare interface ActorInfo {

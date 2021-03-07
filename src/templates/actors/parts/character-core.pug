@@ -30,24 +30,25 @@ mixin score-config-button(scoreType, dataPath)
         .body-section.flexrow
             .skill-section.flexcol
                 - const untrainedStatement = "{{#if (and skill.trainedOnly (not skill.isTrained))}}untrained{{/if}}"
+                - const rollableStatement = "{{#if (or skill.isTrained (not skill.trainedOnly))}}rollable{{/if}}"
                 h3.section-title {{ localize "MNM3E.Skills" }}
                     +score-config-button("Skill", "skills")
                 ul.skills-list
                     | {{#each data.skills as |skill key|}}
                     | {{#if (eq skill.type "dynamic")}}
                     li.skill.flexrow(class=untrainedStatement data-skill="{{key}}")
-                        label.skill-name.rollable {{skill.label}}
+                        label.skill-name(class=rollableStatement) {{skill.label}}
                         span.skill-score {{numberFormat skill.base decimals=0 sign=true}}
                     | {{#if (not (emptyObj skill.data))}}
                     | {{#each skill.data as |subskill subKey|}}
                     li.subskill.flexrow(data-skill="{{key}}" data-subskill="{{subKey}}")
-                        label.subskill-name.rollable - {{subskill.displayName}}
+                        label.subskill-name(class=rollableStatement) - {{subskill.displayName}}
                         span.skill-score {{numberFormat subskill.total decimals=0 sign=true}}
                     | {{/each}}
                     | {{/if}}
                     | {{else}}
                     li.skill.flexrow(class=untrainedStatement data-skill="{{key}}")
-                        label.skill-name.rollable {{skill.label}}
+                        label.skill-name(class=rollableStatement) {{skill.label}}
                         span.skill-score {{numberFormat skill.data.total decimals=0 sign=true}}
                     | {{/if}}
                     | {{/each}}

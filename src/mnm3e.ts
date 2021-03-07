@@ -110,15 +110,21 @@ Hooks.once('setup', function() {
         'abilities',
         'abilityAbbreviations',
         'actionTypes',
+        'activationTypes',
+        'areaTypes',
         'defenses',
         'defenseAbbreviations',
+        'durationTypes',
         'measurements.mass',
         'measurements.time',
         'measurements.distance',
         'measurements.volume',
+        'movement',
         'rangeTypes',
         'rankCostTypes',
+        'rollTypes',
         'skills',
+        'summaryPositions',
     ];
 
     toLocalize.forEach(o => {
@@ -126,10 +132,10 @@ Hooks.once('setup', function() {
             ([name, identifier]) => [name, game.i18n.localize(identifier as string)]
         );
 
-        CONFIG.MNM3E[o] = localized.reduce((obj: any, e: string[]) => {
+        setProperty(CONFIG.MNM3E, o, localized.reduce((obj: any, e: string[]) => {
             obj[e[0]] = e[1];
             return obj;
-        }, {});
+        }, {}));
     });
 
     Handlebars.registerHelper({

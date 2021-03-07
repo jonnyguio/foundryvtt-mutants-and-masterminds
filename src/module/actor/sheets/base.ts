@@ -4,6 +4,7 @@ import { prepareActiveEffectCategories, onManagedActiveEffect } from '../../acti
 import ItemSheet3e from '../../item/sheets/base';
 import Actor3e from '../entity';
 import { Config } from '../../config';
+import { getMeasurement } from '../../measurements';
 
 export interface ExtendedActorSheetData<T extends CommonActorData & CreatureData> extends FoundryActorSheetData<T> {
     config: Config;
@@ -11,6 +12,10 @@ export interface ExtendedActorSheetData<T extends CommonActorData & CreatureData
     powers: Item<PowerData>[];
     advantages: Item<AdvantageData>[];
     equipment: Item<EquipmentData>[];
+    movement: {
+        main: string;
+        special?: string;
+    };
 
     summary: {
         name: string;
@@ -52,6 +57,19 @@ export default abstract class ActorSheet3e<T extends CommonActorData & CreatureD
         });
 
         this.prepareItems(sheetData);
+
+        const speedMeasurement = getMeasurement('distance', sheetData.data.attributes.movement.speed);
+        sheetData.movement = {
+            main: `${CONFIG.MNM3E.movement.speed} ${sheetData.data.attributes.movement.speed} (${speedMeasurement.value} ${speedMeasurement.units})`,
+            special: Object.entries(sheetData.data.attributes.movement).map(([name, value]) => {
+                if (name == 'speed' || value == 0) {
+                    return undefined;
+                }
+
+                const measurement = getMeasurement('distance', value);
+                return `${name.titleCase()} ${value} (${measurement.value} ${measurement.units})`;
+            }).filter(m => m).reduce((prev, current) => prev ? `${prev}, ${current}` : current, ''),
+        };
 
         sheetData.effects = prepareActiveEffectCategories((this.entity as any).effects);
 

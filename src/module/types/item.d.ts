@@ -1,4 +1,4 @@
-declare type SummaryPosition = 'prefix' | 'postfix';
+declare type SummaryPosition = 'prefix' | 'suffix';
 
 declare interface ItemSummary {
     summary: {

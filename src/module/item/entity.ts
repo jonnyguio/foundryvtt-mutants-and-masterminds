@@ -47,6 +47,10 @@ export default class Item3e<T = any> extends Item<T> {
                             change.originalValue = change.value;
                         }
                         change.value = change.originalValue.replace('@rank', effect.data.rank);
+                        const parsed = parseInt(change.value)
+                        if (Number.isSafeInteger(parsed)) {
+                            change.value = parsed;
+                        }
                     })
                     return ae;
                 }));
@@ -274,11 +278,11 @@ export default class Item3e<T = any> extends Item<T> {
         });
 
         if (data.data.summary.format == '') {
-            data.data.summary.format = `$prefix ${data.name} $rank $postfix`;
+            data.data.summary.format = `$prefix ${data.name} $rank $suffix`;
         }
 
         const prefix: string[] = [];
-        const postfix: string[] = [];
+        const suffix: string[] = [];
 
         data.data.modifiers.forEach(modifier => {
             overrideValues.forEach(key => {
@@ -310,8 +314,8 @@ export default class Item3e<T = any> extends Item<T> {
             });
 
             let targetList = prefix;
-            if (modifier.data.summary.position == 'postfix') {
-                targetList = postfix;
+            if (modifier.data.summary.position == 'suffix') {
+                targetList = suffix;
             }
 
             if (modifier.data.summary.parsed) {
@@ -326,7 +330,7 @@ export default class Item3e<T = any> extends Item<T> {
         data.data.summary.parsed = data.data.summary.format.
             replace('$rank', data.data.rank.toString()).
             replace('$prefix', prefix.join(' ')).
-            replace('$postfix', postfix.join(' ')).
+            replace('$suffix', suffix.join(' ')).
             trim();
 
         [

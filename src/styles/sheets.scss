@@ -22,7 +22,16 @@
         .editor{
             flex-wrap: nowrap;
             flex: 1 0 auto;
-            margin: 15px;
+            .editor-content {
+                border-left: $sectionBorderOpaque;
+                padding-left: 10px;
+            }
+        }
+        .item-editor {
+            .item-summary {
+                line-height: 30px;
+                border-bottom: $sectionBorderOpaque;
+            }
         }
     }
 
@@ -67,31 +76,38 @@
             size:15px;
         }
         .item {
-            background-color: rgba(0, 0, 0, 0.034);
             margin: 2px;
+        }
+
+        &:empty {
+            border: none;
         }
     }
 
     .tox-toolbar-overlord,
     .tox-toolbar__primary {
       border: $sectionBorder;
-      border-radius: $sectionBorderRadius;
-      background-color: rgba(224, 224, 224, 0.527);
+      background: rgba(133, 129, 129, 0.034);
     }
     .tox-edit-area{
-        border: $sectionBorder;
-        border-radius: $sectionBorderRadius;
+        border: $sectionBorderOpaque;
         font-family: Charcoal, sans-serif;
         background-color: rgba(224, 224, 224, 0.527);
     }
 
     .tabs {
         flex: 0 1 auto;
-        //margin: 2%;
+        margin-top: 2%;
+        margin-bottom: 2%;
         align-items: center;
         background: $editableBackground;
-        border-radius: $sectionBorderRadius;
-        border: $sectionBorder;
+        border-radius: 5px 5px 0 0;
+        :first-child {
+            border-radius: 5px 0 0 0;
+        }
+        :last-child {
+            border-radius: 0 5px 0 0;
+        }
         .item {
             font-size: 100%;
             font-family: Charcoal, sans-serif;
@@ -99,8 +115,7 @@
             padding: 1%;
         }
         .item.active {
-            background: rgba(197, 7, 7, 0.863);
-            border-radius: 5px,5px,0,0;
+            background: $selectedTab;
             text-size-adjust: 20%;
             color: white;
         }
@@ -109,6 +124,7 @@
     .item-properties {
         min-width: 10px;
         flex: 0 1 30%;
+        padding-right: 10px;
     }
 
     .tab {

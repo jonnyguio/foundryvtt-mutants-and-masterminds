@@ -89,9 +89,7 @@
         .ability-scores {
             list-style: none;
             align-self: flex-start;
-            font-family: Charcoal, sans-serif;
             text-align: center;
-            //border-top: $sectionBorder;
             margin: 0;
             padding-left: 2px;
             padding-right: 2px;
@@ -122,11 +120,7 @@
             border: $sectionBorder;
             border-radius: $sectionBorderRadius;
             background-color: $tabFillerBackground;
-            font-family: Charcoal, sans-serif;
             margin-top: 6px;
-            .section-title{
-                padding: 1px;
-            }
         }
     
         .body-section {
@@ -138,14 +132,13 @@
             margin-top: 6px;
             border: $sectionBorder;
             border-radius: $sectionBorderRadius;
-            font-family: Charcoal, sans-serif;
             background-color: $tabFillerBackground;
             .section-title{
                 margin-bottom: 0;
             }
 
             .untrained {
-                font-style: italic;
+                color: grey;
             }
 
             .subskill-name {
@@ -171,8 +164,10 @@
 
 h3.section-title {
     text-align: center;
+    font-family: Charcoal, sans-serif;
     color: $tabFillerBackground;
     background: $editableBackground;
     border-radius: 0 6px 0 6px;
     flex: 0 1 auto;
+    padding: 3px;
 }

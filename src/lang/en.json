@@ -33,6 +33,7 @@
     "MNM3E.ActionFree": "Free Action",
     "MNM3E.ActionReaction": "Reaction",
 
+    "MNM3E.ActivationCheck": "Activation Check",
     "MNM3E.ActiveEffectCreate": "Create",
     "MNM3E.ActiveEffectDelete": "Delete",
     "MNM3E.ActiveEffectDuration": "Duration",
@@ -48,11 +49,22 @@
 
     "MNM3E.Advantages": "Advantages",
 
-    "MNM3E.BaseOfOperations": "Base of Operations",
+    "MNM3E.Area": "Area",
 
+    "MNM3E.AttackCheck": "Attack Check",
+
+    "MNM3E.Background": "Background",
+    "MNM3E.BaseOfOperations": "Base of Operations",
     "MNM3E.Biography": "Biography",
 
+    "MNM3E.CannotRollUntrainedSkill": "Cannot roll untrained skills.",
+
+    "MNM3E.Catalog": "Catalog",
+    "MNM3E.Cancel": "Cancel",
     "MNM3E.Core": "Core",
+    "MNM3E.Cost": "Cost",
+    "MNM3E.CostType": "Cost Type",
+    "MNM3E.Custom": "Custom",
 
     "MNM3E.Defenses": "Defenses",
     "MNM3E.DefenseDge": "Dodge",
@@ -69,6 +81,24 @@
     "MNM3E.Description": "Description",
     "MNM3E.Details": "Details",
 
+    "MNM3E.DistanceInches": "inches",
+    "MNM3E.DistanceInchesAbbrev": "in.",
+    "MNM3E.DistanceFeet": "feet",
+    "MNM3E.DistanceFeetAbbrev": "ft.",
+    "MNM3E.DistanceMiles": "miles",
+    "MNM3E.DistanceMilesAbbrev": "mi.",
+    "MNM3E.DistanceMillionMiles": "million miles",
+    "MNM3E.DistanceMillionMilesAbbrev": "mmi.",
+
+    "MNM3E.Duration": "Duration",
+    "MNM3E.DurationInstant": "Instant",
+    "MNM3E.DurationConcentration": "Concentration",
+    "MNM3E.DurationSustained": "Sustained",
+    "MNM3E.DurationContinuous": "Continuous",
+    "MNM3E.DurationPermanent": "Permanent",
+
+    "MNM3E.EarnedPowerPoints": "Earned Power Points",
+
     "MNM3E.EffectBaseRange": "Base Range",
     "MNM3E.Effects": "Effects",
 
@@ -80,37 +110,78 @@
     "MNM3E.EffectTypeMovement": "Movement",
     "MNM3E.EffectTypeSensory": "Sensory",
 
+    "MNM3E.Equipment": "Equipment",
+
     "MNM3E.Expressions": "Expressions",
+    "MNM3E.Formula": "Formula",
 
     "MNM3E.GroupAffiliation": "Group Affiliation",
 
+    "MNM3E.HeroPoints": "Hero Points",
+
     "MNM3E.Identity": "Identity",
 
+    "MNM3E.Initiative": "Initiative",
+
+    "MNM3E.ItemActionDetails": "Action Details",
+    "MNM3E.ItemActionType": "Action Type",
+    "MNM3E.ItemActivationDetails": "Activation Details",
+    "MNM3E.ItemActivationType": "Activation Type",
     "MNM3E.ItemName": "Item Name",
+
+    "MNM3E.MassPoundsAbbrev": "lbs.",
+    "MNM3E.MassTons": "tons",
+    "MNM3E.MassKiloTonsAbbrev": "ktons",
 
     "MNM3E.Modifiers": "Modifiers",
     "MNM3E.ModifierExtra": "Extra",
     "MNM3E.ModifierFlaw": "Flaw",
     "MNM3E.ModifierParentEffect": "Parent Effect",
 
+    "MNM3E.Movement": "Movement",
+    "MNM3E.MovementBurrowing": "Burrowing",
+    "MNM3E.MovementFlight": "Flight",
+    "MNM3E.MovementLeaping": "Leaping",
+    "MNM3E.MovementSpeed": "Speed",
+    "MNM3E.MovementSwim": "Swim",
+    "MNM3E.MovementTeleport": "Teleport",
+
     "MNM3E.Name": "Name",
     "MNM3E.None": "None",
+    "MNM3E.Notes": "Notes",
 
+    "MNM3E.OK": "Ok",
+    "MNM3E.Overrides": "Overrides",
+
+    "MNM3E.PenaltyPoints": "Penalty Points",
     "MNM3E.PowerLevel": "Power Level",
     "MNM3E.PowerPointTotal": "Power Point Total",
+    "MNM3E.PowerTotalCost": "Power Total Cost",
     "MNM3E.Powers": "Powers",
+    "MNM3E.PowerArray": "Power Array",
+    "MNM3E.PowerSummary": "Power Summary",
 
     "MNM3E.Range": "Range",
     "MNM3E.RangeTypeClose": "Close",
     "MNM3E.RangeTypeRanged": "Ranged",
     "MNM3E.RangeTypePerception": "Perception",
     "MNM3E.RangeTypePersonal": "Personal",
+    "MNM3E.RangeTypeRank": "Rank",
 
     "MNM3E.Rank": "Rank",
     "MNM3E.RankCostType": "Rank Cost Type",
     "MNM3E.RankCostTypeFlat": "Flat",
     "MNM3E.RankCostTypePerRank": "Per Rank",
     "MNM3E.RankCostTypeDiscount": "Discount",
+
+    "MNM3E.Required": "Required",
+    "MNM3E.ResistDC": "Resist DC",
+
+    "MNM3E.ScoreConfig": "Score Config",
+    "MNM3E.ScoreName": "Name",
+    "MNM3E.ScoreNew": "New Score",
+    "MNM3E.ScoreRank": "Rank",
+    "MNM3E.ScoreTotal": "Total",
 
     "MNM3E.SheetClassCharacter": "Default 3e Character Sheet",
     "MNM3E.SheetClassItem": "Default 3e Item Sheet",
@@ -133,6 +204,11 @@
     "MNM3E.SkillTre": "Treatment",
     "MNM3E.SkillVhc": "Vehicle",
 
+    "MNM3E.SummaryBuilder": "Summary Builder",
+    "MNM3E.SummaryFormat": "Summary Format",
+    "MNM3E.SummaryPrefix": "Prefix",
+    "MNM3E.SummarySuffix": "Suffix",
+
     "MNM3E.TargetSelf": "Self",
     "MNM3E.TargetCharacter": "Character",
     "MNM3E.TargetAlly": "Ally",
@@ -146,6 +222,24 @@
     "MNM3E.TargetPerception": "Perception",
     "MNM3E.TargetShapeable": "Shapeable",
 
+    "MNM3E.TimeSeconds": "seconds",
+    "MNM3E.TimeSecondsAbbrev": "sec.",
+    "MNM3E.TimeMinutes": "minutes",
+    "MNM3E.TimeMinutesAbbrev": "min.",
+    "MNM3E.TimeHours": "hours",
+    "MNM3E.TimeHoursAbbrev": "hrs.",
+    "MNM3E.TimeDays": "days",
+    "MNM3E.TimeWeeks": "weeks",
+    "MNM3E.TimeMonths": "months",
+    "MNM3E.TimeYears": "years",
+
+    "MNM3E.Uses": "Uses",
+    "MNM3E.UsesOf": "Of",
+
     "MNM3E.Versus": "Versus",
-    "MNM3E.VersusAbbrev": "vs"
+    "MNM3E.VersusAbbrev": "vs",
+
+    "MNM3E.VolumeCubicFeetAbbrev": "cft.",
+    "MNM3E.VolumeMillionCubicFeetAbbrev": "mcft.",
+    "MNM3E.VolumeBillionCubicFeetAbbrev": "bcft."
 }

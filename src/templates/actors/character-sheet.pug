@@ -19,6 +19,12 @@ form(class="{{cssClass}} flexcol" autocomplete="off")
                     h4.attribute-name.box-title {{ localize "MNM3E.Initiative" }}
                     .attribute-value
                         span {{numberFormat data.attributes.initiative decimals=0 sign=true}}
+                li.attribute.movement
+                    h4.attribute-name.box-title {{ localize "MNM3E.Movement" }}
+                    .attribute-value
+                        span {{ movement.main }}
+                    footer.attribute-footer
+                        span {{ movement.special }}
                 li.attribute.earned-power-points
                     h4.attribute-name.box-title {{ localize "MNM3E.EarnedPowerPoints" }}
                     .attribute-value
