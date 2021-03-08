@@ -23,7 +23,6 @@ import ItemSheet3eEffect from './module/item/sheets/effect';
 import ItemSheet3eEquipment from './module/item/sheets/equipment';
 import ItemSheet3eModifier from './module/item/sheets/modifier';
 import { MNM3E } from './module/config';
-import { NamespacedActiveEffect } from './module/active-effects';
 import SummaryBuilder from './module/apps/summary-builder';
 import ScoreConfig from './module/apps/score-config';
 import PowerEffectTemplate from './module/pixi/power-effect-template';
@@ -46,7 +45,6 @@ Hooks.once('init', async function() {
     };
 
     CONFIG.MNM3E = MNM3E;
-    CONFIG.ActiveEffect.sheetClass = NamespacedActiveEffect;
     CONFIG.Actor.entityClass = Actor3e as typeof Actor;
     CONFIG.Item.entityClass = Item3e as typeof Item;
 

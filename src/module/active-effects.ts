@@ -1,83 +1,26 @@
 import Actor3e from "./actor/entity";
+import Item3e from "./item/entity";
 
-export class NamespacedActiveEffect extends ActiveEffectConfig {
-    /**
-     * @override
-     */
-    public activateListeners(html: JQuery<HTMLElement>): void {
-        html.find('ol.changes-list .mode select').on('change', this.onModeChange.bind(this));
-        super.activateListeners(html);
-    }
+export const onActiveEffect = (actor: Actor3e, change: ActiveEffectChange): boolean | void => {
+    const itemIdInActor = change.effect.data.origin.slice(change.effect.data.origin.lastIndexOf('.') + 1);
+    const item = actor.items.get(itemIdInActor) as Item3e;
+    const parent = (change.effect as any).parent;
 
-    /**
-     * @override
-     */
-    protected _injectHTML(html: JQuery<HTMLElement>, options: object = {}): void {
-        super._injectHTML(html, options);
-        this.updateNamespaceForm(html);
-    }
-
-    /**
-     * @override
-     */
-    protected _replaceHTML(element: JQuery<HTMLElement>, html: JQuery<HTMLElement>, options: object = {}): void {
-        super._replaceHTML(element, html, options);
-        this.updateNamespaceForm(html);
-    }
-
-    private onModeChange(ev: JQuery.ChangeEvent): void {
-        ev.preventDefault();
-        this.handleNamespaceInputInjection($(ev.currentTarget));
-    }
-
-    private updateNamespaceForm(html: JQuery<HTMLElement>): void {
-        const changesTab = html.find('section[data-tab="effects"]');
-        const changesList = changesTab.find('ol.changes-list li');
-        for (let i = 0; i < changesList.length; i++) {
-            const changeElement = changesList.eq(i);
-            const selectElement = changeElement.find('.mode select');
-            this.handleNamespaceInputInjection(selectElement);
-        }
-    }
-
-    private handleNamespaceInputInjection(selectElement: JQuery<HTMLElement>): void {
-        const changeElement = $(selectElement.closest('.effect-change'));
-        const effectIndex = changeElement.data('index');
-        const effectFlagsKey = `changes.${effectIndex}.flags`
-        let effectFlags = getProperty((this.object as any).data, effectFlagsKey);
-        if (!effectFlags) {
-            setProperty((this.object as any).data, effectFlagsKey, {});
-            effectFlags = getProperty((this.object as any).data, effectFlagsKey);
-        }
-        const namespaceKey = `mnm3e.namespace`;
-        if (!getProperty(effectFlags, namespaceKey)) {
-            setProperty(effectFlags, namespaceKey, '');
-        }
-
-        const changeMode = changeElement.find('.mode');
-        const namespaceElements = changeElement.find('.namespace');
-        if (selectElement.val() == CONST.ACTIVE_EFFECT_MODES.CUSTOM && namespaceElements.length <= 0) {
-            changeMode.after($(`
-                    <div class="namespace">
-                        <input type="text"
-                            name="${effectFlagsKey}.${namespaceKey}"
-                            value="${getProperty(effectFlags, namespaceKey)}"
-                            placeholder="${game.i18n.localize('MNM3E.Namespace')}">
-                        </input>
-                    </div>
-                `))
-        } else if (namespaceElements.length > 0) {
-            namespaceElements.remove();
-        }
-    }
-}
-
-export const onActiveEffect = (actor: Actor3e, change: ActiveEffectChange): boolean => {
-    if (change.flags?.mnm3e?.namespace != 'mnm3e') {
+    let data;
+    if (item) {
+        data = item.data;
+    } else if (['advantage', 'power', 'equipment'].includes(parent.data.type)) {
+        data = (change.effect as any).parent.data.data.effects.find((mnmEffect: any) => mnmEffect.effects.find((e: any) => e._id == change.effect.data._id));
+    } else {
         return true;
     }
+    let value = change.value.replace('@rank', data.data.rank);
+    const parsed = parseFloat(value);
+    if (Number.isNumeric(parsed)) {
+        value = parsed;
+    }
 
-    return false;
+    setProperty(actor.data, change.key, value);
 }
 
 export const onManagedActiveEffect = (event: JQuery.ClickEvent, owner: any): ActiveEffect | undefined => {

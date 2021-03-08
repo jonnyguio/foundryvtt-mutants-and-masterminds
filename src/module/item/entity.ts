@@ -41,19 +41,7 @@ export default class Item3e<T = any> extends Item<T> {
             const data = (this.data as unknown) as Item.Data<PowerData | EquipmentData> & { effects: ActiveEffect[]};
             data.effects = [];
             data.data.effects.forEach(effect => {
-                data.effects = data.effects.concat((effect as any).effects.map((ae: any) => {
-                    ae.changes.forEach((change: any) => {
-                        if (!change.originalValue) {
-                            change.originalValue = change.value;
-                        }
-                        change.value = change.originalValue.replace('@rank', effect.data.rank);
-                        const parsed = parseInt(change.value)
-                        if (Number.isSafeInteger(parsed)) {
-                            change.value = parsed;
-                        }
-                    })
-                    return ae;
-                }));
+                data.effects = data.effects.concat((effect as any).effects);
             });
         }
         super.prepareEmbeddedEntities();

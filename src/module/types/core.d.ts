@@ -20,6 +20,7 @@ declare interface ActiveEffectChange {
     value: any;
     mode: number;
     priority: number;
+    effect: ActiveEffect;
 
     // Custom to mnm3e
     flags: {
