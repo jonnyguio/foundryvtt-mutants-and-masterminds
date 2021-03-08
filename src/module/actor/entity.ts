@@ -82,6 +82,7 @@ export default class Actor3e<T extends CommonActorData = CommonActorData> extend
         this.prepareAbilities(actorData);
         this.prepareDefenses(actorData);
         this.prepareSkills(actorData);
+        actorData.data.attributes.initiative = actorData.data.abilities.agl.total!;
 
         this.items.forEach(item => {
             switch (item.type) {

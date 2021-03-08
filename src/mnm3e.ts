@@ -47,6 +47,7 @@ Hooks.once('init', async function() {
     CONFIG.MNM3E = MNM3E;
     CONFIG.Actor.entityClass = Actor3e as typeof Actor;
     CONFIG.Item.entityClass = Item3e as typeof Item;
+    (CONFIG.Combat as any).initiative.formula = '1d20 + @attributes.initiative';
 
     // Assign custom classes and constants here
     Actors.unregisterSheet('core', ActorSheet);
