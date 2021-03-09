@@ -1,6 +1,22 @@
 .mnm3e.sheet.actor.character {
     .cost-breakdown {
         flex: 0 1 auto;
+        .point-cost {
+            border: $sectionBorder;
+            padding-top: 9px;
+            text-align: center;
+            &:first-child {
+                border-radius: 0 0 0 10px;
+            }
+            &:last-child {
+                padding: 0;
+                border-radius: 0 10px 0 0;
+            }
+            span {
+                font-size: 12px;
+                padding-left: 3px;
+            }
+        }
     }
 
     h4.box-title {
@@ -27,8 +43,7 @@
             }
     
             .header-powerlevel {
-                flex: 0 0 150px;
-                height: 60px;
+                flex: 0 0 auto;
                 justify-content: flex-end;
                 text-align: right;
             }

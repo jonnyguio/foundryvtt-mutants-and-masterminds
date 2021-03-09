@@ -39,19 +39,11 @@ onto effects to override these parameters and the effect itself can be dropped i
 - [ ] Tools
     - [ ] Measurement calculator
 
-## Development Notes
+## Issues
+Feel free to submit issues and enhancement requests. This is a passion project so I will not be able to make every request in a timely fashion, but I will try to fix anything that doesn't already have a work around.
 
-### Why TypeScript?
-I've found TypeScript easier to use than raw JavaScript.
-[foundry-pc-types](https://gitlab.com/foundry-projects/foundry-pc/foundry-pc-types) has been
-very valuable in the interface and class definitions it provides. However, there have been a few
-interfaces and classes that I've had to override with my own definitions due to them being incomplete
-or out of date in certain areas. Currently there are places in the code where I cast to `any` to
-bypass these issues.
-
-### Why [pugjs](https://pugjs.org)?
-I find indentation scoped syntax is easier to work with and pugjs allows for a preprocessing layer.
-I plan on using most of the toolkit pugjs offers at a later point.
+## Contributing
+Once this project is in a stable state, contributions will be encouraged.
 
 ## Related Websites
 - https://foundryvtt.com

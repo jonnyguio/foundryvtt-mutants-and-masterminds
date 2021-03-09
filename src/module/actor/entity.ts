@@ -104,9 +104,12 @@ export default class Actor3e<T extends CommonActorData = CommonActorData> extend
         actorData.data.pointCosts.total.value = pointTotal;
         actorData.data.attributes.penaltyPoints = -Math.abs(actorData.data.attributes.penaltyPoints)
 
-        if (actorData.type == 'character') {
-            const characterData = (actorData.data as unknown) as CharacterData;
-            characterData.maxPowerPoints = 15 * characterData.attributes.powerLevel + characterData.powerPoints;
+        if (!this.getFlag('mnm3e', 'overrideMaxPoints')) {
+            actorData.data.maxPoints = 15 * actorData.data.attributes.powerLevel + ((actorData.data as any).earnedPowerPoints || 0);
+        }
+
+        if (actorData.data.pointCosts.total.value > actorData.data.maxPoints) {
+            actorData.data.pointCosts.total.cssClass = 'invalid-power-points';
         }
     }
 

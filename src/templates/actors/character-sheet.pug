@@ -4,11 +4,23 @@ form(class="{{cssClass}} flexcol" autocomplete="off")
         section.header-details.flexrow
             h1.charname
                 input(name="name" type="text" value="{{actor.name}}" placeholder="{{ localize 'MNM3E.Name' }}")
-            aside.header-powerlevel
+            aside.header-powerlevel.stacked
                 .powerlevel
                     .form-group.input
                         label {{ localize "MNM3E.PowerLevel" }}:
                         input(type="text" name="data.attributes.powerLevel" value="{{data.attributes.powerLevel}}" data-dtype="Number" placeholder="1")
+                .max-points
+                    .form-group.checkbox-input
+                        span: i.checkbox.fas(class="{{#if actor.flags.mnm3e.overrideMaxPoints}}fa-unlock{{else}}fa-lock{{/if}}")
+                        label {{ localize "MNM3E.MaxPowerPoints" }}:
+                        input(
+                            type="number"
+                            name="data.maxPoints"
+                            value="{{data.maxPoints}}"
+                            data-dtype="Number"
+                            placeholder="{{data.maxPoints}}"
+                        )&attributes({[`{{#if (not actor.flags.mnm3e.overrideMaxPoints)}}disabled{{/if}}`]: ''})
+
             ul.summary.flexrow
                 | {{#each summary as |summary|}}
                 li
@@ -42,7 +54,7 @@ form(class="{{cssClass}} flexcol" autocomplete="off")
         | {{#each data.pointCosts as |cost|}}
         .point-cost
             label {{ cost.label }}:
-            span {{ cost.value }}
+            span(class="{{cost.cssClass}}") {{ cost.value }}
         | {{/each}}
 
     nav.sheet-navigation.tabs(data-group="primary")
@@ -54,7 +66,7 @@ form(class="{{cssClass}} flexcol" autocomplete="off")
     section.sheet-body
         .tab.core.flexrow(data-group="primary" data-tab="core")
             | {{> "systems/mnm3e/templates/actors/parts/character-core.html" }}
-        .tab.powers.flexcol(data-group="primary" data-tab="catalog")
+        .tab.powers(data-group="primary" data-tab="catalog")
             | {{> "systems/mnm3e/templates/actors/parts/character-catalog.html" }}
         .tab.notes.flexrow(data-group="primary" data-tab="notes")
             | {{> "systems/mnm3e/templates/actors/parts/actor-notes.html" }}

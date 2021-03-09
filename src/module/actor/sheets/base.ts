@@ -114,6 +114,7 @@ export default abstract class ActorSheet3e<T extends CommonActorData & CreatureD
 
         if (this.actor.owner) {
             html.find('.item .item-image').on('click', this.onItemRoll.bind(this));
+            html.find('.max-points .checkbox').on('click', this.onMaxPointsOverrideToggle.bind(this));
         }
         super.activateListeners(html);
     }
@@ -233,5 +234,10 @@ export default abstract class ActorSheet3e<T extends CommonActorData & CreatureD
         const subskill = container.dataset.subskill;
 
         await this.actor.rollSkill(skill, subskill);
+    }
+
+    private async onMaxPointsOverrideToggle(ev: JQuery.ClickEvent): Promise<void> {
+        ev.preventDefault();
+        await this.actor.setFlag('mnm3e', 'overrideMaxPoints', !this.actor.getFlag('mnm3e', 'overrideMaxPoints'));
     }
 }

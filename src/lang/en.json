@@ -128,10 +128,13 @@
     "MNM3E.ItemActivationDetails": "Activation Details",
     "MNM3E.ItemActivationType": "Activation Type",
     "MNM3E.ItemName": "Item Name",
+    "MNM3E.ItemNewFormat": "New {type}",
 
     "MNM3E.MassPoundsAbbrev": "lbs.",
     "MNM3E.MassTons": "tons",
     "MNM3E.MassKiloTonsAbbrev": "ktons",
+
+    "MNM3E.MaxPowerPoints": "Max Power Points",
 
     "MNM3E.Modifiers": "Modifiers",
     "MNM3E.ModifierExtra": "Extra",
@@ -235,6 +238,7 @@
 
     "MNM3E.Uses": "Uses",
     "MNM3E.UsesOf": "Of",
+    "MNM3E.UsesRemainingFormat": "{remaining} Remaining",
 
     "MNM3E.Versus": "Versus",
     "MNM3E.VersusAbbrev": "vs",

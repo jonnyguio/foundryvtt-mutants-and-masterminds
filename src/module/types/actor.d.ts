@@ -111,6 +111,7 @@ declare interface ActorInfo {
 declare interface LabeledNumber {
     value: number;
     label: string;
+    cssClass?: string;
 }
 
 declare interface PointCosts {
@@ -131,6 +132,7 @@ declare interface CommonActorData {
 
     // Prepared Data
     pointCosts: PointCosts;
+    maxPoints: number;
 }
 
 declare interface CreatureData {
@@ -139,11 +141,7 @@ declare interface CreatureData {
 
 declare interface CharacterData extends CommonActorData, CreatureData {
     heroPoints: number;
-    powerPoints: number;
-
-    // Prepared Data
-    maxPowerPoints: number;
-
+    earnedPowerPoints: number;
 }
 
 declare interface NPCData extends CommonActorData, CreatureData {
