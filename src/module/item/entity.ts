@@ -369,7 +369,13 @@ export default class Item3e<T = any> extends Item<T> {
             if (perRankCost < 1) {
                 perRankCost = 1 / (Math.abs(perRankCost) + 2);
             }
-            totalPowerCost = totalPowerCost + (perRankCost * effect.data.rank) + flatCost;
+            let totalRankCost = perRankCost * effect.data.rank;
+            if (totalRankCost + flatCost >= 1) {
+                totalRankCost += flatCost;
+            } else {
+                totalRankCost = Math.min(totalRankCost, 1);
+            }
+            totalPowerCost = totalPowerCost + totalRankCost;
         });
 
         deferredCosts.forEach(dc => {

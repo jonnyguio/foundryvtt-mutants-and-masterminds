@@ -25,7 +25,7 @@ form(class="{{cssClass}} item-sheet-effect flexcol" autocomplete="off")
         .tab.modifiers.flexcol(data-group="primary" data-tab="modifiers")
             | {{>
             |       "systems/mnm3e/templates/items/parts/list-sheet.html"
-            |       dataPath="data.modifiers"
+            |       items=data.modifiers
             |       header=(localize "MNM3E.Modifiers")
             |       type="modifier"
             | }}

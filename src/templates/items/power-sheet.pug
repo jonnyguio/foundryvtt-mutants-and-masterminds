@@ -22,17 +22,17 @@ form(class="{{cssClass}} item-sheet-power flexcol" autocomplete="off")
 
             | {{editor content=data.description.value target="data.description.value" button=true owner=owner editable=editable}}
 
-        .tab.details.flexcol(data-group="primary" data-tab="details")
+        .tab.details(data-group="primary" data-tab="details")
             | {{>
             |       "systems/mnm3e/templates/items/parts/list-sheet.html"
-            |       dataPath="data.effects"
+            |       items=data.effects
             |       header=(localize "MNM3E.Effects")
             |       type="effect"
             | }}
 
             | {{>
             |       "systems/mnm3e/templates/items/parts/list-sheet.html"
-            |       dataPath="data.powerArray"
+            |       items=data.powerArray
             |       header=(localize "MNM3E.PowerArray")
             |       type="power"
             | }}

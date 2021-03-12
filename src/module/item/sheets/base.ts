@@ -113,7 +113,7 @@ export default class ItemSheet3e<T, I extends Item<T>> extends ItemSheet<T, I> {
         switch (target.dataset.action) {
             case 'create':
                 const newItem = await Item.create({
-                    name: `New ${target.dataset.itemType}`,
+                    name: `New ${target.dataset.itemType.titleCase()}`,
                     type: target.dataset.itemType
                 }, { temporary: true });
                 newItem.data._id = `${randomID(8)}-temp`;

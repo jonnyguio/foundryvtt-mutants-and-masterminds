@@ -57,7 +57,7 @@ mixin score-config-button(scoreType, dataPath)
 .catalog-section
     | {{>
     |       "systems/mnm3e/templates/items/parts/list-sheet.html"
-    |       dataPath="advantages"
+    |       items=advantages
     |       header=(localize "MNM3E.Advantages")
     |       type="advantage"
     |       iconClass="fa-sm"
@@ -65,7 +65,7 @@ mixin score-config-button(scoreType, dataPath)
 
     | {{>
     |       "systems/mnm3e/templates/items/parts/list-sheet.html"
-    |       dataPath="powers"
+    |       items=powers
     |       header=(localize "MNM3E.Powers")
     |       type="power"
     |       iconClass="fa-sm"
@@ -73,7 +73,7 @@ mixin score-config-button(scoreType, dataPath)
 
     | {{>
     |       "systems/mnm3e/templates/items/parts/list-sheet.html"
-    |       dataPath="equipment"
+    |       items=equipment
     |       header=(localize "MNM3E.Equipment")
     |       type="equipment"
     |       iconClass="fa-sm"
