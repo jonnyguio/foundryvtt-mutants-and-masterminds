@@ -28,11 +28,13 @@
     "MNM3E.AbilityPre": "Presence",
     "MNM3E.AbilityPreAbbrev": "pre",
 
-    "MNM3E.ActionStandard": "Standard Action",
-    "MNM3E.ActionMove": "Move Action",
-    "MNM3E.ActionFree": "Free Action",
+    "MNM3E.Action": "Action",
+    "MNM3E.ActionStandard": "Standard",
+    "MNM3E.ActionMove": "Move",
+    "MNM3E.ActionFree": "Free",
     "MNM3E.ActionReaction": "Reaction",
 
+    "MNM3E.Activation": "Activation",
     "MNM3E.ActivationCheck": "Activation Check",
     "MNM3E.ActiveEffectCreate": "Create",
     "MNM3E.ActiveEffectDelete": "Delete",
@@ -51,6 +53,7 @@
 
     "MNM3E.Area": "Area",
 
+    "MNM3E.Attack": "Attack",
     "MNM3E.AttackCheck": "Attack Check",
 
     "MNM3E.Background": "Background",
@@ -65,6 +68,8 @@
     "MNM3E.Cost": "Cost",
     "MNM3E.CostType": "Cost Type",
     "MNM3E.Custom": "Custom",
+
+    "MNM3E.DC": "DC",
 
     "MNM3E.Defenses": "Defenses",
     "MNM3E.DefenseDge": "Dodge",
@@ -179,6 +184,7 @@
     "MNM3E.RankCostTypeDiscount": "Discount",
 
     "MNM3E.Required": "Required",
+    "MNM3E.ResistCheck": "Resist Check",
     "MNM3E.ResistDC": "Resist DC",
 
     "MNM3E.ScoreConfig": "Score Config",

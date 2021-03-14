@@ -1,8 +1,73 @@
 @use 'sass:list';
 
 .mnm3e.chat-card {
-    .card-header img {
-        flex: 0 0 36px;
+    $header-height: 36px;
+    $card-border: 2px groove white;
+    $effect-border: 2px ridge white;
+
+    .card-header {
+        border-top: $card-border;
+        border-bottom: $card-border;
+        padding: 3px 0;
+        img {
+            flex: 0 0 $header-height;
+        }
+
+        h3 {
+            padding-left: 5px;
+            line-height: $header-height;
+            margin: 0;
+        }
+    }
+
+    .card-content {
+        h3, h4, p {
+            margin: 0;
+        }
+
+        .descriptor, .effect-summary {
+            font-weight: bold;
+        }
+
+        .effect-roll-type {
+            text-align: left;
+        }
+
+        .effect-versus {
+            text-align: right;
+        }
+
+        .card-description {
+            border-bottom: $card-border;
+        }
+
+        .roll-result, .roll-request {
+            margin-top: 5px;
+            border-bottom: $effect-border;
+        }
+
+        .roll-request {
+            padding-bottom: 4px;
+            .effect-roll-type {
+                text-align: center;
+            }
+
+            &:last-of-type {
+                border-bottom: $card-border;
+            }
+        }
+
+        .effect-footer {
+            span {
+                $footer-padding: 5px;
+                font-size: 10px;
+                padding-left: $footer-padding;
+                padding-right: $footer-padding;
+                &:not(&:last-child) {
+                    border-right: $card-border;
+                }
+            }
+        }
     }
 
     $fail-degrees: '.four-fail', '.three-fail', '.two-fail', '.one-fail';

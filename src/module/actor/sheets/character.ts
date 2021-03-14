@@ -8,10 +8,10 @@ interface FavoriteItem {
 }
 
 interface ExtendedCharacterSheetData extends ExtendedActorSheetData<CharacterData> {
-    favoritePowers: Item<PowerData>[];
-    favoriteAdvantages: Item<AdvantageData>[];
+    favoritePowers: Item.Data<PowerData>[];
+    favoriteAdvantages: Item.Data<AdvantageData>[];
 
-    favoriteEquipment: Item<EquipmentData>[];
+    favoriteEquipment: Item.Data<EquipmentData>[];
     favorites: FavoriteItem[];
 }
 

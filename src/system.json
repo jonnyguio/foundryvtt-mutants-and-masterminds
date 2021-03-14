@@ -3,7 +3,7 @@
   "title": "Mutants and Masterminds 3rd Edition",
   "description": "A system to support the third edition of Mutants and Masterminds.",
   "templateVersion": 2,
-  "version": "0.4.10",
+  "version": "0.4.11",
   "author": "matthewswar",
   "scripts": [],
   "esmodules": [

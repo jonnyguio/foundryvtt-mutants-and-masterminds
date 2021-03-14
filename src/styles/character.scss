@@ -2,9 +2,10 @@
     .cost-breakdown {
         flex: 0 1 auto;
         .point-cost {
-            border: $sectionBorder;
+            border: $sectionBorderOpaque;
             padding-top: 9px;
             text-align: center;
+            background-color: $tabFillerBackground;
             &:first-child {
                 border-radius: 0 0 0 10px;
             }
@@ -74,11 +75,23 @@
         }
     }
 
+    .sheet-navigation.tabs {
+        border: $sectionBorder;
+        border-bottom: none;
+        border-top: none;
+        margin: 8px 0 0 0 ;
+    }
+    .sheet-body {
+        border: $sectionBorder;
+        border-top: none;
+        padding: 6px;
+    }
+
     .core-container {
         label.box-title {
             height: 18px;
             line-height: 16px;
-            margin: 4px 8px 2px;
+            padding: 4px 8px 2px;
             font-size: 15px;
             color:rgb(49, 49, 49);
             border-bottom: 1px solid gray;
@@ -92,7 +105,7 @@
             margin-right: 6px;
             margin-top: 6px;
             border: $sectionBorder;
-            border-radius: $sectionBorderRadius;
+            border-radius:  0 5px 0 0;;
             background-color: $tabFillerBackground;
             align-self: flex-start;
             margin-top: 6px;

@@ -92,7 +92,7 @@ export default class Item3e<T = any> extends Item<T> {
                         config.activationTypes[effect.data.activation.type.value],
                         config.actionTypes[effect.data.action.type.value],
                         config.durationTypes[effect.data.activation.duration.type.value],
-                    ],
+                    ].filter(t => t),
                 };
 
                 if (effect.data.activation.uses.max.value > 0) {

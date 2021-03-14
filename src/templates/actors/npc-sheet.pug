@@ -18,6 +18,7 @@ form(class="{{cssClass}} flexcol" autocomplete="off")
         nav.sheet-navigation.tabs(data-group="primary")
             a.item.active(data-tab="core") {{ localize 'MNM3E.Core' }}
             a.item(data-tab="notes") {{ localize 'MNM3E.Notes' }}
+            a.item(data-tab="effects") {{ localize "MNM3E.Effects" }}
 
 
     section.sheet-body 
@@ -26,3 +27,6 @@ form(class="{{cssClass}} flexcol" autocomplete="off")
 
         .tab.notes.flexrow(data-group="primary" data-tab="notes")
             | {{> "systems/mnm3e/templates/actors/parts/actor-notes.html" }}
+
+        .tab.effects.flexrow(data-group="primary" data-tab="effects")
+            | {{> "systems/mnm3e/templates/actors/parts/actor-effects.html" }}

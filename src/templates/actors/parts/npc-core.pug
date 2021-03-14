@@ -36,28 +36,33 @@ mixin score-config-button(scoreType, dataPath)
                 span.defense-score {{ defense.total }}
             | {{/each}}
     .skills.flexcol
-        div
+        h4.section-title {{ localize 'MNM3E.Skills' }}
             +score-config-button('Skill', 'skills')
-            h4 {{ localize 'MNM3E.Skills' }}
         | {{#each data.skills as |skill skillName|}}
+        | {{#if (eq skill.type "static")}}
+        | {{#if (gt skill.data.rank 0)}}
         .skill(data-skill="{{skillName}}")
-            | {{#if (eq skill.type "static")}}
-            | {{#if (gt skill.data.rank 0)}}
             span.skill-name.rollable {{ skill.label }} {{ numberFormat skill.data.rank sign=true }}{{#if (ne skill.data.total skill.data.rank)}} ({{ numberFormat skill.data.total sign=true }}){{/if}}
-            | {{/if}}
-            | {{else}}
-            | {{#each skill.data as |subskill|}}
-            | {{#if (gt subskill.rank 0)}}
+        | {{/if}}
+        | {{else}}
+        | {{#each skill.data as |subskill subKey|}}
+        | {{#if (gt skill.data.rank 0)}}
+        .skill(data-skill="{{skillName}}")
+            span.skill-name.rollable {{ skill.label }} {{ numberFormat skill.data.rank sign=true }}{{#if (ne skill.data.total skill.data.rank)}} ({{ numberFormat skill.data.total sign=true }}){{/if}}
+        | {{/if}}
+        | {{#if (gt subskill.rank 0)}}
+        .subskill(data-skill="{{skillName}}" data-subskill="{{subKey}}")
             span.skill-name.rollable {{ subskill.displayName }} {{ numberFormat subskill.rank sign=true }}{{#if (ne subskill.total subskill.rank)}} ({{ numberFormat subskill.total sign=true }}){{/if}}
-            | {{/if}}
-            | {{/each}}
-            | {{/if}}
+        | {{/if}}
+        | {{/each}}
+        | {{/if}}
         | {{/each}}
 
 .catalog-section
     | {{>
     |       "systems/mnm3e/templates/items/parts/list-sheet.html"
     |       items=advantages
+    |       sections=advantageSections
     |       header=(localize "MNM3E.Advantages")
     |       type="advantage"
     |       iconClass="fa-sm"
@@ -66,6 +71,7 @@ mixin score-config-button(scoreType, dataPath)
     | {{>
     |       "systems/mnm3e/templates/items/parts/list-sheet.html"
     |       items=powers
+    |       sections=powerSections
     |       header=(localize "MNM3E.Powers")
     |       type="power"
     |       iconClass="fa-sm"
@@ -74,6 +80,7 @@ mixin score-config-button(scoreType, dataPath)
     | {{>
     |       "systems/mnm3e/templates/items/parts/list-sheet.html"
     |       items=equipment
+    |       sections=equipmentSections
     |       header=(localize "MNM3E.Equipment")
     |       type="equipment"
     |       iconClass="fa-sm"

@@ -1,6 +1,11 @@
 ol(class="items-list {{ type }}-list item-{{ type }}-controls")
     li.items-header.flexrow
         h3.item-name {{ header }}
+        | {{#if sections}}
+        | {{#each sections.headers as |sectionHeader|}}
+        .section-header {{ sectionHeader }}
+        | {{/each}}
+        | {{/if}}
         | {{#if (not hideControls)}}
         a.item-control(title="{{ localize 'MNM3E.ItemCreate' }}" data-action="create" data-item-type="{{ type }}")
             i.fas.fa-plus(class="{{iconClass}}")
@@ -12,6 +17,11 @@ ol(class="items-list {{ type }}-list item-{{ type }}-controls")
             .item-name.flexrow
                 .item-image(style="background-image: url('{{item.img}}')")
                 h4 {{#if item.data.summary.parsed}} {{item.data.summary.parsed}} {{else}} {{item.name}} {{/if}}
+            | {{#if ../sections}}
+            | {{#each (lookup ../sections.rows @index) as |detail|}}
+            .section-detail {{ detail }}
+            | {{/each}}
+            | {{/if}}
             | {{#if (not ../hideControls)}}
             .item-controls.flexrow
                 | {{#if ../canFavorite}}

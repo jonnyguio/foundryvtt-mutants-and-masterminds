@@ -144,7 +144,7 @@ declare interface PowerData extends ItemDescription {
 }
 
 declare interface EquipmentData extends ItemDescription {
-    effects: Item.Data<PowerEffetData>[];
+    effects: Item.Data<PowerEffectData>[];
     descriptor: string;
 
     // Prepared data
@@ -155,4 +155,9 @@ declare interface EquipmentData extends ItemDescription {
 declare interface FoundryItemSheetData<T = any> extends Omit<ItemSheet.Data<T>, 'data'> {
     data: T;
     effects: ActiveEffectCategories;
+}
+
+declare interface ItemListSections {
+    headers: string[];
+    rows: (string | number)[][];
 }

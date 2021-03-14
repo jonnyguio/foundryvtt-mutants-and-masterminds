@@ -10,47 +10,51 @@ header.card-header.flexrow
     h3.item-name {{item.name}}
 
 .card-content.flexcol
-    h4 {{ item.data.descriptor }}
-    | {{{ item.data.description.value }}}
+    h4.descriptor {{ item.data.descriptor }}
+    .card-description
+        | {{{ item.data.description.value }}}
 
     | {{#each effects }}
-    h4 
-        | {{#if this.effect.data.summary.parsed}}
-        |   {{this.effect.data.summary.parsed}}
-        | {{else}}
-        |   {{ this.effect.name }}
+    .card-effect
+        h4.effect-summary 
+            | {{#if this.effect.data.summary.parsed}}
+            |   {{this.effect.data.summary.parsed}}
+            | {{else}}
+            |   {{ this.effect.name }}
+            | {{/if}}
+
+        | {{{ this.effect.data.description.value }}}
+
+        | {{#if this.canRoll}}
+
+        | {{#if this.activationRoll}}
+        .roll-result.activation-roll
+            h3.effect-roll-type {{ localize "MNM3E.Activation" }}
+            | {{{ this.activationRoll.template }}}
+            .effect-versus {{ localize "MNM3E.VersusAbbrev" }} {{ this.effect.data.activation.check.targetScore.label }}
         | {{/if}}
-    | {{{ this.effect.data.description.value }}}
 
-    | {{#if this.canRoll}}
+        | {{#if this.attackRoll}}
+        .roll-result.attack-roll
+            h3.effect-roll-type {{ localize "MNM3E.Attack" }}
+            | {{{ this.attackRoll.template }}}
+            .effect-versus {{ localize "MNM3E.VersusAbbrev" }} {{ this.effect.data.action.roll.attack.targetScore.label }}
+        | {{/if}}
 
-    | {{#if this.activationRoll}}
-    h3 {{ localize "MNM3E.Activation" }}
-    | {{{ this.activationRoll.template }}}
-    span {{ localize "MNM3E.VersusAbbrev" }} {{ this.effect.data.activation.check.targetScore.label }}
-    | {{/if}}
+        | {{#if this.resistInfo}}
+        .roll-request.resist-request
+            h3.effect-roll-type {{ localize "MNM3E.ResistCheck" }}
+            button.effect-button(data-action="resist" data-effect-index="{{@index}}") {{ localize "MNM3E.DC" }} {{ this.resistInfo.dc }} {{ this.resistInfo.rollDetail.targetScore.label }}
+        | {{/if}}
+        
+        | {{else}}
+        span {{ localize "MNM3E.NoUsesRemaining" }}
 
-    | {{#if this.attackRoll}}
-    h3 {{ localize "MNM3E.Attack" }}
-    | {{{ this.attackRoll.template }}}
-
-    span {{ localize "MNM3E.VersusAbbrev" }} {{ this.effect.data.action.roll.attack.targetScore.label }}
-    | {{/if}}
-
-    | {{#if this.resistInfo}}
-    h3 {{ localize "MNM3E.ResistCheck" }}
-    button(data-action="resist" data-effect-index="{{@index}}") {{ localize "MNM3E.DC" }} {{ this.resistInfo.dc }} {{ this.resistInfo.rollDetail.targetScore.label }}
-    | {{/if}}
-    
-    | {{else}}
-    span {{ localize "MNM3E.NoUsesRemaining" }}
-
-    | {{/if}}
-    // Maybe not footer?
-    footer.effect-footer
-        | {{#each this.tags}}
-        span {{ this }}
-        | {{/each}}
+        | {{/if}}
+        footer.effect-footer
+            | {{#each this.tags}}
+            span {{ this }}
+            | {{/each}}
     | {{/each}}
 
 footer.card-footer

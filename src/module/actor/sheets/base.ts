@@ -9,9 +9,12 @@ import { getMeasurement } from '../../measurements';
 export interface ExtendedActorSheetData<T extends CommonActorData & CreatureData> extends FoundryActorSheetData<T> {
     config: Config;
     
-    powers: Item<PowerData>[];
-    advantages: Item<AdvantageData>[];
-    equipment: Item<EquipmentData>[];
+    powers: Item.Data<PowerData>[];
+    powerSections: ItemListSections;
+    advantages: Item.Data<AdvantageData>[];
+    advantageSections: ItemListSections;
+    equipment: Item.Data<EquipmentData>[];
+    equipmentSections: ItemListSections;
     movement: {
         main: string;
         special?: string;
@@ -75,17 +78,17 @@ export default abstract class ActorSheet3e<T extends CommonActorData & CreatureD
 
         sheetData.summary = [
             {
-                name: 'data.identity',
+                name: 'data.info.identity',
                 value: sheetData.data.info.identity,
                 localizedKey: 'MNM3E.Identity',
             },
             {
-                name: 'data.groupAffiliation',
+                name: 'data.info.groupAffiliation',
                 value: sheetData.data.info.groupAffiliation,
                 localizedKey: 'MNM3E.GroupAffiliation',
             },
             {
-                name: 'data.baseOfOperations',
+                name: 'data.info.baseOfOperations',
                 value: sheetData.data.info.baseOfOperations,
                 localizedKey: 'MNM3E.BaseOfOperations',
             },
@@ -121,9 +124,9 @@ export default abstract class ActorSheet3e<T extends CommonActorData & CreatureD
 
     protected prepareItems(incomingData: ActorSheet.Data<T>): void {
         const data = incomingData as ExtendedActorSheetData<T>;
-        const powers: Item<PowerData>[] = [];
-        const advantages: Item<AdvantageData>[] = [];
-        const equipment: Item<EquipmentData>[] = [];
+        const powers: Item.Data<PowerData>[] = [];
+        const advantages: Item.Data<AdvantageData>[] = [];
+        const equipment: Item.Data<EquipmentData>[] = [];
         data.items.reduce((arr, item) => {
             let targetArray;
             switch (item.type) {
@@ -143,9 +146,33 @@ export default abstract class ActorSheet3e<T extends CommonActorData & CreatureD
             return arr;
         }, [powers, advantages, equipment]);
 
+        const standardHeaders = ['MNM3E.Activation', 'MNM3E.Action'].map(l => game.i18n.localize(l));
         data.powers = powers;
+        data.powerSections = {
+            headers: standardHeaders,
+            rows: powers.map(p => [
+                CONFIG.MNM3E.activationTypes[p.data.effects[0]?.data.activation.type.value],
+                CONFIG.MNM3E.actionTypes[p.data.effects[0]?.data.action.type.value],
+            ]),
+        };
+
         data.advantages = advantages;
+        data.advantageSections = {
+            headers: standardHeaders,
+            rows: advantages.map(a => [
+                CONFIG.MNM3E.activationTypes[a.data.activation.type.value],
+                CONFIG.MNM3E.actionTypes[a.data.action.type.value],
+            ]),
+        };
+
         data.equipment = equipment;
+        data.equipmentSections = {
+            headers: standardHeaders,
+            rows: equipment.map(e => [
+                CONFIG.MNM3E.activationTypes[e.data.effects[0]?.data.activation.type.value],
+                CONFIG.MNM3E.actionTypes[e.data.effects[0]?.data.action.type.value],
+            ]),
+        };
     }
 
     private onItemRoll(event: JQuery.ClickEvent): void {
