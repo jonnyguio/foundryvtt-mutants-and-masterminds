@@ -34,6 +34,8 @@
     "MNM3E.ActionFree": "Free",
     "MNM3E.ActionReaction": "Reaction",
 
+    "MNM3E.ActionWarningNoToken": "No token selected.",
+
     "MNM3E.Activation": "Activation",
     "MNM3E.ActivationCheck": "Activation Check",
     "MNM3E.ActiveEffectCreate": "Create",
@@ -64,6 +66,7 @@
 
     "MNM3E.Catalog": "Catalog",
     "MNM3E.Cancel": "Cancel",
+    "MNM3E.Check": "Check",
     "MNM3E.Core": "Core",
     "MNM3E.Cost": "Cost",
     "MNM3E.CostType": "Cost Type",
@@ -82,6 +85,9 @@
     "MNM3E.DefenseTghAbbrev": "tgh",
     "MNM3E.DefenseWil": "Willpower",
     "MNM3E.DefenseWilAbbrev": "wil",
+
+    "MNM3E.DegreesOfFailure": "Degrees of Failure",
+    "MNM3E.DegreesOfSuccess": "Degress of Success",
 
     "MNM3E.Description": "Description",
     "MNM3E.Descriptor": "Descriptor",

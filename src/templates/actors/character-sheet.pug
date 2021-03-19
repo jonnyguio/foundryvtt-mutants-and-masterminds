@@ -8,11 +8,16 @@ form(class="{{cssClass}} flexcol" autocomplete="off")
                 .powerlevel
                     .form-group.input
                         label {{ localize "MNM3E.PowerLevel" }}:
-                        input(type="text" name="data.attributes.powerLevel" value="{{data.attributes.powerLevel}}" data-dtype="Number" placeholder="1")
+                        input(type="number" name="data.attributes.powerLevel" value="{{data.attributes.powerLevel}}" data-dtype="Number" placeholder="1")
+                .earned-power-points
+                    .form-group.input
+                        label {{ localize "MNM3E.EarnedPowerPoints" }}:
+                        input(type="number" name="data.earnedPowerPoints" value="{{data.earnedPowerPoints}}" data-dtype="Number" placeholder="0")
                 .max-points
                     .form-group.checkbox-input
-                        span: i.checkbox.fas(class="{{#if actor.flags.mnm3e.overrideMaxPoints}}fa-unlock{{else}}fa-lock{{/if}}")
-                        label {{ localize "MNM3E.MaxPowerPoints" }}:
+                        div
+                            span: i.lock-button.fas(class="{{#if actor.flags.mnm3e.overrideMaxPoints}}fa-unlock{{else}}fa-lock{{/if}}")
+                            label {{ localize "MNM3E.MaxPowerPoints" }}:
                         input(
                             type="number"
                             name="data.maxPoints"
@@ -28,25 +33,21 @@ form(class="{{cssClass}} flexcol" autocomplete="off")
                 | {{/each}}
             ul.attributes.flexrow
                 li.attribute.initiative 
-                    h4.attribute-name.box-title {{ localize "MNM3E.Initiative" }}
+                    h4.attribute-name {{ localize "MNM3E.Initiative" }}
                     .attribute-value
                         span {{numberFormat data.attributes.initiative decimals=0 sign=true}}
                 li.attribute.movement
-                    h4.attribute-name.box-title {{ localize "MNM3E.Movement" }}
+                    h4.attribute-name {{ localize "MNM3E.Movement" }}
                     .attribute-value
                         span {{ movement.main }}
                     footer.attribute-footer
                         span {{ movement.special }}
-                li.attribute.earned-power-points
-                    h4.attribute-name.box-title {{ localize "MNM3E.EarnedPowerPoints" }}
-                    .attribute-value
-                        input(type="number" name="data.earnedPowerPoints" value="{{data.earnedPowerPoints}}")
                 li.attribute.hero-points 
-                    h4.attribute-name.box-title {{ localize "MNM3E.HeroPoints" }}
+                    h4.attribute-name {{ localize "MNM3E.HeroPoints" }}
                     .attribute-value
                         input(type="number" name="data.heroPoints" value="{{data.heroPoints}}")
                 li.attribute.penalty-points
-                    h4.attribute-name.box-title {{ localize "MNM3E.PenaltyPoints" }}
+                    h4.attribute-name {{ localize "MNM3E.PenaltyPoints" }}
                     .attribute-value
                         input(type="number" name="data.attributes.penaltyPoints" value="{{data.attributes.penaltyPoints}}" placeholder="0")
 

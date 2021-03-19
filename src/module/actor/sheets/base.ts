@@ -117,7 +117,7 @@ export default abstract class ActorSheet3e<T extends CommonActorData & CreatureD
 
         if (this.actor.owner) {
             html.find('.item .item-image').on('click', this.onItemRoll.bind(this));
-            html.find('.max-points .checkbox').on('click', this.onMaxPointsOverrideToggle.bind(this));
+            html.find('.max-points .lock-button').on('click', this.onMaxPointsOverrideToggle.bind(this));
         }
         super.activateListeners(html);
     }

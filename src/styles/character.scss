@@ -44,9 +44,25 @@
             }
     
             .header-powerlevel {
-                flex: 0 0 auto;
-                justify-content: flex-end;
+                flex: 0 1 160px;
+                align-content: center;
                 text-align: right;
+                div input {
+                    flex: 0 1 30px;
+                }
+
+                .max-points {
+                    position: relative;
+                    .lock-button {
+                        position: absolute;
+                        display: none;
+                        margin-top: 5px;
+                    }
+            
+                    &:hover .lock-button {
+                        display: block;
+                    }
+                }   
             }
     
             .summary {
@@ -65,20 +81,22 @@
         }
 
         .attributes {
-            flex: 0 0 100%;
+            flex: 1 0 100%;
             margin: 0;
 
             .attribute {
-                height: 70px;
+                flex: 1 0 60px;
+                height: auto;
                 margin: 0;
+                word-wrap: break-word;
+                font-size: medium;
             }
         }
     }
 
     .sheet-navigation.tabs {
         border: $sectionBorder;
-        border-bottom: none;
-        border-top: none;
+        border: none;
         margin: 8px 0 0 0 ;
     }
     .sheet-body {

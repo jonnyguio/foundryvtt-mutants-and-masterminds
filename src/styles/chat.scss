@@ -3,7 +3,7 @@
 .mnm3e.chat-card {
     $header-height: 36px;
     $card-border: 2px groove white;
-    $effect-border: 2px ridge white;
+    $effect-border: 2px groove white;
 
     .card-header {
         border-top: $card-border;
@@ -41,22 +41,23 @@
             border-bottom: $card-border;
         }
 
-        .roll-result, .roll-request {
+        .roll-result {
             margin-top: 5px;
             border-bottom: $effect-border;
         }
-
         .roll-request {
             padding-bottom: 4px;
+            border-top: 2px groove $primaryColor;
             .effect-roll-type {
                 text-align: center;
             }
-
             &:last-of-type {
                 border-bottom: $card-border;
             }
         }
-
+        .roll-result.attack-roll {
+            border-bottom: none;
+        }
         .effect-footer {
             span {
                 $footer-padding: 5px;
@@ -102,4 +103,10 @@
             background: rgba($threshold, 255, $threshold, $visibility)
         }
     }
+}
+#chat-log .chat-message {
+        background: $sheetBackground;
+        .effect-button {
+            background: $tabFillerBackground;
+        }
 }

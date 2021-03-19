@@ -105,7 +105,7 @@ export default class Actor3e<T extends CommonActorData = CommonActorData> extend
         actorData.data.pointCosts.total.value = pointTotal;
         actorData.data.attributes.penaltyPoints = -Math.abs(actorData.data.attributes.penaltyPoints)
 
-        if (!this.getFlag('mnm3e', 'overrideMaxPoints')) {
+        if (!this.getFlag('mnm3e', 'overrideMaxPoints') || !actorData.data.maxPoints) {
             actorData.data.maxPoints = 15 * actorData.data.attributes.powerLevel + ((actorData.data as any).earnedPowerPoints || 0);
         }
 
