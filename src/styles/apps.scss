@@ -1,56 +1,79 @@
-
-.mnm3e.sheet {
-    input[type="text"],
-    input[type="number"] {
-        background: none;
-        border: 1px solid transparent;
-
-        &:hover,
-        &:focus {
-            border: 1px solid black;
-        }
-    }
-
-    .section-title {
+.mnm3e.sheet.app.score-config {
+    form {
+        border: $sectionBorder;
+        border-top: none;
         border-radius: $sectionBorderRadius;
     }
 
-    // .tabs {
-    //     color: black;
-    //     flex-basis: 25px;
-    //     flex: 0 1 10%;
-    //     align-items: center;
-    //     .item{
-    //         font-size: 100%;
-    //         font-family: Charcoal, sans-serif;
-    //         color:rgb(49, 49, 49);
-    //     }
-    // }
-
-    .tab .form-group{
-        flex: 0 0 auto;
+    ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
     }
 
-    .tab {
-        flex: auto;
+    .tooltip {
+        position: relative;
+        display: inline-flex;
+
+        .tooltip-text {
+            visibility: hidden;
+            width: auto;
+            background-color: $primaryColor;
+            color: white;
+            text-align: center;
+            padding: 2px;
+            border-radius: 6px;
+            position: absolute;
+            z-index: 1;
+            top: 100%;
+            opacity: 0;
+            transition: opacity 0.25s;
+        }
+
+        &:hover .tooltip-text {
+            visibility: visible;
+            opacity: 1;
+        }
     }
 
-    .sheet-header {
+    $columnWidth: 50px;
+    .score-headers {
+        background: $primaryColor;
+        color: white;
+        border: $sectionBorder;
+        border-radius: $sectionBorderRadius;
+
+        span:not(:first-child) {
+            flex: 0 1 $columnWidth;
+        }
+    }
+
+    .score-control {
+        margin: 0 5px;
+    }
+
+    .form-group {
+        background: rgba(black, 0.05);
+        border-radius: 5px;
+        padding: 2px;
+        &.input input, &.input-input input {
+            flex: 0 1 $columnWidth;
+            text-align: center;
+            border: unset;
+            border-left: 2px solid rgba(black, 0.1);
+        }
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    .dynamic-score label {
+        padding-left: 2px;
+        flex: 1 0 auto;
+    }
+    
+    .score-control {
         flex: 0 1 auto;
-        align-items: flex-start;
     }
-
-    .sheet-body {
-        color:rgb(49, 49, 49);
-        display: flex;
-    }
-
-    .item .item-name .item-image{
-        flex: 0 0 30px;
-        height: 30px;
-        background-size: 30px;
-        border: none;
-        margin-right: 5px;
-    }
-
 }

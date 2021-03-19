@@ -51,6 +51,7 @@ export default class Actor3e<T extends CommonActorData = CommonActorData> extend
             }
         };
 
+        Object.values(actorData.data.skills).forEach(s => s.base = 0);
         switch (actorData.type) {
             case 'character':
                 this.prepareCharacterData(actorData);
@@ -213,7 +214,6 @@ export default class Actor3e<T extends CommonActorData = CommonActorData> extend
         Object.values(data.skills).forEach(skill => {
             const evaluateSkill = (sd: SkillDetail, s: Skill) => {
                 sd.isTrained = false;
-                sd.base += data.abilities[sd.ability].total!;
                 s.total = 0;
                 if (!sd.trainedOnly || (sd.trainedOnly && s.rank > 0)) {
                     sd.isTrained = true;
@@ -221,10 +221,8 @@ export default class Actor3e<T extends CommonActorData = CommonActorData> extend
                 }
                 data.pointCosts.skills.value += s.rank / 2;
             };
+            skill.base += data.abilities[skill.ability].total!;
             if (skill.type == 'dynamic') {
-                if (isObjectEmpty(skill.data)) {
-                    skill.base += data.abilities[skill.ability].total!;
-                }
                 Object.values(skill.data).forEach((s: Skill) => {
                     evaluateSkill(skill, s);
                 });

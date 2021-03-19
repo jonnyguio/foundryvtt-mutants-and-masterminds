@@ -9,6 +9,9 @@
     }
 
     .sheet-header {
+        flex: 0 1 auto;
+        align-items: flex-start;
+
         .summary {
             flex: 0 0 100%;
             margin: 0;
@@ -17,6 +20,10 @@
         }
     }
 
+    .sheet-body {
+        color:rgb(49, 49, 49);
+        display: flex;
+    }
 
     .description{
         .editor{
@@ -99,7 +106,7 @@
         flex: 0 1 auto;
         margin-top: 2%;
         align-items: center;
-        background: $editableBackground;
+        background: $primaryColor;
         border-radius: 5px 5px 0 0;
         :first-child {
             border-radius: 5px 0 0 0;
@@ -127,6 +134,8 @@
     }
 
     .tab {
+        flex: auto;
+
         .item-summary {
             flex: 0 1 auto;
         }
@@ -134,6 +143,24 @@
             flex: 0 1 10%;
             align-items: flex-start;
         }
+        .form-group {
+            flex: 0 0 auto;
+        }
+    }
+
+    input[type="text"],
+    input[type="number"] {
+        background: none;
+        border: 1px solid transparent;
+
+        &:hover,
+        &:focus {
+            border: 1px solid black;
+        }
+    }
+
+    .section-title {
+        border-radius: $sectionBorderRadius;
     }
 
     .favorites-section {
@@ -145,5 +172,13 @@
             border:  $sectionBorder;
             border-radius: $sectionBorderRadius;
         }
+    }
+
+    .item .item-name .item-image{
+        flex: 0 0 30px;
+        height: 30px;
+        background-size: 30px;
+        border: none;
+        margin-right: 5px;
     }
 }

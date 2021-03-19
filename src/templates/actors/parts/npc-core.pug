@@ -18,7 +18,7 @@ mixin score-config-button(scoreType, dataPath)
         label {{ localize "MNM3E.Movement" }}
         span {{ movement.main }}{{#if movement.special}}, {{ movement.special }}{{/if}}
     .ability-section.flexcol
-        h4.section-title {{ localize 'MNM3E.Abilities' }}
+        h3.section-title {{ localize 'MNM3E.Abilities' }}
             +score-config-button('Ability', 'abilities')
         ul.ability-scores.flexrow
             | {{#each data.abilities as |ability abilityName|}}
@@ -27,7 +27,7 @@ mixin score-config-button(scoreType, dataPath)
                 span.ability-score {{ ability.total }}
             | {{/each}}
     .defense-section.flexcol
-        h4.section-title {{ localize "MNM3E.Defenses" }}
+        h3.section-title {{ localize "MNM3E.Defenses" }}
             +score-config-button('Defense', 'defenses')
         ul.defense-scores.flexrow
             | {{#each data.defenses as |defense defenseName|}}
@@ -36,7 +36,7 @@ mixin score-config-button(scoreType, dataPath)
                 span.defense-score {{ defense.total }}
             | {{/each}}
     .skills.flexcol
-        h4.section-title {{ localize 'MNM3E.Skills' }}
+        h3.section-title {{ localize 'MNM3E.Skills' }}
             +score-config-button('Skill', 'skills')
         | {{#each data.skills as |skill skillName|}}
         | {{#if (eq skill.type "static")}}

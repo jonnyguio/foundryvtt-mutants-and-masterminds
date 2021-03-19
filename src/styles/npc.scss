@@ -10,11 +10,16 @@
     
     .traits-section {
         flex: 0 1 30%;
+
+        .trait {
+            flex: 0;
+        }
+
         h4 {
             text-align: center;
             font-family: Charcoal, sans-serif;
             color: $tabFillerBackground;
-            background: $editableBackground;
+            background: $primaryColor;
             border-radius: $sectionBorderRadius;
             flex: 0 1 auto;
             padding: 2px 0 2px 0;
@@ -78,9 +83,7 @@
                 padding-left: 10px;
             }
         }
-        .config-button {
-            padding: 5px;
-        }
+
         .trait {
             span {
                 padding: 3px;

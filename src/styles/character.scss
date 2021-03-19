@@ -82,7 +82,7 @@
         margin: 8px 0 0 0 ;
     }
     .sheet-body {
-        border: $sectionBorder;
+        border: 3px solid $primaryColor;
         border-top: none;
         padding: 6px;
     }
@@ -182,20 +182,5 @@
                 white-space: nowrap;
             }
         }
-
-        .config-button{
-            margin-left: 6px;
-            margin-top: 4px;
-        }
     }
-}
-
-h3.section-title {
-    text-align: center;
-    font-family: Charcoal, sans-serif;
-    color: $tabFillerBackground;
-    background: $editableBackground;
-    border-radius: 0 6px 0 6px;
-    flex: 0 1 auto;
-    padding: 3px;
 }

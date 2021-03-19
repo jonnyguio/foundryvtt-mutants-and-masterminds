@@ -1,11 +1,11 @@
-form.score-config.stacked(autocomplete="off")
-    .flexrow
+form.stacked(autocomplete="off")
+    .score-headers.flexrow
         span {{ localize "MNM3E.ScoreName" }}
         span {{ localize "MNM3E.ScoreRank" }}
         span {{ localize "MNM3E.ScoreTotal" }}
     | {{#each scores as |score name|}}
     | {{#if (eq score.type "dynamic")}}
-    .score-header.flexrow
+    .dynamic-score.flexrow
         label {{ score.label }}
         a.score-control(title="{{ localize 'MNM3E.ScoreCreate' }}" data-action="create" data-score-type="{{name}}")
             i.fas.fa-plus
@@ -13,7 +13,10 @@ form.score-config.stacked(autocomplete="off")
         | {{#each score.data as |subscore subscoreName|}}
         li.subscore
             .form-group.input-input
-                span ({{ subscoreName }}) {{ subscore.displayName }}
+                a.score-control(title="{{ localize 'MNM3E.ScoreDelete' }}" data-action="delete" data-score-type="{{name}}" data-subscore-name="{{subscoreName}}")
+                    i.fas.fa-trash
+                .tooltip {{ subscore.displayName }}
+                    span.tooltip-text @skills.{{name}}.{{ subscoreName }}
                 input(
                     type="text"
                     name="{{../../dataPath}}.{{name}}.data.{{subscoreName}}.rank"
@@ -28,8 +31,6 @@ form.score-config.stacked(autocomplete="off")
                     data-type="Number"
                     disabled
                 )
-                a.score-control(title="{{ localize 'MNM3E.ScoreDelete' }}" data-action="delete" data-score-type="{{name}}" data-subscore-name="{{subscoreName}}")
-                    i.fas.fa-trash
         | {{/each}}
     | {{else}}
     .form-group.input

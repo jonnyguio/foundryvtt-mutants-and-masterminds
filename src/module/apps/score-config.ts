@@ -17,8 +17,8 @@ export default class ScoreConfig extends BaseEntitySheet {
     public static get defaultOptions(): FormApplication.Options {
         return mergeObject(super.defaultOptions, {
             template: 'systems/mnm3e/templates/apps/score-config.html',
-            classes: ['mnm3e'],
-            width: 400,
+            classes: ['mnm3e', 'sheet', 'app', 'score-config'],
+            width: 300,
             height: 'auto',
         });
     }
@@ -91,8 +91,10 @@ export default class ScoreConfig extends BaseEntitySheet {
                 const scoreName = await new Promise((resolve) => {
                     new Dialog({
                         title: game.i18n.localize('MNM3E.ScoreNew'),
-                        content: `<label>${game.i18n.localize('MNM3E.ScoreName')}</label>
-                                  <input type="text" />`,
+                        content: `<div class="new-score-dialog">
+                                    <label>${game.i18n.localize('MNM3E.ScoreName')}</label>
+                                    <input type="text" maxlength="25" />
+                                </div>`,
                         buttons: {
                             ok: {
                                 label: game.i18n.localize('MNM3E.OK'),
@@ -105,6 +107,9 @@ export default class ScoreConfig extends BaseEntitySheet {
                         },
                         close: () => resolve(null),
                         default: 'ok',
+                    }, {
+                        width: 200,
+                        classes: ['dialog', 'new-score'],
                     }).render(true);
                 }) as string | null;
                 if (!scoreName) {
@@ -114,7 +119,7 @@ export default class ScoreConfig extends BaseEntitySheet {
                     rank: 0,
                     displayName: scoreName,
                 };
-                const cleanedName = scoreName.replace(' ', '');
+                const cleanedName = scoreName.replace(/\s/g, '');
                 targetScore.data[cleanedName] = newScore;
                 await this.entity.update({[`${this._dataPath}.${scoreType}`]: targetScore});
                 break;

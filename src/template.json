@@ -237,7 +237,8 @@
             "earnedPowerPoints": 0
         },
         "npc": {
-            "templates": ["common", "creature"]
+            "templates": ["common", "creature"],
+            "isMinion": false
         }
     },
     "Item": {
