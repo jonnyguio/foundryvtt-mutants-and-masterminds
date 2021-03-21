@@ -1,25 +1,4 @@
 .mnm3e.sheet.actor.character {
-    .cost-breakdown {
-        flex: 0 1 auto;
-        .point-cost {
-            border: $sectionBorderOpaque;
-            padding-top: 9px;
-            text-align: center;
-            background-color: $tabFillerBackground;
-            &:first-child {
-                border-radius: 0 0 0 10px;
-            }
-            &:last-child {
-                padding: 0;
-                border-radius: 0 10px 0 0;
-            }
-            span {
-                font-size: 12px;
-                padding-left: 3px;
-            }
-        }
-    }
-
     h4.box-title {
         height: 18px;
         line-height: 16px;
@@ -31,73 +10,120 @@
 
     .sheet-header {
         img.profile {
-            flex: 0 0 160px;
-            max-width: 160px;
-            height: 160px;
+            $length: 164px;
+            max-width: $length;
+            height: $length;
+            margin-right: 0;
         }
 
         .header-details {
-            h1.charname {
-                flex: 1;
-                height: 60px;
-                padding: 0;
+            height: 100%;
+            .top-info {
+                align-items: center;
+                h1.charname {
+                    flex: 2 0 auto;
+                    padding: 0;
+                }
+        
+                .header-powerlevel {
+                    flex: 1 0 25%;
+                    flex-direction: column;
+                    margin: 0;
+                    border: $sectionBorder;
+                    border-radius: $sectionBorderRadius;
+                    background: rgba(gray, 0.1);
+                    .header-power {
+                        display: flex;
+                        justify-content: flex-end;
+                        flex-direction: row;
+                        input {
+                            flex: 0 1 30px;
+                        }
+                    }
+    
+                    .max-points {
+                        position: relative;
+                        .lock-button {
+                            position: absolute;
+                            display: none;
+                            margin-top: 5px;
+                            margin-left: -15px;
+                        }
+                
+                        &:hover .lock-button {
+                            display: block;
+                        }
+                    }
+                }
             }
     
-            .header-powerlevel {
-                flex: 0 1 160px;
-                align-content: center;
-                text-align: right;
-                div input {
-                    flex: 0 1 30px;
+            $border-info: $sectionBorderOpaque;
+            .summary {
+                margin-top: 2px;
+                border-top: $border-info;
+                
+                li {
+                    border-right: $border-info;
                 }
 
-                .max-points {
-                    position: relative;
-                    .lock-button {
-                        position: absolute;
-                        display: none;
-                        margin-top: 5px;
-                    }
-            
-                    &:hover .lock-button {
-                        display: block;
-                    }
-                }   
+                li:last-child {
+                    border-right: none;
+                }
             }
-    
-            .summary {
-                height: 30px;
-                font-size: 18px;
-            }
-        }
-    
-        ul.attributes {
-            list-style: none;
-            padding: 0;
 
-            li.attribute {
-                text-align: center;
-            }
-        }
-
-        .attributes {
-            flex: 1 0 100%;
-            margin: 0;
-
-            .attribute {
-                flex: 1 0 60px;
-                height: auto;
+            ul.attributes {
+                list-style: none;
+                padding: 0;
                 margin: 0;
-                word-wrap: break-word;
-                font-size: medium;
+                border-bottom: $border-info;
+    
+                li.attribute {
+                    border-top: $border-info;
+                    text-align: center;
+                    border-left: $border-info;
+                    border-right: $border-info;
+                    .attribute-name {
+                        border-bottom: 1px groove rgba($primaryColor, 0.1);
+                        margin: 4px 8px 2px;
+                    }
+                }
+
+                li:last-child {
+                    border-right: none;
+                }
+
+                .movement .attribute-footer {
+                    font-size: 8.5px;
+                }
+            }
+        }
+    }
+
+    .cost-breakdown {
+        flex: 0 1 auto;
+        $text-size: 12px;
+        .point-cost {
+            border: $sectionBorderOpaque;
+            border-bottom: none;
+            padding-top: 2px;
+            text-align: center;
+            font-size: $text-size;
+            span {
+                font-size: $text-size;
+                padding-left: 3px;
+            }
+            &:first-child {
+                border-left: none;
+            }
+            &:last-child {
+                flex: 1 0 auto;
+                border-right: none;
             }
         }
     }
 
     .sheet-navigation.tabs {
-        border: $sectionBorder;
-        border: none;
-        margin: 8px 0 0 0 ;
+        margin: 0;
     }
     .sheet-body {
         border: 3px solid $primaryColor;
@@ -106,6 +132,8 @@
     }
 
     .core-container {
+        $section-buffer: 6px;
+
         label.box-title {
             height: 18px;
             line-height: 16px;
@@ -115,21 +143,10 @@
             border-bottom: 1px solid gray;
             white-space: nowrap;
             background-color: $tabFillerBackground;
-        
         }
 
         .ability-section {
-            flex: 0 0 100px;
-            margin-right: 6px;
-            margin-top: 6px;
-            border: $sectionBorder;
-            border-radius:  0 5px 0 0;;
-            background-color: $tabFillerBackground;
-            align-self: flex-start;
-            margin-top: 6px;
-            .section-title{
-                margin-bottom: 0;
-            }
+            margin-right: $section-buffer;
         }
 
         .ability-scores {
@@ -161,43 +178,36 @@
             }
         }
     
-        .defense-section {
-            flex: 0 0 100px;
-            border: $sectionBorder;
-            border-radius: $sectionBorderRadius;
-            background-color: $tabFillerBackground;
-            margin-top: 6px;
-        }
-    
         .body-section {
-            flex: 0 1 auto;
-        }
-        
-        .skill-section {
-            max-width: fit-content;
-            margin-top: 6px;
-            border: $sectionBorder;
-            border-radius: $sectionBorderRadius;
-            background-color: $tabFillerBackground;
-            .section-title{
-                margin-bottom: 0;
+            flex: 0;
+            margin-top: $section-buffer;
+            .skill-section {
+                flex: 1;
+                max-width: fit-content;
+                margin-right: $section-buffer;
+    
+                .untrained {
+                    color: grey;
+                }
+    
+                .subskill-name {
+                    margin-left: 10px;
+                }
+                .skill-score {
+                    text-align: right;
+                    padding-left: 20px;
+                    padding-right: 10px;
+                }
+                ul {
+                    padding-left: 10px;
+                    white-space: nowrap;
+                }
             }
 
-            .untrained {
-                color: grey;
-            }
-
-            .subskill-name {
-                margin-left: 10px;
-            }
-            .skill-score {
-                text-align: right;
-                padding-left: 20px;
-                padding-right: 10px;
-            }
-            ul {
-                padding-left: 10px;
-                white-space: nowrap;
+            .favorites-section ol {
+                padding: 0px;
+                flex: 0 1 auto;
+                margin-top: 0;
             }
         }
     }

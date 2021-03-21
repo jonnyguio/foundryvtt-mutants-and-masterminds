@@ -2,19 +2,17 @@ form(class="{{cssClass}} flexcol" autocomplete="off")
     header.sheet-header
         img.profile(src="{{actor.img}}" data-edit="img" title="{{actor.name}}")
         section.header-details.flexrow
-            h1.charname
-                input(name="name" type="text" value="{{actor.name}}" placeholder="{{ localize 'MNM3E.Name' }}")
-            aside.header-powerlevel.stacked
-                .powerlevel
-                    .form-group.input
+            .top-info.flexrow
+                h1.charname
+                    input(name="name" type="text" value="{{actor.name}}" placeholder="{{ localize 'MNM3E.Name' }}")
+                aside.form-group.header-powerlevel
+                    .header-power.powerlevel
                         label {{ localize "MNM3E.PowerLevel" }}:
                         input(type="number" name="data.attributes.powerLevel" value="{{data.attributes.powerLevel}}" data-dtype="Number" placeholder="1")
-                .earned-power-points
-                    .form-group.input
+                    .header-power.earned-power-points
                         label {{ localize "MNM3E.EarnedPowerPoints" }}:
                         input(type="number" name="data.earnedPowerPoints" value="{{data.earnedPowerPoints}}" data-dtype="Number" placeholder="0")
-                .max-points
-                    .form-group.checkbox-input
+                    .header-power.max-points
                         div
                             span: i.lock-button.fas(class="{{#if actor.flags.mnm3e.overrideMaxPoints}}fa-unlock{{else}}fa-lock{{/if}}")
                             label {{ localize "MNM3E.MaxPowerPoints" }}:

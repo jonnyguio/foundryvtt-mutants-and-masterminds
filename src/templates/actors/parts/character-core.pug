@@ -8,8 +8,8 @@ mixin score-config-button(scoreType, dataPath)
         i.fas.fa-cog
 
 .core-container.flexrow
-    .ability-section.flexcol
-        h3.section-title {{ localize "MNM3E.Abilities" }}
+    .bordered-section.ability-section.flexcol
+        h3.section-header {{ localize "MNM3E.Abilities" }}
             +score-config-button("Ability", "abilities")
         ul.ability-scores.flexrow
             | {{#each data.abilities as |ability key|}}
@@ -18,8 +18,8 @@ mixin score-config-button(scoreType, dataPath)
                 span.ability-score {{ability.total}}
             | {{/each}}
     .flexcol
-        .defense-section.flexcol
-            h3.section-title {{ localize "MNM3E.Defenses" }}
+        .bordered-section.defense-section.flexcol
+            h3.section-header {{ localize "MNM3E.Defenses" }}
                 +score-config-button("Defense", "defenses")
             ul.defenses-list.flexrow
                 | {{#each data.defenses as |defense key|}}
@@ -28,10 +28,10 @@ mixin score-config-button(scoreType, dataPath)
                     span.defense-score {{numberFormat defense.total decimals=0 sign=true}}
                 | {{/each}}
         .body-section.flexrow
-            .skill-section.flexcol
+            .bordered-section.skill-section.flexcol
                 - const untrainedStatement = "{{#if (and skill.trainedOnly (not skill.isTrained))}}untrained{{/if}}"
                 - const rollableStatement = "{{#if (or skill.isTrained (not skill.trainedOnly))}}rollable{{/if}}"
-                h3.section-title {{ localize "MNM3E.Skills" }}
+                h3.section-header {{ localize "MNM3E.Skills" }}
                     +score-config-button("Skill", "skills")
                 ul.skills-list
                     | {{#each data.skills as |skill key|}}
@@ -54,11 +54,11 @@ mixin score-config-button(scoreType, dataPath)
                     | {{/each}}
             .favorites-section.flexcol
                 | {{#each favorites}}
-                | {{#if (lookup .. this.dataPath)}}
+                | {{#if this.items}}
                 | {{>
                 |       "systems/mnm3e/templates/items/parts/list-sheet.html"
                 |       ..
-                |       dataPath=this.dataPath
+                |       items=this.items
                 |       header=(localize this.label)
                 |       type=this.type
                 |       hideControls=true

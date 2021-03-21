@@ -37,15 +37,9 @@
     }
 
     $columnWidth: 50px;
-    .score-headers {
-        background: $primaryColor;
-        color: white;
-        border: $sectionBorder;
-        border-radius: $sectionBorderRadius;
-
-        span:not(:first-child) {
-            flex: 0 1 $columnWidth;
-        }
+    .score-headers span:not(:first-child) {
+        flex: 0 1 $columnWidth;
+        text-align: center;
     }
 
     .score-control {
@@ -60,7 +54,7 @@
             flex: 0 1 $columnWidth;
             text-align: center;
             border: unset;
-            border-left: 2px solid rgba(black, 0.1);
+            border-left: $column-separator;
         }
 
         &:last-child {

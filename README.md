@@ -38,6 +38,7 @@ onto effects to override these parameters and the effect itself can be dropped i
     - [ ] Gadgets
 - [ ] Tools
     - [ ] Measurement calculator
+    - [ ] Modifier/Effect Summary Builder
 
 ## Issues
 Feel free to submit issues and enhancement requests. This is a passion project so I will not be able to make every request in a timely fashion, but I will try to fix anything that doesn't already have a work around.

@@ -25,8 +25,16 @@
         display: flex;
     }
 
-    .description{
-        .editor{
+    .bordered-section {
+        border: $sectionBorder;
+        border-top: none;
+        border-radius:  0 5px 0 0;
+        flex: 0;
+        background-color: $tabFillerBackground;
+    }
+
+    .description {
+        .editor {
             flex-wrap: nowrap;
             flex: 1 0 auto;
             .editor-content {
@@ -42,54 +50,104 @@
         }
     }
 
-    .item-subtitle{
+    .item-subtitle {
         flex: 0 1 auto;
         text-align: right;
     }
 
-    .item-list .list-item-summary {
-        flex: 0 0 100%;
-    }
+    // Item list
+    $name-column-flex: 3 0 100px;
+    $section-column-flex: 1;
+    $control-column-flex: 0 1 75px;
+    .items-header {
+        text-align: left;
+        padding-left: 10px;
+        margin: 0;
 
-    .item-list.subitem-list{
-        margin: 0%;
-    }
-
-    .items-header{
-        background: rgb(25,140,255);
-        border-radius: $sectionBorderRadius;
-        .item-name{
-            text-align: left ;
-            font-size: 1.125em;
-            color: white;
-            padding-left: 10px;
+        .item-name {
             margin: 0;
+            flex: $name-column-flex;
+        }
+
+        .section-name {
+            margin: 0;
+            flex: $section-column-flex;
+            text-align: center;
+        }
+
+        .item-control {
+            text-align: right;
+            flex: $control-column-flex;
         }
     }
 
-    .item-list:not(.subitem-list) {
-        background-color: $tabFillerBackground;
-        border: $sectionBorder;
-        border-radius: $sectionBorderRadius;
-        h4 {
-            size: 20px;
-            display: flex;
-            align-items: flex-end;
-        }
-        .item-list { 
-            border: none;
-        }
-        h4 {
-            size:15px;
-        }
-        .item {
-            margin: 2px;
-        }
-
-        &:empty {
-            border: none;
+    ol, ul {
+        &.items-list, &.item-list {
+            margin-left: 0;
+            padding-left: 0;
         }
     }
+
+    .items-list {
+        .item-name {
+            margin-bottom: 0;
+        }
+
+        .item-list {
+            $summary-offset: 5px;
+            .item {
+                $image-size: 30px;
+                $item-border: 2px groove rgba(black, 0.1);
+                .item-name {
+                    flex: $name-column-flex;
+
+                    h4 {
+                        display: flex;
+                        align-items: flex-end;
+                    }
+                    .item-image {
+                        flex: 0 0 $image-size;
+                        height: $image-size;
+                        background-size: $image-size;
+                        border: none;
+                        margin-right: 5px;
+                    }
+                }
+
+                .section-detail, .item-controls {
+                    border-left: $column-separator;
+                    text-align: center;
+                    margin: auto;
+                }
+
+                .section-detail {
+                    flex: $section-column-flex;
+                }
+
+                .item-controls {
+                    flex: $control-column-flex;
+                }
+
+                .list-item-summary {
+                    flex: 0 1 100%;
+                    margin-left: $summary-offset;
+                    &:not(:empty) {
+                        border-top: $item-border;
+                    }
+                }
+
+                &:not(:last-of-type) {
+                    border-bottom: $item-border;
+                }
+            }
+    
+            &.subitem-list {
+                margin-left: $summary-offset;
+            }
+        }
+    }
+
+    // Description box
 
     .tox-toolbar-overlord,
     .tox-toolbar__primary {
@@ -159,26 +217,12 @@
         }
     }
 
-    .section-title {
+    .section-header {
+        background: $primaryColor;
         border-radius: $sectionBorderRadius;
-    }
-
-    .favorites-section {
-        margin-top: 4px;
-        ol {
-            padding: 0px;
-            flex: 0 1 auto;
-            margin: 4px 8px;
-            border:  $sectionBorder;
-            border-radius: $sectionBorderRadius;
-        }
-    }
-
-    .item .item-name .item-image{
-        flex: 0 0 30px;
-        height: 30px;
-        background-size: 30px;
-        border: none;
-        margin-right: 5px;
+        color: $tabFillerBackground;
+        font-family: Charcoal, sans-serif;
+        padding: 3px;
+        margin-bottom: 0;
     }
 }

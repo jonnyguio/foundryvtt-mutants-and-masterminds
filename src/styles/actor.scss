@@ -1,12 +1,7 @@
 .mnm3e.sheet.actor {
-    h3.section-title {
+    h3.section-header {
         text-align: center;
-        font-family: Charcoal, sans-serif;
-        color: $tabFillerBackground;
-        background: $primaryColor;
-        border-radius: 0 6px 0 6px;
         flex: 0 1 auto;
-        padding: 3px;
         position: relative;
 
         .config-button{

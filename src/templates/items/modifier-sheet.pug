@@ -7,8 +7,6 @@ form(class="{{cssClass}} item-sheet-modifier flexcol" autocomplete="off")
     nav.sheet-navigation.tabs(data-group="primary")
         a.item.active(data-tab="description") {{ localize "MNM3E.Description" }}
         a.item(data-tab="overrides") {{ localize "MNM3E.Overrides" }}
-        //- a.item(data-tab="expressions") {{ localize "MNM3E.Expressions" }}
-        //- a.item(data-tab="effects") {{ localize "MNM3E.Effects" }}
 
     section.sheet-body
         .tab.description.flexrow.active(data-group="primary" data-tab="description")
@@ -22,9 +20,3 @@ form(class="{{cssClass}} item-sheet-modifier flexcol" autocomplete="off")
             | {{> "systems/mnm3e/templates/items/parts/activations-sheet.html" }}
 
             | {{> "systems/mnm3e/templates/items/parts/actions-sheet.html" }}
-
-        //- .tab.expressions.flexrow(data-group="primary" data-tab="expressions")
-        //-     | {{> "systems/mnm3e/templates/items/parts/expressions-sheet.html" }}
-
-        //- .tab.effects.flexrow(data-group="primary" data-tab="effects")
-        //-     | {{> "systems/mnm3e/templates/actors/parts/actor-effects.html" }}

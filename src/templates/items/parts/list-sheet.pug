@@ -1,9 +1,9 @@
-ol(class="items-list {{ type }}-list item-{{ type }}-controls")
-    li.items-header.flexrow
+ol.bordered-section.items-list(class="{{ type }}-list item-{{ type }}-controls")
+    li.items-header.section-header.flexrow
         h3.item-name {{ header }}
         | {{#if sections}}
-        | {{#each sections.headers as |sectionHeader|}}
-        .section-header {{ sectionHeader }}
+        | {{#each sections.headers as |sectionName|}}
+        h3.section-name {{ sectionName }}
         | {{/each}}
         | {{/if}}
         | {{#if (not hideControls)}}
@@ -11,7 +11,7 @@ ol(class="items-list {{ type }}-list item-{{ type }}-controls")
             i.fas.fa-plus(class="{{iconClass}}")
         | {{/if}}
 
-    ol.item-list
+    ol.item-list(data-data-path="{{dataPath}}")
         | {{#each items as |item|}}
         li.item.flexrow(data-item-id="{{item._id}}" data-item-index="{{@index}}")
             .item-name.flexrow

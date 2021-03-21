@@ -3,7 +3,7 @@ import Actor3e from '../entity';
 
 interface FavoriteItem {
     label: string;
-    dataPath: string;
+    items: Item.Data[];
     type: string;
 }
 
@@ -56,9 +56,9 @@ export default class ActorSheet3eCharacter extends ActorSheet3e<CharacterData, A
         data.favoriteEquipment = data.equipment.filter(isFavorite);
 
         data.favorites = [
-            {label: 'MNM3E.FavoritePowers', dataPath: 'favoritePowers', type: 'power'},
-            {label: 'MNM3E.FavoriteAdvantages', dataPath: 'favoriteAdvantages', type: 'advantage'},
-            {label: 'MNM3E.FavoriteEquipment', dataPath: 'favoriteEquipment', type: 'equipment'},
+            {label: 'MNM3E.FavoritePowers', items: data.favoritePowers, type: 'power'},
+            {label: 'MNM3E.FavoriteAdvantages', items: data.favoriteAdvantages, type: 'advantage'},
+            {label: 'MNM3E.FavoriteEquipment', items: data.favoriteEquipment, type: 'equipment'},
         ];
     }
 }

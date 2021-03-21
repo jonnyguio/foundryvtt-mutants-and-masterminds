@@ -26,6 +26,7 @@ form(class="{{cssClass}} item-sheet-power flexcol" autocomplete="off")
             | {{>
             |       "systems/mnm3e/templates/items/parts/list-sheet.html"
             |       items=data.effects
+            |       dataPath="data.effects"
             |       header=(localize "MNM3E.Effects")
             |       type="effect"
             | }}
@@ -33,6 +34,7 @@ form(class="{{cssClass}} item-sheet-power flexcol" autocomplete="off")
             | {{>
             |       "systems/mnm3e/templates/items/parts/list-sheet.html"
             |       items=data.powerArray
+            |       dataPath="data.powerArray"
             |       header=(localize "MNM3E.PowerArray")
             |       type="power"
             | }}

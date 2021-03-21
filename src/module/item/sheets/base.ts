@@ -248,7 +248,7 @@ export default class ItemSheet3e<T, I extends Item<T>> extends ItemSheet<T, I> {
         const li = $(ev.currentTarget).closest('.item');
 
         const expandedClass = 'expanded';
-        const summaryClass = 'list-item-summary'
+        const summaryClass = 'list-item-summary';
         if (li.hasClass(expandedClass)) {
             const summary = li.children(`.${summaryClass}`)
             summary.slideUp(200, () => summary.remove());
