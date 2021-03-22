@@ -1,14 +1,13 @@
-ol.items-list.effects-list
+ol.bordered-section.items-list.effects-list
     | {{#each effects as |section sectionName|}}
-    li.items-header.flexrow(data-effect-type="{{section.type}}")
+    li.items-header.section-header.flexrow(data-effect-type="{{section.type}}")
         h3.item-name.effect-name.flexrow {{ section.label }}
-        .effect-source {{ localize "MNM3E.ActiveEffectSource" }}
-        .effect-duration {{ localize "MNM3E.ActiveEffectDuration" }}
+        .effect-source.section-name {{ localize "MNM3E.ActiveEffectSource" }}
+        .effect-duration.section-name {{ localize "MNM3E.ActiveEffectDuration" }}
         | {{#if (not ../readOnly)}}
-        .item-controls.effect-controls.flexrow
+        .item-control.effect-control.flexrow
             a.effect-control(data-action="create" title="{{localize 'MNM3E.ActiveEffectCreate'}}")
                 i.fas.fa-plus
-                | {{ localize "MNM3E.Add" }}
         | {{/if}}
         
     ol.item-list
@@ -17,8 +16,8 @@ ol.items-list.effects-list
             .item-name.effect-name.flexrow
                 img.item-image(src="{{effect.data.icon}}")
                 h4 {{ effect.data.label }}
-            .effect-source {{ effect.sourceName }}
-            .effect-duration {{ effect.duration.label }}
+            .effect-source.section-detail {{ effect.sourceName }}
+            .effect-duration.section-detail {{ effect.duration.label }}
             | {{#if (not ../../readOnly)}}
             .item-controls.effect-controls.flexrow
                 a.effect-control(data-action="toggle" title="{{ localize 'MNM3E.ActiveEffectToggle' }}")

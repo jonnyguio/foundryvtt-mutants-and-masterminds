@@ -33,23 +33,6 @@
         background-color: $tabFillerBackground;
     }
 
-    .description {
-        .editor {
-            flex-wrap: nowrap;
-            flex: 1 0 auto;
-            .editor-content {
-                border-left: $sectionBorderOpaque;
-                padding-left: 10px;
-            }
-        }
-        .item-editor {
-            .item-summary {
-                line-height: 30px;
-                border-bottom: $sectionBorderOpaque;
-            }
-        }
-    }
-
     .item-subtitle {
         flex: 0 1 auto;
         text-align: right;
@@ -59,6 +42,8 @@
     $name-column-flex: 3 0 100px;
     $section-column-flex: 1;
     $control-column-flex: 0 1 75px;
+    $section-padding: 10px;
+
     .items-header {
         text-align: left;
         padding-left: 10px;
@@ -73,9 +58,10 @@
             margin: 0;
             flex: $section-column-flex;
             text-align: center;
+            padding-right: $section-padding;
         }
 
-        .item-control {
+        .item-control, .effect-control {
             text-align: right;
             flex: $control-column-flex;
         }
@@ -98,6 +84,7 @@
             .item {
                 $image-size: 30px;
                 $item-border: 2px groove rgba(black, 0.1);
+                margin-top: $summary-offset;
                 .item-name {
                     flex: $name-column-flex;
 
@@ -122,9 +109,11 @@
 
                 .section-detail {
                     flex: $section-column-flex;
+                    padding-left: $section-padding;
+                    padding-right: $section-padding;
                 }
 
-                .item-controls {
+                .item-controls, .effect-controls {
                     flex: $control-column-flex;
                 }
 
@@ -148,6 +137,23 @@
     }
 
     // Description box
+
+    // .description {
+    //     .editor {
+    //         flex-wrap: nowrap;
+    //         flex: 1 0 auto;
+    //         .editor-content {
+    //             border-left: $sectionBorderOpaque;
+    //             padding-left: 10px;
+    //         }
+    //     }
+    //     .item-editor {
+    //         .item-summary {
+    //             line-height: 30px;
+    //             border-bottom: $sectionBorderOpaque;
+    //         }
+    //     }
+    // }
 
     .tox-toolbar-overlord,
     .tox-toolbar__primary {

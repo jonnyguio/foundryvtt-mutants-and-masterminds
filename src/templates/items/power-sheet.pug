@@ -13,10 +13,10 @@ form(class="{{cssClass}} item-sheet-power flexcol" autocomplete="off")
 
     section.sheet-body
         .tab.description.flexcol.active(data-group="primary" data-tab="description")
-            .flexrow
+            .summary.flexrow
                 label {{ localize "MNM3E.PowerSummary" }}
                 span {{ data.summary }}
-            .flexrow
+            .power-cost.flexrow
                 label {{ localize "MNM3E.PowerTotalCost" }}
                 span {{ numberFormat data.totalCost decimals=2 sign=false }}
 
@@ -39,5 +39,5 @@ form(class="{{cssClass}} item-sheet-power flexcol" autocomplete="off")
             |       type="power"
             | }}
 
-        .tab.effects.flexcol(data-group="primary" data-tab="effects")
+        .tab.effects(data-group="primary" data-tab="effects")
             | {{> "systems/mnm3e/templates/actors/parts/actor-effects.html" readOnly=true }}

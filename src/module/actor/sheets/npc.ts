@@ -13,8 +13,8 @@ export default class ActorSheet3eNPC extends ActorSheet3e<NPCData, Actor3e<NPCDa
         opts.classes?.push('npc');
         return mergeObject(opts, {
             template: 'systems/mnm3e/templates/actors/npc-sheet.html',
-            width: 600,
-            height: 400,
+            width: 700,
+            height: 500,
         });
     }
 

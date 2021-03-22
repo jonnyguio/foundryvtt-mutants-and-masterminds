@@ -1,11 +1,17 @@
-.notes-entries.left-notes
-    article.background-notes
-        .article-title {{ localize "MNM3E.Background" }}
-        | {{editor content=data.info.background target="data.info.background" button=true owner=owner editable=editable}}
+.notes-entries.complication-notes.flexcol
+    article.flexcol
+        h3.article-title {{ localize "MNM3E.Complications" }}
+        | {{editor content=data.info.complications target="data.info.complications" button=true owner=owner editable=editable}}
 
-| {{#if (eq actor.type "character")}}
-.notes-entries.right-notes
-    article.journal-notes
-        .article-title {{ localize "MNM3E.Notes" }}
-        | {{editor content=data.info.notes target="data.info.notes" button=true owner=owner editable=editable}}
-| {{/if}}
+.background-info.flexrow
+    .notes-entries.background-notes.left-notes.flexcol
+        article.flexcol
+            h3.article-title {{ localize "MNM3E.Background" }}
+            | {{editor content=data.info.background target="data.info.background" button=true owner=owner editable=editable}}
+
+    | {{#if (eq actor.type "character")}}
+    .notes-entries.journal-notes.right-notes.flexcol
+        article.flexcol
+            h3.article-title {{ localize "MNM3E.Notes" }}
+            | {{editor content=data.info.notes target="data.info.notes" button=true owner=owner editable=editable}}
+    | {{/if}}

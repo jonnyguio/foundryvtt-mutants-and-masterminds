@@ -8,15 +8,6 @@ mixin score-config-button(scoreType, dataPath)
         i.fas.fa-cog
 
 .traits-section.flexcol
-    .trait
-        label {{ localize "MNM3E.PenaltyPoints" }}
-        input(type="number" name="data.attributes.penaltyPoints" value="{{data.attributes.penaltyPoints}}")
-    .trait
-        label {{ localize "MNM3E.Initiative" }}
-        span {{data.attributes.initiative}}
-    .trait
-        label {{ localize "MNM3E.Movement" }}
-        span {{ movement.main }}{{#if movement.special}}, {{ movement.special }}{{/if}}
     .ability-section.flexcol
         h3.section-header {{ localize 'MNM3E.Abilities' }}
             +score-config-button('Ability', 'abilities')

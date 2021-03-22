@@ -67,6 +67,7 @@
     "MNM3E.Catalog": "Catalog",
     "MNM3E.Cancel": "Cancel",
     "MNM3E.Check": "Check",
+    "MNM3E.Complications": "Complications",
     "MNM3E.Core": "Core",
     "MNM3E.Cost": "Cost",
     "MNM3E.CostType": "Cost Type",
@@ -253,7 +254,7 @@
     "MNM3E.TimeYears": "years",
 
     "MNM3E.Uses": "Uses",
-    "MNM3E.UsesOf": "Of",
+    "MNM3E.UsesOf": "of",
     "MNM3E.UsesRemainingFormat": "{remaining} Remaining",
 
     "MNM3E.Versus": "Versus",

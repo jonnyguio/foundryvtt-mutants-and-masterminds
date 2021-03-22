@@ -11,21 +11,21 @@ mixin score-config-button(scoreType, dataPath)
     .bordered-section.ability-section.flexcol
         h3.section-header {{ localize "MNM3E.Abilities" }}
             +score-config-button("Ability", "abilities")
-        ul.ability-scores.flexrow
+        ul.scores.ability-scores.flexrow
             | {{#each data.abilities as |ability key|}}
             li.ability.flexcol(data-ability="{{key}}")
                 label.ability-name.box-title.rollable {{ability.label}}
-                span.ability-score {{ability.total}}
+                span.score.ability-score {{ability.total}}
             | {{/each}}
     .flexcol
         .bordered-section.defense-section.flexcol
             h3.section-header {{ localize "MNM3E.Defenses" }}
                 +score-config-button("Defense", "defenses")
-            ul.defenses-list.flexrow
+            ul.scores.defenses-list.flexrow
                 | {{#each data.defenses as |defense key|}}
                 li.defense.flexcol(data-defense="{{key}}")
                     label.defense-name.box-title.rollable {{defense.label}}
-                    span.defense-score {{numberFormat defense.total decimals=0 sign=true}}
+                    span.score.defense-score {{ defense.total }}
                 | {{/each}}
         .body-section.flexrow
             .bordered-section.skill-section.flexcol
@@ -33,23 +33,23 @@ mixin score-config-button(scoreType, dataPath)
                 - const rollableStatement = "{{#if (or skill.isTrained (not skill.trainedOnly))}}rollable{{/if}}"
                 h3.section-header {{ localize "MNM3E.Skills" }}
                     +score-config-button("Skill", "skills")
-                ul.skills-list
+                ul.scores.skills-list
                     | {{#each data.skills as |skill key|}}
                     | {{#if (eq skill.type "dynamic")}}
                     li.skill.flexrow(class=untrainedStatement data-skill="{{key}}")
                         label.skill-name(class=rollableStatement) {{skill.label}}
-                        span.skill-score {{numberFormat skill.base decimals=0 sign=true}}
+                        span.score.skill-score {{numberFormat skill.base decimals=0 sign=true}}
                     | {{#if (not (emptyObj skill.data))}}
                     | {{#each skill.data as |subskill subKey|}}
                     li.subskill.flexrow(data-skill="{{key}}" data-subskill="{{subKey}}")
                         label.subskill-name(class=rollableStatement) - {{subskill.displayName}}
-                        span.skill-score {{numberFormat subskill.total decimals=0 sign=true}}
+                        span.score.skill-score {{numberFormat subskill.total decimals=0 sign=true}}
                     | {{/each}}
                     | {{/if}}
                     | {{else}}
                     li.skill.flexrow(class=untrainedStatement data-skill="{{key}}")
                         label.skill-name(class=rollableStatement) {{skill.label}}
-                        span.skill-score {{numberFormat skill.data.total decimals=0 sign=true}}
+                        span.score.skill-score {{numberFormat skill.data.total decimals=0 sign=true}}
                     | {{/if}}
                     | {{/each}}
             .favorites-section.flexcol

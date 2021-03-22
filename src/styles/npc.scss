@@ -1,13 +1,16 @@
 .mnm3e.sheet.actor.npc {
-    .tabs {
+    .sheet-navigation.tabs {
         flex: 0;
-        border-radius: 0;
+        border: $sectionBorder;
+        border-radius: $sectionBorderRadius;
         font-size: 16px;
+        margin: 2px 2px 0 2px;
         .active {
+            padding: 3px;
             border-radius: 0;
         }
     }
-    
+
     .traits-section {
         flex: 0 1 30%;
 
@@ -81,20 +84,6 @@
             .skill-name {
                 text-align: center;
                 padding-left: 10px;
-            }
-        }
-
-        .trait {
-            span {
-                padding: 3px;
-            }
-            label {
-                padding-right: 5px;
-            }
-            input {
-                background-color: $tabFillerBackground;
-                max-width: 40%;
-                padding-left: 3px;
             }
         }
     }

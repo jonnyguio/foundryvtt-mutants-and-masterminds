@@ -8,92 +8,42 @@
         border-bottom: 1px solid #c9c7b8
     }
 
-    .sheet-header {
-        img.profile {
-            $length: 164px;
-            max-width: $length;
-            height: $length;
-            margin-right: 0;
-        }
-
-        .header-details {
-            height: 100%;
-            .top-info {
-                align-items: center;
-                h1.charname {
-                    flex: 2 0 auto;
-                    padding: 0;
-                }
-        
-                .header-powerlevel {
-                    flex: 1 0 25%;
-                    flex-direction: column;
-                    margin: 0;
-                    border: $sectionBorder;
-                    border-radius: $sectionBorderRadius;
-                    background: rgba(gray, 0.1);
-                    .header-power {
-                        display: flex;
-                        justify-content: flex-end;
-                        flex-direction: row;
-                        input {
-                            flex: 0 1 30px;
-                        }
-                    }
-    
-                    .max-points {
-                        position: relative;
-                        .lock-button {
-                            position: absolute;
-                            display: none;
-                            margin-top: 5px;
-                            margin-left: -15px;
-                        }
-                
-                        &:hover .lock-button {
-                            display: block;
-                        }
-                    }
-                }
-            }
-    
-            $border-info: $sectionBorderOpaque;
-            .summary {
-                margin-top: 2px;
-                border-top: $border-info;
-                
-                li {
-                    border-right: $border-info;
-                }
-
-                li:last-child {
-                    border-right: none;
-                }
-            }
-
-            ul.attributes {
-                list-style: none;
+    .sheet-header .header-details {
+        .top-info {
+            align-items: center;
+            h1.charname {
+                flex: 2 0 auto;
                 padding: 0;
-                margin: 0;
-                border-bottom: $border-info;
+            }
     
-                li.attribute {
-                    border-top: $border-info;
-                    text-align: center;
-                    border-left: $border-info;
-                    border-right: $border-info;
-                    .attribute-name {
-                        border-bottom: 1px groove rgba($primaryColor, 0.1);
-                        margin: 4px 8px 2px;
+            .header-powerlevel {
+                flex: 1 0 25%;
+                flex-direction: column;
+                margin: 0;
+                border: $sectionBorder;
+                border-radius: $sectionBorderRadius;
+                background: rgba(gray, 0.1);
+                .header-power {
+                    display: flex;
+                    justify-content: flex-end;
+                    flex-direction: row;
+                    input {
+                        flex: 0 1 30px;
                     }
                 }
 
-                li:last-child {
-                    border-right: none;
-                }
-
-                .movement .attribute-footer {
-                    font-size: 8.5px;
+                .max-points {
+                    position: relative;
+                    .lock-button {
+                        position: absolute;
+                        display: none;
+                        margin-top: 5px;
+                        margin-left: -15px;
+                    }
+            
+                    &:hover .lock-button {
+                        display: block;
+                    }
                 }
             }
         }
@@ -135,38 +85,37 @@
         $section-buffer: 6px;
 
         label.box-title {
-            height: 18px;
-            line-height: 16px;
             padding: 4px 8px 2px;
             font-size: 15px;
-            color:rgb(49, 49, 49);
-            border-bottom: 1px solid gray;
+            border-bottom: $underline-border;
+            text-transform: uppercase;
             white-space: nowrap;
-            background-color: $tabFillerBackground;
         }
 
         .ability-section {
+            text-align: center;
             margin-right: $section-buffer;
         }
 
-        .ability-scores {
-            list-style: none;
-            align-self: flex-start;
+        .defense {
             text-align: center;
+            border-right: $sectionBorderOpaque;
+            &:last-child {
+                border-right: none;
+            }
+        }
+
+        .scores {
             margin: 0;
             padding-left: 2px;
             padding-right: 2px;
             background-color: $tabFillerBackground;
     
             .ability {
-                height: 60px;
                 border-bottom: $borderGroove;
-                text-transform: uppercase;
-                background-color: $tabFillerBackground;
-            }
-
-            :last-child {
-                border-bottom: none;
+                &:last-child {
+                    border-bottom: none;
+                }
             }
             
             span.ability-score {
@@ -174,7 +123,6 @@
                 width: 36px;
                 margin: 0 auto;
                 font-size: 20px;
-                background-color: $tabFillerBackground;
             }
         }
     
@@ -209,6 +157,12 @@
                 flex: 0 1 auto;
                 margin-top: 0;
             }
+        }
+    }
+
+    .notes {
+        .notes-entries.complication-notes {
+            height: 30%;
         }
     }
 }

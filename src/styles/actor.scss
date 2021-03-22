@@ -1,4 +1,56 @@
 .mnm3e.sheet.actor {
+    .sheet-header {
+        img.profile {
+            $length: 164px;
+            max-width: $length;
+            height: $length;
+            margin-right: 0;
+        }
+
+        .header-details {
+            height: 100%;
+            $border-info: $sectionBorderOpaque;
+            .summary {
+                margin-top: 2px;
+                border-top: $border-info;
+                
+                li {
+                    border-right: $border-info;
+                }
+
+                li:last-child {
+                    border-right: none;
+                }
+            }
+
+            ul.attributes {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+                border-bottom: $border-info;
+
+                li.attribute {
+                    border-top: $border-info;
+                    text-align: center;
+                    border-left: $border-info;
+                    border-right: $border-info;
+                    .attribute-name {
+                        border-bottom: $underline-border;
+                        margin: 4px 8px 2px;
+                    }
+                }
+
+                li:last-child {
+                    border-right: none;
+                }
+
+                .movement .attribute-footer {
+                    font-size: 8.5px;
+                }
+            }
+        }
+    }
+
     h3.section-header {
         text-align: center;
         flex: 0 1 auto;
@@ -19,5 +71,53 @@
 
     .item-list .item-controls {
         flex: 0 1 50px;
+    }
+
+    .notes {
+        overflow: hidden;
+        .notes-entries {
+            background: $tabFillerBackground;
+            border-radius: 5px;
+            $description-margin: 8px;
+            margin: $description-margin;
+            padding: $description-margin / 2;
+            min-height: 200px;
+
+            .article-title {
+                flex: 0 1 auto;
+                border-bottom: $underline-border;
+                margin-bottom: 0.5rem;
+                padding-bottom: 0.25rem;
+                font-size: 20px;
+                font-weight: bold;
+            }
+
+            article {
+                position: relative;
+                overflow: hidden;
+            }
+
+            &:hover .editor .editor-edit {
+                display: block;
+                padding: 0;
+                border: none;
+                box-shadow: none;
+            }
+
+            .editor {
+                position: static;
+            }
+
+            .editor-edit {
+                position: absolute;
+                top: 2.5px;
+                right: 5px;
+                font-size: 1.25em;
+            }
+        }
+
+        .background-info {
+            height: auto;
+        }
     }
 }

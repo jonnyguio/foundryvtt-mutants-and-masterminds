@@ -52,14 +52,6 @@ export default class Actor3e<T extends CommonActorData = CommonActorData> extend
         };
 
         Object.values(actorData.data.skills).forEach(s => s.base = 0);
-        switch (actorData.type) {
-            case 'character':
-                this.prepareCharacterData(actorData);
-                break;
-            case 'npc':
-                this.prepareNPCData(actorData);
-                break;
-        }
     }
 
     /**
@@ -83,7 +75,7 @@ export default class Actor3e<T extends CommonActorData = CommonActorData> extend
         this.prepareAbilities(actorData);
         this.prepareDefenses(actorData);
         this.prepareSkills(actorData);
-        actorData.data.attributes.initiative = actorData.data.abilities.agl.total!;
+        actorData.data.attributes.initiative += actorData.data.abilities.agl.total!;
 
         this.items.forEach(item => {
             switch (item.type) {
@@ -111,6 +103,15 @@ export default class Actor3e<T extends CommonActorData = CommonActorData> extend
 
         if (actorData.data.pointCosts.total.value > actorData.data.maxPoints) {
             actorData.data.pointCosts.total.cssClass = 'invalid-power-points';
+        }
+
+        switch (actorData.type) {
+            case 'character':
+                this.prepareCharacterData(actorData);
+                break;
+            case 'npc':
+                this.prepareNPCData(actorData);
+                break;
         }
     }
 
@@ -237,6 +238,6 @@ export default class Actor3e<T extends CommonActorData = CommonActorData> extend
     }
 
     private prepareNPCData(actorData: Actor.Data<T>): void {
-
+        actorData.data.attributes.powerLevel = Math.floor(actorData.data.pointCosts.total.value / 15);
     }
 }

@@ -4,21 +4,35 @@ form(class="{{cssClass}} flexcol" autocomplete="off")
         section.header-details.flexrow
             h1.charname
                 input(name="name" type="text" value="{{actor.name}}" placeholder="{{ localize 'MNM3E.Name'}}")
-            aside.header-powerlevel
-                .powerlevel
-                    .form-group.input
-                        label {{ localize "MNM3E.PowerLevel" }}:
-                        input(type="text" name="data.attributes.powerLevel" value="{{data.attributes.powerLevel}}" data-dtype="Number" placeholder="1")
+            nav.sheet-navigation.tabs(data-group="primary")
+                a.item.active(data-tab="core") {{ localize "MNM3E.Core" }}
+                a.item(data-tab="notes") {{ localize "MNM3E.Notes" }}
+                a.item(data-tab="effects") {{ localize "MNM3E.Effects" }}
             ul.summary.flexrow
                 | {{#each summary as |summary|}}
                 li
                     input(type="text" name="{{ summary.name }}" value="{{ summary.value }}" placeholder="{{ localize summary.localizedKey }}")
                 | {{/each}}
 
-        nav.sheet-navigation.tabs(data-group="primary")
-            a.item.active(data-tab="core") {{ localize 'MNM3E.Core' }}
-            a.item(data-tab="notes") {{ localize 'MNM3E.Notes' }}
-            a.item(data-tab="effects") {{ localize "MNM3E.Effects" }}
+            ul.attributes.flexrow
+                li.attribute.initiative 
+                    h4.attribute-name {{ localize "MNM3E.Initiative" }}
+                    .attribute-value
+                        span {{numberFormat data.attributes.initiative decimals=0 sign=true}}
+                li.attribute.movement
+                    h4.attribute-name {{ localize "MNM3E.Movement" }}
+                    .attribute-value
+                        span {{ movement.main }}
+                    footer.attribute-footer
+                        span {{ movement.special }}
+                li.attribute.powerlevel 
+                    h4.attribute-name {{ localize "MNM3E.PowerLevel" }}
+                    .attribute-value
+                        span {{data.attributes.powerLevel}}
+                li.attribute.penalty-points
+                    h4.attribute-name {{ localize "MNM3E.PenaltyPoints" }}
+                    .attribute-value
+                        input(type="number" name="data.attributes.penaltyPoints" value="{{data.attributes.penaltyPoints}}" placeholder="0")
 
 
     section.sheet-body 
@@ -28,5 +42,5 @@ form(class="{{cssClass}} flexcol" autocomplete="off")
         .tab.notes.flexrow(data-group="primary" data-tab="notes")
             | {{> "systems/mnm3e/templates/actors/parts/actor-notes.html" }}
 
-        .tab.effects.flexrow(data-group="primary" data-tab="effects")
+        .tab.effects(data-group="primary" data-tab="effects")
             | {{> "systems/mnm3e/templates/actors/parts/actor-effects.html" }}
