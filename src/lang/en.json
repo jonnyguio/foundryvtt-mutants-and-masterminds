@@ -87,8 +87,10 @@
     "MNM3E.DefenseWil": "Willpower",
     "MNM3E.DefenseWilAbbrev": "wil",
 
+    "MNM3E.Delete": "Delete",
+
     "MNM3E.DegreesOfFailure": "Degrees of Failure",
-    "MNM3E.DegreesOfSuccess": "Degress of Success",
+    "MNM3E.DegreesOfSuccess": "Degrees of Success",
 
     "MNM3E.Description": "Description",
     "MNM3E.Descriptor": "Descriptor",
@@ -103,6 +105,9 @@
     "MNM3E.DistanceMillionMiles": "million miles",
     "MNM3E.DistanceMillionMilesAbbrev": "mmi.",
 
+    "MNM3E.Discount": "Discount",
+    "MNM3E.DiscountPer": "per",
+
     "MNM3E.Duration": "Duration",
     "MNM3E.DurationInstant": "Instant",
     "MNM3E.DurationConcentration": "Concentration",
@@ -111,6 +116,8 @@
     "MNM3E.DurationPermanent": "Permanent",
 
     "MNM3E.EarnedPowerPoints": "Earned Power Points",
+
+    "MNM3E.Edit": "Edit",
 
     "MNM3E.EffectBaseRange": "Base Range",
     "MNM3E.Effects": "Effects",
@@ -124,12 +131,14 @@
     "MNM3E.EffectTypeSensory": "Sensory",
 
     "MNM3E.Equipment": "Equipment",
-
     "MNM3E.Expressions": "Expressions",
+    
+    "MNM3E.Favorite": "Favorite",
     "MNM3E.FavoriteAdvantages": "Favorite Advantages",
     "MNM3E.FavoriteEquipment": "Favorite Equipment",
     "MNM3E.FavoritePowers": "Favorite Powers",
     "MNM3E.Formula": "Formula",
+    "MNM3E.FormulaBuilder": "Formula Builder",
 
     "MNM3E.GroupAffiliation": "Group Affiliation",
 
@@ -145,6 +154,7 @@
     "MNM3E.ItemActivationType": "Activation Type",
     "MNM3E.ItemName": "Item Name",
     "MNM3E.ItemNewFormat": "New {type}",
+    "MNM3E.ItemSummaryBuilder": "Item Summary Builder",
 
     "MNM3E.MassPoundsAbbrev": "lbs.",
     "MNM3E.MassTons": "tons",
@@ -175,7 +185,6 @@
     "MNM3E.PenaltyPoints": "Penalty Points",
     "MNM3E.PowerLevel": "Power Level",
     "MNM3E.PowerPointTotal": "Power Point Total",
-    "MNM3E.PowerTotalCost": "Power Total Cost",
     "MNM3E.Powers": "Powers",
     "MNM3E.PowerArray": "Power Array",
     "MNM3E.PowerSummary": "Power Summary",
@@ -241,6 +250,7 @@
     "MNM3E.TargetLine": "Line",
     "MNM3E.TargetPerception": "Perception",
     "MNM3E.TargetShapeable": "Shapeable",
+    "MNM3E.TotalCostFormat": "Total Cost: {amount}",
 
     "MNM3E.TimeSeconds": "seconds",
     "MNM3E.TimeSecondsAbbrev": "sec.",

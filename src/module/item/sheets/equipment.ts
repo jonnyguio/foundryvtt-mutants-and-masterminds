@@ -7,9 +7,9 @@ export default class ItemSheet3eEquipment extends ItemSheet3e<EquipmentData, Ite
      */
     public static get defaultOptions(): FormApplication.Options {
         const opts = super.defaultOptions;
-        opts.classes?.push('equipment');
+        opts.classes?.push('power', 'equipment');
         return mergeObject(opts, {
-            template: 'systems/mnm3e/templates/items/equipment-sheet.html',
+            template: 'systems/mnm3e/templates/items/power-sheet.html',
         });
     }
 
@@ -25,6 +25,12 @@ export default class ItemSheet3eEquipment extends ItemSheet3e<EquipmentData, Ite
                 sheetData.data.summary += effect.data.summary.parsed;
             }
         });
+
+        sheetData.attributes = [{
+            label: game.i18n.localize('MNM3E.Descriptor'),
+            name: 'data.descriptor',
+            value: sheetData.data.descriptor,
+        }];
 
         return sheetData;
     }

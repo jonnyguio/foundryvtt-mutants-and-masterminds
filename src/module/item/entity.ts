@@ -337,6 +337,15 @@ export default class Item3e<T = any> extends Item<T> {
     }
 
     private preparePowerData(data: Item.Data<PowerData>): void {
+        const totalPowerCost = this.calculateEffectCost(data);
+        data.data.totalCost = totalPowerCost + data.data.powerArray.length;
+    }
+
+    private prepareEquipmentData(data: Item.Data<EquipmentData>): void {
+        data.data.totalCost = this.calculateEffectCost(data);
+    }
+
+    private calculateEffectCost(data: Item.Data<PowerData | EquipmentData>): number {
         let totalPowerCost = 0;
         const deferredCosts: { modifier: number; discountPer: number; }[] = [];
 
@@ -383,11 +392,7 @@ export default class Item3e<T = any> extends Item<T> {
             totalPowerCost += quotient * dc.modifier;
         });
 
-        data.data.totalCost = totalPowerCost + data.data.powerArray.length;
-    }
-
-    private prepareEquipmentData(data: Item.Data<EquipmentData>): void {
-
+        return totalPowerCost;
     }
 
     private fixArrays(data: Item.Data): void {

@@ -3,14 +3,21 @@ include ../../mixins.pug
 img.profile(src="{{item.img}}" title="{{item.name}}" data-edit="img")
 .header-details.flexcol
     .titles.flexrow
-        h1.charname
+        h1.item-name
             input(name="name" type="text" value="{{item.name}}" placeholder="{{ localize 'MNM3E.ItemName' }}")
 
         .item-subtitle
             h4.item-type {{itemType}}
-            | {{#if itemSubtype}}
-            span.item-subtype {{itemSubtype}}
-            | {{/if}}
+            | {{#each itemSubtitles as |subtitle|}}
+            span.item-subtitle {{subtitle}}
+            | {{/each}}
+
+    | {{#if attributes}}
+    ul.header-attributes.flexrow
+        | {{#each attributes as |attribute|}}
+        li: input(type="text" name="{{attribute.name}}" value="{{attribute.value}}" placeholder="{{attribute.label}}")
+        | {{/each}}
+    | {{/if}}
 
     | {{#if showSummary}}
     +item-summary-controller()

@@ -17,7 +17,7 @@ h3.form-header {{ localize "MNM3E.ItemActivationDetails" }}
 
 +select-value-with-override("MNM3E.Duration", "data.activation.duration.type", "config.durationTypes")
 
-.form-group.input
+.form-group.input.effect-uses
     label {{ localize "MNM3E.Uses" }}
     | {{#if item.isOwned}}
     input(type="number" name="data.activation.uses.remaining" value="{{data.activation.uses.remaining}}" data-dtype="Number")

@@ -69,6 +69,28 @@
         }
     }
 
+    .skill-section {
+        flex: 1;
+        margin-right: 6px;
+
+        .untrained {
+            color: grey;
+        }
+
+        .subskill-name {
+            margin-left: 10px;
+        }
+        .skill-score {
+            text-align: right;
+            padding-left: 20px;
+            padding-right: 10px;
+        }
+        ul {
+            padding-left: 10px;
+            white-space: nowrap;
+        }
+    }
+
     .item-list .item-controls {
         flex: 0 1 50px;
     }

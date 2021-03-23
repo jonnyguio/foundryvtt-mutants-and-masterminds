@@ -1,6 +1,6 @@
 form(class="{{cssClass}} item-sheet-effect flexcol" autocomplete="off")
     header.sheet-header
-        | {{> "systems/mnm3e/templates/items/parts/header-sheet.html" itemSubtype=itemSubtype showSummary=true }}
+        | {{> "systems/mnm3e/templates/items/parts/header-sheet.html" showSummary=true }}
 
     nav.sheet-navigation.tabs(data-group="primary")
         a.item.active(data-tab="description") {{ localize "MNM3E.Description" }}

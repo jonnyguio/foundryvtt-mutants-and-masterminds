@@ -14,76 +14,31 @@
     .traits-section {
         flex: 0 1 30%;
 
-        .trait {
-            flex: 0;
-        }
+        .bordered-section:not(.skill-section) {
+            margin: 3px;
+            .scores {
+                justify-content: space-evenly;
+                padding: 0 2px 2px 2px;
+                margin: 0 5px 5px 5px;
+                .score {
+                    border: $sectionBorderOpaque;
+                    text-align: center;
+                    &.ability {
+                        flex: 1 0 25%;
+                    }
 
-        h4 {
-            text-align: center;
-            font-family: Charcoal, sans-serif;
-            color: $tabFillerBackground;
-            background: $primaryColor;
-            border-radius: $sectionBorderRadius;
-            flex: 0 1 auto;
-            padding: 2px 0 2px 0;
-            margin-bottom: 5px;
-        }
-        .ability-section{
-            flex-wrap: wrap;
-            margin-top: 8px;
-            border: $sectionBorder;
-            border-radius: $sectionBorderRadius;
-            background-color: $tabFillerBackground;
-            margin: 3px;
-            .ability-scores {
-                justify-content: space-evenly;
-                padding: 0 2px 2px 2px;
-                margin: 0 5px 5px 5px;;
-            }
-            .ability {
-                flex: 1 0 25%;
-                border: $sectionBorderOpaque;
-                .ability-name {
-                    text-align: center;
-                    text-decoration: underline;
-                }
-                .ability-score {
-                    text-align: center;
+                    label {
+                        border-bottom: $underline-border;
+                        text-transform: uppercase;
+                    }
                 }
             }
-        }
-        .defense-section{
-            flex-wrap: nowrap;
-            margin: 3px;
-            border: $sectionBorder;
-            border-radius: $sectionBorderRadius;
-            background-color: $tabFillerBackground;
-            .defense-scores {
-                justify-content: space-evenly;
-                padding: 0 2px 2px 2px;
-                margin: 0 5px 5px 5px;;
+            &.ability-section {
+                flex-wrap: wrap;
+                margin-top: 8px;
             }
-            .defense {
-                border: $sectionBorderOpaque;
-                .defense-name {
-                    text-align: center;
-                    text-decoration: underline;
-                }
-                .defense-score {
-                    text-align: center;
-                }
-            }
-        }
-        .skills{
-            flex-wrap: nowrap;
-            margin: 3px;
-            border: $sectionBorder;
-            border-radius: $sectionBorderRadius;
-            background-color: $tabFillerBackground;
-            padding-bottom: 5px;
-            .skill-name {
-                text-align: center;
-                padding-left: 10px;
+            &.defense-section {
+                flex-wrap: nowrap;
             }
         }
     }

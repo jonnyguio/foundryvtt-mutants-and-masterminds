@@ -24,11 +24,11 @@ mixin select-value-with-override(label, dataPath, configPath, allowBlank=false, 
 
 mixin item-summary-controller()
     .item-summary.flexrow
-        label {{ localize "MNM3E.SummaryFormat" }}
+        label {{ localize "MNM3E.SummaryFormat" }}:
         span {{ data.summary.parsed }}
         .summary-controls.flexrow
-            a.config-button(title="{{ localize 'MNM3E.ItemSummaryBuilder' }}" data-action="summary-builder")
-                i.fas.fa-bars
+            a.app-button(title="{{ localize 'MNM3E.ItemSummaryBuilder' }}" data-action="summary-builder")
+                i.fas.fa-edit
 
 mixin expanding-roll-controller(headerLabel, rollDetailsPath)
     .form-group.expanding-group
@@ -46,12 +46,14 @@ mixin expanding-roll-controller(headerLabel, rollDetailsPath)
                         | {{/each}}
                         | {{/select}}
             | {{#if (or (and #{rollDetailsPath}.rollType.value (ne #{rollDetailsPath}.rollType.value "none")) (eq item.type "modifier"))}}
-            a.check-control(
-                    title="{{ localize 'MNM3E.AddFormula' }}"
-                    data-action="create"
-                    data-data-path=`${rollDetailsPath}.formula.value`
-                )
-                    i.fas.fa-plus
+            .formula-builder-header.flexrow
+                h4 {{ localize "MNM3E.FormulaBuilder" }}
+                a.check-control(
+                        title="{{ localize 'MNM3E.Add' }}"
+                        data-action="create"
+                        data-data-path=`${rollDetailsPath}.formula.value`
+                    )
+                        i.fas.fa-plus
             .hidden-data(style="display: none;")
                 input(
                     type="text"
@@ -68,7 +70,7 @@ mixin expanding-roll-controller(headerLabel, rollDetailsPath)
                     readonly
                 )
             | {{#each #{rollDetailsPath}.formula.value as |formula idx|}}
-            .form-group
+            .form-group.formula-builder
                 .form-fields
                     - const disabledCondition = `(lt idx ../${rollDetailsPath}.formula.numOverrides)`
                     | {{#if #{disabledCondition}}}
@@ -86,7 +88,7 @@ mixin expanding-roll-controller(headerLabel, rollDetailsPath)
                         option(value="-") -
                         | {{/select}}
                     | {{/if}}
-                .form-fields 
+                .form-fields.score-dropdown
                     | {{#if #{disabledCondition}}}
                     input(
                         type="text"
@@ -94,6 +96,7 @@ mixin expanding-roll-controller(headerLabel, rollDetailsPath)
                         value="{{lookup this 'dataPath'}}"
                         data-dtype="String"
                         readonly
+                        style="display: none;"
                     )
                     | {{else}}
                     select(name=`${rollDetailsPath}.formula.value.{{idx}}.dataPath`)
@@ -115,7 +118,7 @@ mixin expanding-roll-controller(headerLabel, rollDetailsPath)
                 | {{/if}}
                 | {{#if (not #{disabledCondition})}}
                 a.check-control(
-                    title="{{ localize 'MNM3E.DeleteFormula' }}"
+                    title="{{ localize 'MNM3E.Delete' }}"
                     data-action="delete"
                     data-data-path=`${rollDetailsPath}.formula.value`
                     data-index="{{idx}}"

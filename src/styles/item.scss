@@ -1,0 +1,151 @@
+.mnm3e.sheet.item {
+    .sheet-header {
+        img.profile {
+            max-width: 76px;
+            height: auto;
+        }
+
+        .header-details {
+            height: 100%;
+            .item-name input {
+                margin: 0;
+            }
+
+            .header-attributes {
+                align-items: center;
+                margin: 0;
+                padding: 0;
+                list-style: none;
+                border-top: $sectionBorderOpaque;
+                border-bottom: $sectionBorderOpaque;
+            }
+
+            .item-subtitle {
+                flex: 0 1 auto;
+                text-align: right;
+            }
+
+            .item-summary {
+                align-items: center;
+                border-top: $sectionBorderOpaque;
+                border-bottom: $sectionBorderOpaque;
+                > * {
+                    flex: 0 1 auto;
+                    margin-left: 5px;
+                }
+
+                .app-button {
+                    display: none;
+                }
+        
+                &:hover .app-button {
+                    display: inline-flex;
+                }
+            }
+        }
+    }
+
+    .sheet-navigation.tabs {
+        margin-top: 4px;
+    }
+
+    .sheet-body {
+        border: 3px solid $primaryColor;
+        border-top: none;
+        padding: 6px;
+
+        .editor {
+            margin: 5px 0;
+        }
+
+        .form-group:not(.form-group.expanding-group) {
+            background: rgba(black, 0.05);
+            border-radius: 5px;
+            padding: 2px;
+            &:last-child {
+                margin-bottom: 0;
+            }
+
+            input, select {
+                background: rgba(white, 0.25);
+            }
+        }
+
+        .item-properties {
+            $line-distance: 5px;
+            margin-right: $line-distance;
+            padding-right: $line-distance;
+            flex: 0 1 30%;
+            border-right: $sectionBorderOpaque;
+
+            .form-group {
+                label {
+                    flex: 0 1 40%;
+                }
+                input {
+                    text-align: right;
+                }
+
+                &.input-input span {
+                    padding: 0 5px;
+                }
+            }
+        }
+
+        .details {
+            .form-header, .formula-builder-header {
+                font-size: 16px;
+                font-weight: bold;
+            }
+
+            .form-group {
+                label {
+                    flex: 0 1 30%;
+                    min-width: 150px;
+                }
+
+                &.effect-uses span {
+                    flex: 0 1 20px;
+                    text-align: center;
+                }
+
+                &.expanding-group {
+                    .formula-builder-header {
+                        h4 {
+                            margin: 0;
+                        }
+
+                        a {
+                            text-align: right;
+                        }
+                    }
+
+                    .formula-builder {
+                        > input {
+                            flex: 1
+                        }
+                        
+                        .score-dropdown, > :first-child, > :last-child {
+                            flex: 0;
+                        }
+
+                        > :last-child {
+                            padding-left: 4px;
+                        }
+
+                        input:read-only {
+                            flex: 1;
+                            border: none;
+                            cursor: unset;
+                            background: none;
+                        }
+
+                        a {
+                            margin-left: auto;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

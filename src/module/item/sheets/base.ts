@@ -8,11 +8,18 @@ interface OptionGroupInfo {
     entries: object;
 }
 
+interface AttributeField {
+    label: string;
+    name: string;
+    value: string;
+}
+
 export interface ExtendedItemSheetData<T = any> extends FoundryItemSheetData<T> {
     config: Config;
     formulaOptions: OptionGroupInfo[];
+    attributes?: AttributeField[];
+    itemSubtitles?: string[];
     itemType?: string;
-    itemSubtype?: string;
 }
 
 export default class ItemSheet3e<T, I extends Item<T>> extends ItemSheet<T, I> {
@@ -90,7 +97,7 @@ export default class ItemSheet3e<T, I extends Item<T>> extends ItemSheet<T, I> {
     public activateListeners(html: JQuery): void {
         html.find('.effect-control').on('click', ev => onManagedActiveEffect(ev, this.item));
         html.find('.check-control').on('click', this.onCheckControl.bind(this));
-        html.find('.config-button').on('click', this.onConfigMenu.bind(this));
+        html.find('.app-button').on('click', this.onAppMenu.bind(this));
         html.find('.item .item-name h4').on('click', this.onItemSummary.bind(this));
 
         const originalClose = this.close.bind(this);
@@ -206,7 +213,7 @@ export default class ItemSheet3e<T, I extends Item<T>> extends ItemSheet<T, I> {
         return newItem;
     }
 
-    private async onConfigMenu(ev: JQuery.ClickEvent): Promise<void> {
+    private async onAppMenu(ev: JQuery.ClickEvent): Promise<void> {
         ev.preventDefault();
         const button = ev.currentTarget;
         let app: Application;
@@ -260,8 +267,9 @@ export default class ItemSheet3e<T, I extends Item<T>> extends ItemSheet<T, I> {
                 item = await this.newChildItem(sourceItem);
             }
             const div = await (item.sheet as ItemSheet3e<any, Item3e>).renderListItemContents();
-            li.append(div.hide());
-            div.slideDown(200);
+            const trimmedDiv = div.html($.trim(div.html()));
+            li.append(trimmedDiv.hide());
+            trimmedDiv.slideDown(200);
         }
 
         li.toggleClass(expandedClass);

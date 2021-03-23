@@ -2,7 +2,7 @@ include ../mixins.pug
 
 form(class="{{cssClass}} item-sheet-equipment flexcol" autocomplete="off")
     header.sheet-header.flexrow
-        | {{> "systems/mnm3e/templates/items/parts/header-sheet.html" itemSubtype=itemSubtype }}
+        | {{> "systems/mnm3e/templates/items/parts/header-sheet.html" }}
 
     nav.sheet-navigation.tabs(data-group="primary")
         a.item.active(data-tab="description") {{ localize "MNM3E.Description" }}
@@ -29,5 +29,5 @@ form(class="{{cssClass}} item-sheet-equipment flexcol" autocomplete="off")
             |       type="effect"
             | }}
 
-        .tab.effects.flexrow(data-group="primary" data-tab="effects")
+        .tab.effects(data-group="primary" data-tab="effects")
             | {{> "systems/mnm3e/templates/actors/parts/actor-effects.html" }}

@@ -14,12 +14,10 @@
             | {{/each}}
             | {{/select}}
 
-.form-group.input
-    label {{#if (eq data.cost.type "discount")}} {{ localize "MNM3E.CostDiscount" }} {{else}} {{ localize "MNM3E.Cost" }} {{/if}}
+.form-group.input-input
+    label {{#if (eq data.cost.type "discount")}} {{ localize "MNM3E.Discount" }} {{else}} {{ localize "MNM3E.Cost" }} {{/if}}
     input(type="text" name="data.cost.value" value="{{data.cost.value}}" data-dtype="Number" placeholder="0")
-
-| {{#if (eq data.cost.type "discount")}}
-.form-group.input
-    label {{ localize "MNM3E.CostDiscountPer" }}
+    | {{#if (eq data.cost.type "discount")}}
+    span {{ localize "MNM3E.DiscountPer" }}
     input(type="text" name="data.cost.discountPer" value="{{data.cost.discountPer}}" data-dtype="Number" placeholder="0")
-| {{/if}}
+    | {{/if}}

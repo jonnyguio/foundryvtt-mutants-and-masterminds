@@ -92,19 +92,6 @@
             white-space: nowrap;
         }
 
-        .ability-section {
-            text-align: center;
-            margin-right: $section-buffer;
-        }
-
-        .defense {
-            text-align: center;
-            border-right: $sectionBorderOpaque;
-            &:last-child {
-                border-right: none;
-            }
-        }
-
         .scores {
             margin: 0;
             padding-left: 2px;
@@ -125,37 +112,32 @@
                 font-size: 20px;
             }
         }
-    
+
+        .ability-section {
+            text-align: center;
+            margin-right: $section-buffer;
+        }
+
+        .defense {
+            text-align: center;
+            border-right: $sectionBorderOpaque;
+            &:last-child {
+                border-right: none;
+            }
+        }
+
         .body-section {
             flex: 0;
             margin-top: $section-buffer;
-            .skill-section {
-                flex: 1;
-                max-width: fit-content;
-                margin-right: $section-buffer;
-    
-                .untrained {
-                    color: grey;
-                }
-    
-                .subskill-name {
-                    margin-left: 10px;
-                }
-                .skill-score {
-                    text-align: right;
-                    padding-left: 20px;
-                    padding-right: 10px;
-                }
-                ul {
-                    padding-left: 10px;
-                    white-space: nowrap;
-                }
-            }
 
             .favorites-section ol {
                 padding: 0px;
                 flex: 0 1 auto;
                 margin-top: 0;
+            }
+
+            .skill-section {
+                max-width: fit-content;
             }
         }
     }

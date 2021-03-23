@@ -1,4 +1,4 @@
-.window-app .window-content{
+.window-app .window-content {
     background: $sheetBackground;
     background-size: cover;
 }
@@ -25,17 +25,21 @@
         display: flex;
     }
 
+    .section-header {
+        background: $primaryColor;
+        border-radius: $sectionBorderRadius;
+        color: $tabFillerBackground;
+        font-family: Charcoal, sans-serif;
+        padding: 3px;
+        margin-bottom: 0;
+    }
+
     .bordered-section {
         border: $sectionBorder;
         border-top: none;
         border-radius:  0 5px 0 0;
         flex: 0;
         background-color: $tabFillerBackground;
-    }
-
-    .item-subtitle {
-        flex: 0 1 auto;
-        text-align: right;
     }
 
     // Item list
@@ -138,22 +142,11 @@
 
     // Description box
 
-    // .description {
-    //     .editor {
-    //         flex-wrap: nowrap;
-    //         flex: 1 0 auto;
-    //         .editor-content {
-    //             border-left: $sectionBorderOpaque;
-    //             padding-left: 10px;
-    //         }
-    //     }
-    //     .item-editor {
-    //         .item-summary {
-    //             line-height: 30px;
-    //             border-bottom: $sectionBorderOpaque;
-    //         }
-    //     }
-    // }
+    .editor {
+        background: $tabFillerBackground;
+        border-radius: 5px;
+        padding: 2px;
+    }
 
     .tox-toolbar-overlord,
     .tox-toolbar__primary {
@@ -191,12 +184,6 @@
         }
     }
 
-    .item-properties {
-        min-width: 10px;
-        flex: 0 1 30%;
-        padding-right: 10px;
-    }
-
     .tab {
         flex: auto;
 
@@ -221,14 +208,5 @@
         &:focus {
             border: 1px solid black;
         }
-    }
-
-    .section-header {
-        background: $primaryColor;
-        border-radius: $sectionBorderRadius;
-        color: $tabFillerBackground;
-        font-family: Charcoal, sans-serif;
-        padding: 3px;
-        margin-bottom: 0;
     }
 }

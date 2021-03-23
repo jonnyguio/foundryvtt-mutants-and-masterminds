@@ -33,6 +33,14 @@ export default class ItemSheet3ePower extends ItemSheet3e<PowerData, Item3e<Powe
             }
         });
 
+        sheetData.attributes = [{
+            label: game.i18n.localize('MNM3E.Descriptor'),
+            name: 'data.descriptor',
+            value: sheetData.data.descriptor,
+        }];
+
+        sheetData.itemSubtitles = [game.i18n.format('MNM3E.TotalCostFormat', {amount: sheetData.data.totalCost})];
+
         sheetData.effectSummaries = [];
         return sheetData;
     }

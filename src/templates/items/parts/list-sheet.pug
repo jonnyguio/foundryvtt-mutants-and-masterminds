@@ -25,12 +25,12 @@ ol.bordered-section.items-list(class="{{ type }}-list item-{{ type }}-controls")
             | {{#if (not ../hideControls)}}
             .item-controls.flexrow
                 | {{#if ../canFavorite}}
-                a.item-control(title="{{ localize 'MNM3E.ItemFavorite' }}" data-action="favorite" data-index="{{@index}}")
+                a.item-control(title="{{ localize 'MNM3E.Favorite' }}" data-action="favorite" data-index="{{@index}}")
                     i.fa-star(class="{{#if item.flags.mnm3e.isFavorite}}fas{{else}}far{{/if}} {{../iconClass}}")
                 | {{/if}}
-                a.item-control(title="{{ localize 'MNM3E.ItemEdit' }}" data-action="edit" data-index="{{@index}}")
+                a.item-control(title="{{ localize 'MNM3E.Edit' }}" data-action="edit" data-index="{{@index}}")
                     i.fas.fa-edit(class="{{../iconClass}}")
-                a.item-control(title="{{ localize 'MNM3E.ItemDelete' }}" data-action="delete" data-index="{{@index}}")
+                a.item-control(title="{{ localize 'MNM3E.Delete' }}" data-action="delete" data-index="{{@index}}")
                     i.fas.fa-trash(class="{{../iconClass}}")
             | {{/if}}
         | {{/each}}

@@ -19,7 +19,7 @@ export default class ItemSheet3eEffect extends ItemSheet3e<PowerEffectData, Item
     public getData(options: DataOptions = {}): ItemSheet.Data<PowerEffectData> {
         const sheetData = super.getData(options) as ExtendedItemSheetData<PowerEffectData>;
         if (sheetData.data.action.type.value) {
-            sheetData.itemSubtype = game.i18n.localize(`MNM3E.EffectType${sheetData.data.action.type.value.titleCase()}`);
+            sheetData.itemSubtitles = [game.i18n.localize(`MNM3E.EffectType${sheetData.data.action.type.value.titleCase()}`)];
         }
 
         return sheetData;
