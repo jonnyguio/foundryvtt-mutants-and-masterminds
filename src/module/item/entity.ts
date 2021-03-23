@@ -1,6 +1,5 @@
 
 import Actor3e from '../actor/entity';
-import { evaluateExpression } from '../expressions';
 import { getMeasurement } from '../measurements';
 import { displayCard } from '../chat';
 
@@ -19,11 +18,6 @@ interface PowerEffectCardInfo {
 };
 
 export default class Item3e<T = any> extends Item<T> {
-    // TODO: Possibly remove
-    public get hasAreaTarget() {
-        const data = this.data.data as any;
-        return data.activation && data.activation.type.value && data.range.area.value;
-    }
 
     /**
      * @override
@@ -50,6 +44,9 @@ export default class Item3e<T = any> extends Item<T> {
     public prepareMNM3EData(): void {
         this.fixArrays(this.data);
         switch(this.type) {
+            case 'advantage':
+                this.prepareAdvantageData((this.data as unknown) as Item.Data<AdvantageData>);
+                break;
             case 'modifier':
                 this.prepareModifierData((this.data as unknown) as Item.Data<ModifierData>);
                 break;
@@ -203,6 +200,14 @@ export default class Item3e<T = any> extends Item<T> {
             rollMode, 
             flags: { 'mnm3e.effectInfo': effects },
         });
+    }
+
+    private prepareAdvantageData(data: Item.Data<AdvantageData>): void {
+        if (data.data.summary.format == '') {
+            data.data.summary.format = data.name;
+        }
+
+        data.data.summary.parsed = data.data.summary.format.replace('$cost', data.data.cost.value.toString());
     }
 
     private prepareModifierData(data: Item.Data<ModifierData>): void {

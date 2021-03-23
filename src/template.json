@@ -53,6 +53,7 @@
                 },
                 "attributes": {
                     "powerLevel": 0,
+                    "equipmentPoints": 0,
                     "initiative": 0,
                     "penaltyPoints": 0,
                     "movement": {

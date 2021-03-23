@@ -15,7 +15,7 @@ export const onActiveEffect = (actor: Actor3e, change: ActiveEffectChange): bool
         return true;
     }
     let value = change.value.replace('@rank', data.data.rank);
-    const parsed = parseFloat(value);
+    const parsed = (Math as any).safeEval(value);
     if (Number.isNumeric(parsed)) {
         value = parsed;
     }

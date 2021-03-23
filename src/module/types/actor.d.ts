@@ -132,6 +132,7 @@ declare interface CommonActorData {
 
     // Prepared Data
     pointCosts: PointCosts;
+    equipmentCost: number;
     maxPoints: number;
 }
 

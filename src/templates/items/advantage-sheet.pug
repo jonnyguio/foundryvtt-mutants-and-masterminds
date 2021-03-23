@@ -2,7 +2,7 @@ include ../mixins.pug
 
 form(class="{{cssClass}} item-sheet-advantage flexcol" autocomplete="off")
     header.sheet-header.flexrow
-        | {{> "systems/mnm3e/templates/items/parts/header-sheet.html" }}
+        | {{> "systems/mnm3e/templates/items/parts/header-sheet.html" showSummary=true }}
 
     nav.sheet-navigation.tabs(data-group="primary")
         a.item.active(data-tab="description") {{ localize "MNM3E.Description" }}
@@ -13,10 +13,8 @@ form(class="{{cssClass}} item-sheet-advantage flexcol" autocomplete="off")
         .tab.description.flexrow.active(data-group="primary" data-tab="description")
             .item-properties.flexcol
                 | {{> "systems/mnm3e/templates/items/parts/cost-sheet.html" }}
-            
-            .item-editor.flexcol
-                +item-summary-controller()
-                | {{editor content=data.description.value target="data.description.value" button=true owner=owner editable=editable}}
+
+            | {{editor content=data.description.value target="data.description.value" button=true owner=owner editable=editable}}
 
         .tab.details(data-group="primary" data-tab="details")
             | {{> "systems/mnm3e/templates/items/parts/activations-sheet.html" }}

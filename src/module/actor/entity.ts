@@ -77,8 +77,12 @@ export default class Actor3e<T extends CommonActorData = CommonActorData> extend
         this.prepareSkills(actorData);
         actorData.data.attributes.initiative += actorData.data.abilities.agl.total!;
 
+        actorData.data.equipmentCost = 0;
         this.items.forEach(item => {
             switch (item.type) {
+                case 'equipment': 
+                    actorData.data.equipmentCost += (item.data.data as EquipmentData).totalCost || 0;
+                    break;
                 case 'power':
                     actorData.data.pointCosts.powers.value += (item.data.data as PowerData).totalCost || 0;
                     break;

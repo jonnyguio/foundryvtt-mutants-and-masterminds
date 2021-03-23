@@ -122,7 +122,7 @@ declare interface Expression {
     formula: string;
 }
 
-declare interface AdvantageData extends ItemDescription, ItemActivatedEffect, ItemAction, ItemScalingEffect {
+declare interface AdvantageData extends ItemSummary, ItemDescription, ItemActivatedEffect, ItemAction, ItemScalingEffect {
 }
 
 declare interface PowerEffectData extends ItemSummary, ItemDescription, ItemActivatedEffect, ItemAction, ItemScalingEffect {
