@@ -5,7 +5,7 @@ export default class SummaryBuilder extends BaseEntitySheet<ItemSummary> {
     public static get defaultOptions(): FormApplication.Options {
         return mergeObject(super.defaultOptions, {
             template: 'systems/mnm3e/templates/apps/summary-builder.html',
-            classes: ['mnm3e'],
+            classes: ['mnm3e', 'sheet', 'app', 'summary-builder'],
             width: 300,
             height: 'auto',
         });

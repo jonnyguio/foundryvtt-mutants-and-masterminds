@@ -7,13 +7,13 @@
         margin: 2px 2px 0 2px;
         .active {
             padding: 3px;
+            border: 1px solid $selectedTab;
             border-radius: 0;
         }
     }
 
     .traits-section {
         flex: 0 1 30%;
-
         .bordered-section:not(.skill-section) {
             margin: 3px;
             .scores {

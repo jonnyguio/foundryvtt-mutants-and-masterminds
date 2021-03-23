@@ -1,73 +1,85 @@
-.mnm3e.sheet.app.score-config {
-    form {
-        border: $sectionBorder;
-        border-top: none;
-        border-radius: $sectionBorderRadius;
-    }
-
-    ul {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-    }
-
-    .tooltip {
-        position: relative;
-        display: inline-flex;
-
-        .tooltip-text {
-            visibility: hidden;
-            width: auto;
-            background-color: $primaryColor;
-            color: white;
-            text-align: center;
-            padding: 2px;
-            border-radius: 6px;
-            position: absolute;
-            z-index: 1;
-            top: 100%;
-            opacity: 0;
-            transition: opacity 0.25s;
+.mnm3e.sheet.app {
+    &.summary-builder {
+        .form-fields {
+            flex: 0;
         }
 
-        &:hover .tooltip-text {
-            visibility: visible;
-            opacity: 1;
+        input {
+            background: rgba(black, 0.05);
+            border: 1px solid #7a7971;
         }
     }
-
-    $columnWidth: 50px;
-    .score-headers span:not(:first-child) {
-        flex: 0 1 $columnWidth;
-        text-align: center;
-    }
-
-    .score-control {
-        margin: 0 5px;
-    }
-
-    .form-group {
-        background: rgba(black, 0.05);
-        border-radius: 5px;
-        padding: 2px;
-        &.input input, &.input-input input {
+    &.score-config {
+        form {
+            border: $sectionBorder;
+            border-top: none;
+            border-radius: $sectionBorderRadius;
+        }
+    
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+    
+        .tooltip {
+            position: relative;
+            display: inline-flex;
+    
+            .tooltip-text {
+                visibility: hidden;
+                width: auto;
+                background-color: $primaryColor;
+                color: white;
+                text-align: center;
+                padding: 2px;
+                border-radius: 6px;
+                position: absolute;
+                z-index: 1;
+                top: 100%;
+                opacity: 0;
+                transition: opacity 0.25s;
+            }
+    
+            &:hover .tooltip-text {
+                visibility: visible;
+                opacity: 1;
+            }
+        }
+    
+        $columnWidth: 50px;
+        .score-headers span:not(:first-child) {
             flex: 0 1 $columnWidth;
             text-align: center;
-            border: unset;
-            border-left: $column-separator;
         }
-
-        &:last-child {
-            margin-bottom: 0;
-        }
-    }
-
-    .dynamic-score label {
-        padding-left: 2px;
-        flex: 1 0 auto;
-    }
     
-    .score-control {
-        flex: 0 1 auto;
+        .score-control {
+            margin: 0 5px;
+        }
+    
+        .form-group {
+            background: rgba(black, 0.05);
+            border-radius: 5px;
+            padding: 2px;
+            &.input input, &.input-input input {
+                flex: 0 1 $columnWidth;
+                text-align: center;
+                border: unset;
+                border-left: $column-separator;
+            }
+    
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    
+        .dynamic-score label {
+            padding-left: 2px;
+            flex: 1 0 auto;
+        }
+        
+        .score-control {
+            flex: 0 1 auto;
+        }
     }
 }

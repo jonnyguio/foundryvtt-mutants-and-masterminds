@@ -87,7 +87,7 @@ export default class ItemSheet3e<T, I extends Item3e<T>> extends ItemSheet<T, I>
             }, {}),
         }));
 
-        this.item.parseSummary();
+        this.item.parseSummary(!!!this._parentItem);
         sheetData.effects = prepareActiveEffectCategories((this.entity as any).effects);
         return sheetData;
     }

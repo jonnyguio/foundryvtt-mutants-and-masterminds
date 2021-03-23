@@ -62,7 +62,7 @@ export default class Item3e<T = any> extends Item<T> {
         }
     }
 
-    public parseSummary(): void {
+    public parseSummary(shouldUpdate: boolean): void {
         const summary: SummaryData | undefined = (this.data.data as any).summary;
         if (summary) {
             const parsed = (Roll as any).replaceFormulaData(summary.format, Object.assign({}, {
@@ -75,7 +75,9 @@ export default class Item3e<T = any> extends Item<T> {
 
             if (parsed != summary.parsed) {
                 summary.parsed = parsed;
-                this.update({ data: { summary: { parsed } } });
+                if (shouldUpdate) {
+                    this.update({ data: { summary: { parsed } } });
+                }
             }
         }
     }
