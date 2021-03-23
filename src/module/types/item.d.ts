@@ -1,13 +1,16 @@
 declare type SummaryPosition = 'prefix' | 'suffix';
 
-declare interface ItemSummary {
-    summary: {
-        format: string;
-        position: SummaryPosition;
+declare interface SummaryData {
+    format: string;
+    position: SummaryPosition;
 
-        // Prepared Data
-        parsed?: string;
-    };
+    // Prepared Data
+    parsed?: string;
+    data?: any;
+}
+
+declare interface ItemSummary {
+    summary: SummaryData;
 }
 
 declare interface ItemDescription {

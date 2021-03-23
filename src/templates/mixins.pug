@@ -46,107 +46,108 @@ mixin expanding-roll-controller(headerLabel, rollDetailsPath)
                         | {{/each}}
                         | {{/select}}
             | {{#if (or (and #{rollDetailsPath}.rollType.value (ne #{rollDetailsPath}.rollType.value "none")) (eq item.type "modifier"))}}
-            .formula-builder-header.flexrow
-                h4 {{ localize "MNM3E.FormulaBuilder" }}
-                a.check-control(
-                        title="{{ localize 'MNM3E.Add' }}"
-                        data-action="create"
-                        data-data-path=`${rollDetailsPath}.formula.value`
-                    )
-                        i.fas.fa-plus
-            .hidden-data(style="display: none;")
-                input(
-                    type="text"
-                    name=`${rollDetailsPath}.formula.override`
-                    value=`{{${rollDetailsPath}.formula.override}}`
-                    data-dtype="Boolean"
-                    readonly
-                )
-                input(
-                    type="text"
-                    name=`${rollDetailsPath}.formula.numOverrides`
-                    value=`{{${rollDetailsPath}.formula.numOverrides}}`
-                    data-dtype="Number"
-                    readonly
-                )
-            | {{#each #{rollDetailsPath}.formula.value as |formula idx|}}
-            .form-group.formula-builder
-                .form-fields
-                    - const disabledCondition = `(lt idx ../${rollDetailsPath}.formula.numOverrides)`
-                    | {{#if #{disabledCondition}}}
+            .formula-content.flexcol
+                .formula-builder-header.flexrow
+                    h4 {{ localize "MNM3E.FormulaBuilder" }}
+                    a.check-control(
+                            title="{{ localize 'MNM3E.Add' }}"
+                            data-action="create"
+                            data-data-path=`${rollDetailsPath}.formula.value`
+                        )
+                            i.fas.fa-plus
+                .hidden-data(style="display: none;")
                     input(
                         type="text"
-                        name=`${rollDetailsPath}.formula.value.{{idx}}.op`
-                        value="{{lookup this 'op'}}"
-                        data-dtype="String"
+                        name=`${rollDetailsPath}.formula.override`
+                        value=`{{${rollDetailsPath}.formula.override}}`
+                        data-dtype="Boolean"
                         readonly
                     )
-                    | {{else}}
-                    select(name=`${rollDetailsPath}.formula.value.{{idx}}.op`)
-                        | {{#select (lookup this "op") }}
-                        option(value="+") +
-                        option(value="-") -
-                        | {{/select}}
-                    | {{/if}}
-                .form-fields.score-dropdown
-                    | {{#if #{disabledCondition}}}
                     input(
                         type="text"
-                        name=`${rollDetailsPath}.formula.value.{{idx}}.dataPath`
-                        value="{{lookup this 'dataPath'}}"
-                        data-dtype="String"
+                        name=`${rollDetailsPath}.formula.numOverrides`
+                        value=`{{${rollDetailsPath}.formula.numOverrides}}`
+                        data-dtype="Number"
                         readonly
-                        style="display: none;"
                     )
-                    | {{else}}
-                    select(name=`${rollDetailsPath}.formula.value.{{idx}}.dataPath`)
-                        | {{#select (lookup this "dataPath")}}
-                        | {{#each ../formulaOptions as |fo|}}
-                        optgroup(label="{{fo.label}}")
-                            | {{selectOptions fo.entries}}
-                        | {{/each}}
-                        option(value="formula") {{ localize "MNM3E.Formula" }}
-                        | {{/select}}
-                    | {{/if}}
-                | {{#if (eq (lookup this "dataPath") "formula")}}
-                input(
-                    type="text"
-                    name=`${rollDetailsPath}.formula.value.{{idx}}.value`
-                    value="{{formula.value}}"
-                    data-dtype="String"
-                )&attributes({[`{{#if ${disabledCondition}}}readonly{{/if}}`]: ''})
-                | {{/if}}
-                | {{#if (not #{disabledCondition})}}
-                a.check-control(
-                    title="{{ localize 'MNM3E.Delete' }}"
-                    data-action="delete"
-                    data-data-path=`${rollDetailsPath}.formula.value`
-                    data-index="{{idx}}"
-                )
-                    i.fas.fa-minus
-                | {{/if}}
-            | {{/each}}
-            .form-group.score-choice
-                label {{ localize "MNM3E.Versus"}}
-                .form-fields
-                    select(
-                        name=`${rollDetailsPath}.targetScore.type.value`
-                    )&attributes({[getOverrideAttribute(`${rollDetailsPath}.targetScore.type`)]: ''})
-                        | {{#select #{rollDetailsPath}.targetScore.type.value}}
-                        | {{#if (eq item.type "modifier")}}
-                        option(value="")
+                | {{#each #{rollDetailsPath}.formula.value as |formula idx|}}
+                .form-group.formula-builder
+                    .form-fields
+                        - const disabledCondition = `(lt idx ../${rollDetailsPath}.formula.numOverrides)`
+                        | {{#if #{disabledCondition}}}
+                        input(
+                            type="text"
+                            name=`${rollDetailsPath}.formula.value.{{idx}}.op`
+                            value="{{lookup this 'op'}}"
+                            data-dtype="String"
+                            readonly
+                        )
+                        | {{else}}
+                        select(name=`${rollDetailsPath}.formula.value.{{idx}}.op`)
+                            | {{#select (lookup this "op") }}
+                            option(value="+") +
+                            option(value="-") -
+                            | {{/select}}
                         | {{/if}}
-                        | {{#each formulaOptions as |fo|}}
-                        optgroup(label="{{fo.label}}")
-                            | {{selectOptions fo.entries}}
-                        | {{/each}}
-                        option(value="custom") {{ localize "MNM3E.Custom" }}
-                        | {{/select}}
-                | {{#if (eq #{rollDetailsPath}.targetScore.type.value "custom")}}
-                input(
-                    type="text"
-                    name=`${rollDetailsPath}.targetScore.custom.value`
-                    value=`{{${rollDetailsPath}.targetScore.custom.value}}`
-                    data-dtype="String")&attributes({[getOverrideAttribute(`${rollDetailsPath}.targetScore.custom`)]: ''})
-                | {{/if}}
+                    .form-fields.score-dropdown
+                        | {{#if #{disabledCondition}}}
+                        input(
+                            type="text"
+                            name=`${rollDetailsPath}.formula.value.{{idx}}.dataPath`
+                            value="{{lookup this 'dataPath'}}"
+                            data-dtype="String"
+                            readonly
+                            style="display: none;"
+                        )
+                        | {{else}}
+                        select(name=`${rollDetailsPath}.formula.value.{{idx}}.dataPath`)
+                            | {{#select (lookup this "dataPath")}}
+                            | {{#each ../formulaOptions as |fo|}}
+                            optgroup(label="{{fo.label}}")
+                                | {{selectOptions fo.entries}}
+                            | {{/each}}
+                            option(value="formula") {{ localize "MNM3E.Formula" }}
+                            | {{/select}}
+                        | {{/if}}
+                    | {{#if (eq (lookup this "dataPath") "formula")}}
+                    input(
+                        type="text"
+                        name=`${rollDetailsPath}.formula.value.{{idx}}.value`
+                        value="{{formula.value}}"
+                        data-dtype="String"
+                    )&attributes({[`{{#if ${disabledCondition}}}readonly{{/if}}`]: ''})
+                    | {{/if}}
+                    | {{#if (not #{disabledCondition})}}
+                    a.check-control(
+                        title="{{ localize 'MNM3E.Delete' }}"
+                        data-action="delete"
+                        data-data-path=`${rollDetailsPath}.formula.value`
+                        data-index="{{idx}}"
+                    )
+                        i.fas.fa-minus
+                    | {{/if}}
+                | {{/each}}
+                .form-group.score-choice
+                    label {{ localize "MNM3E.Versus"}}
+                    .form-fields
+                        select(
+                            name=`${rollDetailsPath}.targetScore.type.value`
+                        )&attributes({[getOverrideAttribute(`${rollDetailsPath}.targetScore.type`)]: ''})
+                            | {{#select #{rollDetailsPath}.targetScore.type.value}}
+                            | {{#if (eq item.type "modifier")}}
+                            option(value="")
+                            | {{/if}}
+                            | {{#each formulaOptions as |fo|}}
+                            optgroup(label="{{fo.label}}")
+                                | {{selectOptions fo.entries}}
+                            | {{/each}}
+                            option(value="custom") {{ localize "MNM3E.Custom" }}
+                            | {{/select}}
+                    | {{#if (eq #{rollDetailsPath}.targetScore.type.value "custom")}}
+                    input(
+                        type="text"
+                        name=`${rollDetailsPath}.targetScore.custom.value`
+                        value=`{{${rollDetailsPath}.targetScore.custom.value}}`
+                        data-dtype="String")&attributes({[getOverrideAttribute(`${rollDetailsPath}.targetScore.custom`)]: ''})
+                    | {{/if}}
             | {{/if}}

@@ -92,7 +92,7 @@
             }
         }
 
-        .details {
+        .details, .overrides {
             .form-header, .formula-builder-header {
                 font-size: 16px;
                 font-weight: bold;
@@ -109,7 +109,12 @@
                     text-align: center;
                 }
 
-                &.expanding-group {
+                &.expanding-group .formula-content {
+                    $indent-length: 10px;
+                    margin-left: $indent-length;
+                    padding-left: $indent-length;
+                    border-left: $sectionBorder;
+
                     .formula-builder-header {
                         h4 {
                             margin: 0;

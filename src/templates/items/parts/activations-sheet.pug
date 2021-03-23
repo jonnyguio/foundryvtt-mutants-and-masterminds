@@ -23,6 +23,6 @@ h3.form-header {{ localize "MNM3E.ItemActivationDetails" }}
     input(type="number" name="data.activation.uses.remaining" value="{{data.activation.uses.remaining}}" data-dtype="Number")
     span {{ localize "MNM3E.UsesOf" }}
     | {{/if}}
-    input(type="number" name="data.activation.uses.max.value" value="{{data.activation.uses.max.value}}" data-dtype="Number")&attributes({[getOverrideAttribute("data.activation.uses.max.value")]: ''})
+    input(type="number" name="data.activation.uses.max.value" value="{{data.activation.uses.max.value}}" data-dtype="Number")&attributes({[getOverrideAttribute("data.activation.uses.max")]: ''})
 
 | {{/if}}

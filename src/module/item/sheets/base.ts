@@ -22,7 +22,7 @@ export interface ExtendedItemSheetData<T = any> extends FoundryItemSheetData<T> 
     itemType?: string;
 }
 
-export default class ItemSheet3e<T, I extends Item<T>> extends ItemSheet<T, I> {
+export default class ItemSheet3e<T, I extends Item3e<T>> extends ItemSheet<T, I> {
     private _parentItem?: Item;
     private _childDataPath?: string;
     private _childItems: Map<object, Item>;
@@ -87,6 +87,7 @@ export default class ItemSheet3e<T, I extends Item<T>> extends ItemSheet<T, I> {
             }, {}),
         }));
 
+        this.item.parseSummary();
         sheetData.effects = prepareActiveEffectCategories((this.entity as any).effects);
         return sheetData;
     }

@@ -62,6 +62,24 @@ export default class Item3e<T = any> extends Item<T> {
         }
     }
 
+    public parseSummary(): void {
+        const summary: SummaryData | undefined = (this.data.data as any).summary;
+        if (summary) {
+            const parsed = (Roll as any).replaceFormulaData(summary.format, Object.assign({}, {
+                name: this.data.name,
+                type: this.data.type,
+                flags: this.data.flags,
+                ...this.data.data,
+                ...summary.data,
+            }));
+
+            if (parsed != summary.parsed) {
+                summary.parsed = parsed;
+                this.update({ data: { summary: { parsed } } });
+            }
+        }
+    }
+
     public async roll({ rollMode, powerArrayIndex }: { rollMode?: string, powerArrayIndex?: number} = {}): Promise<ChatMessage | object | void> {
         let rollData: any = {};
         if (this.isOwned) {
@@ -203,19 +221,21 @@ export default class Item3e<T = any> extends Item<T> {
     }
 
     private prepareAdvantageData(data: Item.Data<AdvantageData>): void {
+        data.data.summary.data = {
+            cost: data.data.cost.value,
+        };
         if (data.data.summary.format == '') {
-            data.data.summary.format = data.name;
+            data.data.summary.format = `@name @rank`;
         }
-
-        data.data.summary.parsed = data.data.summary.format.replace('$cost', data.data.cost.value.toString());
     }
 
     private prepareModifierData(data: Item.Data<ModifierData>): void {
+        data.data.summary.data = {
+            cost: data.data.cost.value,
+        };
         if (data.data.summary.format == '') {
-            data.data.summary.format = data.name;
+            data.data.summary.format = `@name @rank`;
         }
-
-        data.data.summary.parsed = data.data.summary.format.replace('$cost', data.data.cost.value.toString());
     }
 
     private preparePowerEffectData(data: Item.Data<PowerEffectData>): void {
@@ -271,7 +291,7 @@ export default class Item3e<T = any> extends Item<T> {
         });
 
         if (data.data.summary.format == '') {
-            data.data.summary.format = `$prefix ${data.name} $rank $suffix`;
+            data.data.summary.format = `@prefix @name @rank @suffix`;
         }
 
         const prefix: string[] = [];
@@ -320,11 +340,10 @@ export default class Item3e<T = any> extends Item<T> {
             data.data.activation.uses.remaining = data.data.activation.uses.max.value;
         }
 
-        data.data.summary.parsed = data.data.summary.format.
-            replace('$rank', data.data.rank.toString()).
-            replace('$prefix', prefix.join(' ')).
-            replace('$suffix', suffix.join(' ')).
-            trim();
+        data.data.summary.data = {
+            prefix: prefix.join(' '),
+            suffix: suffix.join(' '),
+        };
 
         [
             data.data.activation.check,

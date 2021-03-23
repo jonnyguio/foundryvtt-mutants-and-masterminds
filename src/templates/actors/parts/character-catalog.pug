@@ -16,9 +16,11 @@
 |       canFavorite=true
 | }}
 
+| {{#if (or data.equipmentCost data.attributes.equipmentPoints)}}
 .equipment-properties.flexrow
     label {{ localize "MNM3E.EquipmentPoints" }}:
     span {{ data.equipmentCost }} / {{ data.attributes.equipmentPoints }}
+| {{/if}}
 
 | {{>
 |       "systems/mnm3e/templates/items/parts/list-sheet.html"
