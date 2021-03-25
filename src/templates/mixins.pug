@@ -97,7 +97,6 @@ mixin expanding-roll-controller(headerLabel, rollDetailsPath)
                             value="{{lookup this 'dataPath'}}"
                             data-dtype="String"
                             readonly
-                            style="display: none;"
                         )
                         | {{else}}
                         select(name=`${rollDetailsPath}.formula.value.{{idx}}.dataPath`)
@@ -125,6 +124,8 @@ mixin expanding-roll-controller(headerLabel, rollDetailsPath)
                         data-index="{{idx}}"
                     )
                         i.fas.fa-minus
+                    | {{else}}
+                    .dummy
                     | {{/if}}
                 | {{/each}}
                 .form-group.score-choice

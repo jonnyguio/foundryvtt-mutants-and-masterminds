@@ -24,6 +24,8 @@ export interface ExtendedItemSheetData<T = any> extends FoundryItemSheetData<T> 
 
 export default class ItemSheet3e<T, I extends Item3e<T>> extends ItemSheet<T, I> {
     private _parentItem?: Item;
+    private _parentList?: any[];
+    private _sourceItem: any;
     private _childDataPath?: string;
     private _childItems: Map<object, Item>;
 
@@ -87,7 +89,6 @@ export default class ItemSheet3e<T, I extends Item3e<T>> extends ItemSheet<T, I>
             }, {}),
         }));
 
-        this.item.parseSummary(!!!this._parentItem);
         sheetData.effects = prepareActiveEffectCategories((this.entity as any).effects);
         return sheetData;
     }
@@ -163,6 +164,38 @@ export default class ItemSheet3e<T, I extends Item3e<T>> extends ItemSheet<T, I>
         (this.item.sheet as any)._onSubmit(event, { updateData: { [`data.${dataPath}`]: dataList }});
     }
 
+    /**
+     * @override
+     */
+    protected async _updateObject(ev: JQuery.Event, flattenedObject: object): Promise<void> {
+        ev.preventDefault();
+
+        if (this._parentItem) {
+            const updatedItem = this._parentList!.find(data => data._id == this._sourceItem._id);
+            if (!updatedItem) {
+                return;
+            }
+
+            this.item.data = mergeObject(updatedItem, flattenedObject);
+            this.item.parseSummary(this.item.data);
+            await this.updateItem(ev, this._childDataPath!, this._parentList!);
+        } else {
+            const summary = (this.item.data.data as any).summary;
+            if (summary) {
+                this.item.parseSummary(mergeObject(this.item.data, flattenedObject, { inplace: false }) as Item.Data);
+                flattenedObject = flattenObject(mergeObject(flattenedObject, { data: { summary }}));
+            }
+            await super._updateObject(ev, flattenedObject);
+        }
+    }
+
+    private initializeChildData(sourceItem: any, parentItem: Item, childDataPath: string, parentList: any[]): void {
+        this._parentItem = parentItem;
+        this._sourceItem = sourceItem;
+        this._parentList = parentList;
+        this._childDataPath = childDataPath;
+    }
+
     private async handleListItemEdit(ev: JQuery.Event, key: string, list: any[], index: number): Promise<void> {
         const sourceItem = list[index];
         if (!sourceItem) {
@@ -173,18 +206,19 @@ export default class ItemSheet3e<T, I extends Item3e<T>> extends ItemSheet<T, I>
         if (!childItem) {
             const newItem = await this.newChildItem(sourceItem);
 
-            const rawSheet = newItem.sheet as any;
-            rawSheet._parentItem = this.item;
-            rawSheet._childDataPath = key;
-            rawSheet._updateObject = (async (_: JQuery.Event, flattenedObject: object) => {
-                const updatedItem = list.find(data => data._id == sourceItem._id);
-                if (!updatedItem) {
-                    return;
-                }
+            const rawSheet = (newItem.sheet as unknown) as ItemSheet3e<T, I>;
+            rawSheet.initializeChildData(sourceItem, this.item, key, list);
+            // rawSheet._parentItem = this.item;
+            // rawSheet._childDataPath = key;
+            // rawSheet._updateObject = (async (_: JQuery.Event, flattenedObject: object) => {
+            //     const updatedItem = list.find(data => data._id == sourceItem._id);
+            //     if (!updatedItem) {
+            //         return;
+            //     }
 
-                rawSheet.item.data = mergeObject(updatedItem, flattenedObject);
-                await rawSheet.updateItem(ev, key, list);
-            });
+            //     rawSheet.item.data = mergeObject(updatedItem, flattenedObject);
+            //     await rawSheet.updateItem(ev, key, list);
+            // });
             childItem = newItem;
             this._childItems.set(sourceItem, newItem);
         }
@@ -220,13 +254,13 @@ export default class ItemSheet3e<T, I extends Item3e<T>> extends ItemSheet<T, I>
         let app: Application;
         switch (button.dataset.action) {
             case 'summary-builder':
-                app = new SummaryBuilder(this.object);
+                app = new SummaryBuilder(this.item as any);
                 break;
             default:
                 throw new Error(`unknown action: ${button.dataset.action}`);
         }
         if (this._parentItem) {
-            (app as any)._updateObject = (this.item.sheet as any)._updateObject;
+            (app as any)._updateObject = (this.item.sheet as any)._updateObject.bind(this);
         }
         app.render(true);
     }

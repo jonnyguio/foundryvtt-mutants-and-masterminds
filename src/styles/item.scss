@@ -130,7 +130,7 @@
                             flex: 1
                         }
                         
-                        .score-dropdown, > :first-child, > :last-child {
+                        > :first-child, > :last-child {
                             flex: 0;
                         }
 
@@ -147,6 +147,10 @@
 
                         a {
                             margin-left: auto;
+                        }
+
+                        :nth-child(2) {
+                            flex: 0 1 auto;
                         }
                     }
                 }

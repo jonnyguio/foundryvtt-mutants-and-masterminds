@@ -11,7 +11,7 @@ form.summary-builder.stacked(autocomplete="off")
                 | {{/select}}
         | {{/if}}
         input(type="text" name="data.summary.format" value="{{data.summary.format}}" data-dtype="String")
-    button(type="submit" name="submit" value="1")
+    button.save-control(type="submit" name="submit" value="1")
         i.fas.fa-save
         .
             {{ localize "Submit" }}

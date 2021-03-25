@@ -62,23 +62,16 @@ export default class Item3e<T = any> extends Item<T> {
         }
     }
 
-    public parseSummary(shouldUpdate: boolean): void {
+    public parseSummary(data: Item.Data): void {
         const summary: SummaryData | undefined = (this.data.data as any).summary;
         if (summary) {
-            const parsed = (Roll as any).replaceFormulaData(summary.format, Object.assign({}, {
-                name: this.data.name,
-                type: this.data.type,
-                flags: this.data.flags,
-                ...this.data.data,
+            summary.parsed = (Roll as any).replaceFormulaData(summary.format, Object.assign({}, {
+                name: data.name,
+                type: data.type,
+                flags: data.flags,
+                ...data.data,
                 ...summary.data,
             }));
-
-            if (parsed != summary.parsed) {
-                summary.parsed = parsed;
-                if (shouldUpdate) {
-                    this.update({ data: { summary: { parsed } } });
-                }
-            }
         }
     }
 

@@ -1,4 +1,6 @@
-export default class SummaryBuilder extends BaseEntitySheet<ItemSummary> {
+import Item3e from '../item/entity';
+
+export default class SummaryBuilder extends FormApplication<Item3e<ItemSummary>> {
     /**
      * @override
      */
@@ -15,16 +17,39 @@ export default class SummaryBuilder extends BaseEntitySheet<ItemSummary> {
      * @override
      */
     public get title(): string {
-        return `${game.i18n.localize('MNM3E.SummaryBuilder')}: ${this.entity.name}`;
+        return `${game.i18n.localize('MNM3E.SummaryBuilder')}: ${this.object.name}`;
     }
 
     /**
      * @override
      */
     public getData(): any {
-        return {
-            config: CONFIG.MNM3E,
-            ...this.entity.data,
-        };
+        (this.object.data as any).config = CONFIG.MNM3E;
+        return this.object.data;
+    }
+
+    /**
+     * @override
+     */
+    public activateListeners(html: JQuery<HTMLElement>): void {
+        html.find('.save-control').on('click', this.onSave.bind(this));
+        super.activateListeners(html);
+    }
+
+    private async onSave(ev: JQuery.ClickEvent): Promise<void> {
+        ev.preventDefault();
+
+        const itemData = this.object.data;
+        const summary = itemData.data.summary;
+        const form = $(this.form);
+        const position = form.find('select[name="data.summary.position');
+        if (position.length > 0) {
+            summary.position = position.val() as SummaryPosition;
+        }
+        summary.format = form.find('input[name="data.summary.format"]').val() as string;
+        this.object.parseSummary(this.object.data);
+        const parseUpdate = { data: { summary } };
+
+        await this._onSubmit(ev, { updateData: parseUpdate });
     }
 }
