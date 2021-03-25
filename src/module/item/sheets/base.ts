@@ -14,6 +14,11 @@ interface AttributeField {
     value: string;
 }
 
+export interface DragDropSelector {
+    expectedType: string;
+    destinationPath: string;
+}
+
 export interface ExtendedItemSheetData<T = any> extends FoundryItemSheetData<T> {
     config: Config;
     formulaOptions: OptionGroupInfo[];
@@ -143,7 +148,7 @@ export default class ItemSheet3e<T, I extends Item3e<T>> extends ItemSheet<T, I>
         }
     }
 
-    protected async handleDroppedData(event: DragEvent, listedDataType: string, dataPath: string): Promise<void> {
+    protected async handleDroppedData(event: DragEvent, selectors: DragDropSelector[]): Promise<void> {
         event.preventDefault();
         if (!event.dataTransfer) {
             return;
@@ -154,15 +159,16 @@ export default class ItemSheet3e<T, I extends Item3e<T>> extends ItemSheet<T, I>
         }
 
         const droppedItem = game.items.get(dropData.id);
-        if (droppedItem.data.type != listedDataType) {
+        const selector = selectors.find(s => s.expectedType == droppedItem.data.type);
+        if (!selector) {
             return;
         }
 
         const copiedItem = duplicate(droppedItem.data) as Item.Data;
         (copiedItem as any)._id = `${randomID(8)}-temp`;
-        const dataList = getProperty(this.item.data.data as any, dataPath) as any[];
+        const dataList = getProperty(this.item.data.data as any, selector.destinationPath) as any[];
         dataList.push(copiedItem);
-        (this.item.sheet as any)._onSubmit(event, { updateData: { [`data.${dataPath}`]: dataList }});
+        (this.item.sheet as any)._onSubmit(event, { updateData: { [`data.${selector.destinationPath}`]: dataList }});
     }
 
     /**

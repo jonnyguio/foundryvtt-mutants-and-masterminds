@@ -1,6 +1,6 @@
 {
     "ACTOR.TypeCharacter": "Character",
-    "ACTOR.TypeNpc": "NPC",
+    "ACTOR.TypeNpc": "Non-Player Character",
 
     "ITEM.TypeAdvantage": "Advantage",
     "ITEM.TypeEffect": "Effect",
@@ -144,8 +144,6 @@
 
     "MNM3E.GroupAffiliation": "Group Affiliation",
 
-    "MNM3E.VictoryPoints": "Victory Points",
-
     "MNM3E.Identity": "Identity",
 
     "MNM3E.Initiative": "Initiative",
@@ -270,6 +268,8 @@
 
     "MNM3E.Versus": "Versus",
     "MNM3E.VersusAbbrev": "vs",
+
+    "MNM3E.VictoryPoints": "Victory Points",
 
     "MNM3E.VolumeCubicFeetAbbrev": "cft.",
     "MNM3E.VolumeMillionCubicFeetAbbrev": "mcft.",

@@ -56,16 +56,13 @@ export default class ItemSheet3ePower extends ItemSheet3e<PowerData, Item3e<Powe
         ].forEach(opts => html.find(opts.selector).on('click', ev => this.onItemListActionHandler(ev, opts.dataPath)));
         new DragDrop({
             dragSelector: '.item',
-            dropSelector: '.items-list.effect-list',
+            dropSelector: '.sheet-body .details',
             permissions: { dragstart: () => true, drop: () => true },
-            callbacks: { drop: (ev: DragEvent) => this.handleDroppedData(ev, 'effect', 'effects') },
-        }).bind($('form.editable.item-sheet-power')[0]);
-
-        new DragDrop({
-            dragSelector: '.item',
-            dropSelector: '.items-list.power-list',
-            permissions: { dragstart: () => true, drop: () => true },
-            callbacks: { drop: (ev: DragEvent) => this.handleDroppedData(ev, 'power', 'powerArray') }
+            callbacks: { drop: (ev: DragEvent) => this.handleDroppedData(ev, [
+                    {expectedType: 'effect', destinationPath: 'effects'},
+                    {expectedType: 'power', destinationPath: 'powerArray'},
+                ])
+            },
         }).bind($('form.editable.item-sheet-power')[0]);
 
         itemData.data.powerArray.forEach((alternativePower: Item.Data<PowerData>, index: number) => {

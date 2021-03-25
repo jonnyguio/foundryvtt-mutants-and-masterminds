@@ -42,9 +42,9 @@ export default class ItemSheet3eEquipment extends ItemSheet3e<EquipmentData, Ite
         html.find('.item-effect-controls .item-control').on('click', ev => this.onItemListActionHandler(ev, 'data.effects'));
         new DragDrop({
             dragSelector: '.item',
-            dropSelector: '.items-list.effect-list',
+            dropSelector: '.sheet-body .details',
             permissions: { dragstart: () => true, drop: () => true },
-            callbacks: { drop: (ev: DragEvent) => this.handleDroppedData(ev, 'effect', 'effects') },
+            callbacks: { drop: (ev: DragEvent) => this.handleDroppedData(ev, [{expectedType: 'effect', destinationPath: 'effects'}]) },
         }).bind($('form.editable.item-sheet-equipment')[0]);
         super.activateListeners(html);
     }

@@ -32,9 +32,9 @@ export default class ItemSheet3eEffect extends ItemSheet3e<PowerEffectData, Item
         html.find('.item-modifier-controls .item-control').on('click', ev => this.onItemListActionHandler(ev, 'data.modifiers'));
         new DragDrop({
             dragSelector: '.item',
-            dropSelector: '.items-list.modifier-list',
+            dropSelector: '.sheet-body .modifiers',
             permissions: { dragstart: () => true, drop: () => true },
-            callbacks: { drop: (ev: DragEvent) => this.handleDroppedData(ev, 'modifier', 'modifiers') },
+            callbacks: { drop: (ev: DragEvent) => this.handleDroppedData(ev, [{expectedType: 'modifier', destinationPath: 'modifiers'}]) },
         }).bind($('form.editable.item-sheet-effect')[0]);
 
         super.activateListeners(html);
