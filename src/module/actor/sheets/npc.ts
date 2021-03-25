@@ -26,11 +26,4 @@ export default class ActorSheet3eNPC extends ActorSheet3e<NPCData, Actor3e<NPCDa
 
         return sheetData;
     }
-
-    /**
-     * @override
-     */
-    protected activateListeners(html: JQuery<HTMLElement>): void {
-        super.activateListeners(html);
-    }
 }

@@ -39,13 +39,6 @@ export default class ActorSheet3eCharacter extends ActorSheet3e<CharacterData, A
     /**
      * @override
      */
-    protected activateListeners(html: JQuery<HTMLElement>): void {
-        super.activateListeners(html);
-    }
-
-    /**
-     * @override
-     */
     protected prepareItems(incomingData: ActorSheet.Data<CharacterData>): void {
         super.prepareItems(incomingData);
         const data = incomingData as ExtendedCharacterSheetData;

@@ -123,6 +123,7 @@ export default class ItemSheet3e<T, I extends Item3e<T>> extends ItemSheet<T, I>
             case 'create':
                 const newItem = await Item.create({
                     name: `New ${target.dataset.itemType.titleCase()}`,
+                    img: 'icons/svg/upgrade.svg',
                     type: target.dataset.itemType
                 }, { temporary: true });
                 newItem.data._id = `${randomID(8)}-temp`;
@@ -208,17 +209,6 @@ export default class ItemSheet3e<T, I extends Item3e<T>> extends ItemSheet<T, I>
 
             const rawSheet = (newItem.sheet as unknown) as ItemSheet3e<T, I>;
             rawSheet.initializeChildData(sourceItem, this.item, key, list);
-            // rawSheet._parentItem = this.item;
-            // rawSheet._childDataPath = key;
-            // rawSheet._updateObject = (async (_: JQuery.Event, flattenedObject: object) => {
-            //     const updatedItem = list.find(data => data._id == sourceItem._id);
-            //     if (!updatedItem) {
-            //         return;
-            //     }
-
-            //     rawSheet.item.data = mergeObject(updatedItem, flattenedObject);
-            //     await rawSheet.updateItem(ev, key, list);
-            // });
             childItem = newItem;
             this._childItems.set(sourceItem, newItem);
         }

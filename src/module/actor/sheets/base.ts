@@ -192,6 +192,7 @@ export default abstract class ActorSheet3e<T extends CommonActorData & CreatureD
                 const itemType = button.dataset.itemType;
                 const itemData = {
                     name: game.i18n.format('MNM3E.ItemNewFormat', { type: itemType.capitalize() }),
+                    img: 'icons/svg/upgrade.svg',
                     type: itemType,
                 };
                 this.actor.createOwnedItem(itemData);

@@ -32,7 +32,7 @@ export const onManagedActiveEffect = (event: JQuery.ClickEvent, owner: any): Act
         case 'create':
             return ActiveEffect.create({
                 label: game.i18n.localize('MNM3E.ActiveEffectNew'),
-                icon: 'icons/svg/aura.svg', // TODO: Give path to svg
+                icon: 'icons/svg/aura.svg',
                 origin: owner.uuid,
                 'duration.rounds': listElement.dataset.effectType === 'temporary' ? 1 : undefined,
                 disabled: listElement.dataset.effectType === 'inactive',
