@@ -66,6 +66,7 @@
 
     "MNM3E.Catalog": "Catalog",
     "MNM3E.Cancel": "Cancel",
+    "MNM3E.CharacterPointTotal": "Character Point Total",
     "MNM3E.Check": "Check",
     "MNM3E.Complications": "Complications",
     "MNM3E.Core": "Core",
@@ -115,7 +116,7 @@
     "MNM3E.DurationContinuous": "Continuous",
     "MNM3E.DurationPermanent": "Permanent",
 
-    "MNM3E.EarnedPowerPoints": "Earned Power Points",
+    "MNM3E.EarnedCharacterPoints": "Earned Character Points",
 
     "MNM3E.Edit": "Edit",
 
@@ -143,7 +144,7 @@
 
     "MNM3E.GroupAffiliation": "Group Affiliation",
 
-    "MNM3E.HeroPoints": "Hero Points",
+    "MNM3E.VictoryPoints": "Victory Points",
 
     "MNM3E.Identity": "Identity",
 
@@ -161,7 +162,7 @@
     "MNM3E.MassTons": "tons",
     "MNM3E.MassKiloTonsAbbrev": "ktons",
 
-    "MNM3E.MaxPowerPoints": "Max Power Points",
+    "MNM3E.MaxCharacterPoints": "Max Character Points",
 
     "MNM3E.Modifiers": "Modifiers",
     "MNM3E.ModifierExtra": "Extra",
@@ -185,7 +186,6 @@
 
     "MNM3E.PenaltyPoints": "Penalty Points",
     "MNM3E.PowerLevel": "Power Level",
-    "MNM3E.PowerPointTotal": "Power Point Total",
     "MNM3E.Powers": "Powers",
     "MNM3E.PowerArray": "Power Array",
     "MNM3E.PowerSummary": "Power Summary",

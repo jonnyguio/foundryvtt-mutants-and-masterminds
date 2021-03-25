@@ -10,12 +10,12 @@ form(class="{{cssClass}} flexcol" autocomplete="off")
                         label {{ localize "MNM3E.PowerLevel" }}:
                         input(type="number" name="data.attributes.powerLevel" value="{{data.attributes.powerLevel}}" data-dtype="Number" placeholder="1")
                     .header-power.earned-power-points
-                        label {{ localize "MNM3E.EarnedPowerPoints" }}:
-                        input(type="number" name="data.earnedPowerPoints" value="{{data.earnedPowerPoints}}" data-dtype="Number" placeholder="0")
+                        label {{ localize "MNM3E.EarnedCharacterPoints" }}:
+                        input(type="number" name="data.earnedCharacterPoints" value="{{data.earnedCharacterPoints}}" data-dtype="Number" placeholder="0")
                     .header-power.max-points
                         div
                             span: i.lock-button.fas(class="{{#if actor.flags.mnm3e.overrideMaxPoints}}fa-unlock{{else}}fa-lock{{/if}}")
-                            label {{ localize "MNM3E.MaxPowerPoints" }}:
+                            label {{ localize "MNM3E.MaxCharacterPoints" }}:
                         input(
                             type="number"
                             name="data.maxPoints"
@@ -40,10 +40,10 @@ form(class="{{cssClass}} flexcol" autocomplete="off")
                         span {{ movement.main }}
                     footer.attribute-footer
                         span {{ movement.special }}
-                li.attribute.hero-points 
-                    h4.attribute-name {{ localize "MNM3E.HeroPoints" }}
+                li.attribute.victory-points 
+                    h4.attribute-name {{ localize "MNM3E.VictoryPoints" }}
                     .attribute-value
-                        input(type="number" name="data.heroPoints" value="{{data.heroPoints}}")
+                        input(type="number" name="data.victoryPoints" value="{{data.victoryPoints}}")
                 li.attribute.penalty-points
                     h4.attribute-name {{ localize "MNM3E.PenaltyPoints" }}
                     .attribute-value

@@ -47,7 +47,7 @@ export default class Actor3e<T extends CommonActorData = CommonActorData> extend
             },
             total: {
                 value: 0,
-                label: game.i18n.localize('MNM3E.PowerPointTotal'),
+                label: game.i18n.localize('MNM3E.CharacterPointTotal'),
             }
         };
 
@@ -102,7 +102,7 @@ export default class Actor3e<T extends CommonActorData = CommonActorData> extend
         actorData.data.attributes.penaltyPoints = -Math.abs(actorData.data.attributes.penaltyPoints)
 
         if (!this.getFlag('mnm3e', 'overrideMaxPoints') || !actorData.data.maxPoints) {
-            actorData.data.maxPoints = 15 * actorData.data.attributes.powerLevel + ((actorData.data as any).earnedPowerPoints || 0);
+            actorData.data.maxPoints = 15 * actorData.data.attributes.powerLevel + ((actorData.data as any).earnedCharacterPoints || 0);
         }
 
         if (actorData.data.pointCosts.total.value > actorData.data.maxPoints) {

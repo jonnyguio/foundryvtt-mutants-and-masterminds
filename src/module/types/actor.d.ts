@@ -141,8 +141,8 @@ declare interface CreatureData {
 }
 
 declare interface CharacterData extends CommonActorData, CreatureData {
-    heroPoints: number;
-    earnedPowerPoints: number;
+    victoryPoints: number;
+    earnedCharacterPoints: number;
 }
 
 declare interface NPCData extends CommonActorData, CreatureData {

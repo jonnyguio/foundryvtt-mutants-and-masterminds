@@ -235,8 +235,8 @@
         },
         "character": {
             "templates": ["common", "creature"],
-            "heroPoints": 1,
-            "earnedPowerPoints": 0
+            "victoryPoints": 1,
+            "earnedCharacterPoints": 0
         },
         "npc": {
             "templates": ["common", "creature"],
