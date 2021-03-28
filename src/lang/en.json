@@ -90,6 +90,7 @@
 
     "MNM3E.Delete": "Delete",
 
+    "MNM3E.DegreeCalculator": "Degree Calculator",
     "MNM3E.DegreesOfFailure": "Degrees of Failure",
     "MNM3E.DegreesOfSuccess": "Degrees of Success",
 
@@ -180,6 +181,10 @@
     "MNM3E.Notes": "Notes",
 
     "MNM3E.OK": "Ok",
+
+    "MNM3E.OptionEnableDegreeCalculator": "Enable Degree Calculator",
+    "MNM3E.OptionEnableDegreeCalculatorHint": "Adds a calculator to the bottom of the chat sidebar.",
+
     "MNM3E.Overrides": "Overrides",
 
     "MNM3E.PenaltyPoints": "Penalty Points",
@@ -204,6 +209,7 @@
     "MNM3E.Required": "Required",
     "MNM3E.ResistCheck": "Resist Check",
     "MNM3E.ResistDC": "Resist DC",
+    "MNM3E.Roll": "Roll",
 
     "MNM3E.ScoreConfig": "Score Config",
     "MNM3E.ScoreName": "Name",

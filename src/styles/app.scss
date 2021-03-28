@@ -1,4 +1,31 @@
+#chat .degree-calculator {
+    flex: 0;
+
+    input {
+        background-color: $tabFillerBackground;
+        flex: 0 0 50px;
+    }
+
+    span {
+        flex: 0 1 auto;
+        line-height: 25px;
+        margin: 0 5px;
+    }
+
+    .degrees {
+        color: black;
+        margin-right: 5px;
+
+        &.no-input {
+            background-color: $tabFillerBackground;
+            border-radius: 3px;
+            border: 1px solid #7a7971;
+        }
+    }
+}
+
 .mnm3e.sheet.app {
+
     &.summary-builder {
         .form-fields {
             flex: 0;
@@ -9,6 +36,7 @@
             border: 1px solid #7a7971;
         }
     }
+
     &.score-config {
         form {
             border: $sectionBorder;
