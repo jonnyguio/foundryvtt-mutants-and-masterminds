@@ -149,6 +149,151 @@ Hooks.once('setup', function() {
         getProp: getProperty,
         titleCase: v1 => v1.titleCase(),
     });
+
+    CONFIG.statusEffects = [
+        {
+            id: 'compelled',
+            label: 'EFFECT.StatusCompelled',
+            icon: 'systems/mnm3e/assets/icons/svg/compelled.svg'
+        },
+        {
+            id: 'controlled',
+            label: 'EFFECT.StatusControlled',
+            icon: 'systems/mnm3e/assets/icons/svg/controlled.svg'
+        },
+        {
+            id: 'dazed',
+            label: 'EFFECT.StatusDazed',
+            icon: 'icons/svg/daze.svg'
+        },
+        {
+            id: 'debilitated',
+            label: 'EFFECT.StatusDebilitated',
+            icon: 'systems/mnm3e/assets/icons/svg/debilitated.svg'
+        },
+        {
+            id: 'defenseless',
+            label: 'EFFECT.StatusDefenseless',
+            icon: 'systems/mnm3e/assets/icons/svg/defenseless.svg'
+        },
+        {
+            id: 'disabled',
+            label: 'EFFECT.StatusDisabled',
+            icon: 'systems/mnm3e/assets/icons/svg/disabled.svg'
+        },
+        {
+            id: 'fatigued',
+            label: 'EFFECT.StatusFatigued',
+            icon: 'systems/mnm3e/assets/icons/svg/fatigued.svg'
+        },
+        {
+            id: 'hindered',
+            label: 'EFFECT.StatusHindered',
+            icon: 'systems/mnm3e/assets/icons/svg/hindered.svg'
+        },
+        {
+            id: 'immobile',
+            label: 'EFFECT.StatusImmobile',
+            icon: 'systems/mnm3e/assets/icons/svg/immobile.svg'
+        },
+        {
+            id: 'impaired',
+            label: 'EFFECT.StatusImpaired',
+            icon: 'icons/svg/net.svg'
+        },
+        {
+            id: 'stunned',
+            label: 'EFFECT.StatusStunned',
+            icon: 'icons/svg/stoned.svg'
+        },
+        {
+            id: 'transformed',
+            label: 'EFFECT.StatusTransformed',
+            icon: 'systems/mnm3e/assets/icons/svg/transformed.svg'
+        },
+        {
+            id: 'unaware',
+            label: 'EFFECT.StatusUnaware',
+            icon: 'icons/svg/unconscious.svg'
+        },
+        {
+            id: 'vulnerable',
+            label: 'EFFECT.StatusVulnerable',
+            icon: 'systems/mnm3e/assets/icons/svg/vulnerable.svg'
+        },
+        {
+            id: 'weakened',
+            label: 'EFFECT.StatusWeakened',
+            icon: 'icons/svg/degen.svg'
+        },
+
+        // Combined conditions
+        {
+            id: 'asleep',
+            label: 'EFFECT.StatusAsleep',
+            icon: 'icons/svg/sleep.svg'
+        },
+        {
+            id: 'blind',
+            label: 'EFFECT.StatusBlind',
+            icon: 'icons/svg/blind.svg'
+        },
+        {
+            id: 'bound',
+            label: 'EFFECT.StatusBound',
+            icon: 'systems/mnm3e/assets/icons/svg/handcuffed.svg'
+        },
+        {
+            id: 'deaf',
+            label: 'EFFECT.StatusDeaf',
+            icon: 'icons/svg/deaf.svg'
+        },
+        {
+            id: 'dying',
+            label: 'EFFECT.StatusDying',
+            icon: 'systems/mnm3e/assets/icons/svg/dying.svg'
+        },
+        {
+            id: 'entranced',
+            label: 'EFFECT.StatusEntranced',
+            icon: 'systems/mnm3e/assets/icons/svg/entranced.svg'
+        },
+        {
+            id: 'exhausted',
+            label: 'EFFECT.StatusExhausted',
+            icon: 'systems/mnm3e/assets/icons/svg/exhausted.svg'
+        },
+        {
+            id: 'incapacitated',
+            label: 'EFFECT.StatusIncapacitated',
+            icon: 'icons/svg/unconscious.svg'
+        },
+        {
+            id: 'paralyzed',
+            label: 'EFFECT.StatusParalyzed',
+            icon: 'icons/svg/paralysis.svg'
+        },
+        {
+            id: 'prone',
+            label: 'EFFECT.StatusProne',
+            icon: 'systems/mnm3e/assets/icons/svg/prone.svg'
+        },
+        {
+            id: 'restrained',
+            label: 'EFFECT.StatusRestrained',
+            icon: 'systems/mnm3e/assets/icons/svg/restrained.svg'
+        },
+        {
+            id: 'staggered',
+            label: 'EFFECT.StatusStaggered',
+            icon: 'systems/mnm3e/assets/icons/svg/staggered.svg'
+        },
+        {
+            id: 'surprised',
+            label: 'EFFECT.StatusSurprised',
+            icon: 'systems/mnm3e/assets/icons/svg/surprised.svg'
+        },
+    ];
 });
 
 /* ------------------------------------ */

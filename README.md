@@ -38,7 +38,7 @@ The main goal of this system is to make it easy to build powers and effects via 
 - [ ] Tools
     - [ ] Measurement calculator
     - [x] Modifier/Effect Summary Builder
-- [ ] Conditions
+- [x] Conditions
 
 ## Local Development
 Create a file named `foundryconfig.json` at the root of the repository with the following contents:
@@ -61,3 +61,9 @@ Code and content contributions are accepted and encouraged. Please fork the repo
 ## Related Websites
 - https://foundryvtt.com
 - https://www.d20herosrd.com
+- https://game-icons.net
+
+## Licenses
+### game-icons
+Licensed under the [CC BY 3.0 License](https://creativecommons.org/licenses/by/3.0/)
+Icons made available by the authors delapouite and Lorc from [game-icons](https://game-icons.net).
