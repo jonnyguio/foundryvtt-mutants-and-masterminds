@@ -146,6 +146,7 @@ export default abstract class ActorSheet3e<T extends CommonActorData & CreatureD
             return arr;
         }, [powers, advantages, equipment]);
 
+        // Additional headers for item lists
         const standardHeaders = ['MNM3E.Activation', 'MNM3E.Action'].map(l => game.i18n.localize(l));
         data.powers = powers;
         data.powerSections = {

@@ -22,8 +22,8 @@
                 flex-direction: column;
                 margin: 0 ;
                 padding: 0 10px;
-                border: $sectionBorder;
-                border-radius: $sectionBorderRadius;
+                border: $section-border;
+                border-radius: $asymmetric-radius;
                 background: rgba(gray, 0.1);
                 .header-power {
                     display: flex;
@@ -57,7 +57,7 @@
         flex: 0 1 auto;
         $text-size: 12px;
         .point-cost {
-            border: $sectionBorderOpaque;
+            border: $transparent-border;
             border-bottom: none;
             padding-top: 2px;
             text-align: center;
@@ -84,7 +84,7 @@
         margin: 0;
     }
     .sheet-body {
-        border: 3px solid $primaryColor;
+        border: 3px solid $primary-color;
         border-top: none;
         padding: 6px;
     }
@@ -104,10 +104,10 @@
             margin: 0;
             padding-left: 2px;
             padding-right: 2px;
-            background-color: $tabFillerBackground;
+            background-color: $tinted-background;
     
             .ability {
-                border-bottom: $borderGroove;
+                border-bottom: 1px solid rgb(59, 84, 94);;
                 &:last-child {
                     border-bottom: none;
                 }
@@ -128,7 +128,7 @@
 
         .defense {
             text-align: center;
-            border-right: $sectionBorderOpaque;
+            border-right: $transparent-border;
             &:last-child {
                 border-right: none;
             }

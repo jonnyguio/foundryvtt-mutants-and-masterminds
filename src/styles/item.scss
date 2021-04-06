@@ -16,8 +16,8 @@
                 margin: 0;
                 padding: 0;
                 list-style: none;
-                border-top: $sectionBorderOpaque;
-                border-bottom: $sectionBorderOpaque;
+                border-top: $transparent-border;
+                border-bottom: $transparent-border;
             }
 
             .item-subtitle {
@@ -27,8 +27,8 @@
 
             .item-summary {
                 align-items: center;
-                border-top: $sectionBorderOpaque;
-                border-bottom: $sectionBorderOpaque;
+                border-top: $transparent-border;
+                border-bottom: $transparent-border;
                 > * {
                     flex: 0 1 auto;
                     margin-left: 5px;
@@ -50,7 +50,7 @@
     }
 
     .sheet-body {
-        border: 3px solid $primaryColor;
+        border: 3px solid $primary-color;
         border-top: none;
         padding: 6px;
 
@@ -76,7 +76,7 @@
             margin-right: $line-distance;
             padding-right: $line-distance;
             flex: 0 1 30%;
-            border-right: $sectionBorderOpaque;
+            border-right: $transparent-border;
 
             .form-group {
                 label {
@@ -113,7 +113,7 @@
                     $indent-length: 10px;
                     margin-left: $indent-length;
                     padding-left: $indent-length;
-                    border-left: $sectionBorder;
+                    border-left: $section-border;
 
                     .formula-builder-header {
                         h4 {

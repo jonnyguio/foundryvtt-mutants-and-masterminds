@@ -1,13 +1,13 @@
 .mnm3e.sheet.actor.npc {
     .sheet-navigation.tabs {
         flex: 0;
-        border: $sectionBorder;
-        border-radius: $sectionBorderRadius;
+        border: $section-border;
+        border-radius: $asymmetric-radius;
         font-size: 16px;
         margin: 2px 2px 0 2px;
         .active {
             padding: 3px;
-            border: 1px solid $selectedTab;
+            border: 1px solid $activated-tab-color;
             border-radius: 0;
         }
     }
@@ -21,7 +21,7 @@
                 padding: 0 2px 2px 2px;
                 margin: 0 5px 5px 5px;
                 .score {
-                    border: $sectionBorderOpaque;
+                    border: $transparent-border;
                     text-align: center;
                     &.ability {
                         flex: 1 0 25%;

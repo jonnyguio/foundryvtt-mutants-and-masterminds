@@ -47,7 +47,7 @@
         }
         .roll-request {
             padding-bottom: 4px;
-            border-top: 2px groove $primaryColor;
+            border-top: 1px groove rgba($primary-color, 0.1);
             .effect-roll-type {
                 text-align: center;
             }
@@ -73,9 +73,9 @@
 }
 
 #chat-log .chat-message {
-    background: $sheetBackground;
+    background: $sheet-background;
     .effect-button {
-        background: $tabFillerBackground;
+        background: $tinted-background;
     }
 }
 

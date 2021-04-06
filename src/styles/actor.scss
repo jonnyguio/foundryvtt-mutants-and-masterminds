@@ -9,7 +9,7 @@
 
         .header-details {
             height: 100%;
-            $border-info: $sectionBorderOpaque;
+            $border-info: $transparent-border;
             .summary {
                 margin-top: 2px;
                 border-top: $border-info;
@@ -98,7 +98,7 @@
     .notes {
         overflow: hidden;
         .notes-entries {
-            background: $tabFillerBackground;
+            background: $tinted-background;
             border-radius: 5px;
             $description-margin: 8px;
             margin: $description-margin;

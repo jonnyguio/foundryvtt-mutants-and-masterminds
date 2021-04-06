@@ -1,5 +1,5 @@
 .window-app .window-content {
-    background: $sheetBackground;
+    background: $sheet-background;
     background-size: cover;
 }
 
@@ -26,20 +26,20 @@
     }
 
     .section-header {
-        background: $primaryColor;
-        border-radius: $sectionBorderRadius;
-        color: $tabFillerBackground;
+        background: $primary-color;
+        border-radius: $asymmetric-radius;
+        color: $tinted-background;
         font-family: Charcoal, sans-serif;
         padding: 3px;
         margin-bottom: 0;
     }
 
     .bordered-section {
-        border: $sectionBorder;
+        border: $section-border;
         border-top: none;
         border-radius:  0 5px 0 0;
         flex: 0;
-        background-color: $tabFillerBackground;
+        background-color: $tinted-background;
     }
 
     // Item list
@@ -143,18 +143,18 @@
     // Description box
 
     .editor {
-        background: $tabFillerBackground;
+        background: $tinted-background;
         border-radius: 5px;
         padding: 2px;
     }
 
     .tox-toolbar-overlord,
     .tox-toolbar__primary {
-      border: $sectionBorder;
+      border: $section-border;
       background: rgba(133, 129, 129, 0.034);
     }
     .tox-edit-area{
-        border: $sectionBorderOpaque;
+        border: $transparent-border;
         font-family: Charcoal, sans-serif;
         background-color: rgba(224, 224, 224, 0.527);
     }
@@ -163,7 +163,7 @@
         flex: 0 1 auto;
         margin-top: 2%;
         align-items: center;
-        background: $primaryColor;
+        background: $primary-color;
         border-radius: 5px 5px 0 0;
         :first-child {
             border-radius: 5px 0 0 0;
@@ -178,7 +178,7 @@
             padding: 1%;
         }
         .item.active {
-            background: $selectedTab;
+            background: $activated-tab-color;
             text-size-adjust: 20%;
             color: white;
         }

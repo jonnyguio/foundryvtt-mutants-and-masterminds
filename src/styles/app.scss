@@ -2,7 +2,7 @@
     flex: 0;
 
     input {
-        background-color: $tabFillerBackground;
+        background-color: $tinted-background;
         flex: 0 0 50px;
     }
 
@@ -17,7 +17,7 @@
         margin-right: 5px;
 
         &.no-input {
-            background-color: $tabFillerBackground;
+            background-color: $tinted-background;
             border-radius: 3px;
             border: 1px solid #7a7971;
         }
@@ -39,9 +39,9 @@
 
     &.score-config {
         form {
-            border: $sectionBorder;
+            border: $section-border;
             border-top: none;
-            border-radius: $sectionBorderRadius;
+            border-radius: $asymmetric-radius;
         }
     
         ul {
@@ -57,7 +57,7 @@
             .tooltip-text {
                 visibility: hidden;
                 width: auto;
-                background-color: $primaryColor;
+                background-color: $primary-color;
                 color: white;
                 text-align: center;
                 padding: 2px;

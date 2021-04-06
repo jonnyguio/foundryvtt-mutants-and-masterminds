@@ -1,11 +1,10 @@
-$borderGroove: 1px solid rgb(59, 84, 94); 
-$colorDark: darkgray;
-$sectionBorder: 1px solid rgb(20, 90, 160);
-$sectionBorderOpaque: 1px solid rgba(20, 90, 160, 0.2);
-$sectionBorderRadius: 0 5px 0 5px;
-$sheetBackground: rgb(238, 235, 235);
-$primaryColor: rgb(25,140,255);
-$tabFillerBackground: rgb(228, 228, 228);
-$selectedTab: rgb(197, 7, 7);
+$primary-color: rgb(25,140,255);
+$section-border-color: rgb(20, 90, 160);
+$section-border: 1px solid $section-border-color;
+$transparent-border: 1px solid rgba($section-border-color, 0.2);
+$asymmetric-radius: 0 5px 0 5px;
+$sheet-background: rgb(238, 235, 235);
+$tinted-background: rgb(228, 228, 228);
+$activated-tab-color: rgb(197, 7, 7);
 $column-separator: 2px solid rgba(black, 0.1);
-$underline-border: 1px groove rgba($primaryColor, 0.1)
+$underline-border: 1px groove rgba($primary-color, 0.1)
