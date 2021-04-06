@@ -7,8 +7,17 @@ This system has not yet been submitted to FoundryVTT and will not show up in the
 If you wish to manually install the system, follow the steps in the [Local Development](#local-development) section and copy the contents of the `dist` folder into `<foundryvtt_data_folder>/Data/systems/mnm3e`.
 
 ## System Goals
+### Auto Calculations
+Actor sheets calculate the costs of all powers, advantages, defenses, abilities, and skills.
+
+<img src="images/character-scores.gif" width="800" />
+
 ### Ease of Use
 The main goal of this system is to make it easy to build powers and effects via dragging and dropping. Each effect defines set of parameters that determines if a roll is needed, what to do in an attack, and the total DC of the resistance check if necessary. Modifiers can be dragged and onto effects to override these parameters and the effect itself can be dropped into a power.
+
+<img src="images/power-building.gif" width="800" />
+
+<img src="images/power-activation.gif" width="800" />
 
 ## MVP Roadmap
 - [x] Character
@@ -29,7 +38,7 @@ The main goal of this system is to make it easy to build powers and effects via 
     - [x] Sheet rendering
     - [x] Complete sheet layout
     - [x] Sheet CSS Styling
-- [ ] Compendium populated with data from [d20herosrd](https://www.d20herosrd.com)
+- [ ] ~~Compendium populated with data from [d20herosrd](https://www.d20herosrd.com)~~ Postponed
     - [ ] Advantages
     - [ ] Power Effects and Modifiers
     - [ ] Weapons
@@ -64,6 +73,8 @@ Code and content contributions are accepted and encouraged. Please fork the repo
 - https://game-icons.net
 
 ## Licenses
+### d20herosrd
+Licensed under the [Open Game License](https://www.d20herosrd.com/open-game-license/).
 ### game-icons
 Licensed under the [CC BY 3.0 License](https://creativecommons.org/licenses/by/3.0/)
 Icons made available by the authors delapouite and Lorc from [game-icons](https://game-icons.net).

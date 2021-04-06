@@ -79,7 +79,7 @@ export default class ItemSheet3e<T, I extends Item3e<T>> extends ItemSheet<T, I>
                         key += `.base`;
                         if (actorData) {
                             Object.entries(actorData.data.skills[scoreName].data).forEach(customSkill => {
-                                subCategories[`@skills.${scoreName}.data.${customSkill[0]}.total`] = `➥ ${customSkill[1].displayName}`;
+                                subCategories[`skills.${scoreName}.data.${customSkill[0]}.total`] = `➥ ${customSkill[1].displayName}`;
                             });
                         }
                     } else {
@@ -255,9 +255,7 @@ export default class ItemSheet3e<T, I extends Item3e<T>> extends ItemSheet<T, I>
             default:
                 throw new Error(`unknown action: ${button.dataset.action}`);
         }
-        if (this._parentItem) {
-            (app as any)._updateObject = (this.item.sheet as any)._updateObject.bind(this);
-        }
+        (app as any)._updateObject = (this.item.sheet as any)._updateObject.bind(this);
         app.render(true);
     }
 

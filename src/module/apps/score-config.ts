@@ -93,7 +93,7 @@ export default class ScoreConfig extends BaseEntitySheet {
                         title: game.i18n.localize('MNM3E.ScoreNew'),
                         content: `<div class="new-score-dialog">
                                     <label>${game.i18n.localize('MNM3E.ScoreName')}</label>
-                                    <input type="text" maxlength="25" />
+                                    <input type="text" maxlength="25" autocomplete="new-password" />
                                 </div>`,
                         buttons: {
                             ok: {

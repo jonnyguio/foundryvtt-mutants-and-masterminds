@@ -60,6 +60,8 @@ export default class Item3e<T = any> extends Item<T> {
                 this.preparePowerData((this.data as unknown) as Item.Data<PowerData>);
                 break;
         }
+
+        this.parseSummary(this.data);
     }
 
     public parseSummary(data: Item.Data): void {
