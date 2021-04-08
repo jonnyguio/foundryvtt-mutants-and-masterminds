@@ -25,6 +25,7 @@ export interface ExtendedItemSheetData<T = any> extends FoundryItemSheetData<T> 
     attributes?: AttributeField[];
     itemSubtitles?: string[];
     itemType?: string;
+    parentItem?: Item;
 }
 
 export default class ItemSheet3e<T, I extends Item3e<T>> extends ItemSheet<T, I> {
@@ -58,6 +59,7 @@ export default class ItemSheet3e<T, I extends Item3e<T>> extends ItemSheet<T, I>
         const sheetData = super.getData() as ExtendedItemSheetData<T>;
         sheetData.config = CONFIG.MNM3E;
         (sheetData.item as any).isOwned = this.item.isOwned;
+        sheetData.parentItem = this._parentItem;
         sheetData.itemType = game.i18n.localize(`ITEM.Type${this.item.type.titleCase()}`);
         let actorData: Actor.Data<CommonActorData & CreatureData> | undefined = undefined;
         if (this.actor) {
@@ -296,9 +298,8 @@ export default class ItemSheet3e<T, I extends Item3e<T>> extends ItemSheet<T, I>
                 item = await this.newChildItem(sourceItem);
             }
             const div = await (item.sheet as ItemSheet3e<any, Item3e>).renderListItemContents();
-            const trimmedDiv = div.html($.trim(div.html()));
-            li.append(trimmedDiv.hide());
-            trimmedDiv.slideDown(200);
+            li.append(div.hide());
+            div.slideDown(200);
         }
 
         li.toggleClass(expandedClass);

@@ -363,7 +363,7 @@ export default class Item3e<T = any> extends Item<T> {
     }
 
     private prepareEquipmentData(data: Item.Data<EquipmentData>): void {
-        data.data.totalCost = this.calculateEffectCost(data);
+        data.data.totalCost = Math.max(1, this.calculateEffectCost(data));
     }
 
     private calculateEffectCost(data: Item.Data<PowerData | EquipmentData>): number {

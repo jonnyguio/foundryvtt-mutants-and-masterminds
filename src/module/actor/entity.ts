@@ -59,11 +59,11 @@ export default class Actor3e<T extends CommonActorData = CommonActorData> extend
      */
     public prepareEmbeddedEntities(): void {
         super.prepareEmbeddedEntities();
-        this.items.filter(item => ['power', 'equipment'].includes(item.type)).forEach(item => {
+        this.items.filter(item => ['power'].includes(item.type)).forEach(item => {
             (item as any).effects.forEach((ae: ActiveEffect<any>) => {
                 this.effects.set(ae.id, ae);
             });
-        })
+        });
     }
 
     /**
@@ -199,7 +199,7 @@ export default class Actor3e<T extends CommonActorData = CommonActorData> extend
         const data = actorData.data;
 
         Object.values(data.abilities).forEach(ability => {
-            ability.total = ability.rank;
+            ability.total = (ability.total || 0) + ability.rank;
             data.pointCosts.abilities.value += ability.rank * 2;
         });
     }
@@ -208,7 +208,7 @@ export default class Actor3e<T extends CommonActorData = CommonActorData> extend
         const data = actorData.data;
 
         Object.values(data.defenses).forEach(defense => {
-            defense.total = data.abilities[defense.ability].rank + defense.rank;
+            defense.total = (defense.total || 0) + data.abilities[defense.ability].rank + defense.rank;
             data.pointCosts.defenses.value += defense.rank;
         });
     }

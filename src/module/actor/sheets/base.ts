@@ -239,9 +239,8 @@ export default abstract class ActorSheet3e<T extends CommonActorData & CreatureD
         } else {
             const item = this.actor.getOwnedItem(li.data('item-id')) as Item3e;
             const div = await (item.sheet as ItemSheet3e<any, Item3e>).renderListItemContents();
-            const trimmedDiv = div.html($.trim(div.html()));
-            li.append(trimmedDiv.hide());
-            trimmedDiv.slideDown(200);
+            li.append(div.hide());
+            div.slideDown(200);
         }
 
         li.toggleClass(expandedClass);
