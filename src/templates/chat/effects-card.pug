@@ -10,20 +10,22 @@ header.card-header.flexrow
     h3.item-name {{item.name}}
 
 .card-content.flexcol
-    h4.descriptor {{ item.data.descriptor }}
-    .card-description
-        | {{{ item.data.description.value }}}
+    .power-description
+        h4.descriptor.hidable-toggle {{ item.data.descriptor }}
+        .card-description.hidable
+            | {{{ item.data.description.value }}}
 
     | {{#each effects }}
     .card-effect
-        h4.effect-summary 
+        h4.effect-summary.hidable-toggle
             | {{#if this.effect.data.summary.parsed}}
             |   {{this.effect.data.summary.parsed}}
             | {{else}}
             |   {{ this.effect.name }}
             | {{/if}}
 
-        | {{{ this.effect.data.description.value }}}
+        .hidable.initially-hidden
+            | {{{ this.effect.data.description.value }}}
 
         | {{#if this.canRoll}}
 

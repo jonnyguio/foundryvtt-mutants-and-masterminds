@@ -40,12 +40,12 @@ mixin score-config-button(scoreType, dataPath)
             | {{else}}
             | {{#each skill.data as |subskill subKey|}}
             | {{#if (gt skill.data.rank 0)}}
-            li.skill(data-skill="{{skillName}}")
+            li.skill.flexrow(data-skill="{{skillName}}")
                 label.skill-name.rollable {{ skill.label }}
                 span.score.skill-score  {{ numberFormat skill.data.rank sign=true }}{{#if (ne skill.data.total skill.data.rank)}} ({{ numberFormat skill.data.total sign=true }}){{/if}}
             | {{/if}}
             | {{#if (gt subskill.rank 0)}}
-            .subskill(data-skill="{{skillName}}" data-subskill="{{subKey}}")
+            li.subskill.flexrow(data-skill="{{skillName}}" data-subskill="{{subKey}}")
                 label.skill-name.rollable {{ subskill.displayName }}
                 span.score.skill-score  {{ numberFormat subskill.rank sign=true }}{{#if (ne subskill.total subskill.rank)}} ({{ numberFormat subskill.total sign=true }}){{/if}}
             | {{/if}}

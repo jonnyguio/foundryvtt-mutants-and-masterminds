@@ -5,6 +5,10 @@
     $card-border: 2px groove white;
     $effect-border: 2px groove white;
 
+    .hidable-toggle:hover {
+        text-shadow: 0 0 8px red;
+    }
+
     .card-header {
         border-top: $card-border;
         border-bottom: $card-border;

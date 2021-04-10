@@ -434,6 +434,17 @@ export default class Item3e<T = any> extends Item<T> {
 
     public static activateChatListeners(html: JQuery<HTMLElement>): void {
         html.on('click', '.card-content button', this.onChatCardAction.bind(this));
+        html.on('click', '.hidable-toggle, .hidable', this.onChatCardToggleHidable.bind(this));
+    }
+
+    public static onChatCardToggleHidable(ev: JQuery.ClickEvent): void {
+        ev.preventDefault();
+        const toggle = $(ev.currentTarget);
+        let hidable = toggle;
+        if (!hidable.hasClass('hidable')) {
+            hidable = toggle.siblings('.hidable');
+        }
+        hidable.slideToggle();
     }
 
     private static async onChatCardAction(ev: JQuery.ClickEvent): Promise<void> {

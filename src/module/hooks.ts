@@ -2,9 +2,12 @@ import Item3e from './item/entity';
 import { onActiveEffect } from './active-effects';
 import { calculateDegrees } from './dice';
 
-Hooks.on('renderChatLog', (app: Application, html: JQuery<HTMLElement>, data: any) => Item3e.activateChatListeners(html));
-Hooks.on('renderChatPopout', (app: any, html: JQuery<HTMLElement>, data: any) => Item3e.activateChatListeners(html));
 Hooks.on('applyActiveEffect', onActiveEffect);
+Hooks.on('renderChatLog', (app: Application, html: JQuery<HTMLElement>, data: any): void => Item3e.activateChatListeners(html));
+Hooks.on('renderChatPopout', (app: any, html: JQuery<HTMLElement>, data: any): void => Item3e.activateChatListeners(html));
+Hooks.on('renderChatMessage', (app: Application, html: JQuery<HTMLElement>, data: any): void => {
+    html.find('.initially-hidden').hide();
+});
 
 Hooks.on('renderSidebarTab', async (app: Application, html: JQuery<HTMLElement>, data: any) => {
     if (!game.settings.get('mnm3e', 'enableDegreeCalculator')) {
